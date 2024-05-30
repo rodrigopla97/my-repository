@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   return (
     <div className="h-[5vh] flex justify-between items-center px-4 py-2 fixed w-full border-b-2 border-bluePrimary text-bluePrimary bg-gray-100 z-10">
       <div className="flex items-center">
-      <img src={logo} alt="Logo" className="h-10 mr-2" />
+      <img src={logo} alt="Logo" className="h-20 mr-2" />
         {/* <span className="text-xl font-bold py-2">RodPLA</span> */}
       </div>
       <div className="flex space-x-2 sm:space-x-4">
