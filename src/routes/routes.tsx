@@ -1,20 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "./main/mainPage";
-import Test from "../components/test";
-import Header from "../components/header";
-import Curriculum from "./curriculum/curriculumPage";
+import CurriculumPage from "./curriculum/curriculumPage";
+import HeaderInterface from "../components/headerInterface";
+import MainPage from "./main/mainPage";
+import ContactPage from "./contact/contactPage";
 
 export default function RoutesProvider() {
   return (
     <BrowserRouter>
-        <Header />
-        <div className="bg-gray-100 min-h-screen">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/curriculum" element={<Curriculum />} />
-            <Route path="/contact" element={<Test />} />
-          </Routes>
-        </div>      
+      <HeaderInterface />
+      <div className="bg-gray-100 min-h-screen">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/curriculum" element={<CurriculumPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

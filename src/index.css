@@ -1,7 +1,57 @@
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 ::-webkit-scrollbar {
+  width: 0;
+}
+
+@keyframes typing {
+  from {
     width: 0;
   }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes deleting {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: black;
+  }
+}
+
+.typewriter h2 {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid black;
+  white-space: nowrap;
+  animation: blink-caret .75s step-end infinite;
+}
+
+.typing {
+  animation: typing 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+}
+
+.deleting {
+  animation: deleting 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+}

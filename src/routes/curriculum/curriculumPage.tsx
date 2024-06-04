@@ -82,7 +82,7 @@ export const jobExperiences: JobExperience[] = [
 ];
 
 
-const Curriculum: React.FC = () => {
+export default function curriculumPage() {
   return (
     <div className="container mx-auto py-[10vh]">
       <div className="bg-white p-8 rounded shadow-md">
@@ -114,5 +114,3 @@ const Curriculum: React.FC = () => {
     </div>
   );
 };
-
-export default Curriculum;
