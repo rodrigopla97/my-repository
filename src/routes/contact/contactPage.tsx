@@ -7,7 +7,7 @@ import ContactMeInterface from '../../components/interfaces/curriculum/contactMe
 export default function ContactPage() {
   return (
     <div className="relative flex flex-col md:flex-row h-screen bg-gray-100 ">
-      <img src={mail} alt="Logo" className="absolute inset-0 h-full w-full object-cover opacity-20 md:opacity-100 md:h-screen md:mt-[5vh] md:fixed md:w-auto pl-auto md:pl-[5vh]" />
+      <img src={mail} alt="Logo" className="absolute inset-0 h-full w-full object-cover opacity-20 md:opacity-100 md:h-[80vh]  md:fixed md:w-auto pl-auto md:pl-[5vh] md:my-auto" />
 
       <div className="relative flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto">
         <div className="w-[80vw] md:w-[40vw] md:h-[80vh] p-6 bg-white rounded-lg shadow-md mt-[10vh]">
