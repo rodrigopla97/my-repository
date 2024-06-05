@@ -9,35 +9,18 @@
 }
 
 @keyframes typing {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes deleting {
-  from {
-    width: 100%;
-  }
-
-  to {
-    width: 0;
-  }
+  from { width: 100%; }
+  to { width: 0; }
 }
 
 @keyframes blink-caret {
-
-  from,
-  to {
-    border-color: transparent;
-  }
-
-  50% {
-    border-color: black;
-  }
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
 }
 
 .typewriter h2 {
@@ -46,6 +29,8 @@
   border-right: .15em solid black;
   white-space: nowrap;
   animation: blink-caret .75s step-end infinite;
+  line-height: 1.2;
+  padding-bottom: 0.1em;
 }
 
 .typing {
@@ -54,4 +39,10 @@
 
 .deleting {
   animation: deleting 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+}
+
+@media (max-width: 768px) {
+  .typewriter {
+    margin-top: 0 !important;
+  }
 }
