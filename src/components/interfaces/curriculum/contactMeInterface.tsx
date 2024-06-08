@@ -1,7 +1,7 @@
 export default function ContactMeInterface() {
   return (
-    <div>
-      <div >
+    <div className="relative flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto">
+      <div className="w-[80vw] md:w-[40vw] md:h-[80vh] p-6 bg-white rounded-lg shadow-md mt-[10vh]">
         <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
         <form>
           <div className="mb-4">

@@ -1,6 +1,4 @@
-import React from 'react';
-
-const EducationInterface: React.FC = () => {
+export default function EducationInterface()  {
   return (
     
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
@@ -8,6 +6,4 @@ const EducationInterface: React.FC = () => {
     </div>
   );
 };
-
-export default EducationInterface;
 

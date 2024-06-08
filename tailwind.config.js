@@ -8,6 +8,15 @@ module.exports = {
       colors: {
         bluePrimary: "#0B486B",
       },
+      keyframes: {
+        tilt: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+      },
+      animation: {
+        tilt: 'tilt 3s infinite ease-in-out',
+      },
     },
   },
   plugins: [],

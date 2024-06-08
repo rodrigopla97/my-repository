@@ -37,9 +37,9 @@ export default function MainPage() {
   }, [currentText, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <div className="flex flex-col justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col justify-center min-h-[85vh] sm:min-h-screen bg-gray-100">
       <div className="flex flex-row justify-between items-center w-full container mx-auto">
-        <div className="text-bluePrimary my-auto text-xl md:text-6xl space-y-4 z-10 mx-[8vh] md:mx-0 font-bold">
+        <div className="text-bluePrimary my-auto text-xl md:text-6xl space-y-4 md:z-10 mx-[8vh] md:mx-20 font-bold">
           <h1>Hola! Soy</h1>
           <div className="typewriter">
             <h2 className={` ${isDeleting ? 'deleting' : 'typing'}`}>

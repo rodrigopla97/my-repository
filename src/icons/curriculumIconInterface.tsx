@@ -1,4 +1,4 @@
-export default function CurriculumIcon({ isHovered }: { isHovered: boolean }) {
+export default function CurriculumIcon({ isHovered }: { isHovered?: boolean }) {
     return (
       <div>
         <svg
