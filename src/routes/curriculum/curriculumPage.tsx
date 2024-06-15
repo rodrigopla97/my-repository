@@ -84,8 +84,8 @@ export const jobExperiences: JobExperience[] = [
 
 export default function curriculumPage() {
   return (
-    <div className="container mx-auto py-[10vh]">
-      <div className="bg-white p-8 rounded shadow-md">
+    <div className="container mx-auto pt-[15vh] pb-[5vh] text-gray-100">
+      <div className="p-8 rounded shadow-md border border-gray-300">
         <h1 className="text-2xl font-bold mb-4">Currículum Vitae</h1>
         
         {/* Información Personal */}

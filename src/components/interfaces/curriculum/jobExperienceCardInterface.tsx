@@ -13,7 +13,7 @@ export default function JobExperienceCard({ job }: { job: JobExperience }) {
   };
 
   return (
-    <div className="bg-gray-100 p-4 rounded shadow-md mb-4">
+    <div className="bg-bluePrimary p-4 rounded shadow-md mb-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-bold">{job.company}</h3>
         <button onClick={() => setIsExpanded(!isExpanded)} className="focus:outline-none">
@@ -33,7 +33,7 @@ export default function JobExperienceCard({ job }: { job: JobExperience }) {
                 </h4>
                 <ul className="list-disc list-inside mt-2">
                   {role.tasks.map((task, taskIndex) => (
-                    <li key={taskIndex} className="text-sm text-gray-700">
+                    <li key={taskIndex} className="text-sm text-gray-100">
                       {task}
                     </li>
                   ))}
