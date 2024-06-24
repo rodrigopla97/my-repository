@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import desk from '../../images/avatar-desk.png';
+import { useState, useEffect } from 'react';
+import desk from '../../images/avatar-float.png';
 import ContentTextInterface from '../../components/interfaces/main/contentTextInterface';
+import bgImage from '../../images/bg-desk.png';
+import bgAvatarDesk from '../../images/bg-avatar.png';
 
 const texts = [
   'Rodrigo Placeres',
@@ -39,20 +41,24 @@ export default function MainPage() {
 
   return (
     <>
-      <div className="flex flex-col justify-center min-h-screen text-gray-100">
+      <div className="flex flex-col justify-center min-h-screen w-screen text-grayPrimary" style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
         <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between mt-[15vh] mb-[5vh] h-full">
-          <div className="text-gray-100 text-xl md:text-6xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh]">
-            <h1 className="text-left">Hola! Soy</h1>
+          <div className="text-grayPrimary text-xl md:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center  md:pb-[10vh] z-10 items-center">
+            <h1 className="text-left font-orbitron">Hola! Soy</h1>
             <div className="typewriter">
-              <h2 className={` ${isDeleting ? 'deleting' : 'typing'}`}>
-                <span className="bg-green-500">
+              <h2 className={`font-orbitron ${isDeleting ? 'deleting' : 'typing'}`}>
+                <span className="">
                   {currentText || '\u00A0'}
                 </span>
               </h2>
             </div>
           </div>
-          <div className="w-full md:w-1/2 flex justify-center items-center mt-5 md:mt-0">
-            <img src={desk} alt="Logo" className="md:h-[80vh] md:w-auto animate-float" />
+          <div className="w-full md:w-1/2 flex justify-center items-center mt-5 md:mt-0" style={{ backgroundImage: `url(${bgAvatarDesk})`, backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+            <img src={desk} alt="Logo" className="h-[50vh] mt-10 md:mt-0 md:h-[70vh] md:w-auto animate-float drop-shadow-white"/>
           </div>
         </div>
       </div>

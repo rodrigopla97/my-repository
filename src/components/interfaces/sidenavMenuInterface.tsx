@@ -10,7 +10,7 @@ export function SidenavMenuInterface() {
   return (
     <div className="inline sm:hidden">
     <button
-        className="text-gray-100 focus:outline-none w-20 h-20 flex items-center justify-center"
+        className="text-grayPrimary focus:outline-none w-20 h-20 flex items-center justify-center"
         onClick={() => setIsDrawerOpen(true)}
       >
         <span className="material-icons">menu</span>
@@ -19,7 +19,7 @@ export function SidenavMenuInterface() {
         <div className="fixed inset-0 z-50 flex justify-end">
           <div className="fixed top-0 bottom-0 left-0 w-full bg-bluePrimary shadow-lg flex flex-col">
             <div className="ml-4 w-20 h-20 flex items-center justify-center">
-              <button className="text-gray-100 hover:text-gray-900 focus:outline-none" onClick={closeDrawer}>
+              <button className="text-grayPrimary hover:text-gray-900 focus:outline-none" onClick={closeDrawer}>
                 <span className="material-icons">close</span>
               </button>
             </div>

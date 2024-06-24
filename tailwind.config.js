@@ -1,5 +1,3 @@
-/** @type {import('tailwindcss').Config} */
-
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -8,6 +6,12 @@ module.exports = {
     extend: {
       colors: {
         bluePrimary: "#0B486B",
+        redPrimary: "#E13035",
+        grayPrimary: "#BABABA",
+      },
+      fontFamily: {
+        sans: ['Exo', 'sans-serif'],
+        orbitron: ["Orbitron", "sans-serif"]
       },
       keyframes: {
         tilt: {
@@ -23,7 +27,19 @@ module.exports = {
         tilt: 'tilt 3s infinite ease-in-out',
         float: 'float 3s infinite ease-in-out',
       },
+      dropShadow: {
+        'red': '10px 10px 10px #E13035',
+        'white': '10px 10px 10px #FFFFFF',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--blue-primary': theme('colors.bluePrimary'),
+        },
+      });
+    }
+  ],
 };

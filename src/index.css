@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
+/* @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -47,7 +49,7 @@
   }
 }
 
-
 body {
-  background-color: #0B486B;
+  background-color: var(--blue-primary);
+  position: relative;
 }

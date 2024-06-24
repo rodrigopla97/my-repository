@@ -3,7 +3,7 @@ export default function ContactMeInterface() {
     <div className="relative flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto">
       <div className="w-[80vw] md:w-[40vw] md:h-[80vh] p-6 bg-red rounded-lg shadow-md mt-[10vh]">
         <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
-        <form className="text-gray-100">
+        <form className="text-grayPrimary">
           <div className="mb-4">
             <label htmlFor="name" className="block">Nombre</label>
             <input
@@ -32,7 +32,7 @@ export default function ContactMeInterface() {
             />
           </div>
 
-          <button type="submit" className="w-full text-gray-100 p-2 rounded-md border border-gray-100 bg-transparent hover:bg-gray-100 hover:text-black">
+          <button type="submit" className="w-full text-grayPrimary p-2 rounded-md border border-grayPrimary bg-transparent hover:bg-grayPrimary hover:text-black">
             Enviar
           </button>
         </form>

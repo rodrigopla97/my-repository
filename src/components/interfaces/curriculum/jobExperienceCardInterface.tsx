@@ -33,7 +33,7 @@ export default function JobExperienceCard({ job }: { job: JobExperience }) {
                 </h4>
                 <ul className="list-disc list-inside mt-2">
                   {role.tasks.map((task, taskIndex) => (
-                    <li key={taskIndex} className="text-sm text-gray-100">
+                    <li key={taskIndex} className="text-sm text-grayPrimary">
                       {task}
                     </li>
                   ))}
