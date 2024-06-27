@@ -13,7 +13,7 @@ export default function JobExperienceCard({ job }: { job: JobExperience }) {
   };
 
   return (
-    <div className="bg-bluePrimary p-4 rounded shadow-md mb-4">
+    <div className="bg-black p-4 rounded shadow-md mb-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-bold">{job.company}</h3>
         <button onClick={() => setIsExpanded(!isExpanded)} className="focus:outline-none">

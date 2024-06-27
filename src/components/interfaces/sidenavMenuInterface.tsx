@@ -17,7 +17,7 @@ export function SidenavMenuInterface() {
       </button>
       {isDrawerOpen && (
         <div className="fixed inset-0 z-50 flex justify-end">
-          <div className="fixed top-0 bottom-0 left-0 w-full bg-bluePrimary shadow-lg flex flex-col">
+          <div className="fixed top-0 bottom-0 left-0 w-full bg-black shadow-lg flex flex-col">
             <div className="ml-4 w-20 h-20 flex items-center justify-center">
               <button className="text-grayPrimary hover:text-gray-900 focus:outline-none" onClick={closeDrawer}>
                 <span className="material-icons">close</span>

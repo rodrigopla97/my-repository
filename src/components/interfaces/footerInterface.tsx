@@ -1,6 +1,6 @@
 import React from 'react';
 import bye from '../../images/bye.png';
-import sign from '../../images/firma.png';
+import sign from '../../images/black-sign.png';
 
 export default function FooterInterface() {
   return (

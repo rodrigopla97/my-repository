@@ -1,6 +1,7 @@
 import React from 'react';
 import JobExperienceCard from '../../components/interfaces/curriculum/jobExperienceCardInterface';
 import { JobExperience } from '../../entities/entities';
+// import LoadingInterface from '../../components/interfaces/curriculum/educationInterface';
 
 export const jobExperiences: JobExperience[] = [
   {
@@ -112,5 +113,6 @@ export default function curriculumPage() {
         </div>
       </div>
     </div>
+    // <LoadingInterface></LoadingInterface>
   );
 };

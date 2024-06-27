@@ -1,15 +1,15 @@
 import HeaderMenuInterface from './headerMenuInterface';
 import { SidenavMenuInterface } from './sidenavMenuInterface';
-import logo from '../../images/logo-blanco.png';
+import logo from '../../images/black-logo.png';
 
 export default function HeaderInterface() {
 
   return (
-    <div className="max-h-[10vh] flex justify-between items-center px-4 fixed w-full border-b-2 border-grayPrimary text-grayPrimary bg-bluePrimary z-20">
+    <div className="max-h-[10vh] flex justify-between items-center px-4 fixed w-full border-b-2 border-grayPrimary text-grayPrimary bg-black z-20">
       <SidenavMenuInterface/>
-      <div className="flex items-center justify-center w-20 h-20">
+      <div className="flex items-center justify-center w-[4rem] h-[4rem]">
         {/* <span>&#40;⌐■_■&#41;</span> */}
-        <img src={logo} alt="Logo" className="" />
+        <img src={logo} alt="Logo"/>
       </div>
       <HeaderMenuInterface/>
       <div className="flex items-center justify-center w-20 h-20">

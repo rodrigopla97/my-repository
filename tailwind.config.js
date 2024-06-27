@@ -22,10 +22,15 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        rotate360: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         tilt: 'tilt 3s infinite ease-in-out',
         float: 'float 3s infinite ease-in-out',
+        rotate360: 'rotate360 1s linear infinite',
       },
       dropShadow: {
         'red': '10px 10px 10px #E13035',
