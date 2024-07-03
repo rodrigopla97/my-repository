@@ -1,8 +1,11 @@
+import { useTheme } from "../../../context/themeContext";
 
 export default function ContentTextInterface() {
+
+  const { textColor } = useTheme();
   return (
-    <div className="flex justify-center w-screen items-center h-screen text-grayPrimary">
-      <div className="md:w-[80vh] pt-2 overflow-y-auto px-[5vh] md:px-8 mt-[15vh] content-center font-bold">
+    <div className={` flex justify-center w-screen items-center h-screen ${textColor}`} >
+      <div className="md:w-[80vh] py-2 overflow-y-auto px-[5vh] md:px-8 mt-20 md:mt-0 content-center font-bold">
         <p>
           Vivo en la Ciudad Autónoma de Buenos Aires, Argentina. Graduado como Técnico en Computación en la E.T. 29 Reconquista de Buenos Aires, y actualmente estudio Ingeniería en Sistemas de Información en UTN.
         </p>

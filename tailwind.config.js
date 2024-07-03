@@ -6,7 +6,8 @@ module.exports = {
     extend: {
       colors: {
         bluePrimary: "#0B486B",
-        redPrimary: "#E13035",
+        cvButtonPrimary: "#5E1B00",
+        cvButtonSecondary: "#D48F74",
         grayPrimary: "#BABABA",
       },
       fontFamily: {
@@ -33,8 +34,9 @@ module.exports = {
         rotate360: 'rotate360 1s linear infinite',
       },
       dropShadow: {
-        'red': '10px 10px 10px #E13035',
+        'red': '10px 10px 10px #622529',
         'white': '10px 10px 10px #FFFFFF',
+        'darkGray': '10px 10px 10px #1F2937',
       },
     },
   },
@@ -42,7 +44,7 @@ module.exports = {
     function({ addBase, theme }) {
       addBase({
         ':root': {
-          '--blue-primary': theme('colors.bluePrimary'),
+          '--grayPrimary': theme('colors.grayPrimary'),
         },
       });
     }
