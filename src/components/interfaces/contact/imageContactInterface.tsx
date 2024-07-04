@@ -1,6 +1,5 @@
 import { useTheme } from '../../../context/themeContext';
 import contactAvatar from '../../../images/avatar-phone.png';
-// import bg from '../../images/bg-avatar3.png';
 import bg from '../../../images/bg-avatar3.png';
 
 export default function ImageContactInterface() {

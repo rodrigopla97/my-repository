@@ -1,10 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { useTheme } from "../../context/themeContext";
 
 export function SidenavMenuInterface() {
   const { bgColor, textColor} = useTheme();
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   function closeDrawer() {
     setIsDrawerOpen(false);
