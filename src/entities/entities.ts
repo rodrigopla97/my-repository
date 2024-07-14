@@ -19,6 +19,21 @@ export type ThemeContextType = {
   borderColor: string;
 };
 
-export interface ThemeProviderProps {
+export type AboutContextType = {
+  indexCarrousel: number;
+  toggleAboutIndex: (idx: number) => void;
+  toggleJobSelected: (idx: number) => void;
+  jobExperiencesContext: JobExperience[];
+  experienceSelectedContex: number;
+};
+
+export interface ProviderProps {
   children: ReactNode;
+}
+
+
+export interface ModalJobProps {
+  children?: React.ReactNode;
+  onClose: () => void;
+  selectedExperience: JobExperience
 }

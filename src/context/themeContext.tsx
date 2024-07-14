@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { ThemeContextType, ThemeProviderProps } from '../entities/entities';
+import { ThemeContextType, ProviderProps } from '../entities/entities';
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider: React.FC<ProviderProps> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('isDarkMode');
     return savedTheme ? JSON.parse(savedTheme) : true;

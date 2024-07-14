@@ -8,7 +8,7 @@ export default function WorkExpierenceInterface() {
     <>
       <div className={`pt-20 pb-[5vh] px-8 lg:px-20 ${textColor} lg:h-screen`}>
         <h2 className="text-xl font-bold mb-4 text-center">Experiencia Laboral</h2>
-        <div className="flex flex-col md:flex-row mb-6 h-full">
+        <div className="flex flex-col md:flex-row mb-6 h-full place-content-center place-items-center">
           <img
             src={workerAvatar}
             alt="worker"
