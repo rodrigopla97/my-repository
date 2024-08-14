@@ -45,6 +45,8 @@ module.exports = {
       addBase({
         ':root': {
           '--grayPrimary': theme('colors.grayPrimary'),
+          '--cvButtonPrimary': theme('colors.cvButtonPrimary'),
+          '--cvButtonSecondary': theme('colors.cvButtonSecondary'),
         },
       });
     }

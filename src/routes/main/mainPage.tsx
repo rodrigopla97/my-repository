@@ -44,13 +44,11 @@ export default function MainPage() {
     <div className={`flex flex-col justify-center min-h-screen w-screen ${textColor}`}>
       <BackgroundImageInterface />
       <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between mt-[15vh] mb-[5vh] h-full">
-        <div className={`${textColor} max-md:text-lg md:text-2xl lg:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh] z-10 items-center`}>
+        <div className={`${textColor} max-md:text-lg md:text-2xl lg:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh] z-20 items-center`}>
           <h1 className="text-left font-orbitron">Hola! Soy</h1>
           <div className="typewriter">
             <h2 className={`font-orbitron ${isDeleting ? 'deleting' : 'typing'}`}>
-              <span className="">
-                {currentText || '\u00A0'}
-              </span>
+              <span>{currentText || '\u00A0'}</span>
             </h2>
           </div>
           <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`w-fit hidden md:block font-medium md:text-lg lg:text-xl py-2 my-4 px-4 ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${textColor} rounded-lg border-2 border-transparent hover:bg-opacity-80 transition-all duration-300 mx-auto md:mx-0`}>Descargar CV</a>

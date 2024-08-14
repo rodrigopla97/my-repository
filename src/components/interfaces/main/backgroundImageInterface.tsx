@@ -36,7 +36,7 @@ export default function BackgroundImageInterface() {
 
   useEffect(() => {
     if (!backgroundView) {
-      const timeout = setTimeout(() => setHidden(true), 2000);
+      const timeout = setTimeout(() => setHidden(true), 5000);
       return () => clearTimeout(timeout);
     } else {
         setHidden(false);
@@ -53,6 +53,7 @@ export default function BackgroundImageInterface() {
         backgroundImage: `url(${isDarkMode ? bgImageDark : bgImagelight})`,
         backgroundSize: 'cover',
         backgroundPosition: isMobile ? 'left' : 'center',
+        borderLeft: isDarkMode ? '0.3rem solid black' : '0.3rem solid #BABABA',
       }}
     >
     </div>

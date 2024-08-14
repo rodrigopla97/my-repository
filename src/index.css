@@ -7,9 +7,18 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 0;
+  width: 0.3rem;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: 1rem;
+  border: 1px solid var(--scrollbar-track-color)
+}
+
+#root {
+  border-left: 0.3rem solid var(--scrollbar-track-color);
+}
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; }
@@ -66,7 +75,6 @@
   position: relative;
   border-radius: 0.5rem;
   padding: 0;
-  /* box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); */
   border: 1px solid;
   width: 50vw;
   height: 55vh;
@@ -75,6 +83,11 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
+}
+
+.card-container::-webkit-scrollbar{
+/* .rol-container::-webkit-scrollbar { */
+  width: 0;
 }
 
 .card-title {
@@ -99,17 +112,22 @@
 body.light-mode {
   background-color: var(--grayPrimary);
   background-image: url('./images/bg-desk-gray-secondary.png');
+  --scrollbar-track-color: var(--grayPrimary);
+  --scrollbar-color: var(--cvButtonSecondary);
 }
 
 body.dark-mode {
   background-color: black;
   background-image: url('./images/bg-desk-black-secondary.png');
+  --scrollbar-track-color: black;
+  --scrollbar-color: var(--cvButtonPrimary);
 }
 
 body {
   background-size: contain;
   background-position: center;
   position: relative;
+  overflow-x: hidden;
 }
 
 @media (max-width: 1024px) {

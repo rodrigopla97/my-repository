@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { JobRole } from '../../../entities/entities';
 import { useTheme } from '../../../context/themeContext';
 import { useAbout } from '../../../context/aboutContext';
 
@@ -14,16 +13,12 @@ export default function JobExperienceCardInterface() {
     return () => clearTimeout(timer);
   }, [indexCarrousel]);
 
-  // function getRolePeriod(roles: JobRole[]) {
-  //   const startDate = roles[roles.length - 1].date.split('-')[0];
-  //   const endDate = roles[0].date.split('-')[1] || 'Actualidad';
-  //   return `${startDate} - ${endDate}`;
-  // }
-
   return (
     <div className="flex flex-col lg:flex-row items-center lg:w-2/3 mx-auto">
       <div className="lg:ml-8 p-4 lg:p-8 flex-1 relative">
-        <div className={`card-container z-[30] ${isDarkMode ? 'border-grayPrimary' : 'border-black'} ${animate && 'transition-all duration-500 transform scale-105'} `}>
+      <div 
+          className={`card-container z-30 ${isDarkMode ? 'border-grayPrimary' : 'border-black'} ${animate && 'transition-all duration-500 transform scale-105'}`}
+        >
           {jobExperiencesContext.map((experience, index) => (
             <div key={index} className={`role-container ${index !== indexCarrousel && 'hidden'}`}>
               <h4 className="card-title text-lg font-bold">

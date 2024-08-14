@@ -9,7 +9,7 @@ export default function HeaderInterface() {
   const { isDarkMode, toggleTheme, bgColor, textColor } = useTheme()
 
   return (
-    <div className={`max-h-[10vh] flex justify-between items-center px-4 fixed w-full ${textColor} z-[21] ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
+    <div className={`max-h-[10vh] flex justify-between items-center px-4 fixed w-full ${textColor} z-[31] ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />
       <div className="flex items-center justify-center w-20 h-20">
         <Link to="/">
