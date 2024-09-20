@@ -1,53 +1,45 @@
 import { useTheme } from "../../../context/themeContext";
+import { useState } from "react";
 
 export default function ContactMeInterface() {
-
   const { borderColor, textColor, isDarkMode } = useTheme();
+  const [copySuccess, setCopySuccess] = useState(false);
 
-  const classInput = `mt-1 block w-full p-2 border ${borderColor} rounded-md bg-transparent`
+  const mail = "rodrigoplaceres19@gmail.com"
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(mail)
+      .then(() => setCopySuccess(true))
+      .catch(() => setCopySuccess(false));
+
+    setTimeout(() => setCopySuccess(false), 2000);
+  };
 
   return (
     <div className="relative flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto p-6">
-      <div className={`w-[80vw] md:w-[40vw] md:h-[60vh] p-6 border ${borderColor} rounded-lg shadow-md mt-[10vh]`} >
+      <div className={`w-[80vw] md:w-[40vw] p-6 border ${borderColor} rounded-lg shadow-md`}>
         <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
-        <form>
-          <div className="mb-4">
-            <label htmlFor="name" className="block">Nombre</label>
-            <input
-              id="name"
-              name="name"
-              className={`${classInput}`}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="email" className="block">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className={`${classInput}`}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="message" className="block">Mensaje</label>
-            <textarea
-              id="message"
-              name="message"
-              className={`mt-1 block w-full p-2 border ${borderColor} rounded-md resize-none min-h-[20vh] bg-transparent`}
-            />
-          </div>
-
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className={`w-1/3 ${textColor} p-2 rounded-md hover:font-bold ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"}`}
+        <p className="mb-4">
+          Hola! Si deseás contactarme, podés enviarme un correo a la dirección que aparece a continuación.
+        </p>
+        <div className="flex flex-col">
+          <div className="flex items-center mb-4">
+            <a 
+              href={`mailto:${mail}`} 
+              className={`text-lg font-semibold underline ${textColor} hover:text-opacity-80 mr-2`}
             >
-              Enviar
-            </button>
+              {mail}
+            </a>
+            <i 
+              className="material-symbols-outlined cursor-pointer"
+              onClick={handleCopyEmail}
+              title={copySuccess ? "¡Copiado!" : "Copiar Email"}
+            >
+              content_copy
+            </i>
           </div>
-        </form>
+          {copySuccess && <p className={`text-sm font-bold ${isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary"}`}>¡Copiado al portapapeles!</p>}
+        </div>
       </div>
     </div>
   );

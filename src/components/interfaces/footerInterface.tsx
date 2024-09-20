@@ -1,5 +1,6 @@
 import bye from '../../images/bye.png';
 import { useTheme } from '../../context/themeContext';
+import FooterAllIcons from './footerAllIconsInterface';
 
 export default function FooterInterface() {
   const { textColor, isDarkMode } = useTheme();
@@ -8,12 +9,10 @@ export default function FooterInterface() {
     <div className={`flex flex-col items-center justify-between w-screen h-screen ${textColor} font-semibold overflow-y-auto py-20 px-[5vh] md:px-8`}>
       <div className="flex flex-col md:flex-row items-center justify-center w-full h-full">
         <div className="flex flex-col items-center justify-center w-full md:w-1/3 h-full">
-          <p className="text-center">Adios</p>
+          <FooterAllIcons/>
         </div>
         <div className="flex flex-col items-center justify-center w-full md:w-1/3 h-full">
-          {/* <p className="text-center">Adios</p> */}
           <img src={bye} alt="bye" className="w-auto animate-tilt text-center" />
-          {/* <img src={sign} alt="sign" className="w-auto" /> */}
         </div>
 
         <div className="flex flex-row md:flex-col items-center justify-center w-full md:w-1/3 h-full">
@@ -34,13 +33,12 @@ export default function FooterInterface() {
               <span>LinkedIn</span>
               <i className="material-icons-outlined text-base ml-2">open_in_new</i>
             </div>
-
           </a>
 
         </div>
       </div>
       <div className="text-center mt-4 md:mt-0">
-        <p className="h-2">Rodrigo Placeres 2024 &#40;⌐■_■&#41;</p>
+        <p className="h-2">Rodrigo Placeres  {new Date().getFullYear()}  &#40;⌐■_■&#41;</p>
       </div>
     </div>
   );
