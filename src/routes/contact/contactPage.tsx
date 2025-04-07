@@ -1,6 +1,5 @@
 import ContactMeInterface from '../../components/interfaces/contact/contactMeInterface';
 import ImageContactInterface from '../../components/interfaces/contact/imageContactInterface';
-import ExperienceInterface from '../../components/interfaces/expierence/expierenceInterface';
 import { useTheme } from '../../context/themeContext';
 
 
@@ -13,7 +12,6 @@ export default function ContactPage() {
       <ImageContactInterface />
       <ContactMeInterface />
     </div>
-      <ExperienceInterface/>
     </>
   );
 }
