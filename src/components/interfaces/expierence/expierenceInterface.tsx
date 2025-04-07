@@ -28,7 +28,6 @@ export default function ExperienceInterface() {
             <li>Edad: {myAge} años</li>
             <li>Ubicación: Buenos Aires</li>
             <li>Estudios: Técnico En Computación</li>
-            <li>Mascota: Gato</li>
           </ul>
         </div>
 
