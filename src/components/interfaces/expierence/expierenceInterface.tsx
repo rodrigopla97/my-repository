@@ -5,7 +5,7 @@ export default function ExperienceInterface() {
 
   return (
     <div
-      className={`flex flex-col justify-center items-center w-full min-h-[40vh] p-10 pt-[10vh] py-0 ${textColor}`}
+      className={`flex flex-col justify-center items-center min-h-[40vh] p-10 pt-[10vh] py-0 ${textColor}`}
     >
       <div className="w-full max-w-4xl">
 
