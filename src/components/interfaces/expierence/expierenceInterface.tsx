@@ -1,65 +1,36 @@
-import { useEffect, useState } from "react";
 import { useTheme } from "../../../context/themeContext";
 
 export default function ExperienceInterface() {
-
   const { textColor } = useTheme();
-  const [myAge, setMyAge] = useState(0);
-
-  useEffect(() => {
-    const currentDate = new Date();
-    const bornDate = new Date(1997, 0, 22);
-
-    const hasBirthdayPassed = currentDate.getMonth() > bornDate.getMonth() ||
-      (currentDate.getMonth() === bornDate.getMonth() && currentDate.getDate() >= bornDate.getDate());
-
-    const becauseWasMyBirth = hasBirthdayPassed ? 0 : -1;
-
-    setMyAge(currentDate.getUTCFullYear() - bornDate.getUTCFullYear() + becauseWasMyBirth);
-  }, []);
 
   return (
-    <div className={`flex flex-col md:flex-row justify-center items-center w-full min-h-screen p-10 py-[10vh] ${textColor}`}>
-      <div className="w-full md:w-1/3 lg:p-20 p-4">
-        {/* Información Personal */}
-        <div className="mb-6">
-          <h2 className="text-xl font-bold mb-2">Información Básica</h2>
-          <ul>
-            <li>Edad: {myAge} años</li>
-            <li>Ubicación: Buenos Aires</li>
-            <li>Estudios: Técnico En Computación</li>
-          </ul>
-        </div>
+    <div
+      className={`flex flex-col justify-center items-center w-full min-h-[40vh] p-10 pt-[10vh] py-0 ${textColor}`}
+    >
+      <div className="w-full max-w-4xl">
 
-        {/* Hobbies e Intereses */}
-        <div className="mb-6">
-          <h2 className="text-xl font-bold mb-2">Hobbies e Intereses</h2>
-          <ul className="list-disc list-inside">
-            <li>Fútbol</li>
-            <li>Música</li>
-            <li>Cine</li>
-          </ul>
-        </div>
-      </div>
+        <p className="mb-4">
+          Soy desarrollador frontend de <strong>Buenos Aires</strong>, técnico en computación
+          y estudiante de <strong>Ingeniería en Sistemas</strong> (UTN).
+        </p>
 
-      {/* Descripción Personal */}
-      <div className="w-full md:w-2/3 lg:p-20 p-4">
-        <h2 className="text-xl font-bold mb-2">Descripción Personal</h2>
-        <p className="mb-2">
-          Vivo en la Ciudad Autónoma de Buenos Aires, Argentina. Graduado como Técnico en Computación en la E.T. 29 Reconquista de Buenos Aires, y actualmente estudio Ingeniería en Sistemas de Información en UTN.
+        <p className="mb-4">
+          Inicié reparando PCs 🛠️ y me especialicé en desarrollo web. Me formé como Fullstack
+          con Node.js en EducaciónIT, aunque hoy mi enfoque es <strong>frontend</strong>.
         </p>
-        <p className="mb-2">
-          Comencé mi carrera como técnico en reparación de PCs, adquiriendo habilidades en diagnóstico y solución de problemas de hardware y software. Con el tiempo, me especialicé en desarrollo web, realizando la carrera de Fullstack con Node.js en EducaciónIT, aunque mi enfoque principal actualmente es el frontend. Tengo experiencia con HTML, CSS, JavaScript, React, Angular y Tailwind CSS.
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">🛠️ Tecnologías</h3>
+        <p className="mb-4">HTML · CSS · JavaScript · React · Angular · Tailwind CSS</p>
+
+        <h3 className="text-lg font-semibold mb-2">🚀 Experiencia</h3>
+        <p className="mb-4">
+          Participé en proyectos con <strong>React</strong> y <strong>Angular</strong>, creando
+          interfaces dinámicas y resolviendo problemas en frontend.
         </p>
-        <p className="mb-2">
-          Participé en varios proyectos, como la creación de aplicaciones con React y desarrollo de resolución de problemas en Angular.
-        </p>
-        <p className="">
-          Mi objetivo es seguir creciendo profesionalmente y seguir aprendiendo.
-        </p>
+
+        <h3 className="text-lg font-semibold mb-2">🎯 Objetivo</h3>
+        <p>Seguir creciendo como desarrollador y aportar valor en cada proyecto.</p>
       </div>
     </div>
-
-
   );
 }

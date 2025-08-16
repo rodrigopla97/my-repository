@@ -44,19 +44,18 @@ export default function JobExperienceCardInterface() {
   return (
     <>
       <div className="relative w-full overflow-hidden">
-        <div className="relative flex w-[80%] justify-center mx-auto">
+        <div className="relative flex w-[80%] justify-center mx-auto px-4">
           {jobExperiencesContext.map((experience, index) => (
             <div
               key={index}
-              className={`flex flex-col ${index !== indexCarrousel && 'hidden'} duration-500 ${
-                animate
-                  ? direction === 'right'
-                    ? 'translate-x-20 opacity-0'
-                    : '-translate-x-20 opacity-0'
-                  : 'translate-x-0 opacity-100'
-              }`}
+              className={`flex flex-col ${index !== indexCarrousel && 'hidden'} ${textColor} duration-500 ${animate
+                ? direction === 'right'
+                  ? 'translate-x-20 opacity-0'
+                  : '-translate-x-20 opacity-0'
+                : 'translate-x-0 opacity-100'
+                }`}
             >
-              <h4 className="card-title text-lg font-bold">
+              <h4 className="card-title text-lg font-bold" >
                 {experience.company}
               </h4>
               {experience.roles.map((role, roleIndex) => (
@@ -64,7 +63,7 @@ export default function JobExperienceCardInterface() {
                   <h5 className="text-md font-semibold">
                     {role.title} ({role.date})
                   </h5>
-                  <ul className="list-disc ml-6">
+                  <ul className="list-[circle] ml-6">
                     {role.tasks.map((task, taskIndex) => (
                       <li key={taskIndex} className={`${textColor}`}>
                         {task}
@@ -78,7 +77,7 @@ export default function JobExperienceCardInterface() {
         </div>
 
         <button
-          className={`absolute top-1/2 left-0 z-[1] flex items-center justify-center w-[15%] p-0 ${textColor} opacity-50 transition-opacity hover:opacity-100`}
+          className={`absolute top-1/2 left-0 z-[1] flex items-center justify-start w-[15%] p-0 ${textColor} opacity-50 transition-opacity hover:opacity-100`}
           onClick={previousExperience}
         >
           <i className="material-symbols-outlined text-[3rem]">
@@ -86,7 +85,7 @@ export default function JobExperienceCardInterface() {
           </i>
         </button>
         <button
-          className={`absolute top-1/2 right-0 z-[1] flex items-center justify-center w-[15%] p-0 ${textColor} opacity-50 transition-opacity hover:opacity-100`}
+          className={`absolute top-1/2 right-0 z-[1] flex items-center justify-end w-[15%] p-0 ${textColor} opacity-50 transition-opacity hover:opacity-100`}
           onClick={nextExperience}
         >
           <i className="material-symbols-outlined text-[3rem]">
