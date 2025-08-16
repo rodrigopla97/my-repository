@@ -6,6 +6,7 @@ import TailwindIcon from '../../icons/tailwindIcon';
 import HtmltIcon from '../../icons/htmlIcon';
 import CssIcon from '../../icons/cssIcon';
 import GitIcon from '../../icons/gitIcon';
+import TypescriptIcon from '../../icons/typescriptIcon';
 
 export default function FooterAllIcons() {
   const icons = [
@@ -14,6 +15,7 @@ export default function FooterAllIcons() {
     { component: <JavascriptIcon key="js" />, label: "JavaScript" },
     { component: <AngularIcon key="angular" />, label: "Angular" },
     { component: <ReactIcon key="react" />, label: "React" },
+    { component: <TypescriptIcon key="typescript" />, label: "Typescript" },
     { component: <TailwindIcon key="tailwind" />, label: "Tailwind" },
     { component: <GitIcon key="git" />, label: "GIT" },
   ];
