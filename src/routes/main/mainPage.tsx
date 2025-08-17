@@ -41,7 +41,7 @@ export default function MainPage() {
   }, [currentText, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <div className={`flex flex-col justify-center min-h-screen w-screen ${textColor}`}>
+    <div className={`flex flex-col justify-center h-screen w-screen ${textColor}`}>
       <BackgroundImageInterface />
       <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between mt-[15vh] mb-[5vh] h-full">
         <div className={`${textColor} max-md:text-lg md:text-2xl lg:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh] z-20 items-center`}>
