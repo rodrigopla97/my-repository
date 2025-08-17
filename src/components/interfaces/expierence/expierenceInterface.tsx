@@ -1,4 +1,5 @@
 import { useTheme } from "../../../context/themeContext";
+import FooterAllIcons from "../footerAllIconsInterface";
 
 export default function ExperienceInterface() {
   const { textColor } = useTheme();
@@ -15,14 +16,14 @@ export default function ExperienceInterface() {
         </p>
 
         <p className="mb-4">
-          Inicié reparando PCs y me especialicé en desarrollo web. Me formé como Fullstack
+          Inicié laboralmente reparando laptops PCs y luego me especialicé en desarrollo web. Me formé como Fullstack
           con Node.js en EducaciónIT, aunque hoy mi enfoque es como <strong>Desarrollador Frontend</strong>.
         </p>
 
         <h3 className="text-lg font-semibold mt-6 mb-2">🛠️ Tecnologías</h3>
-        <p className="mb-4">HTML · CSS · JavaScript · React · Angular · Typescript · Tailwind CSS</p>
-
-        <h3 className="text-lg font-semibold mb-2">🚀 Experiencia</h3>
+        {/* <p className="mb-4">HTML · CSS · JavaScript · React · Angular · Typescript · Tailwind CSS</p> */}
+        <FooterAllIcons />
+        <h3 className="text-lg font-semibold mb-2 mt-6">🚀 Experiencia</h3>
         <p className="mb-4">
           Participé en proyectos con <strong>React</strong> y <strong>Angular</strong>, creando
           aplicaciones y resolviendo problemas en frontend.

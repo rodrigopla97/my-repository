@@ -45,7 +45,7 @@ export default function FooterAllIcons() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="mb-4">Skills</h1>
+      {/* <h1 className="mb-4">Skillsss</h1> */}
       <div className={`grid grid-cols-5 gap-8 `}>
         {displayedIcons.map((icon, index) => {
           return (
