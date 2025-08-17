@@ -15,9 +15,9 @@ export default function FooterInterface() {
 
         <div className="flex flex-col items-center justify-center w-full md:w-2/3 h-full">
 
-          <div className="flex flex-col items-center justify-center w-full">
+          {/* <div className="flex flex-col items-center justify-center w-full">
             <FooterAllIcons />
-          </div>
+          </div> */}
 
           <div className='flex flex-row items-center justify-center w-full mt-8'>
             {/* github icon */}
