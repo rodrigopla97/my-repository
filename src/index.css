@@ -87,7 +87,6 @@
 }
 
 .card-container::-webkit-scrollbar{
-/* .rol-container::-webkit-scrollbar { */
   width: 0;
 }
 

@@ -11,7 +11,7 @@ export default function ExperienceInterface() {
       <div className="max-w-4xl mt-4 md:mt-0">
 
         <p className="mb-4">
-          Soy desarrollador frontend de <strong>Buenos Aires</strong>, técnico en computación
+          Vivo en la Ciudad Autónoma de <strong>Buenos Aires</strong>, soy desarrollador <strong>frontend</strong>, recibido como <strong>Técnico en Computación</strong>
           y estudiante de <strong>Ingeniería en Sistemas</strong> (UTN).
         </p>
 
@@ -21,7 +21,6 @@ export default function ExperienceInterface() {
         </p>
 
         <h3 className="text-lg font-semibold mt-6 mb-2">🛠️ Tecnologías</h3>
-        {/* <p className="mb-4">HTML · CSS · JavaScript · React · Angular · Typescript · Tailwind CSS</p> */}
         <FooterAllIcons />
         <h3 className="text-lg font-semibold mb-2 mt-6">🚀 Experiencia</h3>
         <p className="mb-4">
@@ -29,7 +28,8 @@ export default function ExperienceInterface() {
         </p>
 
         <h3 className="text-lg font-semibold mb-2">🎯 Objetivo</h3>
-        <p>Seguir creciendo como desarrollador y aportar valor en cada proyecto.</p>
+        <p>Estar en constante crecimiento y desarrollo, tanto personal como laboral.</p>
+        <p>Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo.</p>
       </div>
     </div>
   );

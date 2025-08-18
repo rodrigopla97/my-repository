@@ -1,6 +1,5 @@
 import bye from '../../images/bye.png';
 import { useTheme } from '../../context/themeContext';
-import FooterAllIcons from './footerAllIconsInterface';
 
 export default function FooterInterface() {
   const { textColor, isDarkMode } = useTheme();
@@ -14,11 +13,6 @@ export default function FooterInterface() {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full md:w-2/3 h-full">
-
-          {/* <div className="flex flex-col items-center justify-center w-full">
-            <FooterAllIcons />
-          </div> */}
-
           <div className='flex flex-row items-center justify-center w-full mt-8'>
             {/* github icon */}
             <a href="https://github.com/rodrigopla97" target="_blank" rel="noopener noreferrer" title="https://github.com/rodrigopla97" className={`flex flex-row items-center md:w-[25%] place-content-center hover:cursor-pointer hover:font-bold ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}>
