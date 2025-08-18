@@ -19,7 +19,7 @@ export default function JobExperienceCardInterface() {
   }, [indexCarrousel, roleIndex]);
 
   return (
-    <div className="relative md:w-[50vw] overflow-hidden md:pt-[10vh]">
+    <div className="md:w-[50vw] overflow-hidden md:pt-[10vh]">
       <h3 className={`text-lg font-semibold my-6 ${textColor}`}>👷 Trayectoria profesional:</h3>
       <div className="flex justify-center gap-3 mb-6 flex-wrap ">
         {jobExperiencesContext.map((experience, index) => (
@@ -50,7 +50,7 @@ export default function JobExperienceCardInterface() {
         ))}
       </div>
 
-      <div className="relative flex justify-center mx-auto md:px-4 min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
+      <div className="flex justify-center mx-auto md:px-4 min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
         {jobExperiencesContext[indexCarrousel]?.roles[roleIndex] && (
           <div
             className={`flex flex-col ${textColor} duration-500 transition-all

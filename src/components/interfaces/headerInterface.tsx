@@ -9,15 +9,15 @@ export default function HeaderInterface() {
   const { isDarkMode, toggleTheme, bgColor, textColor } = useTheme()
 
   return (
-    <div className={`max-h-[10vh] flex justify-between items-center px-4 fixed w-full ${textColor} z-[31] ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
+    <div className={`max-h-[10vh] flex justify-between items-center pr-4 fixed w-full ${textColor} z-[31] ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />
-      <div className="flex items-center justify-center w-20 h-20">
+      <div className="flex items-center justify-center w-20 h-[10vh]">
         <Link to="/">
           <img src={isDarkMode ? darkLogo : lightLogo} alt="Logo" />
         </Link>
       </div>
       <HeaderMenuInterface />
-      <div className="flex items-center justify-center w-20 h-20">
+      <div className="flex items-center justify-center w-20 h-[10vh]">
         <label className="relative inline-block w-12 h-6">
           <input
             type="checkbox"
