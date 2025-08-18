@@ -11,8 +11,7 @@ export default function ExperienceInterface() {
       <div className="max-w-4xl mt-4 md:mt-0">
 
         <p className="mb-4">
-          Vivo en la Ciudad Autónoma de <strong>Buenos Aires</strong>, soy desarrollador <strong>frontend</strong>, recibido como <strong>Técnico en Computación</strong>
-          y estudiante de <strong>Ingeniería en Sistemas</strong> (UTN).
+          Vivo en la Ciudad Autónoma de <strong>Buenos Aires</strong>, soy desarrollador <strong>frontend</strong>, recibido como <strong>Técnico en Computación</strong> y actualmente estudiante de <strong>Ingeniería en Sistemas</strong> (UTN).
         </p>
 
         <p className="mb-4">
