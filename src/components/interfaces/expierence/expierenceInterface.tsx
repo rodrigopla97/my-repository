@@ -25,8 +25,7 @@ export default function ExperienceInterface() {
         <FooterAllIcons />
         <h3 className="text-lg font-semibold mb-2 mt-6">🚀 Experiencia</h3>
         <p className="mb-4">
-          Participé en proyectos con <strong>React</strong> y <strong>Angular</strong>, creando
-          aplicaciones y resolviendo problemas en frontend.
+          Participé en el mantenimiento de plataformas de distintos proyectos, desarrollo de <strong> bugfix</strong> y diseño e implementación de <strong>features</strong>.
         </p>
 
         <h3 className="text-lg font-semibold mb-2">🎯 Objetivo</h3>
