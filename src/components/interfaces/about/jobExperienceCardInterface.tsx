@@ -52,7 +52,7 @@ export default function JobExperienceCardInterface() {
       </div>
 
       <div className="relative flex justify-center mx-auto px-4 
-                h-[50vh] items-start overflow-y-auto mt-4">
+                min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
         {jobExperiencesContext[indexCarrousel]?.roles[roleIndex] && (
           <div
             className={`flex flex-col ${textColor} duration-500 transition-all
