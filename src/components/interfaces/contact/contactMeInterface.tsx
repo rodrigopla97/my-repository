@@ -16,7 +16,7 @@ export default function ContactMeInterface() {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto p-6">
+    <div className="flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto p-6">
       <div className={`w-[80vw] md:w-[40vw] p-6 border ${borderColor} rounded-lg shadow-md`}>
         <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
         <p className="mb-4">
@@ -24,13 +24,13 @@ export default function ContactMeInterface() {
         </p>
         <div className="flex flex-col">
           <div className="flex items-center mb-4">
-            <a 
-              href={`mailto:${mail}`} 
+            <a
+              href={`mailto:${mail}`}
               className={`text-lg font-semibold underline ${textColor} hover:text-opacity-80 mr-2`}
             >
               {mail}
             </a>
-            <i 
+            <i
               className="material-symbols-outlined cursor-pointer"
               onClick={handleCopyEmail}
               title={copySuccess ? "¡Copiado!" : "Copiar Email"}

@@ -10,19 +10,17 @@ export default function HeaderMenuInterface() {
       <div className={`flex items-center justify-center ${textColor}`}>
         <NavLink
           to="/"
-          className={`relative text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
+          className={`text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
         >
           <span className="nav-text">
-          {/* <span className="ml-2 relative"> */}
             Home
             <span className={`underline-nav scale-x-0 transition-transform duration-300 origin-left ${!isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${pathname === '/' && 'scale-x-100'}`}></span>
           </span>
         </NavLink>
         <NavLink
           to="/about"
-          className={`relative text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/about' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
+          className={`text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/about' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
         >
-          {/* <span className="ml-2 relative"> */}
           <span className="nav-text">
             About
             <span className={`underline-nav scale-x-0 transition-transform duration-300 origin-left ${!isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${pathname === '/about' && 'scale-x-100'}`}></span>
@@ -30,9 +28,8 @@ export default function HeaderMenuInterface() {
         </NavLink>
         <NavLink
           to="/contact"
-          className={`relative text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/contact' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
+          className={`text-lg px-2 sm:px-4 py-1 rounded flex items-center ${pathname === '/contact' ? `font-bold ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}` : "hover:text-xl"} transition duration-300`}
         >
-          {/* <span className="ml-2 relative"> */}
           <span className="nav-text">
             Contact
             <span className={`underline-nav scale-x-0 transition-transform duration-300 origin-left ${!isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${pathname === '/contact' && 'scale-x-100'}`}></span>

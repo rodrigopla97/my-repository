@@ -6,9 +6,9 @@ export default function ExperienceInterface() {
 
   return (
     <div
-      className={`flex flex-col justify-center items-center min-h-[40vh] md:px-10 pt-[10vh] py-0 ${textColor}`}
+      className={`flex flex-col justify-center items-center min-h-[40vh] md:px-10 py-0 pt-[10vh]  ${textColor}`}
     >
-      <div className="w-full max-w-4xl">
+      <div className="max-w-4xl mt-4 md:mt-0">
 
         <p className="mb-4">
           Soy desarrollador frontend de <strong>Buenos Aires</strong>, técnico en computación
