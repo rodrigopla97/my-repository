@@ -20,7 +20,7 @@ export default function JobExperienceCardInterface() {
 
   return (
     <div className="relative w-full overflow-hidden md:pt-[10vh]">
-      <h3 className="text-lg font-semibold my-6">👷 Experiencias:</h3>
+      <h3 className={`text-lg font-semibold my-6 ${textColor}`}>👷 Experiencias:</h3>
       <div className="flex justify-center gap-3 mb-6 flex-wrap">
         {jobExperiencesContext.map((experience, index) => (
           <button
