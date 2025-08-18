@@ -20,7 +20,7 @@ export default function JobExperienceCardInterface() {
 
   return (
     <div className="relative w-full overflow-hidden md:pt-[10vh]">
-      <h3 className={`text-lg font-semibold my-6 ${textColor}`}>👷 Experiencias:</h3>
+      <h3 className={`text-lg font-semibold my-6 ${textColor}`}>👷 Trayectoria profesional:</h3>
       <div className="flex justify-center gap-3 mb-6 flex-wrap">
         {jobExperiencesContext.map((experience, index) => (
           <button
@@ -52,7 +52,7 @@ export default function JobExperienceCardInterface() {
       </div>
 
       <div className="relative flex justify-center mx-auto px-4 
-                h-[50vh] items-start overflow-y-auto mt-4">
+                min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
         {jobExperiencesContext[indexCarrousel]?.roles[roleIndex] && (
           <div
             className={`flex flex-col ${textColor} duration-500 transition-all
