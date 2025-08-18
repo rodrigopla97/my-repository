@@ -19,16 +19,15 @@ export default function JobExperienceCardInterface() {
   }, [indexCarrousel, roleIndex]);
 
   return (
-    <div className="relative w-full overflow-hidden md:pt-[10vh]">
+    <div className="relative md:w-[50vw] overflow-hidden md:pt-[10vh]">
       <h3 className={`text-lg font-semibold my-6 ${textColor}`}>👷 Trayectoria profesional:</h3>
-      <div className="flex justify-center gap-3 mb-6 flex-wrap">
+      <div className="flex justify-center gap-3 mb-6 flex-wrap ">
         {jobExperiencesContext.map((experience, index) => (
           <button
             key={index}
-            className={`px-4 py-2 rounded-lg border transition-colors duration-300 
-              ${index === indexCarrousel
-                ? `text-white border-cvButtonPrimary ${!isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"}`
-                : `bg-transparent ${textColor} border-gray-400 ${!isDarkMode ? "hover:border-cvButtonPrimary" : "hover:border-cvButtonSecondary"}`}`}
+            className={`px-4 py-2 rounded-lg border transition-colors duration-300 ${index === indexCarrousel
+              ? `text-white border-cvButtonPrimary ${!isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"}`
+              : `bg-transparent ${textColor} border-gray-400 ${!isDarkMode ? "hover:border-cvButtonPrimary" : "hover:border-cvButtonSecondary"}`}`}
             onClick={() => toggleAboutIndex(index)}
           >
             {experience.company}
@@ -51,8 +50,7 @@ export default function JobExperienceCardInterface() {
         ))}
       </div>
 
-      <div className="relative flex justify-center mx-auto px-4 
-                min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
+      <div className="relative flex justify-center mx-auto md:px-4 min-h-[50vh] md:h-auto items-start overflow-y-auto mt-4">
         {jobExperiencesContext[indexCarrousel]?.roles[roleIndex] && (
           <div
             className={`flex flex-col ${textColor} duration-500 transition-all
