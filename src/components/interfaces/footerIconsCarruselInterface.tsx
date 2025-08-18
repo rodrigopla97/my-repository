@@ -11,7 +11,7 @@ export default function FooterIconsCarrousel() {
     { component: <AngularIcon key="angular" />, label: "Angular" },
     { component: <TailwindIcon key="tailwind" />, label: "Tailwind" },
   ];
-  
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -21,7 +21,7 @@ export default function FooterIconsCarrousel() {
       setTimeout(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % icons.length);
         setIsTransitioning(false);
-      }, 500); 
+      }, 500);
     }, 3000);
 
     return () => clearInterval(intervalId);
@@ -30,9 +30,6 @@ export default function FooterIconsCarrousel() {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className='mb-4'>Skills</h1>
-      {/* <div
-        className={`w-12 h-12 flex items-center justify-center transition-transform duration-500 ease-in-out transform ${isTransitioning ? '-translate-x-4' : 'translate-x-0'}`}
-      > */}
       <div
         className={`w-12 h-12 flex items-center justify-center transition-transform duration-500 ease-in-out transform ${isTransitioning ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}
       >
