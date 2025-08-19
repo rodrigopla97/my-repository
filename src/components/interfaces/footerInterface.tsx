@@ -13,6 +13,9 @@ export default function FooterInterface() {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full md:w-2/3 h-full">
+          <div>
+            <p>En construcción 🏗️</p>
+          </div>
           <div className='flex flex-row items-center justify-center w-full mt-8'>
             {/* github icon */}
             <a href="https://github.com/rodrigopla97" target="_blank" rel="noopener noreferrer" title="https://github.com/rodrigopla97" className={`flex flex-row items-center md:w-[25%] place-content-center hover:cursor-pointer hover:font-bold ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}>
@@ -36,7 +39,7 @@ export default function FooterInterface() {
         </div>
       </div>
       <div className="text-center h-20 mb-4 content-end mt-4 md:mt-0">
-        <p>Rodrigo Placeres  {new Date().getFullYear()}  &#40;⌐■_■&#41;</p>
+        <p>Rodrigo Placeres {new Date().getFullYear()} 😎</p>
       </div>
     </div>
   );
