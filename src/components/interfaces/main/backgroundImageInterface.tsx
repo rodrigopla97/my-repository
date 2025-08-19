@@ -39,15 +39,14 @@ export default function BackgroundImageInterface() {
       const timeout = setTimeout(() => setHidden(true), 5000);
       return () => clearTimeout(timeout);
     } else {
-        setHidden(false);
+      setHidden(false);
     }
   }, [backgroundView]);
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out z-0 ${
-        hidden ? 'hidden' : 'block'
-      }`}
+      className={`fixed top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${hidden ? 'hidden' : 'block'
+        }`}
       style={{
         opacity: backgroundView ? 1 : 0,
         backgroundImage: `url(${isDarkMode ? bgImageDark : bgImagelight})`,
