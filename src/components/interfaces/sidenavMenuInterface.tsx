@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { useTheme } from "../../context/themeContext";
 
@@ -9,6 +9,18 @@ export function SidenavMenuInterface() {
   function closeDrawer() {
     setIsDrawerOpen(false);
   }
+
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isDrawerOpen]);
 
   return (
     <div className="inline sm:hidden">

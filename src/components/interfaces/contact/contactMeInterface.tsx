@@ -17,30 +17,33 @@ export default function ContactMeInterface() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full md:w-1/2 ml-auto my-auto p-6">
-      <div className={`w-[80vw] md:w-[40vw] p-6 border ${borderColor} rounded-lg shadow-md`}>
+      <div className={`w-[80vw] md:w-[40vw] p-6 border ${borderColor} rounded-lg shadow-md z-10`}>
         <h2 className="text-xl font-semibold mb-4">Envíame un mensaje</h2>
         <p className="mb-4">
           Hola! Si deseás contactarme, podés enviarme un correo a la dirección que aparece a continuación.
         </p>
-        <div className="flex flex-col">
-          <div className="flex items-center mb-4">
-            <a
-              href={`mailto:${mail}`}
-              className={`text-lg font-semibold underline ${textColor} hover:text-opacity-80 mr-2`}
-            >
-              {mail}
-            </a>
-            <i
-              className="material-symbols-outlined cursor-pointer"
-              onClick={handleCopyEmail}
-              title={copySuccess ? "¡Copiado!" : "Copiar Email"}
-            >
-              content_copy
-            </i>
-          </div>
-          {copySuccess && <p className={`text-sm font-bold ${isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary"}`}>¡Copiado al portapapeles!</p>}
+        <div className="flex items-center content-center mb-4">
+          <a
+            href={`mailto:${mail}`}
+            className={`md:text-lg font-semibold underline ${textColor} hover:text-opacity-80 mr-2`}
+          >
+            {mail}
+          </a>
+          <i
+            className="material-symbols-outlined cursor-pointer"
+            onClick={handleCopyEmail}
+            title={copySuccess ? "¡Copiado!" : "Copiar Email"}
+          >
+            content_copy
+          </i>
+        </div>
+        <div className="text-sm font-bold h-2">
+          <p className={`${isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary"} ${!copySuccess && "hidden"}`}>
+            ¡Copiado al portapapeles!
+          </p>
         </div>
       </div>
+
     </div>
   );
 }
