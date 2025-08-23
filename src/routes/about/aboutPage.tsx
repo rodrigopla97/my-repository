@@ -5,7 +5,7 @@ import JobExperienceCardInterface from '../../components/interfaces/about/jobExp
 export default function AboutPage() {
     return (
         <AboutProvider>
-            <div className="flex md:flex-row flex-col justify-center items-center gap-8 w-screen md:h-screen h-auto px-10">
+            <div className="flex md:flex-row flex-col justify-center items-center gap-8 w-screen h-full px-10 py-[10vh]">
                 <ExperienceInterface />
                 <JobExperienceCardInterface />
             </div>
