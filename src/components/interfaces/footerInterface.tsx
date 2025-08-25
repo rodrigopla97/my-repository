@@ -2,12 +2,16 @@ import bye from '../../images/bye.png';
 import { useTheme } from '../../context/themeContext';
 import LinkedInIcon from '../../icons/linkedinIconInterface';
 import GitHubIcon from '../../icons/githubIconInterface';
+import { useTabData } from '../../context/tabdataContext';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export default function FooterInterface() {
-  const { textColor, isDarkMode, bgColor } = useTheme();
+  const { textColor, isDarkMode, } = useTheme();
+  const { tabdataItems } = useTabData();
+  const { pathname } = useLocation();
 
   return (
-    <div className={`relative flex flex-col md:flex-row w-screen h-screen border-t border-dashed border-[white] ${textColor} font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
+    <div className={`relative flex flex-col md:flex-row w-screen h-screen border-t border-dashed border-[white] ${textColor} font-semibold overflow-y-hidden py-[10vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
 
       <div className="hidden md:flex flex-col justify-center items-center md:w-1/4">
         <img src={bye} alt="bye" className="h-auto" />
@@ -17,29 +21,37 @@ export default function FooterInterface() {
         <img
           src={bye}
           alt="Logo"
-          className={`w-auto h-[80%] object-contain ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
+          className={`w-auto object-contain ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
         />
       </div>
 
-
-      {/* <div className="hidden md:flex flex-col justify-center items-center md:w-1/4">
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-          <li>Item 4</li>
-        </ul>
-        <span>Mensaje de despedida 🫶</span>
-
-      </div> */}
-
-      <div className="flex flex-col text-center justify-center w-full md:w-3/4 z-10">
-        <div>
-          <h2>Sección footer</h2>
-          <p>En construcción 🏗️</p>
+      <div className="flex flex-col text-center justify-between md:justify-center w-full md:w-3/4 z-10 h-[50vh] md:h-auto">
+        <div className="flex justify-center items-center mb-auto md:mb-4 mt-6">
+          <span>Gracias por tu tiempo 🫶</span>
         </div>
-        <div className="flex flex-row items-center justify-center w-full mt-8 ">
+        <div>
+          <div className='flex flex-col items-center'>
+            {tabdataItems.map((tab, index) => (
+              <span key={index} className="cursor-pointer py-2" >
+                <NavLink
+                  to={tab.path}
+                  onClick={(e) => {
+                    if (pathname === tab.path) {
+                      e.preventDefault();
+                      window.location.reload();
+                    }
+                  }}
+                  className={`flex items-center ${textColor} ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}
+                >
+                  <span>{tab.name}</span>
+                </NavLink>
+              </span>
 
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-row items-center justify-center w-full mt-8 ">
           <a
             href="https://github.com/rodrigopla97"
             target="_blank"

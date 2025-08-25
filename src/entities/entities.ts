@@ -11,6 +11,17 @@ export interface JobExperience {
   roles: JobRole[];
 }
 
+export interface TabdataItem {
+  path: string;
+  name: string;
+  icon: string;
+  component: ReactNode;
+}
+
+export interface TabdataContextType {
+  tabdataItems: TabdataItem[];
+}
+
 export type ThemeContextType = {
   isDarkMode: boolean;
   toggleTheme: () => void;

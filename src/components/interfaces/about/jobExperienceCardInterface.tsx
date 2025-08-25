@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../../../context/themeContext';
 import { useAbout } from '../../../context/aboutContext';
-// import deskAvatar from '../../../images/office-avatar.png';
 
 export default function JobExperienceCardInterface() {
   const { jobExperiencesContext, toggleAboutIndex, indexCarrousel } = useAbout();
@@ -20,7 +19,7 @@ export default function JobExperienceCardInterface() {
   }, [indexCarrousel, roleIndex]);
 
   return (
-    <div className="md:w-[50vw] h-full overflow-hidden md:py-4 md:mb-auto">
+    <div className="md:w-[50vw] h-full overflow-hidden md:py-4 self-start">
       <h3 className={`text-lg font-semibold my-6 md:my-0 ${textColor}`}>👷 Trayectoria profesional:</h3>
       <div className="flex justify-center gap-3 my-6 flex-wrap md:px-10 ">
         {jobExperiencesContext.map((experience, index) => (
@@ -36,7 +35,7 @@ export default function JobExperienceCardInterface() {
         ))}
       </div>
 
-      <div className="flex justify-start gap-4 mb-8 flex-wrap">
+      <div className="flex justify-center md:justify-start gap-4 mb-8 flex-wrap">
         {jobExperiencesContext[indexCarrousel]?.roles.map((role, idx) => (
           <button
             key={idx}
@@ -51,17 +50,18 @@ export default function JobExperienceCardInterface() {
         ))}
       </div>
 
-      <div className="flex justify-start mx-auto min-h-[50vh] md:min-h-10 md:px-4 md:h-auto items-start mb-auto mt-4 ">
+      <div className="flex flex-col justify-center md:justify-start mx-auto md:px-4 md:h-full items-start mt-4">
         {jobExperiencesContext[indexCarrousel]?.roles[roleIndex] && (
           <div
-            className={`flex flex-col ${textColor} duration-500 transition-all
+            className={`flex flex-col ${textColor} duration-500 transition-all h-[65vh] md:h-[30vh] place-items-center md:place-items-start
+ 
               ${animate ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}
             `}
           >
             <h5 className="text-md font-semibold mb-2">
               {jobExperiencesContext[indexCarrousel].roles[roleIndex].title}
             </h5>
-            <ul className="list-[circle] ml-6">
+            <ul className="list-[circle] ml-6 md:ml-0 overflow-y-scroll w-full">
               {jobExperiencesContext[indexCarrousel].roles[roleIndex].tasks.map((task, taskIndex) => (
                 <li key={taskIndex} className={`${textColor}`}>
                   {task}
@@ -70,9 +70,9 @@ export default function JobExperienceCardInterface() {
             </ul>
           </div>
         )}
-        {/* <div className="">
-          <img src={deskAvatar} alt="bye" className="" />
-        </div> */}
+        <div className="self-center mt-auto">
+          <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`w-fit hidden md:block font-medium md:text-lg lg:text-xl py-2 mt-6 px-4 ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${textColor} rounded-lg border-2 border-transparent hover:bg-opacity-80 transition-all duration-300 mx-auto md:mx-0`}>Descargar CV</a>
+        </div>
       </div>
 
     </div>

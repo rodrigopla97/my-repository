@@ -15,8 +15,7 @@ export default function ExperienceInterface() {
         </p>
 
         <p className="mb-4">
-          Inicié laboralmente reparando laptops PCs y luego me especialicé en desarrollo web. Me formé como Fullstack
-          con Node.js en EducaciónIT, aunque desde 2022 mi enfoque es como <strong>Desarrollador Frontend</strong>.
+          Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 mi enfoque es como <strong>Desarrollador Frontend</strong> en <strong>Leafnoise</strong>.
         </p>
 
         <h3 className="text-lg font-semibold mt-6 mb-2">🛠️ Tecnologías</h3>
