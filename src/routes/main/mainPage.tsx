@@ -3,6 +3,7 @@ import desk from '../../images/avatar-float.png';
 import bgAvatarDesk from '../../images/bg-avatar.png';
 import { useTheme } from '../../context/themeContext';
 import BackgroundImageInterface from '../../components/interfaces/main/backgroundImageInterface';
+import CurriculumInterface from '../../components/interfaces/curriculumInterface';
 
 const texts = [
   'Rodrigo Placeres',
@@ -51,13 +52,18 @@ export default function MainPage() {
               <span>{currentText || '\u00A0'}</span>
             </h2>
           </div>
-          <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`w-fit hidden md:block font-medium md:text-lg lg:text-xl py-2 my-4 px-4 ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${textColor} rounded-lg border-2 border-transparent hover:bg-opacity-80 transition-all duration-300 mx-auto md:mx-0`}>Descargar CV</a>
+          <CurriculumInterface />
+          <CurriculumInterface download={true} />
+
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center mt-5 md:mt-0 z-10" style={{ backgroundImage: `url(${bgAvatarDesk})`, backgroundSize: '80%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
           <img src={desk} alt="Logo" className={`max-[820px]:h-[50vh] mt-10 md:mt-0:h-[70vh] w-auto animate-float ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`} />
         </div>
-        <a href='/CV - Rodrigo Placeres.pdf' target='_blank' className={`block md:hidden font-medium md:text-lg lg:text-xl py-2 my-4 px-4 ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"}  ${textColor} rounded-lg border-2 border-transparent hover:bg-opacity-50 transition-all duration-300 mx-auto md:mx-0 z-10`} >Descargar CV</a>
+        <div className="block md:hidden flex flex-col items-center space-y-3 z-10">
+          <CurriculumInterface />
+          <CurriculumInterface download={true} />
+        </div>
       </div>
     </div>
   );

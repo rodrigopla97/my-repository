@@ -4,6 +4,7 @@ import LinkedInIcon from '../../icons/linkedinIconInterface';
 import GitHubIcon from '../../icons/githubIconInterface';
 import { useTabData } from '../../context/tabdataContext';
 import { NavLink, useLocation } from 'react-router-dom';
+import CurriculumInterface from './curriculumInterface';
 
 export default function FooterInterface() {
   const { textColor, isDarkMode, } = useTheme();
@@ -13,7 +14,7 @@ export default function FooterInterface() {
   return (
     <div className={`relative flex flex-col md:flex-row w-screen h-screen border-t border-dashed border-[white] ${textColor} font-semibold overflow-y-hidden py-[10vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
 
-      <div className="hidden md:flex flex-col justify-center items-center md:w-1/4">
+      <div className="hidden md:flex flex-col justify-center items-center w-1/2">
         <img src={bye} alt="bye" className="h-auto" />
       </div>
 
@@ -21,7 +22,7 @@ export default function FooterInterface() {
         <img
           src={bye}
           alt="Logo"
-          className={`w-auto object-contain ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
+          className={`w-full object-contain ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
         />
       </div>
 
@@ -81,7 +82,12 @@ export default function FooterInterface() {
             </div>
           </a>
         </div>
-        <div className={`mt-8`}>
+        <div className='my-8'>
+          {/* <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`font-medium underline  ${textColor} ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`} >Descargar CV</a> */}
+          <CurriculumInterface />
+          <CurriculumInterface download={true} />
+        </div>
+        <div className="mt-8">
           <p>Rodrigo Placeres {new Date().getFullYear()} 😎</p>
         </div>
       </div>
