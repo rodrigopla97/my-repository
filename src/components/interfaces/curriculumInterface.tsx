@@ -15,7 +15,7 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
       href="/CV - Rodrigo Placeres.pdf"
       target="_blank"
       download={download ? "" : undefined}
-      className={`font-medium text-lg py-2 px-4 rounded-lg transition-all duration-300 ${textColor} hover:bg-opacity-50 md:w-fit md:my-4 md:mx-auto md:md:mx-0 md:text-lg lg:text-xl md:border-2 md:border-transparent md:hover:bg-opacity-80 ${isDarkMode ? "hover:text-cvButtonPrimary hover:border-cvButtonPrimary" : "hover:text-cvButtonSecondary hover:border-cvButtonSecondary"}`}
+      className={`font-medium text-lg py-2 px-4 rounded-lg transition-all duration-300 ${textColor} hover:bg-opacity-50 md:w-fit md:my-4 md:mx-auto md:md:mx-0 md:text-lg lg:text-xl md:border-2 md:border-transparent md:hover:bg-opacity-80 ${isDarkMode ? "hover:text-cvButtonSecondary hover:border-cvButtonSecondary" : "hover:text-cvButtonPrimary hover:border-cvButtonPrimary"}`}
     >
       {buttonText}
     </a>
