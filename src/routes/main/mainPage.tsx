@@ -52,8 +52,10 @@ export default function MainPage() {
               <span>{currentText || '\u00A0'}</span>
             </h2>
           </div>
-          <CurriculumInterface />
-          <CurriculumInterface download={true} />
+          <div className='hidden md:block'>
+            <CurriculumInterface />
+            <CurriculumInterface download={true} />
+          </div>
 
         </div>
 
