@@ -38,7 +38,7 @@ export default function FooterCVInterface() {
   return (
     <>
       {!isMenuOpen && (
-        <div className="fixed bottom-20 md:bottom-8 right-8 z-50">
+        <div className="fixed bottom-8 right-8 z-50">
           <div className="relative" ref={modalRef}>
             <button
               onClick={() => handleSetIsCurriculumOpen(!isCurriculumOpen)}
