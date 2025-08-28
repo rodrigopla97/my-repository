@@ -36,7 +36,7 @@ export default function FooterCVInterface() {
   }, [isCurriculumOpen]);
 
   return (
-    <>
+    <React.Fragment>
       {!isMenuOpen && (
         <div className="fixed bottom-8 right-8 z-50">
           <div className="relative" ref={modalRef}>
@@ -59,6 +59,6 @@ export default function FooterCVInterface() {
           </div>
         </div>
       )}
-    </>
+    </ React.Fragment>
   );
 }
