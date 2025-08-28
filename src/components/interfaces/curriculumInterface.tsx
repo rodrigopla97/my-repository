@@ -1,5 +1,6 @@
-import { useTheme } from '../../context/themeContext';
 import React from 'react';
+import { useTheme } from '../../context/themeContext';
+import { useTabData } from '../../context/tabdataContext';
 
 interface CurriculumInterfaceProps {
   download?: boolean;
@@ -7,15 +8,17 @@ interface CurriculumInterfaceProps {
 
 export default function CurriculumInterface({ download }: CurriculumInterfaceProps) {
   const { isDarkMode, textColor } = useTheme();
+  const { handleSetIsCurriculumOpen } = useTabData();
 
-  const buttonText = download ? "Descargar CV ⬇️" : "Ver CV 👀";
+  const buttonText = download ? "Descargar" : "Ver en otra pestaña";
 
   return (
     <a
       href="/CV - Rodrigo Placeres.pdf"
       target="_blank"
       download={download ? "" : undefined}
-      className={`font-medium text-lg py-2 px-4 rounded-lg transition-all duration-300 ${textColor} hover:bg-opacity-50 md:w-fit md:my-4 md:mx-auto md:md:mx-0 md:text-lg lg:text-xl md:border-2 md:border-transparent md:hover:bg-opacity-80 ${isDarkMode ? "hover:text-cvButtonSecondary hover:border-cvButtonSecondary" : "hover:text-cvButtonPrimary hover:border-cvButtonPrimary"}`}
+      onClick={() => handleSetIsCurriculumOpen(false)}
+      className={`font-medium text-lg py-2 px-4 transition-all duration-300 w-auto border-2 border-transparent ${download ? "rounded-b-lg" : "rounded-t-lg"} ${isDarkMode ? "hover:border-cvButtonPrimary hover:bg-cvButtonPrimary" : "hover:border-cvButtonSecondary hover:bg-cvButtonSecondary"}  ${textColor} hover:bg-opacity-50 transition-all duration-300 mx-0`}
     >
       {buttonText}
     </a>

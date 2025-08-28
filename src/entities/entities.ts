@@ -20,6 +20,10 @@ export interface TabdataItem {
 
 export interface TabdataContextType {
   tabdataItems: TabdataItem[];
+  handleSetIsMenuOpen: (isOpen: boolean) => void;
+  isMenuOpen: boolean;
+  handleSetIsCurriculumOpen: (isOpen: boolean) => void;
+  isCurriculumOpen: boolean;
 }
 
 export type ThemeContextType = {

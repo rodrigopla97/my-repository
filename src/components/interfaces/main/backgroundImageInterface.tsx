@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import bgImageDark from '../../../images/bg-desk-black.png';
 import bgImagelight from '../../../images/bg-desk-gray.png';
 import { useTheme } from '../../../context/themeContext';
+import { useTabData } from '../../../context/tabdataContext';
 
 export default function BackgroundImageInterface() {
   const [isMobile, setIsMobile] = useState(false);
   const { isDarkMode } = useTheme();
+  const { handleSetIsCurriculumOpen } = useTabData();
   const [backgroundView, setBackgroundView] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
   const [scroll, setScroll] = useState(window.scrollY);
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
+    handleSetIsCurriculumOpen(false)
     function handleResize() {
       setWidth(window.innerWidth);
       setIsMobile(width < 1024);

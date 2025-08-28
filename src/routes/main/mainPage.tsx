@@ -52,19 +52,11 @@ export default function MainPage() {
               <span>{currentText || '\u00A0'}</span>
             </h2>
           </div>
-          <div className='hidden md:block'>
-            <CurriculumInterface />
-            <CurriculumInterface download={true} />
-          </div>
 
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center mt-5 md:mt-0 z-10" style={{ backgroundImage: `url(${bgAvatarDesk})`, backgroundSize: '80%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
           <img src={desk} alt="Logo" className={`max-[820px]:h-[50vh] mt-0 md:h-[70vh] w-auto animate-float ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`} />
-        </div>
-        <div className="block md:hidden flex flex-col items-center space-y-3 z-10">
-          <CurriculumInterface />
-          <CurriculumInterface download={true} />
         </div>
       </div>
     </div>

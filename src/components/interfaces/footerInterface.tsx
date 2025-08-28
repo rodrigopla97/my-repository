@@ -82,11 +82,6 @@ export default function FooterInterface() {
             </div>
           </a>
         </div>
-        <div className='my-8'>
-          {/* <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`font-medium underline  ${textColor} ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`} >Descargar CV</a> */}
-          <CurriculumInterface />
-          <CurriculumInterface download={true} />
-        </div>
         <div className="mt-8">
           <p>Rodrigo Placeres {new Date().getFullYear()} 😎</p>
         </div>

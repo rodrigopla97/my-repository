@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { ProviderProps, TabdataContextType, TabdataItem } from '../entities/entities';
 
 import HomePage from '../routes/main/mainPage';
@@ -8,6 +8,10 @@ import ContactPage from '../routes/contact/contactPage';
 export const TabdataContext = createContext<TabdataContextType | null>(null);
 
 export const TabdataProvider: React.FC<ProviderProps> = ({ children }) => {
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isCurriculumOpen, setIsCurriculumOpen] = useState(false)
+
   const tabdataItems: TabdataItem[] = [
     {
       path: '/',
@@ -29,8 +33,16 @@ export const TabdataProvider: React.FC<ProviderProps> = ({ children }) => {
     },
   ];
 
+  function handleSetIsMenuOpen(isOpen: boolean) {
+    setIsMenuOpen(isOpen);
+  }
+
+  function handleSetIsCurriculumOpen(isOpen: boolean) {
+    setIsCurriculumOpen(isOpen);
+  }
+
   return (
-    <TabdataContext.Provider value={{ tabdataItems }}>
+    <TabdataContext.Provider value={{ tabdataItems, handleSetIsMenuOpen, isMenuOpen, handleSetIsCurriculumOpen, isCurriculumOpen }}>
       {children}
     </TabdataContext.Provider>
   );

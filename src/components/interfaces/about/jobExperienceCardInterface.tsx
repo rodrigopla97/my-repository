@@ -71,11 +71,6 @@ export default function JobExperienceCardInterface() {
             </ul>
           </div>
         )}
-        <div className="self-center mt-auto">
-          {/* <a href='/CV - Rodrigo Placeres.pdf' target='_blank' download className={`w-fit hidden md:block font-medium md:text-lg lg:text-xl py-2 mt-6 px-4 ${isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary"} ${textColor} rounded-lg border-2 border-transparent hover:bg-opacity-80 transition-all duration-300 mx-auto md:mx-0`}>Descargar CV</a> */}
-          <CurriculumInterface />
-          <CurriculumInterface download={true} />
-        </div>
       </div>
 
     </div>
