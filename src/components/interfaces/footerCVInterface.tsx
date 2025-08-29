@@ -50,7 +50,7 @@ export default function FooterCVInterface() {
             {isCurriculumOpen && (
               <div
 
-                className={`absolute mb-8 md:mb-0 bottom-1/2 right-1/2 md:bottom-full md:right-full flex flex-col ${bgColor} shadow-lg rounded-lg border-2 ${borderColor} w-max border-opacity-50`}
+                className={`absolute mb-8 md:mb-0 bottom-1/2 right-1/2 md:bottom-full md:right-full flex flex-col ${bgColor} ${textColor} shadow-lg rounded-lg border-2 ${borderColor} w-max border-opacity-50`}
               >
                 <CurriculumInterface download={false} />
                 <CurriculumInterface download={true} />
