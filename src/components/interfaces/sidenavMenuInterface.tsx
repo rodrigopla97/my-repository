@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from "../../context/themeContext";
-import { useTabData } from "../../context/tabdataContext";
+import { useActions } from "../../context/actionsContext";
 
 export function SidenavMenuInterface() {
   const { bgColor, textColor } = useTheme();
-  const { isMenuOpen, handleSetIsMenuOpen } = useTabData();
+  const { isMenuOpen, handleSetIsMenuOpen, tabdataItems } = useActions();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -37,24 +38,22 @@ export function SidenavMenuInterface() {
             </div>
             <div className="px-10 flex-grow flex flex-col items-center justify-center">
               <ul className="text-center pb-20 space-y-8">
-                <li className="cursor-pointer py-2" onClick={() => handleSetIsMenuOpen(false)}>
-                  <NavLink to="/" className="flex items-center">
-                    <i className="material-icons-outlined">home</i>
-                    <span className="ml-2">Home</span>
-                  </NavLink>
-                </li>
-                <li className="cursor-pointer py-2" onClick={() => handleSetIsMenuOpen(false)}>
-                  <NavLink to="/about" className="flex items-center">
-                    <i className="material-icons-outlined">description</i>
-                    <span className="ml-2">About</span>
-                  </NavLink>
-                </li>
-                <li className="cursor-pointer py-2" onClick={() => handleSetIsMenuOpen(false)}>
-                  <NavLink to="/contact" className="flex items-center">
-                    <i className="material-icons-outlined">contact_phone</i>
-                    <span className="ml-2">Contact</span>
-                  </NavLink>
-                </li>
+                {tabdataItems.map((tab, index) => (
+                  <li className="cursor-pointer py-2" key={index} onClick={() => handleSetIsMenuOpen(false)}>
+                    <NavLink
+                      to={tab.path}
+                      onClick={(e) => {
+                        if (pathname === tab.path) {
+                          e.preventDefault();
+                          window.location.reload();
+                        }
+                      }}
+                      className="flex items-center">
+                      <i className="material-icons-outlined">{tab.icon}</i>
+                      <span className="ml-2">{tab.name}</span>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

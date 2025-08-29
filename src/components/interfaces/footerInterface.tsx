@@ -2,13 +2,13 @@ import bye from '../../images/bye.png';
 import { useTheme } from '../../context/themeContext';
 import LinkedInIcon from '../../icons/linkedinIconInterface';
 import GitHubIcon from '../../icons/githubIconInterface';
-import { useTabData } from '../../context/tabdataContext';
+import { useActions } from '../../context/actionsContext';
 import { NavLink, useLocation } from 'react-router-dom';
 import CurriculumInterface from './curriculumInterface';
 
 export default function FooterInterface() {
   const { textColor, isDarkMode, } = useTheme();
-  const { tabdataItems } = useTabData();
+  const { tabdataItems } = useActions();
   const { pathname } = useLocation();
 
   return (

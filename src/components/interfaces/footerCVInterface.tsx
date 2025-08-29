@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import CurriculumInterface from './curriculumInterface';
 import { useTheme } from '../../context/themeContext';
-import { useTabData } from '../../context/tabdataContext';
+import { useActions } from '../../context/actionsContext';
 
 export default function FooterCVInterface() {
   const { borderColor, bgColor, textColor, isDarkMode } = useTheme();
-  const { isMenuOpen, isCurriculumOpen, handleSetIsCurriculumOpen } = useTabData();
+  const { isMenuOpen, isCurriculumOpen, handleSetIsCurriculumOpen } = useActions();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +42,7 @@ export default function FooterCVInterface() {
           <div className="relative" ref={modalRef}>
             <button
               onClick={() => handleSetIsCurriculumOpen(!isCurriculumOpen)}
-              className={`border-2  ${bgColor} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary"} ${textColor} rounded-full p-3 shadow-lg bg-opacity-80 hover:bg-opacity-50  transition-all duration-300`}
+              className={`border-2  ${bgColor} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary"} rounded-full p-3 shadow-lg bg-opacity-80 hover:bg-opacity-50  transition-all duration-300`}
             >
               Curriculum 📁
             </button>

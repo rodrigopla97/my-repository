@@ -1,18 +1,18 @@
 import React, { createContext, useContext, useState } from 'react';
-import { ProviderProps, TabdataContextType, TabdataItem } from '../entities/entities';
+import { ActionsContextType, ActionsTabdataItem, ProviderProps } from '../entities/entities';
 
 import HomePage from '../routes/main/mainPage';
 import AboutPage from '../routes/about/aboutPage';
 import ContactPage from '../routes/contact/contactPage';
 
-export const TabdataContext = createContext<TabdataContextType | null>(null);
+export const ActionsContext = createContext<ActionsContextType | null>(null);
 
-export const TabdataProvider: React.FC<ProviderProps> = ({ children }) => {
+export const ActionsProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCurriculumOpen, setIsCurriculumOpen] = useState(false)
 
-  const tabdataItems: TabdataItem[] = [
+  const tabdataItems: ActionsTabdataItem[] = [
     {
       path: '/',
       name: 'Home',
@@ -42,12 +42,12 @@ export const TabdataProvider: React.FC<ProviderProps> = ({ children }) => {
   }
 
   return (
-    <TabdataContext.Provider value={{ tabdataItems, handleSetIsMenuOpen, isMenuOpen, handleSetIsCurriculumOpen, isCurriculumOpen }}>
+    <ActionsContext.Provider value={{ tabdataItems, handleSetIsMenuOpen, isMenuOpen, handleSetIsCurriculumOpen, isCurriculumOpen }}>
       {children}
-    </TabdataContext.Provider>
+    </ActionsContext.Provider>
   );
 };
 
-export function useTabData() {
-  return useContext(TabdataContext) as TabdataContextType;
+export function useActions() {
+  return useContext(ActionsContext) as ActionsContextType;
 }
