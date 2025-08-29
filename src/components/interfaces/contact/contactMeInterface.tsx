@@ -89,7 +89,7 @@ export default function ContactMeInterface() {
             placeholder="Tu nombre"
             value={formData.name}
             onChange={handleChange}
-            className="p-2 border rounded-md w-full bg-transparent"
+            className={`p-2 border rounded-md w-full bg-transparent ${borderColor} ${textColor} ${isDarkMode ? "placeholder-grayPrimary" : "placeholder-black"} placeholder-opacity-70`}
             required
           />
           <input
@@ -98,7 +98,7 @@ export default function ContactMeInterface() {
             placeholder="Tu correo"
             value={formData.email}
             onChange={handleChange}
-            className="p-2 border rounded-md w-full bg-transparent"
+            className={`p-2 border rounded-md w-full bg-transparent ${borderColor} ${textColor} ${isDarkMode ? "placeholder-grayPrimary" : "placeholder-black"} placeholder-opacity-70`}
             required
           />
           <textarea
@@ -107,7 +107,7 @@ export default function ContactMeInterface() {
             rows={4}
             value={formData.message}
             onChange={handleChange}
-            className="p-2 border rounded-md w-full bg-transparent resize-none overflow-y-auto"
+            className={`p-2 border rounded-md w-full bg-transparent resize-none overflow-y-auto ${borderColor} ${textColor} ${isDarkMode ? "placeholder-grayPrimary" : "placeholder-black"} placeholder-opacity-70`}
             required
           />
           <button
