@@ -4,7 +4,6 @@ import LinkedInIcon from '../../icons/linkedinIconInterface';
 import GitHubIcon from '../../icons/githubIconInterface';
 import { useActions } from '../../context/actionsContext';
 import { NavLink, useLocation } from 'react-router-dom';
-import CurriculumInterface from './curriculumInterface';
 
 export default function FooterInterface() {
   const { textColor, isDarkMode, } = useTheme();
@@ -12,7 +11,7 @@ export default function FooterInterface() {
   const { pathname } = useLocation();
 
   return (
-    <div className={`relative flex flex-col md:flex-row w-screen h-screen border-t border-dashed border-[white] ${textColor} font-semibold overflow-y-hidden py-[10vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
+    <div className={`relative flex flex-col md:flex-row w-screen h-screen ${textColor} font-semibold overflow-y-hidden py-[10vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
 
       <div className="hidden md:flex flex-col justify-center items-center w-1/2">
         <img src={bye} alt="bye" className="h-auto" />

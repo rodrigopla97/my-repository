@@ -3,7 +3,6 @@ import desk from '../../images/avatar-float.png';
 import bgAvatarDesk from '../../images/bg-avatar.png';
 import { useTheme } from '../../context/themeContext';
 import BackgroundImageInterface from '../../components/interfaces/main/backgroundImageInterface';
-import CurriculumInterface from '../../components/interfaces/curriculumInterface';
 
 const texts = [
   'Rodrigo Placeres',
@@ -52,7 +51,6 @@ export default function MainPage() {
               <span>{currentText || '\u00A0'}</span>
             </h2>
           </div>
-
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center mt-5 md:mt-0 z-10" style={{ backgroundImage: `url(${bgAvatarDesk})`, backgroundSize: '80%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>

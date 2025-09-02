@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTheme } from '../../context/themeContext';
 import { useActions } from '../../context/actionsContext';
 
@@ -7,7 +6,7 @@ interface CurriculumInterfaceProps {
 }
 
 export default function CurriculumInterface({ download }: CurriculumInterfaceProps) {
-  const { isDarkMode, textColor } = useTheme();
+  const { isDarkMode } = useTheme();
   const { handleSetIsCurriculumOpen } = useActions();
 
   const buttonText = download ? "Descargar" : "Ver en otra pestaña";
