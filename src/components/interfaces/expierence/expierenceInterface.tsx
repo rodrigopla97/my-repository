@@ -31,7 +31,7 @@ export default function ExperienceInterface() {
         </p>
 
         <p>
-          Luego de realizar un curso de React, desarrollé un proyecto desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador.
+          Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador.
         </p>
 
         <h3 className="text-lg font-semibold my-6">🎯 Objetivo</h3>
