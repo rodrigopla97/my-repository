@@ -1,11 +1,8 @@
 import { useTheme } from '../../context/themeContext';
 import { useActions } from '../../context/actionsContext';
+import { CurriculumInterfacePropsType } from '../../entities/entities';
 
-interface CurriculumInterfaceProps {
-  download?: boolean;
-}
-
-export default function CurriculumInterface({ download }: CurriculumInterfaceProps) {
+export default function CurriculumInterface({ download }: CurriculumInterfacePropsType) {
   const { isDarkMode } = useTheme();
   const { handleSetIsCurriculumOpen } = useActions();
 

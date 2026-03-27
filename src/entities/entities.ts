@@ -15,16 +15,54 @@ export interface ActionsTabdataItem {
   path: string;
   name: string;
   icon: string;
-  component: ReactNode;
 }
 
-export interface ActionsContextType {
-  tabdataItems: ActionsTabdataItem[];
-  handleSetIsMenuOpen: (isOpen: boolean) => void;
-  isMenuOpen: boolean;
-  handleSetIsCurriculumOpen: (isOpen: boolean) => void;
-  isCurriculumOpen: boolean;
+export type GithubProfile = {
+  name: string;
+  bio: string;
+  avatar_url: string;
+  public_repos: number;
+  html_url: string;
+};
+
+export interface GithubLanguage {
+  name: string;
+  percentage: number;
 }
+
+// export interface GithubReposWithLanguages extends GithubRepos {
+//   languages?: GithubLanguage[];
+// }
+// GitHub Repo
+export type GithubRepos = {
+  name: string;
+  html_url: string;
+  languages_url: string;
+  language: string;
+  languages?: GithubLanguage[];
+};
+
+// GitHub Repo Detail
+export type GithubRepoDetail = {
+  name: string;
+  html_url: string;
+  languages_url: string;
+  language: string;
+};
+
+// Context principal
+export type ActionsContextType = {
+  tabdataItems: ActionsTabdataItem[];
+  isMenuOpen: boolean;
+  handleSetIsMenuOpen: (isOpen: boolean) => void;
+  isCurriculumOpen: boolean;
+  handleSetIsCurriculumOpen: (isOpen: boolean) => void;
+
+  githubUserInfo: GithubProfile | null;
+  githubUserRepos: GithubRepos[];
+  githubRepoInfo: GithubRepos | null;
+  githubError: string | null;
+};
 
 export type ThemeContextType = {
   isDarkMode: boolean;
@@ -52,3 +90,9 @@ export interface ModalJobProps {
   onClose: () => void;
   selectedExperience: JobExperience
 }
+
+export interface CurriculumInterfacePropsType {
+  download?: boolean;
+}
+
+export type MathChallengeOperationType = "+" | "-" | "×";
