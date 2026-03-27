@@ -100,7 +100,7 @@ export default function ContactMeInterface() {
   const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} py-3 text-sm focus:outline-none transition-colors ${isDarkMode ? "placeholder-grayPrimary" : "placeholder-black"} placeholder-opacity-50`;
 
   return (
-    <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 relative ${textColor}`}>
+    <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 pt-[10vh] relative ${textColor}`}>
 
       {/* Toast */}
       {(formSuccess || operationFailed) && (
@@ -193,7 +193,7 @@ export default function ContactMeInterface() {
             </div>
 
             {/* Submit */}
-            <button type="submit" className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider transition-opacity hover:opacity-70 ${accentColor}`}>
+            <button type="submit" className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider transition-opacity hover:opacity-70 self-end ${accentColor}`}>
               Enviar
               <span className={`text-lg border-b ${accentBorder}`}>→</span>
             </button>
