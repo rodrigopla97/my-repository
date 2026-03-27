@@ -1,88 +1,64 @@
-import bye from '../../images/bye.png';
 import { useTheme } from '../../context/themeContext';
-import LinkedInIcon from '../../icons/linkedinIconInterface';
-import GitHubIcon from '../../icons/githubIconInterface';
 import { useActions } from '../../context/actionsContext';
-import { NavLink, useLocation } from 'react-router-dom';
+import useRoutes from '../../hooks/useRoutes';
+import lightLogo from '../../images/black-logo.png';
+import darkLogo from '../../images/gray-logo.png';
 
 export default function FooterInterface() {
-  const { textColor, isDarkMode, } = useTheme();
+  const { textColor, isDarkMode } = useTheme();
   const { tabdataItems } = useActions();
-  const { pathname } = useLocation();
+  const { navigate, pathname, openExternal } = useRoutes();
 
   return (
-    <div className={`relative flex flex-col md:flex-row w-screen h-screen ${textColor} font-semibold overflow-y-hidden py-[10vh] px-[5vh] md:px-8 justify-center md:justify-normal`}>
+    <div className={`flex flex-col md:flex-row w-screen h-screen md:h-1/4 md:border-t  ${textColor} font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 justify-center md:justify-normal bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
 
-      <div className="hidden md:flex flex-col justify-center items-center w-1/2">
-        <img src={bye} alt="bye" className="h-auto" />
-      </div>
-
-      <div className="md:hidden absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none z-0 flex justify-center items-center">
-        <img
-          src={bye}
-          alt="Logo"
-          className={`w-full object-contain ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
-        />
-      </div>
-
-      <div className="flex flex-col text-center justify-between md:justify-center w-full md:w-3/4 z-10 h-[50vh] md:h-auto">
-        <div className="flex justify-center items-center mb-auto md:mb-4 mt-6">
-          <span>Gracias por tu tiempo 🫶</span>
-        </div>
+      <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>
         <div>
-          <div className='flex flex-col items-center'>
-            {tabdataItems.map((tab, index) => (
-              <span key={index} className="cursor-pointer py-2" >
-                <NavLink
-                  to={tab.path}
-                  onClick={(e) => {
-                    if (pathname === tab.path) {
-                      e.preventDefault();
-                      window.location.reload();
-                    }
-                  }}
-                  className={`flex items-center ${textColor} ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}
-                >
-                  <span>{tab.name}</span>
-                </NavLink>
-              </span>
+          <h2 className='font-bold text-xl'>Rodrigo Placeres</h2>
+          <span className='font-light'>Desarrollador Frontend</span>
+        </div>
+        <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh]' />
+      </div>
 
-            ))}
+      <div className='flex flex-col md:w-1/3 items-center uppercase'>
+        <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
+          <span className='uppercase'>Navegación</span>
+
+          <div className='flex flex-col'>
+            {tabdataItems.map((tab, index) => {
+              const isActive = pathname === tab.path;
+
+              return (
+                <span
+                  key={index}
+                  className={`cursor-pointer py-2 transition ${isActive
+                    ? `font-bold underline ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
+                    : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
+                    }`}
+                  onClick={() => navigate(tab.path)}
+                >
+                  {tab.name}
+                </span>
+              );
+            })}
           </div>
         </div>
+      </div>
 
-        <div className="flex flex-row items-center justify-center w-full mt-8 ">
-          <a
-            href="https://github.com/rodrigopla97"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="https://github.com/rodrigopla97"
-            className={`flex flex-row items-center md:w-[25%] place-content-center hover:cursor-pointer hover:font-bold ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}
-          >
+      <div className='flex flex-col md:w-1/3 items-center uppercase'>
+        <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
+          <span>Social</span>
 
-            <GitHubIcon />
-            <div className="hidden md:flex items-center">
-              <span>GitHub</span>
-              <i className="material-icons-outlined text-base ml-2">open_in_new</i>
-            </div>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/rodrigo-placeres/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="https://www.linkedin.com/in/rodrigo-placeres/"
-            className={`flex flex-row items-center md:w-[25%] hover:cursor-pointer place-content-center ${isDarkMode ? "hover:text-cvButtonSecondary" : "hover:text-cvButtonPrimary"}`}
-          >
-            <LinkedInIcon />
-            <div className="hidden md:flex items-center">
-              <span>LinkedIn</span>
-              <i className="material-icons-outlined text-base ml-2">open_in_new</i>
-            </div>
-          </a>
-        </div>
-        <div className="mt-8">
-          <p>Rodrigo Placeres {new Date().getFullYear()} 😎</p>
+          <div className='flex flex-col'>
+            <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://www.linkedin.com/in/rodrigo-placeres/")}>
+              LinkedIn
+              <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
+            </span>
+            <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://github.com/rodrigopla97")}>
+              GitHub
+              <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
