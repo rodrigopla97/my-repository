@@ -1,48 +1,41 @@
 import React, { createContext, useContext, useState } from 'react';
-import { ActionsContextType, ActionsTabdataItem, ProviderProps } from '../entities/entities';
+import {
+  ActionsContextType,
+  ActionsTabdataItem,
+  ProviderProps,
+} from '../entities/entities';
 
-import HomePage from '../routes/main/mainPage';
-import AboutPage from '../routes/about/aboutPage';
-import ContactPage from '../routes/contact/contactPage';
+const defaultContext: ActionsContextType = {
+  tabdataItems: [
+    { path: '/', name: 'Home', icon: 'home' },
+    { path: '/about', name: 'About', icon: 'description' },
+    { path: '/contact', name: 'Contact', icon: 'contact_phone' },
+  ],
+  isMenuOpen: false,
+  handleSetIsMenuOpen: () => { },
+  isCurriculumOpen: false,
+  handleSetIsCurriculumOpen: () => { },
+};
 
-export const ActionsContext = createContext<ActionsContextType | null>(null);
+export const ActionsContext = createContext<ActionsContextType>(defaultContext)
 
 export const ActionsProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCurriculumOpen, setIsCurriculumOpen] = useState(false);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isCurriculumOpen, setIsCurriculumOpen] = useState(false)
+  const tabdataItems: ActionsTabdataItem[] = defaultContext.tabdataItems;
 
-  const tabdataItems: ActionsTabdataItem[] = [
-    {
-      path: '/',
-      name: 'Home',
-      icon: 'home',
-      component: <HomePage />,
-    },
-    {
-      path: '/about',
-      name: 'About',
-      icon: 'description',
-      component: <AboutPage />,
-    },
-    {
-      path: '/contact',
-      name: 'Contact',
-      icon: 'contact_phone',
-      component: <ContactPage />,
-    },
-  ];
-
-  function handleSetIsMenuOpen(isOpen: boolean) {
-    setIsMenuOpen(isOpen);
-  }
-
-  function handleSetIsCurriculumOpen(isOpen: boolean) {
-    setIsCurriculumOpen(isOpen);
-  }
+  function handleSetIsMenuOpen(isOpen: boolean) { setIsMenuOpen(isOpen); }
+  function handleSetIsCurriculumOpen(isOpen: boolean) { setIsCurriculumOpen(isOpen); }
 
   return (
-    <ActionsContext.Provider value={{ tabdataItems, handleSetIsMenuOpen, isMenuOpen, handleSetIsCurriculumOpen, isCurriculumOpen }}>
+    <ActionsContext.Provider value={{
+      tabdataItems,
+      isMenuOpen,
+      handleSetIsMenuOpen,
+      isCurriculumOpen,
+      handleSetIsCurriculumOpen,
+    }}>
       {children}
     </ActionsContext.Provider>
   );

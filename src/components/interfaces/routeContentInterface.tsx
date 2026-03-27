@@ -1,9 +1,10 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingInterface from "./loadingInterface";
-import MainPage from "../../routes/main/mainPage";
+import HomePage from "../../routes/main/mainPage";
 import AboutPage from "../../routes/about/aboutPage";
 import ContactPage from "../../routes/contact/contactPage";
+import ErrorPage from "../../routes/error/errorPage";
 
 export default function RouteContent() {
   const { pathname } = useLocation();
@@ -25,9 +26,11 @@ export default function RouteContent() {
         <LoadingInterface />
       ) : (
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="*" element={<Navigate to="/error" replace />} />
         </Routes>
       )}
     </>
