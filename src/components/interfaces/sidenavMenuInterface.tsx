@@ -1,24 +1,22 @@
 import { useEffect } from "react";
-import { NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from "../../context/themeContext";
 import { useActions } from "../../context/actionsContext";
+import useRoutes from "../../hooks/useRoutes";
 
 export function SidenavMenuInterface() {
-  const { bgColor, textColor } = useTheme();
+  const { bgColor, textColor, isDarkMode } = useTheme();
   const { isMenuOpen, handleSetIsMenuOpen, tabdataItems } = useActions();
-  const { pathname } = useLocation();
+  const { navigate, pathname } = useRoutes();
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
+
+  function handleNavigate(path: string) {
+    handleSetIsMenuOpen(false);
+    if (pathname !== path) navigate(path);
+  }
 
   return (
     <div className="inline sm:hidden">
@@ -28,37 +26,41 @@ export function SidenavMenuInterface() {
       >
         <span className="material-icons">menu</span>
       </button>
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end">
-          <div className={`fixed top-0 bottom-0 left-0 w-full ${bgColor} shadow-lg flex flex-col`}>
-            <div className="ml-[0.2rem] mt-[0.2rem] w-20 h-[10vh] flex items-center justify-center">
-              <button className={`${textColor} focus:outline-none`} onClick={() => handleSetIsMenuOpen(false)}>
-                <span className="material-icons">close</span>
-              </button>
-            </div>
-            <div className="px-10 flex-grow flex flex-col items-center justify-center">
-              <ul className="text-center pb-20 space-y-8">
-                {tabdataItems.map((tab, index) => (
-                  <li className="cursor-pointer py-2" key={index} onClick={() => handleSetIsMenuOpen(false)}>
-                    <NavLink
-                      to={tab.path}
-                      onClick={(e) => {
-                        if (pathname === tab.path) {
-                          e.preventDefault();
-                          window.location.reload();
-                        }
-                      }}
-                      className="flex items-center">
-                      <i className="material-icons-outlined">{tab.icon}</i>
-                      <span className="ml-2">{tab.name}</span>
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 z-40 bg-black transition-opacity duration-300 ${isMenuOpen ? "opacity-40 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => handleSetIsMenuOpen(false)}
+      />
+
+      {/* Panel */}
+      <div
+        className={`fixed top-0 bottom-0 left-0 w-full z-50 ${bgColor} shadow-lg flex flex-col transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <div className="ml-[0.2rem] mt-[0.2rem] w-20 h-[10vh] flex items-center justify-center">
+          <button className={`${textColor} focus:outline-none`} onClick={() => handleSetIsMenuOpen(false)}>
+            <span className="material-icons">close</span>
+          </button>
         </div>
-      )}
+
+        <div className="px-10 flex-grow flex flex-col items-center justify-center">
+          <ul className="text-center pb-20 space-y-8">
+            {tabdataItems.map((tab, index) => {
+              const isActive = pathname === tab.path;
+              return (
+                <li key={index} className="cursor-pointer py-2" onClick={() => handleNavigate(tab.path)}>
+                  <span className={`uppercase transition-colors ${isActive
+                    ? `font-bold underline ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
+                    : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
+                  }`}>
+                    {tab.name}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
