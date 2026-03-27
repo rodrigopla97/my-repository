@@ -1,5 +1,4 @@
 import { useTheme } from "../../../context/themeContext";
-// import JobExperienceCardInterface from "../about/jobExperienceCardInterface";
 import FooterAllIcons from "../footerAllIconsInterface";
 
 export default function ExperienceInterface() {

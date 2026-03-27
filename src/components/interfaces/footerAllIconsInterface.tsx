@@ -22,18 +22,7 @@ export default function FooterAllIcons() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
-  // const [itemsToShow, setItemsToShow] = useState(5);
   const itemsToShow = 5;
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setItemsToShow(window.innerWidth < 640 ? 3 : 5);
-  //   };
-
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
