@@ -123,7 +123,7 @@ export default function ContactMeInterface() {
   const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} pt-5 pb-1 text-sm focus:outline-none transition-colors placeholder-transparent peer`;
 
   return (
-    <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 pt-[10vh] relative ${textColor}`}>
+    <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 py-[10vh] relative ${textColor}`}>
 
       {formSuccess && (
         <div className={`fixed top-[10vh] right-6 px-4 py-2 rounded text-sm text-white z-50 ${isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary"}`}>
@@ -131,7 +131,7 @@ export default function ContactMeInterface() {
         </div>
       )}
 
-      <div className="w-full max-w-xl flex flex-col gap-10">
+      <div className="w-full max-w-xl flex flex-col gap-10 md:pb-0">
 
         <div className="flex flex-col gap-2">
           <span className={`text-base uppercase tracking-widest flex items-center gap-1.5 ${textColor}`}>

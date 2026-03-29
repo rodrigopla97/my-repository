@@ -10,7 +10,7 @@ export default function FooterInterface() {
   const { navigate, pathname, openExternal } = useRoutes();
 
   return (
-    <div className={`flex flex-col w-screen md:border-t ${textColor} font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
+    <div className={`flex flex-col w-screen h-screen md:h-auto md:border-t ${textColor} justify-center font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
 
       <div className="flex flex-col md:flex-row justify-center md:justify-normal gap-10">
         <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>

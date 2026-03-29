@@ -11,7 +11,7 @@ export default function JobExperienceCardInterface() {
   const [animKey, setAnimKey] = useState<number>(0);
   const [isDesktop, setIsDesktop] = useState<boolean>(() => window.innerWidth >= 768);
   const stepIndexRef = useRef<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(true);
 
   useEffect(() => {
     const handler = () => setIsDesktop(window.innerWidth >= 768);
@@ -54,7 +54,7 @@ export default function JobExperienceCardInterface() {
   function handleSelectRole(roleIdx: number) {
     setSelectedRoleIndex(roleIdx);
     setAnimKey(k => k + 1);
-    if (isDesktop) setIsPaused(true);
+    setIsPaused(true);
     const steps = jobExperiencesContext.flatMap((exp, ci) => exp.roles.map((_, ri) => ({ ci, ri })));
     const found = steps.findIndex(s => s.ci === openIndex && s.ri === roleIdx);
     if (found !== -1) stepIndexRef.current = found;
@@ -100,18 +100,22 @@ export default function JobExperienceCardInterface() {
 
           <div className="flex flex-col gap-1 flex-shrink-0 md:justify-center md:w-2/5">
             <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{role.date}</span>
-            <h4 className={`text-base font-semibold ${textColor}`}>{experience.company}</h4>
-            <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{role.title}</span>
+            <h4 className={`hidden md:block text-base font-semibold ${textColor}`}>{experience.company}</h4>
+            <span className={`text-xs uppercase tracking-widest font-semibold ${textColor}`}>{role.title}</span>
           </div>
 
-          <ul className="flex flex-col gap-1.5 overflow-y-auto pr-1 flex-1 md:justify-center">
-            {role.tasks.map((task, taskIdx) => (
-              <li key={taskIdx} className={`flex items-start gap-2 text-xs md:text-sm ${textColor}`}>
-                <span className={`mt-1 w-1 h-1 rounded-full flex-shrink-0 ${accentBg}`} />
-                {task}
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col flex-1 overflow-hidden">
+            <div className="flex-1" />
+            <ul className="flex flex-col gap-1.5 overflow-y-auto pr-1">
+              {role.tasks.map((task, taskIdx) => (
+                <li key={taskIdx} className={`flex items-start gap-2 text-xs md:text-sm ${textColor}`}>
+                  <span className={`mt-1 w-1 h-1 rounded-full flex-shrink-0 ${accentBg}`} />
+                  {task}
+                </li>
+              ))}
+            </ul>
+            <div className="flex-1" />
+          </div>
 
         </div>
       </div>
