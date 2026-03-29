@@ -4,7 +4,7 @@ import { useTheme } from '../../context/themeContext';
 import { useActions } from '../../context/actionsContext';
 
 export default function FooterCVInterface() {
-  const { borderColor, bgColor, textColor, isDarkMode } = useTheme();
+  const { isDarkMode } = useTheme();
   const { isMenuOpen, isCurriculumOpen, handleSetIsCurriculumOpen } = useActions();
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -42,17 +42,17 @@ export default function FooterCVInterface() {
           <div className="relative" ref={modalRef}>
             <button
               onClick={() => handleSetIsCurriculumOpen(!isCurriculumOpen)}
-              className={`border-2  ${bgColor} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary"} rounded-full p-3 shadow-lg bg-opacity-80 hover:bg-opacity-50  transition-all duration-300`}
+              className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
             >
-              Curriculum 📁
+              <i className="material-symbols-outlined text-sm leading-none">description</i>
+              <span>Curriculum</span>
+              <i className={`material-symbols-outlined text-sm leading-none transition-transform duration-200 ${isCurriculumOpen ? "rotate-180" : ""}`}>expand_more</i>
             </button>
 
             {isCurriculumOpen && (
-              <div
-
-                className={`absolute mb-8 md:mb-0 bottom-1/2 right-1/2 md:bottom-full md:right-full flex flex-col ${bgColor} ${textColor} shadow-lg rounded-lg border-2 ${borderColor} w-max border-opacity-50`}
-              >
+              <div className={`absolute mb-3 md:mb-0 bottom-full right-0 md:bottom-full md:right-full flex flex-col overflow-hidden rounded-xl border backdrop-blur-sm shadow-xl w-max ${isDarkMode ? "bg-neutral-900/90 border-cvButtonSecondary/30" : "bg-grayPrimary/80 border-cvButtonPrimary/20"}`}>
                 <CurriculumInterface download={false} />
+                <div className={`h-px mx-3 ${isDarkMode ? "bg-cvButtonSecondary/20" : "bg-cvButtonPrimary/20"}`} />
                 <CurriculumInterface download={true} />
               </div>
             )}

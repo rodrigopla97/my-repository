@@ -7,6 +7,7 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
   const { handleSetIsCurriculumOpen } = useActions();
 
   const buttonText = download ? "Descargar" : "Ver en otra pestaña";
+  const icon = download ? "download" : "open_in_new";
 
   return (
     <a
@@ -14,9 +15,10 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
       target="_blank"
       download={download ? "" : undefined}
       onClick={() => handleSetIsCurriculumOpen(false)}
-      className={`font-medium text-lg py-2 px-4 transition-all duration-300 w-auto border-2 border-transparent ${download ? "rounded-b-lg" : "rounded-t-lg"} ${isDarkMode ? "hover:border-cvButtonPrimary hover:bg-cvButtonPrimary" : "hover:border-cvButtonSecondary hover:bg-cvButtonSecondary"}  hover:bg-opacity-50 transition-all duration-300 mx-0`}
+      className={`group flex items-center gap-3 px-5 py-3 text-sm font-medium tracking-wide transition-all duration-150 ${isDarkMode ? "text-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
     >
-      {buttonText}
+      <i className="material-symbols-outlined text-base leading-none">{icon}</i>
+      <span className="group-hover:underline underline-offset-2">{buttonText}</span>
     </a>
   );
 }
