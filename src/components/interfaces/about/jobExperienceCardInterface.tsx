@@ -45,7 +45,7 @@ export default function JobExperienceCardInterface() {
     setOpenIndex(isDesktop ? index : index === openIndex ? null : index);
     setSelectedRoleIndex(0);
     setAnimKey(k => k + 1);
-    setIsPaused(false);
+    if (isDesktop) setIsPaused(true);
     const steps = jobExperiencesContext.flatMap((exp, ci) => exp.roles.map((_, ri) => ({ ci, ri })));
     const found = steps.findIndex(s => s.ci === index && s.ri === 0);
     if (found !== -1) stepIndexRef.current = found;
@@ -54,7 +54,7 @@ export default function JobExperienceCardInterface() {
   function handleSelectRole(roleIdx: number) {
     setSelectedRoleIndex(roleIdx);
     setAnimKey(k => k + 1);
-    setIsPaused(false);
+    if (isDesktop) setIsPaused(true);
     const steps = jobExperiencesContext.flatMap((exp, ci) => exp.roles.map((_, ri) => ({ ci, ri })));
     const found = steps.findIndex(s => s.ci === openIndex && s.ri === roleIdx);
     if (found !== -1) stepIndexRef.current = found;
@@ -63,12 +63,14 @@ export default function JobExperienceCardInterface() {
   const accentColor = !isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary";
   const accentBg = !isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary";
   const accentBorder = !isDarkMode ? "border-cvButtonPrimary" : "border-cvButtonSecondary";
+  const accentBorderFaint = !isDarkMode ? "border-cvButtonPrimary/40" : "border-cvButtonSecondary/40";
+  const accentBgFaint = !isDarkMode ? "bg-cvButtonPrimary/30" : "bg-cvButtonSecondary/30";
 
   const detailContent = (index: number) => {
     const experience = jobExperiencesContext[index];
     const role = experience.roles[selectedRoleIndex] ?? experience.roles[0];
     return (
-      <div key={animKey} className={`h-[32vh] flex flex-col rounded-lg border ${accentBorder} border-opacity-20 p-5 animate-fadeIn gap-3 relative`}>
+      <div key={animKey} className={`h-[32vh] flex flex-col md:rounded-lg md:border ${accentBorderFaint} md:p-5 animate-fadeIn gap-3 relative`}>
         <button
           onClick={() => setIsPaused(p => !p)}
           className={`absolute top-3 right-3 hidden md:flex items-center justify-center transition-opacity duration-200 opacity-30 hover:opacity-80 ${accentColor}`}
@@ -94,17 +96,17 @@ export default function JobExperienceCardInterface() {
           </div>
         )}
 
-        <div className="flex gap-6 flex-1 overflow-hidden">
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden gap-2 md:gap-6">
 
-          <div className="flex flex-col gap-2 justify-center flex-shrink-0 w-2/5">
+          <div className="flex flex-col gap-1 flex-shrink-0 md:justify-center md:w-2/5">
             <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{role.date}</span>
             <h4 className={`text-base font-semibold ${textColor}`}>{experience.company}</h4>
             <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{role.title}</span>
           </div>
 
-          <ul className="flex flex-col gap-1.5 overflow-y-auto pr-1 flex-1 justify-center">
+          <ul className="flex flex-col gap-1.5 overflow-y-auto pr-1 flex-1 md:justify-center">
             {role.tasks.map((task, taskIdx) => (
-              <li key={taskIdx} className={`flex items-start gap-2 text-xs ${textColor}`}>
+              <li key={taskIdx} className={`flex items-start gap-2 text-xs md:text-sm ${textColor}`}>
                 <span className={`mt-1 w-1 h-1 rounded-full flex-shrink-0 ${accentBg}`} />
                 {task}
               </li>
@@ -117,8 +119,8 @@ export default function JobExperienceCardInterface() {
   };
 
   const carouselContent = (
-    <div className={`h-[32vh] flex flex-col justify-between rounded-lg border ${accentBorder} border-opacity-20 p-5`}>
-      <div className="flex-1 flex flex-col justify-center gap-3 animate-fadeIn" key={carouselIndex}>
+    <div className={`h-[32vh] flex flex-col rounded-lg border ${accentBorderFaint} p-5 gap-3`}>
+      <div className="flex-1 flex flex-col  justify-center gap-3 animate-fadeIn overflow-hidden" key={carouselIndex}>
         <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
           {jobExperiencesContext[carouselIndex].roles[0].date}
         </span>
@@ -128,22 +130,14 @@ export default function JobExperienceCardInterface() {
         <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
           {jobExperiencesContext[carouselIndex].roles[0].title}
         </span>
-        <ul className="flex flex-col gap-1 mt-1">
-          {jobExperiencesContext[carouselIndex].roles[0].tasks.slice(0, 2).map((task, i) => (
-            <li key={i} className={`flex items-start gap-2 text-xs ${textColor}`}>
-              <span className={`mt-1 w-1 h-1 rounded-full flex-shrink-0 ${accentBg}`} />
-              {task}
-            </li>
-          ))}
-        </ul>
       </div>
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between flex-shrink-0">
         <div className="flex gap-2">
           {jobExperiencesContext.map((_, i) => (
             <button
               key={i}
               onClick={() => setCarouselIndex(i)}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === carouselIndex ? accentBg : `bg-current opacity-20`}`}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === carouselIndex ? accentBg : accentBgFaint}`}
             />
           ))}
         </div>
@@ -180,13 +174,13 @@ export default function JobExperienceCardInterface() {
                     onClick={() => handleToggle(index)}
                     className={`w-3 h-3 rounded-full mt-1 flex-shrink-0 transition-all duration-200 border-2 ${isOpen ? `${accentBg} ${accentBorder}` : `bg-transparent ${accentBorder} opacity-40 hover:opacity-100`}`}
                   />
-                  {!isLast && <div className={`w-px flex-1 mt-1 ${isOpen ? `${accentBg} opacity-30` : "bg-current opacity-10"}`} />}
+                  {!isLast && <div className={`w-px flex-1 mt-1 ${isOpen ? `${accentBg} opacity-30` : accentBgFaint}`} />}
                 </div>
 
                 <div className="flex flex-col pb-6 flex-1">
                   <button
                     onClick={() => handleToggle(index)}
-                    className="flex items-center justify-between gap-2 group mb-1"
+                    className="flex items-center gap-2 w-full mb-1"
                   >
                     <span className={`text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${isOpen ? accentColor : textColor}`}>
                       {experience.company}
@@ -194,7 +188,7 @@ export default function JobExperienceCardInterface() {
                         <span title="Trabajo actual">🟢</span>
                       )}
                     </span>
-                    <i className={`material-symbols-outlined text-sm transition-transform duration-200 opacity-40 md:hidden ${isOpen ? "rotate-180" : ""} ${accentColor}`}>
+                    <i className={`material-symbols-outlined text-sm transition-transform duration-200 opacity-40 md:hidden ml-auto ${isOpen ? "rotate-180" : ""} ${accentColor}`}>
                       expand_more
                     </i>
                   </button>
