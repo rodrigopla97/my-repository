@@ -10,56 +10,62 @@ export default function FooterInterface() {
   const { navigate, pathname, openExternal } = useRoutes();
 
   return (
-    <div className={`flex flex-col md:flex-row w-screen h-screen md:h-1/4 md:border-t  ${textColor} font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 justify-center md:justify-normal bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
+    <div className={`flex flex-col w-screen md:border-t ${textColor} font-semibold overflow-y-hidden py-[10vh] md:py-[5vh] px-[5vh] md:px-8 bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
 
-      <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>
-        <div>
-          <h2 className='font-bold text-xl'>Rodrigo Placeres</h2>
-          <span className='font-light'>Desarrollador Frontend</span>
+      <div className="flex flex-col md:flex-row justify-center md:justify-normal gap-10">
+        <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>
+          <div>
+            <h2 className='font-bold text-xl'>Rodrigo Placeres</h2>
+            <span className='font-light'>Desarrollador Frontend</span>
+          </div>
+          <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh] cursor-pointer' onClick={() => navigate("/")} />
         </div>
-        <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh]' />
-      </div>
 
-      <div className='flex flex-col md:w-1/3 items-center uppercase'>
-        <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
-          <span className='uppercase'>Navegación</span>
+        <div className='flex flex-col md:w-1/3 items-center uppercase'>
+          <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
+            <span className='uppercase'>Navegación</span>
 
-          <div className='flex flex-col'>
-            {tabdataItems.map((tab, index) => {
-              const isActive = pathname === tab.path;
+            <div className='flex flex-col'>
+              {tabdataItems.map((tab, index) => {
+                const isActive = pathname === tab.path;
 
-              return (
-                <span
-                  key={index}
-                  className={`cursor-pointer py-2 transition ${isActive
-                    ? `font-bold underline ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
-                    : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
-                    }`}
-                  onClick={() => navigate(tab.path)}
-                >
-                  {tab.name}
-                </span>
-              );
-            })}
+                return (
+                  <span
+                    key={index}
+                    className={`cursor-pointer py-2 transition ${isActive
+                      ? `font-bold underline ${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
+                      : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
+                      }`}
+                    onClick={() => navigate(tab.path)}
+                  >
+                    {tab.name}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className='flex flex-col md:w-1/3 items-center uppercase'>
+          <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
+            <span>Social</span>
+
+            <div className='flex flex-col'>
+              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://www.linkedin.com/in/rodrigo-placeres/")}>
+                LinkedIn
+                <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
+              </span>
+              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://github.com/rodrigopla97")}>
+                GitHub
+                <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className='flex flex-col md:w-1/3 items-center uppercase'>
-        <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
-          <span>Social</span>
-
-          <div className='flex flex-col'>
-            <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://www.linkedin.com/in/rodrigo-placeres/")}>
-              LinkedIn
-              <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
-            </span>
-            <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://github.com/rodrigopla97")}>
-              GitHub
-              <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
-            </span>
-          </div>
-        </div>
+      <div className="w-full text-center text-xs font-light">
+        © {new Date().getFullYear()} Rodrigo Placeres · Todos los derechos reservados
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ export default function LoadingInterface() {
   const { isDarkMode, bgColor } = useTheme();
 
   return (
-    <div className={`flex items-center justify-center h-screen ${bgColor}`}>
+    <div className={`fixed inset-0 flex items-center justify-center z-50 ${bgColor}`}>
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 200 200" 

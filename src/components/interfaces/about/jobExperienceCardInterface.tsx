@@ -24,7 +24,9 @@ export default function JobExperienceCardInterface() {
   return (
     <React.Fragment>
 
-      <span className={`text-xs uppercase tracking-widest opacity-50 self-start ${textColor}`}>Trayectoria profesional</span>
+      <span className={`text-base uppercase tracking-widest self-start flex items-center gap-1.5 ${textColor}`}>
+        💼 Trayectoria profesional
+      </span>
 
       <div className="flex flex-col w-full">
         {jobExperiencesContext.map((experience, index) => {
@@ -51,7 +53,7 @@ export default function JobExperienceCardInterface() {
                   onClick={() => handleToggle(index)}
                   className="flex items-center justify-between gap-2 group mb-1"
                 >
-                  <span className={`text-sm font-semibold transition-all duration-200 ${isOpen ? accentColor : `${textColor} opacity-60 group-hover:opacity-100`}`}>
+                  <span className={`text-sm font-semibold transition-all duration-200 ${isOpen ? accentColor : textColor}`}>
                     {experience.company}
                   </span>
                   <i className={`material-symbols-outlined text-sm transition-transform duration-200 opacity-40 ${isOpen ? "rotate-180" : ""} ${accentColor}`}>
@@ -89,11 +91,11 @@ export default function JobExperienceCardInterface() {
                         <>
                           <div className="flex items-center gap-3 flex-shrink-0">
                             <span className={`text-xs font-semibold uppercase tracking-widest ${accentColor}`}>{role.title}</span>
-                            {experience.roles.length === 1 && <span className={`text-xs opacity-40 ${textColor}`}>{role.date}</span>}
+                            {experience.roles.length === 1 && <span className={`text-xs ${textColor}`}>{role.date}</span>}
                           </div>
                           <ul className="h-[25vh] overflow-y-auto pr-1 flex flex-col gap-1.5">
                             {role.tasks.map((task, taskIdx) => (
-                              <li key={taskIdx} className={`flex items-start gap-2 text-sm opacity-60 ${textColor}`}>
+                              <li key={taskIdx} className={`flex items-start gap-2 text-sm ${textColor}`}>
                                 <span className={`mt-1.5 w-1 h-1 rounded-full flex-shrink-0 opacity-60 ${accentBg}`} />
                                 {task}
                               </li>

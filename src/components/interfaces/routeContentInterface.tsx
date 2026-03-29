@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import LoadingInterface from "./loadingInterface";
 import HomePage from "../../routes/main/mainPage";
 import AboutPage from "../../routes/about/aboutPage";
@@ -10,7 +10,7 @@ export default function RouteContent() {
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);

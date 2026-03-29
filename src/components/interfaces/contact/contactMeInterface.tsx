@@ -119,7 +119,7 @@ export default function ContactMeInterface() {
   const accentBg = isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary";
   const focusRing = isDarkMode ? "focus:border-cvButtonSecondary" : "focus:border-cvButtonPrimary";
   const errorClass = "text-red-600";
-  const labelFloat = `absolute left-0 text-sm pointer-events-none transition-all duration-200 opacity-50 top-4 peer-focus:top-0 peer-focus:text-xs peer-focus:opacity-80 peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:opacity-80 ${isDarkMode ? "peer-focus:text-cvButtonSecondary peer-[&:not(:placeholder-shown)]:text-cvButtonSecondary" : "peer-focus:text-cvButtonPrimary peer-[&:not(:placeholder-shown)]:text-cvButtonPrimary"}`;
+  const labelFloat = `absolute left-0 text-sm pointer-events-none transition-all duration-200 top-4 peer-focus:top-0 peer-focus:text-xs peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-xs ${textColor} ${isDarkMode ? "peer-focus:text-cvButtonSecondary peer-[&:not(:placeholder-shown)]:text-cvButtonSecondary" : "peer-focus:text-cvButtonPrimary peer-[&:not(:placeholder-shown)]:text-cvButtonPrimary"}`;
   const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} pt-5 pb-1 text-sm focus:outline-none transition-colors placeholder-transparent peer`;
 
   return (
@@ -136,16 +136,18 @@ export default function ContactMeInterface() {
 
         {/* Header */}
         <div className="flex flex-col gap-2">
-          <span className="text-sm uppercase tracking-widest opacity-50">Contacto</span>
+          <span className={`text-base uppercase tracking-widest flex items-center gap-1.5 ${textColor}`}>
+            📬 Contacto
+          </span>
           <h2 className="text-4xl font-bold">Contactate conmigo.</h2>
-          <p className="text-sm opacity-60">
+          <p className="text-sm">
             Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
           </p>
         </div>
 
         {/* Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
+          <div className="flex items-center gap-2 text-sm">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>mail</i>
             <a href="mailto:rodrigoplaceres19@gmail.com" className="whitespace-nowrap">rodrigoplaceres19@gmail.com</a>
             <i
@@ -156,11 +158,11 @@ export default function ContactMeInterface() {
               {copySuccess ? "check" : "content_copy"}
             </i>
           </div>
-          <span onClick={() => openExternal('https://github.com/rodrigopla97')} className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+          <span onClick={() => openExternal('https://github.com/rodrigopla97')} className="flex items-center gap-2 text-sm cursor-pointer">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>code</i>
             <span>github.com/rodrigopla97</span>
           </span>
-          <span onClick={() => openExternal('https://www.linkedin.com/in/rodrigo-placeres/')} className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+          <span onClick={() => openExternal('https://www.linkedin.com/in/rodrigo-placeres/')} className="flex items-center gap-2 text-sm cursor-pointer">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>work</i>
             <span>linkedin.com/in/rodrigo-placeres</span>
           </span>
@@ -193,30 +195,30 @@ export default function ContactMeInterface() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Verificación */}
             <div className="flex flex-col gap-1">
-            <div className="h-10 flex items-center gap-4">
-              <div className="flex items-center gap-3 flex-shrink-0">
-                <button
-                  type="button"
-                  role="checkbox"
-                  aria-checked={showChallenge}
-                  onClick={() => {
-                    setShowChallenge(!showChallenge);
-                    if (showChallenge) { setUserAnswer(""); setAnswerCorrect(null); setChallenge(null); }
-                  }}
-                  className={`w-4 h-4 rounded-sm border-2 flex items-center justify-center flex-shrink-0 transition-colors ${showChallenge ? `${accentBg} border-transparent` : borderColor}`}
-                >
-                  {showChallenge && <span className="text-white text-[10px] font-bold leading-none">✓</span>}
-                </button>
-                <span className="text-sm opacity-60">No soy un robot</span>
-              </div>
+              <div className="h-10 flex items-center gap-4">
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <button
+                    type="button"
+                    role="checkbox"
+                    aria-checked={showChallenge}
+                    onClick={() => {
+                      setShowChallenge(!showChallenge);
+                      if (showChallenge) { setUserAnswer(""); setAnswerCorrect(null); setChallenge(null); }
+                    }}
+                    className={`w-4 h-4 rounded-sm border-2 flex items-center justify-center flex-shrink-0 transition-colors ${showChallenge ? `${accentBg} border-transparent` : borderColor}`}
+                  >
+                    {showChallenge && <span className="text-white text-[10px] font-bold leading-none">✓</span>}
+                  </button>
+                  <span className="text-sm">No soy un robot</span>
+                </div>
 
-              <div className="flex items-center gap-2">
-                {showChallenge && challenge && (
-                  <>
-                    <span className="text-sm font-mono opacity-60 whitespace-nowrap">{challenge.question}</span>
-                    {isResetting
-                      ? <i className="material-symbols-outlined text-sm animate-spin opacity-50 w-14 text-center">progress_activity</i>
-                      : <input
+                <div className="flex items-center gap-2">
+                  {showChallenge && challenge && (
+                    <>
+                      <span className="text-sm font-mono whitespace-nowrap">{challenge.question}</span>
+                      {isResetting
+                        ? <i className="material-symbols-outlined text-sm animate-spin opacity-50 w-14 text-center">progress_activity</i>
+                        : <input
                           type="text"
                           inputMode="numeric"
                           value={userAnswer}
@@ -225,16 +227,16 @@ export default function ContactMeInterface() {
                             ${answerCorrect === true ? "border-green-500" : answerCorrect === false && userAnswer ? "border-red-600" : borderColor}
                             ${textColor}`}
                         />
-                    }
-                    <div className="w-5 flex items-center justify-center">
-                      {answerCorrect === true && <span className="text-green-500 text-sm">✓</span>}
-                      {answerCorrect === false && <span className={`text-sm ${errorClass}`}>✗</span>}
-                    </div>
-                  </>
-                )}
+                      }
+                      <div className="w-5 flex items-center justify-center">
+                        {answerCorrect === true && <span className="text-green-500 text-sm">✓</span>}
+                        {answerCorrect === false && <span className={`text-sm ${errorClass}`}>✗</span>}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-            <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
+              <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
             </div>
 
             {/* Submit */}
