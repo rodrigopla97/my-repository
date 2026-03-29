@@ -65,7 +65,7 @@ export default function FooterInterface() {
       </div>
 
       <div className="w-full text-center text-xs font-light">
-        © {new Date().getFullYear()} Rodrigo Placeres · Todos los derechos reservados
+        © {new Date().getFullYear()} Rodrigo Placeres
       </div>
     </div>
   );
