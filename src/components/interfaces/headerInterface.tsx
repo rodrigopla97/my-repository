@@ -9,7 +9,7 @@ export default function HeaderInterface() {
   const { isDarkMode, toggleTheme, bgColor, textColor } = useTheme()
 
   return (
-    <div className={`max-h-[10vh] flex justify-between items-center pr-2 md:pl-4 fixed w-full ${textColor} z-20 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
+    <div className={`max-h-[10vh] flex justify-between items-center pr-4 md:pl-4 fixed w-full ${textColor} z-20 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />
       <div className="flex items-center justify-center w-20 h-[10vh]">
         <Link to="/">
@@ -18,26 +18,20 @@ export default function HeaderInterface() {
       </div>
       <HeaderMenuInterface />
       <div className="flex items-center justify-center w-20 h-[10vh]">
-        <label className="relative inline-block w-12 h-6">
-          <input
-            type="checkbox"
-            className="opacity-0 w-0 h-0"
-            checked={isDarkMode}
-            onChange={toggleTheme}
-          />
-          <span
-            className={`absolute cursor-pointer inset-0 rounded-full transition ${isDarkMode ? 'bg-gray-800' : 'bg-gray-300'}`}
-          ></span>
-          <span
-            className={`absolute left-1 top-1 ${isDarkMode ? 'bg-white' : 'bg-yellow-400'} w-4 h-4 rounded-full flex items-center justify-center transition transform ${isDarkMode && 'translate-x-6'}`}
-          >
-            {!isDarkMode ? (
-              <i className="material-icons-round text-red-400 text-sm">light_mode</i>
-            ) : (
-              <i className="material-icons-round text-black text-sm">dark_mode</i>
-            )}
+        <button
+          onClick={toggleTheme}
+          className={`relative flex items-center justify-between rounded-full p-1 border transition-all duration-300 hover:scale-105 active:scale-95 w-14 h-7 ${isDarkMode ? "border-cvButtonSecondary/40 bg-cvButtonSecondary/10" : "border-cvButtonPrimary/30 bg-cvButtonPrimary/10"}`}
+        >
+          {/* knob deslizante */}
+          <span className={`absolute w-5 h-5 rounded-full transition-all duration-300 shadow-sm ${isDarkMode ? "translate-x-7 bg-cvButtonSecondary/60" : "translate-x-0 bg-cvButtonPrimary/60"}`} />
+          {/* íconos fijos, centrados sobre el knob */}
+          <span className="z-10 w-5 h-5 flex items-center justify-center">
+            <i className={`material-symbols-outlined text-base transition-all duration-200 ${!isDarkMode ? "text-white" : "text-white/30"}`} >light_mode</i>
           </span>
-        </label>
+          <span className="z-10 w-5 h-5 flex items-center justify-center">
+            <i className={`material-symbols-outlined text-base transition-all duration-200 ml-1 ${isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonPrimary/40"}`} >dark_mode</i>
+          </span>
+        </button>
       </div>
     </div>
   );
