@@ -29,9 +29,9 @@ export default function ContactMeInterface() {
   const { borderColor, textColor, isDarkMode } = useTheme();
   const { openExternal } = useRoutes();
   const [formSuccess, setFormSuccess] = useState(false);
-  const [operationFailed, setOperationFailed] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({ name: "", email: "", message: "", captcha: "" });
   const [showChallenge, setShowChallenge] = useState(false);
   const [challenge, setChallenge] = useState<{ question: string; answer: number } | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
@@ -47,7 +47,9 @@ export default function ContactMeInterface() {
 
   useEffect(() => {
     if (!userAnswer || !challenge) { setAnswerCorrect(null); return; }
-    setAnswerCorrect(parseInt(userAnswer) === challenge.answer);
+    const correct = parseInt(userAnswer) === challenge.answer;
+    setAnswerCorrect(correct);
+    if (correct) setErrors(prev => ({ ...prev, captcha: "" }));
   }, [userAnswer, challenge]);
 
   function handleCopyEmail() {
@@ -56,15 +58,23 @@ export default function ContactMeInterface() {
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors(prev => ({ ...prev, [name]: "" }));
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!showChallenge || !answerCorrect) {
-      setOperationFailed(true);
-      setTimeout(() => setOperationFailed(false), 2000);
+    const newErrors = { name: "", email: "", message: "", captcha: "" };
+    if (!formData.name.trim()) newErrors.name = "El nombre es requerido.";
+    if (!formData.email.trim()) newErrors.email = "El correo es requerido.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "El correo no es válido.";
+    if (!formData.message.trim()) newErrors.message = "El mensaje es requerido.";
+    if (!showChallenge || !answerCorrect) newErrors.captcha = "Completá la verificación.";
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
 
@@ -95,18 +105,17 @@ export default function ContactMeInterface() {
 
   const accentColor = isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary";
   const accentBg = isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary";
-  const accentBorder = isDarkMode ? "border-cvButtonSecondary" : "border-cvButtonPrimary";
   const focusRing = isDarkMode ? "focus:border-cvButtonSecondary" : "focus:border-cvButtonPrimary";
-  const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} py-3 text-sm focus:outline-none transition-colors ${isDarkMode ? "placeholder-grayPrimary" : "placeholder-black"} placeholder-opacity-50`;
+  const labelFloat = `absolute left-0 text-sm pointer-events-none transition-all duration-200 opacity-50 top-4 peer-focus:top-0 peer-focus:text-xs peer-focus:opacity-80 peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:opacity-80 ${isDarkMode ? "peer-focus:text-cvButtonSecondary peer-[&:not(:placeholder-shown)]:text-cvButtonSecondary" : "peer-focus:text-cvButtonPrimary peer-[&:not(:placeholder-shown)]:text-cvButtonPrimary"}`;
+  const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} pt-5 pb-1 text-sm focus:outline-none transition-colors placeholder-transparent peer`;
 
   return (
     <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 pt-[10vh] relative ${textColor}`}>
 
       {/* Toast */}
-      {(formSuccess || operationFailed) && (
+      {formSuccess && (
         <div className={`fixed top-[10vh] right-6 px-4 py-2 rounded text-sm text-white z-50 ${isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary"}`}>
-          {formSuccess && "¡Mensaje enviado!"}
-          {operationFailed && "Completá la verificación"}
+          ¡Mensaje enviado!
         </div>
       )}
 
@@ -124,7 +133,7 @@ export default function ContactMeInterface() {
         {/* Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity">
-            <i className={`material-icons-outlined text-base flex-shrink-0 ${accentColor}`}>mail</i>
+            <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>mail</i>
             <a href="mailto:rodrigoplaceres19@gmail.com" className="whitespace-nowrap">rodrigoplaceres19@gmail.com</a>
             <i
               className="material-symbols-outlined text-base cursor-pointer flex-shrink-0"
@@ -135,25 +144,44 @@ export default function ContactMeInterface() {
             </i>
           </div>
           <span onClick={() => openExternal('https://github.com/rodrigopla97')} className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
-            <i className={`material-icons-outlined text-base flex-shrink-0 ${accentColor}`}>code</i>
+            <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>code</i>
             <span>github.com/rodrigopla97</span>
           </span>
           <span onClick={() => openExternal('https://www.linkedin.com/in/rodrigo-placeres/')} className="flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
-            <i className={`material-icons-outlined text-base flex-shrink-0 ${accentColor}`}>work</i>
+            <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>work</i>
             <span>linkedin.com/in/rodrigo-placeres</span>
           </span>
         </div>
 
         {/* Form */}
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleChange} className={inputClass} required />
-          <input type="email" name="email" placeholder="Correo" value={formData.email} onChange={handleChange} className={inputClass} required />
-          <textarea name="message" placeholder="Mensaje" rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none`} required />
+          <div className="flex flex-col gap-1">
+            <div className="relative">
+              <input type="text" name="name" placeholder=" " value={formData.name} onChange={handleChange} className={`${inputClass} ${errors.name ? "border-red-400" : ""}`} />
+              <label className={labelFloat}>Nombre</label>
+            </div>
+            <span className="text-red-400 text-xs h-4">{errors.name}</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="relative">
+              <input type="text" name="email" placeholder=" " value={formData.email} onChange={handleChange} className={`${inputClass} ${errors.email ? "border-red-400" : ""}`} />
+              <label className={labelFloat}>Correo</label>
+            </div>
+            <span className="text-red-400 text-xs h-4">{errors.email}</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="relative">
+              <textarea name="message" placeholder=" " rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none ${errors.message ? "border-red-400" : ""}`} />
+              <label className={labelFloat}>Mensaje</label>
+            </div>
+            <span className="text-red-400 text-xs h-4">{errors.message}</span>
+          </div>
 
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Verificación */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-1">
+            <div className="h-10 flex items-center gap-4">
+              <div className="flex items-center gap-3 flex-shrink-0">
                 <button
                   type="button"
                   role="checkbox"
@@ -169,10 +197,10 @@ export default function ContactMeInterface() {
                 <span className="text-sm opacity-60">No soy un robot</span>
               </div>
 
-              <div className="flex items-center gap-2 min-w-[140px]">
+              <div className="flex items-center gap-2">
                 {showChallenge && challenge && (
                   <>
-                    <span className="text-sm font-mono opacity-60">{challenge.question}</span>
+                    <span className="text-sm font-mono opacity-60 whitespace-nowrap">{challenge.question}</span>
                     <input
                       type="number"
                       value={userAnswer}
@@ -191,11 +219,13 @@ export default function ContactMeInterface() {
                 )}
               </div>
             </div>
+            <span className="text-red-400 text-xs h-4">{errors.captcha}</span>
+            </div>
 
             {/* Submit */}
-            <button type="submit" className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider transition-opacity hover:opacity-70 self-end ${accentColor}`}>
-              Enviar
-              <span className={`text-lg border-b ${accentBorder}`}>→</span>
+            <button type="submit" className={`group flex items-center gap-2 border rounded-full px-5 py-2 self-end text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}>
+              <span className="group-hover:underline underline-offset-2">Enviar</span>
+              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </button>
           </div>
         </form>
