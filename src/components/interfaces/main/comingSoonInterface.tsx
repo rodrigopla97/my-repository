@@ -8,11 +8,11 @@ export default function ComingSoonInterface() {
       <span className="text-5xl">🛠️</span>
       <h2 className="text-2xl md:text-3xl font-bold text-center">Sección en construcción</h2>
       <p className={`text-center max-w-md opacity-70`}>
-        Próximamente habrá contenido nuevo por acá. Gracias por la paciencia.
+        Próximamente habrá contenido nuevo por acá.
       </p>
-      <div className={`mt-2 px-5 py-1 rounded-full text-sm font-semibold border ${isDarkMode ? 'border-cvButtonSecondary text-cvButtonSecondary' : 'border-cvButtonPrimary text-cvButtonPrimary'}`}>
+      {/* <div className={`mt-2 px-5 py-1 rounded-full text-sm font-semibold border ${isDarkMode ? 'border-cvButtonSecondary text-cvButtonSecondary' : 'border-cvButtonPrimary text-cvButtonPrimary'}`}>
         Próximamente
-      </div>
+      </div> */}
     </div>
   );
 }
