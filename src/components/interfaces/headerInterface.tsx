@@ -22,9 +22,7 @@ export default function HeaderInterface() {
           onClick={toggleTheme}
           className={`relative flex items-center justify-between rounded-full p-1 border transition-all duration-300 hover:scale-105 active:scale-95 w-14 h-7 ${isDarkMode ? "border-cvButtonSecondary/40 bg-cvButtonSecondary/10" : "border-cvButtonPrimary/30 bg-cvButtonPrimary/10"}`}
         >
-          {/* knob deslizante */}
           <span className={`absolute w-5 h-5 rounded-full transition-all duration-300 shadow-sm ${isDarkMode ? "translate-x-7 bg-cvButtonSecondary/60" : "translate-x-0 bg-cvButtonPrimary/60"}`} />
-          {/* íconos fijos, centrados sobre el knob */}
           <span className="z-10 w-5 h-5 flex items-center justify-center">
             <i className={`material-symbols-outlined text-base transition-all duration-200 ${!isDarkMode ? "text-white" : "text-white/30"}`} >light_mode</i>
           </span>

@@ -17,7 +17,6 @@ export interface ActionsTabdataItem {
   icon: string;
 }
 
-// Context principal
 export type ActionsContextType = {
   tabdataItems: ActionsTabdataItem[];
   isMenuOpen: boolean;

@@ -27,13 +27,11 @@ export function SidenavMenuInterface() {
         <span className="material-icons">menu</span>
       </button>
 
-      {/* Overlay */}
       <div
         className={`fixed inset-0 z-40 bg-black transition-opacity duration-300 ${isMenuOpen ? "opacity-40 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => handleSetIsMenuOpen(false)}
       />
 
-      {/* Panel */}
       <div
         className={`fixed top-0 bottom-0 left-0 w-full z-50 ${bgColor} shadow-lg flex flex-col transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >

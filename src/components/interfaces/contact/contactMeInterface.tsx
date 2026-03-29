@@ -125,7 +125,6 @@ export default function ContactMeInterface() {
   return (
     <div className={`flex flex-col justify-center items-center w-full min-h-screen px-6 md:px-0 pt-[10vh] relative ${textColor}`}>
 
-      {/* Toast */}
       {formSuccess && (
         <div className={`fixed top-[10vh] right-6 px-4 py-2 rounded text-sm text-white z-50 ${isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary"}`}>
           ¡Mensaje enviado!
@@ -134,7 +133,6 @@ export default function ContactMeInterface() {
 
       <div className="w-full max-w-xl flex flex-col gap-10">
 
-        {/* Header */}
         <div className="flex flex-col gap-2">
           <span className={`text-base uppercase tracking-widest flex items-center gap-1.5 ${textColor}`}>
             📬 Contacto
@@ -145,7 +143,6 @@ export default function ContactMeInterface() {
           </p>
         </div>
 
-        {/* Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex items-center gap-2 text-sm">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>mail</i>
@@ -168,7 +165,6 @@ export default function ContactMeInterface() {
           </span>
         </div>
 
-        {/* Form */}
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1">
             <div className="relative">
@@ -193,7 +189,6 @@ export default function ContactMeInterface() {
           </div>
 
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* Verificación */}
             <div className="flex flex-col gap-1">
               <div className="h-10 flex items-center gap-4">
                 <div className="flex items-center gap-3 flex-shrink-0">
@@ -239,7 +234,6 @@ export default function ContactMeInterface() {
               <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
             </div>
 
-            {/* Submit */}
             <button type="submit" className={`group flex items-center gap-2 border rounded-full px-5 py-2 self-end text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}>
               <span className="group-hover:underline underline-offset-2">Enviar</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
