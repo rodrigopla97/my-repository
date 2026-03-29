@@ -36,6 +36,7 @@ export default function ContactMeInterface() {
   const [challenge, setChallenge] = useState<{ question: string; answer: number } | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
   const [answerCorrect, setAnswerCorrect] = useState<boolean | null>(null);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     if (showChallenge) {
@@ -49,7 +50,18 @@ export default function ContactMeInterface() {
     if (!userAnswer || !challenge) { setAnswerCorrect(null); return; }
     const correct = parseInt(userAnswer) === challenge.answer;
     setAnswerCorrect(correct);
-    if (correct) setErrors(prev => ({ ...prev, captcha: "" }));
+    if (correct) {
+      setErrors(prev => ({ ...prev, captcha: "" }));
+    } else {
+      setIsResetting(true);
+      const timeout = setTimeout(() => {
+        setChallenge(generateChallenge());
+        setUserAnswer("");
+        setAnswerCorrect(null);
+        setIsResetting(false);
+      }, 800);
+      return () => clearTimeout(timeout);
+    }
   }, [userAnswer, challenge]);
 
   function handleCopyEmail() {
@@ -202,19 +214,21 @@ export default function ContactMeInterface() {
                 {showChallenge && challenge && (
                   <>
                     <span className="text-sm font-mono opacity-60 whitespace-nowrap">{challenge.question}</span>
-                    <input
-                      type="number"
-                      value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
-                      className={`w-14 bg-transparent border-b text-center text-sm py-1 focus:outline-none transition-colors
-                        ${answerCorrect === true ? "border-green-500" : answerCorrect === false && userAnswer ? "border-red-600" : borderColor}
-                        ${textColor} appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
-                    />
+                    {isResetting
+                      ? <i className="material-symbols-outlined text-sm animate-spin opacity-50 w-14 text-center">progress_activity</i>
+                      : <input
+                          type="text"
+                          inputMode="numeric"
+                          value={userAnswer}
+                          onChange={(e) => { if (/^\d*$/.test(e.target.value)) setUserAnswer(e.target.value); }}
+                          className={`w-14 bg-transparent border-b text-center text-sm py-1 focus:outline-none transition-colors
+                            ${answerCorrect === true ? "border-green-500" : answerCorrect === false && userAnswer ? "border-red-600" : borderColor}
+                            ${textColor}`}
+                        />
+                    }
                     <div className="w-5 flex items-center justify-center">
                       {answerCorrect === true && <span className="text-green-500 text-sm">✓</span>}
-                      {answerCorrect === false && userAnswer && (
-                        <button type="button" onClick={() => { setChallenge(generateChallenge()); setUserAnswer(""); setAnswerCorrect(null); }} className="text-red-400 text-sm hover:text-red-500 transition-colors">↺</button>
-                      )}
+                      {answerCorrect === false && <span className={`text-sm ${errorClass}`}>✗</span>}
                     </div>
                   </>
                 )}
