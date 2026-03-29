@@ -15,6 +15,10 @@ module.exports = {
         orbitron: ["Orbitron", "sans-serif"]
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         tilt: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
@@ -29,6 +33,7 @@ module.exports = {
         },
       },
       animation: {
+        fadeIn: 'fadeIn .2s ease',
         tilt: 'tilt 3s infinite ease-in-out',
         float: 'float 3s infinite ease-in-out',
         rotate360: 'rotate360 1s linear infinite',
