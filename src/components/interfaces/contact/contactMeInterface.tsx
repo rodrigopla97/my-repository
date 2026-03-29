@@ -106,6 +106,7 @@ export default function ContactMeInterface() {
   const accentColor = isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary";
   const accentBg = isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary";
   const focusRing = isDarkMode ? "focus:border-cvButtonSecondary" : "focus:border-cvButtonPrimary";
+  const errorClass = "text-red-600";
   const labelFloat = `absolute left-0 text-sm pointer-events-none transition-all duration-200 opacity-50 top-4 peer-focus:top-0 peer-focus:text-xs peer-focus:opacity-80 peer-[&:not(:placeholder-shown)]:top-0 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:opacity-80 ${isDarkMode ? "peer-focus:text-cvButtonSecondary peer-[&:not(:placeholder-shown)]:text-cvButtonSecondary" : "peer-focus:text-cvButtonPrimary peer-[&:not(:placeholder-shown)]:text-cvButtonPrimary"}`;
   const inputClass = `w-full bg-transparent border-b ${borderColor} ${focusRing} ${textColor} pt-5 pb-1 text-sm focus:outline-none transition-colors placeholder-transparent peer`;
 
@@ -157,24 +158,24 @@ export default function ContactMeInterface() {
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1">
             <div className="relative">
-              <input type="text" name="name" placeholder=" " value={formData.name} onChange={handleChange} className={`${inputClass} ${errors.name ? "border-red-400" : ""}`} />
+              <input type="text" name="name" placeholder=" " value={formData.name} onChange={handleChange} className={`${inputClass} ${errors.name ? "border-red-600" : ""}`} />
               <label className={labelFloat}>Nombre</label>
             </div>
-            <span className="text-red-400 text-xs h-4">{errors.name}</span>
+            <span className={`${errorClass} text-xs h-4`}>{errors.name}</span>
           </div>
           <div className="flex flex-col gap-1">
             <div className="relative">
-              <input type="text" name="email" placeholder=" " value={formData.email} onChange={handleChange} className={`${inputClass} ${errors.email ? "border-red-400" : ""}`} />
+              <input type="text" name="email" placeholder=" " value={formData.email} onChange={handleChange} className={`${inputClass} ${errors.email ? "border-red-600" : ""}`} />
               <label className={labelFloat}>Correo</label>
             </div>
-            <span className="text-red-400 text-xs h-4">{errors.email}</span>
+            <span className={`${errorClass} text-xs h-4`}>{errors.email}</span>
           </div>
           <div className="flex flex-col gap-1">
             <div className="relative">
-              <textarea name="message" placeholder=" " rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none ${errors.message ? "border-red-400" : ""}`} />
+              <textarea name="message" placeholder=" " rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none ${errors.message ? "border-red-600" : ""}`} />
               <label className={labelFloat}>Mensaje</label>
             </div>
-            <span className="text-red-400 text-xs h-4">{errors.message}</span>
+            <span className={`${errorClass} text-xs h-4`}>{errors.message}</span>
           </div>
 
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -206,7 +207,7 @@ export default function ContactMeInterface() {
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
                       className={`w-14 bg-transparent border-b text-center text-sm py-1 focus:outline-none transition-colors
-                        ${answerCorrect === true ? "border-green-500" : answerCorrect === false && userAnswer ? "border-red-400" : borderColor}
+                        ${answerCorrect === true ? "border-green-500" : answerCorrect === false && userAnswer ? "border-red-600" : borderColor}
                         ${textColor} appearance-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                     />
                     <div className="w-5 flex items-center justify-center">
@@ -219,7 +220,7 @@ export default function ContactMeInterface() {
                 )}
               </div>
             </div>
-            <span className="text-red-400 text-xs h-4">{errors.captcha}</span>
+            <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
             </div>
 
             {/* Submit */}
