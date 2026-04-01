@@ -31,12 +31,22 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        slideInFromRight: {
+          '0%': { opacity: '0', transform: 'translateX(40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInFromLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         fadeIn: 'fadeIn .2s ease',
         tilt: 'tilt 3s infinite ease-in-out',
         float: 'float 3s infinite ease-in-out',
         rotate360: 'rotate360 1s linear infinite',
+        slideInFromRight: 'slideInFromRight .5s ease',
+        slideInFromLeft: 'slideInFromLeft .5s ease',
       },
       dropShadow: {
         'red': '10px 10px 10px #622529',
