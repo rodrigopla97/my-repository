@@ -1,10 +1,10 @@
-import { useTheme } from '../../context/themeContext';
-import { useActions } from '../../context/actionsContext';
-import { CurriculumInterfacePropsType } from '../../entities/entities';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
+import { CurriculumInterfacePropsType } from '../../containers/entities/entities';
 
 export default function CurriculumInterface({ download }: CurriculumInterfacePropsType) {
-  const { isDarkMode } = useTheme();
-  const { handleSetIsCurriculumOpen } = useActions();
+  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { isDarkMode } = getPortfolioState;
+  const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
 
   const buttonText = download ? "Descargar" : "Ver en otra pestaña";
   const icon = download ? "download" : "open_in_new";
@@ -14,7 +14,7 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
       href="/CV - Rodrigo Placeres.pdf"
       target="_blank"
       download={download ? "" : undefined}
-      onClick={() => handleSetIsCurriculumOpen(false)}
+      onClick={() => setCurriculumOpen(false)}
       className={`group flex items-center gap-3 px-5 py-3 text-sm font-medium tracking-wide transition-all duration-150 ${isDarkMode ? "text-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
     >
       <i className="material-symbols-outlined text-base leading-none">{icon}</i>

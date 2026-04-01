@@ -1,12 +1,14 @@
-import { useTheme } from "../../../context/themeContext";
+import { usePortfolio } from "../../../containers/states/portfolioProvider";
 import { useState, useRef } from "react";
-import useRoutes from "../../../hooks/useRoutes";
+import useRoutes from "../../../containers/hooks/useRoutes";
 import ReCAPTCHA from "react-google-recaptcha";
+import { PROFILE } from "../../../containers/constants/constants";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string;
 
 export default function ContactMeInterface() {
-  const { borderColor, textColor, isDarkMode } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { borderColor, textColor, isDarkMode } = getPortfolioState;
   const { openExternal } = useRoutes();
   const [formSuccess, setFormSuccess] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -16,7 +18,7 @@ export default function ContactMeInterface() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   function handleCopyEmail() {
-    navigator.clipboard.writeText("rodrigoplaceres19@gmail.com")
+    navigator.clipboard.writeText(PROFILE.email)
       .then(() => { setCopySuccess(true); setTimeout(() => setCopySuccess(false), 2000); });
   }
 
@@ -47,7 +49,7 @@ export default function ContactMeInterface() {
     formBody.append("message", formData.message);
 
     try {
-      await fetch("https://formsubmit.co/ajax/rodrigoplaceres19@gmail.com", {
+      await fetch(PROFILE.formEndpoint, {
         method: "POST",
         body: formBody,
       });
@@ -94,7 +96,7 @@ export default function ContactMeInterface() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex items-center gap-2 text-sm">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>mail</i>
-            <a href="mailto:rodrigoplaceres19@gmail.com" className="whitespace-nowrap">rodrigoplaceres19@gmail.com</a>
+            <a href={"mailto:" + PROFILE.email} className="whitespace-nowrap">{PROFILE.email}</a>
             <i
               className="material-symbols-outlined text-base cursor-pointer flex-shrink-0"
               onClick={handleCopyEmail}
@@ -103,13 +105,13 @@ export default function ContactMeInterface() {
               {copySuccess ? "check" : "content_copy"}
             </i>
           </div>
-          <span onClick={() => openExternal('https://github.com/rodrigopla97')} className="flex items-center gap-2 text-sm cursor-pointer">
+          <span onClick={() => openExternal(PROFILE.github.url)} className="flex items-center gap-2 text-sm cursor-pointer">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>code</i>
-            <span>github.com/rodrigopla97</span>
+            <span>{PROFILE.github.label}</span>
           </span>
-          <span onClick={() => openExternal('https://www.linkedin.com/in/rodrigo-placeres/')} className="flex items-center gap-2 text-sm cursor-pointer">
+          <span onClick={() => openExternal(PROFILE.linkedin.url)} className="flex items-center gap-2 text-sm cursor-pointer">
             <i className={`material-symbols-outlined text-base flex-shrink-0 ${accentColor}`}>work</i>
-            <span>linkedin.com/in/rodrigo-placeres</span>
+            <span>{PROFILE.linkedin.label}</span>
           </span>
         </div>
 

@@ -1,8 +1,9 @@
-import { useTheme } from "../../../context/themeContext";
+import { usePortfolio } from "../../../containers/states/portfolioProvider";
 import FooterAllIcons from "../footerAllIconsInterface";
 
 export default function ExperienceInterface() {
-  const { textColor } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { textColor } = getPortfolioState;
 
   return (
     <div className={`flex flex-col w-full items-center mt-4 ${textColor}`}>

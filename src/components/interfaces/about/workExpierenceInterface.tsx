@@ -1,9 +1,10 @@
-import { useTheme } from "../../../context/themeContext";
+import { usePortfolio } from "../../../containers/states/portfolioProvider";
 import workerAvatar from '../../../images/avatar-work.png';
 import JobExperienceCardInterface from "./jobExperienceCardInterface";
 
 export default function WorkExpierenceInterface() {
-  const {textColor, isDarkMode} = useTheme()
+  const { getPortfolioState } = usePortfolio();
+  const {textColor, isDarkMode} = getPortfolioState;
   return (
     <>
       <div className={`pt-20 pb-[5vh] px-8 lg:px-20 ${textColor} lg:h-screen`}>

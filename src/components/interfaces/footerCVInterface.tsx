@@ -1,27 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 import CurriculumInterface from './curriculumInterface';
-import { useTheme } from '../../context/themeContext';
-import { useActions } from '../../context/actionsContext';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
 
 export default function FooterCVInterface() {
-  const { isDarkMode } = useTheme();
-  const { isMenuOpen, isCurriculumOpen, handleSetIsCurriculumOpen } = useActions();
+  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { isDarkMode, isMenuOpen, isCurriculumOpen } = getPortfolioState;
+  const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    handleSetIsCurriculumOpen(false);
+    setCurriculumOpen(false);
   }, [isMenuOpen]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        handleSetIsCurriculumOpen(false);
+        setCurriculumOpen(false);
       }
     }
 
     function handleScroll() {
-      handleSetIsCurriculumOpen(false);
+      setCurriculumOpen(false);
     }
 
     if (isCurriculumOpen) {
@@ -41,7 +41,7 @@ export default function FooterCVInterface() {
         <div className="fixed bottom-8 right-8 z-50">
           <div className="relative" ref={modalRef}>
             <button
-              onClick={() => handleSetIsCurriculumOpen(!isCurriculumOpen)}
+              onClick={() => setCurriculumOpen(!isCurriculumOpen)}
               className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
             >
               <i className="material-symbols-outlined text-sm leading-none">description</i>

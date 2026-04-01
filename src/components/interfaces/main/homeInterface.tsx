@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BackgroundImageInterface from "./backgroundImageInterface";
-import { useTheme } from "../../../context/themeContext";
+import { usePortfolio } from "../../../containers/states/portfolioProvider";
 import desk from '../../../images/avatar-float.png';
 import bgAvatarDesk from '../../../images/bg-avatar.png';
 
@@ -10,7 +10,8 @@ const texts = [
 ];
 
 export default function HomeInterface() {
-    const { isDarkMode, textColor } = useTheme();
+    const { getPortfolioState } = usePortfolio();
+    const { isDarkMode, textColor } = getPortfolioState;
     const [currentText, setCurrentText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);

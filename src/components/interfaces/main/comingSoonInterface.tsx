@@ -1,7 +1,8 @@
-import { useTheme } from '../../../context/themeContext';
+import { usePortfolio } from '../../../containers/states/portfolioProvider';
 
 export default function ComingSoonInterface() {
-  const { textColor, isDarkMode } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { textColor, isDarkMode } = getPortfolioState;
 
   return (
     <div className={`flex flex-col items-center justify-center w-screen min-h-screen gap-6 ${textColor} px-6`}>

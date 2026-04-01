@@ -1,8 +1,9 @@
-import { useTheme } from "../context/themeContext";
+import { usePortfolio } from "../containers/states/portfolioProvider";
 
 export default function TypescriptIcon() {
 
-    const { isDarkMode } = useTheme();
+    const { getPortfolioState } = usePortfolio();
+    const { isDarkMode } = getPortfolioState;
     return (
         <div >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0,256,256" width="48px" height="48px" fillRule="nonzero">
@@ -12,7 +13,7 @@ export default function TypescriptIcon() {
                         <stop offset="1" stopColor="#007acc" />
                     </linearGradient>
                 </defs>
-                <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" textAnchor="none" style={{ mixBlendMode: "normal" }}>
+                <g fill="none" fillRule="nonzero" stroke="none" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10" strokeDasharray="" strokeDashoffset="0" fontFamily="none" fontWeight="none" fontSize="none" style={{ mixBlendMode: "normal" }}>
                     <g transform="scale(5.33333,5.33333)">
                         <path d="M40,6h-32c-1.105,0 -2,0.895 -2,2v32c0,1.105 0.895,2 2,2h32c1.105,0 2,-0.895 2,-2v-32c0,-1.105 -0.895,-2 -2,-2z" fill="url(#color-1)"></path>
                         <path d="M38.819,30.606c-0.814,-1.065 -1.899,-1.683 -2.951,-2.191c-0.319,-0.154 -0.639,-0.305 -0.959,-0.456c-0.665,-0.313 -1.353,-0.637 -2.002,-0.983c-0.485,-0.259 -0.382,-0.509 -0.327,-0.644c0.052,-0.127 0.264,-0.216 0.516,-0.216c0.075,0 0.152,0.008 0.228,0.022c0.284,0.053 0.816,0.507 1.094,0.933l0.272,0.416l0.271,0.416l0.418,-0.269l0.418,-0.269c0.082,-0.053 2.025,-1.302 2.759,-1.834l0.304,-0.22l0.304,-0.22l-0.126,-0.353l-0.126,-0.353c-0.049,-0.138 -1.264,-3.38 -6.221,-3.38h-0.006c-1.611,0.042 -2.972,0.603 -4.066,1.669c-0.23,0.225 -0.434,0.476 -0.617,0.745v-1.419v-0.5v-0.5h-0.5h-0.502h-13h-0.5h-0.5v0.5v0.5v3.034v0.5v0.5h0.5h0.5h3.972v12.938v0.5v0.5h0.5h0.5h2.993h0.498h0.498l0.002,-0.498l0.002,-0.498l0.049,-12.942h3.986h0.074c-0.023,0.238 -0.038,0.479 -0.033,0.723c0.031,1.573 0.664,3.029 1.737,3.994c0.726,0.653 1.565,1.114 2.377,1.56l0.214,0.118c0.541,0.299 1.096,0.561 1.632,0.815c0.426,0.202 0.841,0.398 1.247,0.611c0.151,0.079 0.211,0.183 0.205,0.358c-0.007,0.236 -0.099,0.365 -0.326,0.461c-0.348,0.147 -0.687,0.221 -1.009,0.221c-0.484,0 -0.954,-0.171 -1.399,-0.509c-0.238,-0.181 -0.471,-0.455 -0.719,-0.746c-0.141,-0.165 -0.284,-0.332 -0.436,-0.497l-0.273,-0.294l-0.273,-0.294l-0.346,0.202l-0.346,0.202c-0.869,0.507 -2.844,1.696 -2.844,1.696l-0.422,0.254l-0.422,0.254l0.248,0.426l0.248,0.426c0.713,1.223 1.711,2.287 2.671,2.848c1.331,0.778 2.785,1.172 4.322,1.172c0.837,0 1.715,-0.118 2.61,-0.35c1.932,-0.501 3.332,-1.751 3.942,-3.52c0.642,-1.854 0.304,-4.037 -0.86,-5.559z" fill="#000000" opacity="0.05"></path>

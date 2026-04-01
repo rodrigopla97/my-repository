@@ -1,12 +1,12 @@
-import { useTheme } from '../../context/themeContext';
-import { useActions } from '../../context/actionsContext';
-import useRoutes from '../../hooks/useRoutes';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
+import useRoutes from '../../containers/hooks/useRoutes';
 import lightLogo from '../../images/black-logo.png';
 import darkLogo from '../../images/gray-logo.png';
+import { PROFILE } from '../../containers/constants/constants';
 
 export default function FooterInterface() {
-  const { textColor, isDarkMode } = useTheme();
-  const { tabdataItems } = useActions();
+  const { getPortfolioState } = usePortfolio();
+  const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { navigate, pathname, openExternal } = useRoutes();
 
   return (
@@ -15,8 +15,8 @@ export default function FooterInterface() {
       <div className="flex flex-col md:flex-row justify-center md:justify-normal gap-10">
         <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>
           <div>
-            <h2 className='font-bold text-xl'>Rodrigo Placeres</h2>
-            <span className='font-light'>Desarrollador Frontend</span>
+            <h2 className='font-bold text-xl'>{PROFILE.name}</h2>
+            <span className='font-light'>{PROFILE.role}</span>
           </div>
           <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh] cursor-pointer' onClick={() => navigate("/")} />
         </div>
@@ -51,11 +51,11 @@ export default function FooterInterface() {
             <span>Social</span>
 
             <div className='flex flex-col'>
-              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://www.linkedin.com/in/rodrigo-placeres/")}>
+              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.linkedin.url)}>
                 LinkedIn
                 <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
               </span>
-              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal("https://github.com/rodrigopla97")}>
+              <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.github.url)}>
                 GitHub
                 <span className="opacity-0 group-hover:opacity-100 transition">↗</span>
               </span>
@@ -65,7 +65,7 @@ export default function FooterInterface() {
       </div>
 
       <div className="w-full text-center text-xs font-light">
-        © {new Date().getFullYear()} Rodrigo Placeres
+        © {new Date().getFullYear()} {PROFILE.name}
       </div>
     </div>
   );

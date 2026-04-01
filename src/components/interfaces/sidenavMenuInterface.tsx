@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useTheme } from "../../context/themeContext";
-import { useActions } from "../../context/actionsContext";
-import useRoutes from "../../hooks/useRoutes";
+import { usePortfolio } from "../../containers/states/portfolioProvider";
+import useRoutes from "../../containers/hooks/useRoutes";
 
 export function SidenavMenuInterface() {
-  const { bgColor, textColor, isDarkMode } = useTheme();
-  const { isMenuOpen, handleSetIsMenuOpen, tabdataItems } = useActions();
+  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { bgColor, textColor, isDarkMode, isMenuOpen, tabdataItems } = getPortfolioState;
+  const setMenuOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isMenuOpen: isOpen }));
   const { navigate, pathname } = useRoutes();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export function SidenavMenuInterface() {
   }, [isMenuOpen]);
 
   function handleNavigate(path: string) {
-    handleSetIsMenuOpen(false);
+    setMenuOpen(false);
     if (pathname !== path) navigate(path);
   }
 
@@ -22,21 +22,21 @@ export function SidenavMenuInterface() {
     <div className="inline sm:hidden">
       <button
         className={`${textColor} focus:outline-none w-20 h-[10vh] flex items-center justify-center`}
-        onClick={() => handleSetIsMenuOpen(true)}
+        onClick={() => setMenuOpen(true)}
       >
         <span className="material-icons">menu</span>
       </button>
 
       <div
         className={`fixed inset-0 z-40 bg-black transition-opacity duration-300 ${isMenuOpen ? "opacity-40 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        onClick={() => handleSetIsMenuOpen(false)}
+        onClick={() => setMenuOpen(false)}
       />
 
       <div
         className={`fixed top-0 bottom-0 left-0 w-full z-50 ${bgColor} shadow-lg flex flex-col transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="ml-[0.2rem] mt-[0.2rem] w-20 h-[10vh] flex items-center justify-center">
-          <button className={`${textColor} focus:outline-none`} onClick={() => handleSetIsMenuOpen(false)}>
+          <button className={`${textColor} focus:outline-none`} onClick={() => setMenuOpen(false)}>
             <span className="material-icons">close</span>
           </button>
         </div>

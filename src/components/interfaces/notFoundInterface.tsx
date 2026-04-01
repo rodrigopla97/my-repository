@@ -1,8 +1,9 @@
-import { useTheme } from '../../context/themeContext';
-import useRoutes from '../../hooks/useRoutes';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
+import useRoutes from '../../containers/hooks/useRoutes';
 
 export default function NotFoundInterface() {
-  const { textColor, isDarkMode } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { textColor, isDarkMode } = getPortfolioState;
   const { navigate } = useRoutes();
 
   return (

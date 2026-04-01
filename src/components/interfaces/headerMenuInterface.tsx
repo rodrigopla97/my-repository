@@ -1,10 +1,9 @@
-import { useTheme } from '../../context/themeContext';
-import { useActions } from '../../context/actionsContext';
-import useRoutes from '../../hooks/useRoutes';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
+import useRoutes from '../../containers/hooks/useRoutes';
 
 export default function HeaderMenuInterface() {
-  const { textColor, isDarkMode } = useTheme();
-  const { tabdataItems } = useActions();
+  const { getPortfolioState } = usePortfolio();
+  const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { pathname, navigate } = useRoutes();
 
   function handleNavigate(path: string) {

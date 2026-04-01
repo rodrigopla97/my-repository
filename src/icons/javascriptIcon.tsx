@@ -1,8 +1,9 @@
-import { useTheme } from "../context/themeContext";
+import { usePortfolio } from "../containers/states/portfolioProvider";
 
 export default function JavascriptIcon() {
 
-    const { isDarkMode } = useTheme();
+    const { getPortfolioState } = usePortfolio();
+    const { isDarkMode } = getPortfolioState;
     return (
         <div >
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">

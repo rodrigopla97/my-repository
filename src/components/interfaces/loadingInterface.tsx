@@ -1,8 +1,9 @@
-import { useTheme } from '../../context/themeContext';
+import { usePortfolio } from '../../containers/states/portfolioProvider';
 
 export default function LoadingInterface() {
 
-  const { isDarkMode, bgColor } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { isDarkMode, bgColor } = getPortfolioState;
 
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${bgColor}`}>

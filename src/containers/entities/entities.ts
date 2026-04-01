@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 
 export interface JobRole {
   title: string;
@@ -17,34 +17,27 @@ export interface ActionsTabdataItem {
   icon: string;
 }
 
-export type ActionsContextType = {
-  tabdataItems: ActionsTabdataItem[];
-  isMenuOpen: boolean;
-  handleSetIsMenuOpen: (isOpen: boolean) => void;
-  isCurriculumOpen: boolean;
-  handleSetIsCurriculumOpen: (isOpen: boolean) => void;
-};
-
-export type ThemeContextType = {
+export type PortfolioStateType = {
   isDarkMode: boolean;
-  toggleTheme: () => void;
   textColor: string;
   bgColor: string;
   borderColor: string;
+  isMenuOpen: boolean;
+  isCurriculumOpen: boolean;
+  indexCarrousel: number;
+  experienceSelectedContex: number;
+  tabdataItems: ActionsTabdataItem[];
+  jobExperiencesContext: JobExperience[];
 };
 
-export type AboutContextType = {
-  indexCarrousel: number;
-  toggleAboutIndex: (idx: number) => void;
-  toggleJobSelected: (idx: number) => void;
-  jobExperiencesContext: JobExperience[];
-  experienceSelectedContex: number;
+export type PortfolioContextType = {
+  getPortfolioState: PortfolioStateType;
+  setPortfolioState: Dispatch<SetStateAction<PortfolioStateType>>;
 };
 
 export interface ProviderProps {
   children: ReactNode;
 }
-
 
 export interface ModalJobProps {
   children?: React.ReactNode;
@@ -55,5 +48,3 @@ export interface ModalJobProps {
 export interface CurriculumInterfacePropsType {
   download?: boolean;
 }
-
-export type MathChallengeOperationType = "+" | "-" | "×";
