@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTheme } from '../../../context/themeContext';
-import { useAbout } from '../../../context/aboutContext';
+import { usePortfolio } from '../../../containers/states/portfolioProvider';
 
 export default function JobExperienceCardInterface() {
-  const { jobExperiencesContext } = useAbout();
-  const { isDarkMode, textColor } = useTheme();
+  const { getPortfolioState } = usePortfolio();
+  const { isDarkMode, textColor, jobExperiencesContext } = getPortfolioState;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [selectedRoleIndex, setSelectedRoleIndex] = useState<number>(0);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
@@ -12,20 +11,20 @@ export default function JobExperienceCardInterface() {
   const [isDesktop, setIsDesktop] = useState<boolean>(() => window.innerWidth >= 768);
   const stepIndexRef = useRef<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(true);
+  const [carouselDragX, setCarouselDragX] = useState(0);
+  const [carouselWithTransition, setCarouselWithTransition] = useState(false);
+  const [carouselSlideTarget, setCarouselSlideTarget] = useState<'left' | 'right' | 'base'>('base');
+  const carouselIsAnimating = useRef(false);
+  const carouselIsDragging = useRef(false);
+  const carouselDragStartX = useRef(0);
+  const carouselIntervalRef = useRef<ReturnType<typeof setInterval>>();
+  const carouselResumeRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     const handler = () => setIsDesktop(window.innerWidth >= 768);
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
   }, []);
-
-  useEffect(() => {
-    if (isDesktop || openIndex !== null) return;
-    const timer = setInterval(() => {
-      setCarouselIndex(i => (i + 1) % jobExperiencesContext.length);
-    }, 2500);
-    return () => clearInterval(timer);
-  }, [isDesktop, openIndex, jobExperiencesContext.length]);
 
   useEffect(() => {
     if (!isDesktop || isPaused) return;
@@ -40,6 +39,85 @@ export default function JobExperienceCardInterface() {
     }, 6000);
     return () => clearInterval(timer);
   }, [isDesktop, isPaused, jobExperiencesContext]);
+
+  function advanceCarousel(direction: 'left' | 'right') {
+    if (carouselIsAnimating.current) return;
+    carouselIsAnimating.current = true;
+    setCarouselDragX(0);
+    setCarouselWithTransition(true);
+    setCarouselSlideTarget(direction);
+
+    setTimeout(() => {
+      setCarouselWithTransition(false);
+      setCarouselSlideTarget('base');
+      setCarouselIndex(prev =>
+        direction === 'left'
+          ? (prev + 1) % jobExperiencesContext.length
+          : (prev - 1 + jobExperiencesContext.length) % jobExperiencesContext.length
+      );
+      carouselIsAnimating.current = false;
+    }, 400);
+  }
+
+  function startCarouselAutoAdvance() {
+    clearInterval(carouselIntervalRef.current);
+    carouselIntervalRef.current = setInterval(() => advanceCarousel('left'), 2500);
+  }
+
+  function pauseCarouselAndScheduleResume() {
+    clearInterval(carouselIntervalRef.current);
+    clearTimeout(carouselResumeRef.current);
+    carouselResumeRef.current = setTimeout(startCarouselAutoAdvance, 3000);
+  }
+
+  useEffect(() => {
+    if (isDesktop || openIndex !== null) return;
+    startCarouselAutoAdvance();
+    return () => {
+      clearInterval(carouselIntervalRef.current);
+      clearTimeout(carouselResumeRef.current);
+    };
+  }, [isDesktop, openIndex, jobExperiencesContext.length]);
+
+  function onCarouselPointerDown(e: React.PointerEvent) {
+    if (carouselIsAnimating.current) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    carouselDragStartX.current = e.clientX;
+    carouselIsDragging.current = true;
+    setCarouselWithTransition(false);
+    setCarouselDragX(0);
+  }
+
+  function onCarouselPointerMove(e: React.PointerEvent) {
+    if (!carouselIsDragging.current) return;
+    setCarouselDragX(e.clientX - carouselDragStartX.current);
+  }
+
+  function onCarouselPointerUp(e: React.PointerEvent) {
+    if (!carouselIsDragging.current) return;
+    carouselIsDragging.current = false;
+    const delta = carouselDragStartX.current - e.clientX;
+
+    if (Math.abs(delta) >= 50) {
+      advanceCarousel(delta > 0 ? 'left' : 'right');
+      pauseCarouselAndScheduleResume();
+    } else {
+      setCarouselWithTransition(true);
+      setCarouselDragX(0);
+      setTimeout(() => setCarouselWithTransition(false), 300);
+    }
+  }
+
+  const carouselTargetPercent =
+    carouselSlideTarget === 'left' ? -(200 / 3) :
+      carouselSlideTarget === 'right' ? 0 :
+        -(100 / 3);
+
+  const carouselSlots = [
+    jobExperiencesContext[(carouselIndex - 1 + jobExperiencesContext.length) % jobExperiencesContext.length],
+    jobExperiencesContext[carouselIndex],
+    jobExperiencesContext[(carouselIndex + 1) % jobExperiencesContext.length],
+  ];
 
   function handleToggle(index: number) {
     setOpenIndex(isDesktop ? index : index === openIndex ? null : index);
@@ -123,24 +201,59 @@ export default function JobExperienceCardInterface() {
   };
 
   const carouselContent = (
-    <div className={`h-[32vh] flex flex-col rounded-lg border ${accentBorderFaint} p-5 gap-3`}>
-      <div className="flex-1 flex flex-col  justify-center gap-3 animate-fadeIn overflow-hidden" key={carouselIndex}>
-        <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
-          {jobExperiencesContext[carouselIndex].roles[0].date}
-        </span>
-        <h4 className={`text-base font-semibold ${textColor}`}>
-          {jobExperiencesContext[carouselIndex].company}
-        </h4>
-        <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
-          {jobExperiencesContext[carouselIndex].roles[0].title}
-        </span>
+    <div className={`h-[32vh] flex flex-col rounded-lg border ${accentBorderFaint} gap-0 overflow-hidden`}>
+      <div
+        className="flex-1 overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        onPointerDown={onCarouselPointerDown}
+        onPointerMove={onCarouselPointerMove}
+        onPointerUp={onCarouselPointerUp}
+        style={{ touchAction: 'pan-y' }}
+      >
+        <div
+          className="flex h-full"
+          style={{
+            width: '300%',
+            transform: `translateX(calc(${carouselTargetPercent}% + ${carouselDragX}px))`,
+            transition: carouselWithTransition ? 'transform 0.4s ease' : 'none',
+          }}
+        >
+          {carouselSlots.map((experience, slotI) => (
+            <div
+              key={slotI}
+              style={{ width: '33.333%' }}
+              className="flex flex-col justify-center gap-3 p-5 pointer-events-none"
+            >
+              <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
+                {experience.roles[0].date}
+              </span>
+              <h4 className={`text-base font-semibold ${textColor}`}>
+                {experience.company}
+              </h4>
+              <span className={`text-xs uppercase tracking-widest ${accentColor}`}>
+                {experience.roles[0].title}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex items-center justify-between flex-shrink-0">
+
+      <div className="flex items-center justify-between flex-shrink-0 px-5 pb-4">
         <div className="flex gap-2">
           {jobExperiencesContext.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCarouselIndex(i)}
+              onClick={() => {
+                if (carouselIsAnimating.current) return;
+                const direction = i > carouselIndex ? 'left' : 'right';
+                setCarouselIndex(i);
+                pauseCarouselAndScheduleResume();
+                setCarouselWithTransition(true);
+                setCarouselSlideTarget(direction);
+                setTimeout(() => {
+                  setCarouselWithTransition(false);
+                  setCarouselSlideTarget('base');
+                }, 400);
+              }}
               className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === carouselIndex ? accentBg : accentBgFaint}`}
             />
           ))}
