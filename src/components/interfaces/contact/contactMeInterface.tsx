@@ -146,7 +146,7 @@ export default function ContactMeInterface() {
             <span className={`${errorClass} text-xs h-4`}>{errors.message}</span>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-4 justify-between">
             <div className="flex flex-col gap-1 items-center md:items-start">
               <ReCAPTCHA
                 ref={recaptchaRef}
@@ -160,7 +160,7 @@ export default function ContactMeInterface() {
               />
               <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
             </div>
-            <button type="submit" className={`group self-end flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}>
+            <button type="submit" className={`group self-end flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 my-auto ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}>
               <span className="group-hover:underline underline-offset-2">Enviar</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </button>
