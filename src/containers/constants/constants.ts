@@ -89,9 +89,9 @@ export const PROFILE = {
 };
 
 export const TAB_DATA_ITEMS: ActionsTabdataItem[] = [
-  { path: '/', name: 'Home', icon: 'home' },
-  { path: '/about', name: 'About', icon: 'description' },
-  { path: '/contact', name: 'Contact', icon: 'contact_phone' },
+  { path: '/', name: 'Inicio', icon: 'home' },
+  { path: '/about', name: 'Sobre mí', icon: 'description' },
+  { path: '/contact', name: 'Contacto', icon: 'contact_phone' },
 ];
 
 export const INITIAL_STATE = {
