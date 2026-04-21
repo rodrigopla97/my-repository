@@ -37,7 +37,7 @@ export default function FooterAllIcons() {
     return () => window.removeEventListener('resize', handler);
   }, []);
 
-  const totalSlots = visible + 2;
+  const totalSlots = ICONS.length;
   const innerIcons = Array.from({ length: totalSlots }, (_, i) =>
     ICONS[(startIdx - 1 + i + ICONS.length) % ICONS.length]
   );

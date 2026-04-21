@@ -2,11 +2,12 @@ import { usePortfolio } from '../../containers/states/portfolioProvider';
 import useRoutes from '../../containers/hooks/useRoutes';
 import lightLogo from '../../images/black-logo.png';
 import darkLogo from '../../images/gray-logo.png';
-import { PROFILE } from '../../containers/constants/constants';
+import { PROFILE, TRANSLATIONS } from '../../containers/constants/constants';
 
 export default function FooterInterface() {
   const { getPortfolioState } = usePortfolio();
-  const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
+  const { textColor, isDarkMode, tabdataItems, language } = getPortfolioState;
+  const { footer, profileRole } = TRANSLATIONS[language];
   const { navigate, pathname, openExternal } = useRoutes();
 
   return (
@@ -16,14 +17,14 @@ export default function FooterInterface() {
         <div className='flex md:flex-col w-full md:w-1/3 items-center justify-between'>
           <div>
             <h2 className='font-bold text-xl'>{PROFILE.name}</h2>
-            <span className='font-light'>{PROFILE.role}</span>
+            <span className='font-light'>{profileRole}</span>
           </div>
           <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh] cursor-pointer' onClick={() => navigate("/")} />
         </div>
 
         <div className='flex flex-col md:w-1/3 items-center uppercase'>
           <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
-            <span className='uppercase'>Navegación</span>
+            <span className='uppercase'>{footer.navigation}</span>
 
             <div className='flex flex-col'>
               {tabdataItems.map((tab, index) => {
@@ -48,7 +49,7 @@ export default function FooterInterface() {
 
         <div className='flex flex-col md:w-1/3 items-center uppercase'>
           <div className='flex flex-col gap-4 w-full md:max-w-[10vw] items-start'>
-            <span>Social</span>
+            <span>{footer.social}</span>
 
             <div className='flex flex-col'>
               <span className={`group flex items-center gap-1 cursor-pointer py-2 transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.linkedin.url)}>

@@ -1,0 +1,65 @@
+{
+  "profileRole": "Frontend Developer",
+  "home": {
+    "greeting": "Hi! I'm",
+    "typingTexts": ["Rodrigo Placeres", "Frontend Developer"]
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "social": "Social"
+  },
+  "contact": {
+    "title": "📬 Contact",
+    "heading": "Get in touch.",
+    "description": "If you have a project in mind, a proposal, or just a question, feel free to reach out.",
+    "copySuccess": "Copied!",
+    "copyEmail": "Copy email",
+    "labelName": "Name",
+    "labelEmail": "Email",
+    "labelMessage": "Message",
+    "submit": "Send",
+    "successToast": "Message sent!",
+    "errorName": "Name is required.",
+    "errorEmailRequired": "Email is required.",
+    "errorEmailInvalid": "Email is not valid.",
+    "errorMessage": "Message is required.",
+    "errorCaptcha": "Please complete the verification."
+  },
+  "experience": {
+    "bio1": "I live in <strong>Buenos Aires, Argentina</strong>, I'm a <strong>frontend</strong> developer, graduated as a <strong>Computer Technician</strong> and currently studying a <strong>University Technician in Programming</strong> (UTN).",
+    "bio2": "I trained as a Fullstack Developer with Node.js at EducaciónIT, and since 2022 I've been working as a <strong>Frontend Developer</strong> at <strong>Leafnoise</strong>.",
+    "techTitle": "🛠️ Technologies",
+    "expTitle": "🚀 Experience",
+    "expParagraph1": "I participate in platform maintenance across various projects, developing <strong>bugfixes</strong> and designing and implementing <strong>features</strong>, with the opportunity to be part of diverse projects alongside my team.",
+    "expParagraph2": "In some cases, I attend meetings involving direct interaction with clients and other teams, where I also collaborate on defining the backend structure.",
+    "expParagraph3": "This allowed me to be part of building projects from scratch, which motivated me to create this portfolio to share my experience and keep growing as a developer.",
+    "goalTitle": "🎯 Goal",
+    "goalParagraph1": "To be in constant personal and professional growth and development.",
+    "goalParagraph2": "To gain new experiences where I can contribute my knowledge and keep learning."
+  },
+  "workExperience": {
+    "title": "Work Experience"
+  },
+  "jobCard": {
+    "resume": "Resume",
+    "pause": "Pause",
+    "currentJob": "Current job",
+    "professionalPath": "💼 Professional path",
+    "viewDetail": "View detail",
+    "currentDateKeyword": "present"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This section does not exist or is under construction. Stay tuned.",
+    "back": "Back to home"
+  },
+  "comingSoon": {
+    "title": "Section under construction",
+    "description": "New content coming soon."
+  },
+  "curriculum": {
+    "download": "Download",
+    "view": "Open in new tab",
+    "button": "Resume"
+  }
+}

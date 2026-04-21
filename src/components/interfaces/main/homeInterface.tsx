@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import BackgroundImageInterface from "./backgroundImageInterface";
 import { usePortfolio } from "../../../containers/states/portfolioProvider";
+import { TRANSLATIONS } from "../../../containers/constants/constants";
 import desk from '../../../images/avatar-float.png';
 import bgAvatarDesk from '../../../images/bg-avatar.png';
 
-const texts = [
-    'Rodrigo Placeres',
-    'Desarrollador Front-End'
-];
-
 export default function HomeInterface() {
     const { getPortfolioState } = usePortfolio();
-    const { isDarkMode, textColor } = getPortfolioState;
+    const { isDarkMode, textColor, language } = getPortfolioState;
+    const { home } = TRANSLATIONS[language];
+    const texts = home.typingTexts;
     const [currentText, setCurrentText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
@@ -46,7 +44,7 @@ export default function HomeInterface() {
             <BackgroundImageInterface />
             <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-center md:justify-between my-[15vh] md:mb-[5vh] h-full">
                 <div className={`${textColor} max-md:text-lg md:text-2xl lg:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh] z-10 items-center my-auto md:my-0`}>
-                    <h1 className="text-left font-orbitron">Hola! Soy</h1>
+                    <h1 className="text-left font-orbitron">{home.greeting}</h1>
                     <div className="typewriter">
                         <h2 className={`font-orbitron ${isDeleting ? 'deleting' : 'typing'}`}>
                             <span>{currentText || '\u00A0'}</span>

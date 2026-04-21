@@ -1,6 +1,8 @@
 import { ActionsTabdataItem, JobExperience } from '../entities/entities';
+import es from './es.json';
+import en from './en.json';
 
-export const JOB_EXPERIENCES: JobExperience[] = [
+const JOB_EXPERIENCES_ES: JobExperience[] = [
   {
     company: "Leafnoise",
     roles: [
@@ -79,6 +81,102 @@ export const JOB_EXPERIENCES: JobExperience[] = [
   },
 ];
 
+const JOB_EXPERIENCES_EN: JobExperience[] = [
+  {
+    company: "Leafnoise",
+    roles: [
+      {
+        title: "Frontend Developer",
+        date: "2022-Present",
+        tasks: [
+          "Platform maintenance and participation in various projects. (Angular - React - TypeScript)",
+          "Bug fix development",
+          "Design and implementation of features.",
+          "Participation in API structure creation alongside the backend team",
+          "UI layout and design implementation",
+          "Analysis and resolution of sprint requirements (Azure - Jira)",
+        ],
+      },
+      {
+        title: "Implementer",
+        date: "2021-2022",
+        tasks: [
+          "1 year in .NET Implementation and Database Administration:",
+          "Platform maintenance (bug fixes) C# .NET",
+          "Database maintenance in SQL",
+          "Analysis and resolution of client-reported issues",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Mother Solution",
+    roles: [
+      {
+        title: "Repair Technician",
+        date: "2014-2021",
+        tasks: [
+          "Laptop repair and maintenance (notebooks and netbooks)",
+          "Disassembly and assembly.",
+          "Fault identification and diagnosis",
+          "Electronic component measurement.",
+          "SMD parts and component replacement",
+          "Software installation",
+          "Merchandise reception and delivery",
+          "Customer support",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Estudio Guitelman",
+    roles: [
+      {
+        title: "Technical Support",
+        date: "2018-2020",
+        tasks: [
+          "PC repair and maintenance",
+          "Fault resolution",
+          "Diagnosis and parts replacement.",
+          "Software installation and configuration",
+        ],
+      },
+    ],
+  },
+  {
+    company: "C.L'ectricidad - Ferro - Multiled",
+    roles: [
+      {
+        title: "LED Screen Operator Technician",
+        date: "2017-2020",
+        tasks: [
+          "LED screen installation and wiring (videowall)",
+          "Video configuration in software (LedStudio)",
+          "Cable laying (UTP)",
+          "Stadium light testing",
+        ],
+      },
+    ],
+  },
+];
+
+const TAB_DATA_ITEMS_ES: ActionsTabdataItem[] = [
+  { path: '/', name: 'Inicio', icon: 'home' },
+  { path: '/about', name: 'Sobre mí', icon: 'description' },
+  { path: '/contact', name: 'Contacto', icon: 'contact_phone' },
+];
+
+const TAB_DATA_ITEMS_EN: ActionsTabdataItem[] = [
+  { path: '/', name: 'Home', icon: 'home' },
+  { path: '/about', name: 'About me', icon: 'description' },
+  { path: '/contact', name: 'Contact', icon: 'contact_phone' },
+];
+
+export const TRANSLATIONS = {
+  es: { ...es, jobExperiences: JOB_EXPERIENCES_ES, tabDataItems: TAB_DATA_ITEMS_ES },
+  en: { ...en, jobExperiences: JOB_EXPERIENCES_EN, tabDataItems: TAB_DATA_ITEMS_EN },
+};
+
 export const PROFILE = {
   name: "Rodrigo Placeres",
   role: "Desarrollador Frontend",
@@ -88,15 +186,10 @@ export const PROFILE = {
   formEndpoint: "https://formsubmit.co/ajax/rodrigoplaceres19@gmail.com",
 };
 
-export const TAB_DATA_ITEMS: ActionsTabdataItem[] = [
-  { path: '/', name: 'Inicio', icon: 'home' },
-  { path: '/about', name: 'Sobre mí', icon: 'description' },
-  { path: '/contact', name: 'Contacto', icon: 'contact_phone' },
-];
-
 export const INITIAL_STATE = {
   PORTFOLIO: {
     isDarkMode: true,
+    language: 'es' as 'es' | 'en',
     textColor: "text-grayPrimary",
     bgColor: "bg-black",
     borderColor: "border-grayPrimary",
@@ -104,7 +197,7 @@ export const INITIAL_STATE = {
     isCurriculumOpen: false,
     indexCarrousel: 0,
     experienceSelectedContex: 0,
-    tabdataItems: TAB_DATA_ITEMS,
-    jobExperiencesContext: JOB_EXPERIENCES,
+    tabdataItems: TRANSLATIONS.es.tabDataItems,
+    jobExperiencesContext: TRANSLATIONS.es.jobExperiences,
   },
 };

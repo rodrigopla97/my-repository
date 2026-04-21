@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import CurriculumInterface from './curriculumInterface';
 import { usePortfolio } from '../../containers/states/portfolioProvider';
+import { TRANSLATIONS } from '../../containers/constants/constants';
 
 export default function FooterCVInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolio();
-  const { isDarkMode, isMenuOpen, isCurriculumOpen } = getPortfolioState;
+  const { isDarkMode, isMenuOpen, isCurriculumOpen, language } = getPortfolioState;
+  const { curriculum } = TRANSLATIONS[language];
   const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -45,7 +47,7 @@ export default function FooterCVInterface() {
               className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
             >
               <i className="material-symbols-outlined text-sm leading-none">description</i>
-              <span>Curriculum</span>
+              <span>{curriculum.button}</span>
               <i className={`material-symbols-outlined text-sm leading-none transition-transform duration-200 ${isCurriculumOpen ? "rotate-180" : ""}`}>expand_more</i>
             </button>
 

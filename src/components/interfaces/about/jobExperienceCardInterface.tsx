@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePortfolio } from '../../../containers/states/portfolioProvider';
+import { TRANSLATIONS } from '../../../containers/constants/constants';
 
 export default function JobExperienceCardInterface() {
   const { getPortfolioState } = usePortfolio();
-  const { isDarkMode, textColor, jobExperiencesContext } = getPortfolioState;
+  const { isDarkMode, textColor, jobExperiencesContext, language } = getPortfolioState;
+  const { jobCard } = TRANSLATIONS[language];
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [selectedRoleIndex, setSelectedRoleIndex] = useState<number>(0);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
@@ -152,7 +154,7 @@ export default function JobExperienceCardInterface() {
         <button
           onClick={() => setIsPaused(p => !p)}
           className={`absolute top-3 right-3 hidden md:flex items-center justify-center transition-opacity duration-200 opacity-30 hover:opacity-80 ${accentColor}`}
-          title={isPaused ? "Reanudar" : "Pausar"}
+          title={isPaused ? jobCard.resume : jobCard.pause}
         >
           <i className="material-symbols-outlined">{isPaused ? "play_arrow" : "pause"}</i>
         </button>
@@ -262,7 +264,7 @@ export default function JobExperienceCardInterface() {
           onClick={() => handleToggle(carouselIndex)}
           className={`text-xs uppercase tracking-widest ${accentColor} flex items-center gap-1`}
         >
-          Ver detalle
+          {jobCard.viewDetail}
           <i className="material-symbols-outlined text-sm">arrow_forward</i>
         </button>
       </div>
@@ -273,7 +275,7 @@ export default function JobExperienceCardInterface() {
     <React.Fragment>
 
       <span className={`text-base uppercase tracking-widest self-start flex items-center gap-1.5 ${textColor}`}>
-        💼 Trayectoria profesional
+        {jobCard.professionalPath}
       </span>
 
       <div className="flex flex-col md:flex-row w-full gap-6">
@@ -301,8 +303,8 @@ export default function JobExperienceCardInterface() {
                   >
                     <span className={`text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${isOpen ? accentColor : textColor}`}>
                       {experience.company}
-                      {experience.roles.some(r => r.date.toLowerCase().includes('actualidad')) && (
-                        <span title="Trabajo actual">🟢</span>
+                      {experience.roles.some(r => r.date.toLowerCase().includes(jobCard.currentDateKeyword)) && (
+                        <span title={jobCard.currentJob}>•</span>
                       )}
                     </span>
                     <i className={`material-symbols-outlined text-sm transition-transform duration-200 opacity-40 md:hidden ml-auto ${isOpen ? "rotate-180" : ""} ${accentColor}`}>

@@ -1,12 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import { PortfolioContext } from './portfolioContext';
-import { PortfolioContextType, PortfolioStateType, ProviderProps } from '../entities/entities';
-import { INITIAL_STATE } from '../constants/constants';
+import { PortfolioContextType, PortfolioStateType, ProviderProps, Language } from '../entities/entities';
+import { TRANSLATIONS, INITIAL_STATE } from '../constants/constants';
 
 export default function PortfolioProvider({ children }: ProviderProps) {
   const [getPortfolioState, setPortfolioState] = useState<PortfolioStateType>(() => ({
     ...INITIAL_STATE.PORTFOLIO,
     isDarkMode: JSON.parse(localStorage.getItem('isDarkMode') ?? 'true'),
+    language: 'es' as Language,
   }));
 
   useEffect(() => {
@@ -21,6 +22,15 @@ export default function PortfolioProvider({ children }: ProviderProps) {
       bgColor: isDarkMode ? "bg-black" : "bg-grayPrimary",
     }));
   }, [getPortfolioState.isDarkMode]);
+
+  useEffect(() => {
+    const { language } = getPortfolioState;
+    setPortfolioState((state) => ({
+      ...state,
+      tabdataItems: TRANSLATIONS[language].tabDataItems,
+      jobExperiencesContext: TRANSLATIONS[language].jobExperiences,
+    }));
+  }, [getPortfolioState.language]);
 
   return (
     <PortfolioContext.Provider value={{ getPortfolioState, setPortfolioState }}>

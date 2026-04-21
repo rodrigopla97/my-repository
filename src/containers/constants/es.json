@@ -1,0 +1,65 @@
+{
+  "profileRole": "Desarrollador Frontend",
+  "home": {
+    "greeting": "Hola! Soy",
+    "typingTexts": ["Rodrigo Placeres", "Desarrollador Front-End"]
+  },
+  "footer": {
+    "navigation": "Navegación",
+    "social": "Social"
+  },
+  "contact": {
+    "title": "📬 Contacto",
+    "heading": "Contactate conmigo.",
+    "description": "Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.",
+    "copySuccess": "¡Copiado!",
+    "copyEmail": "Copiar email",
+    "labelName": "Nombre",
+    "labelEmail": "Correo",
+    "labelMessage": "Mensaje",
+    "submit": "Enviar",
+    "successToast": "¡Mensaje enviado!",
+    "errorName": "El nombre es requerido.",
+    "errorEmailRequired": "El correo es requerido.",
+    "errorEmailInvalid": "El correo no es válido.",
+    "errorMessage": "El mensaje es requerido.",
+    "errorCaptcha": "Completá la verificación."
+  },
+  "experience": {
+    "bio1": "Vivo en la <strong>Ciudad Autónoma de Buenos Aires</strong>, soy desarrollador <strong>frontend</strong>, recibido como <strong>Técnico en Computación</strong> y actualmente estudiante de <strong>Tecnicatura universitaria en Programación</strong> (UTN).",
+    "bio2": "Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 me desempeño como <strong>Desarrollador Frontend</strong> en <strong>Leafnoise</strong>.",
+    "techTitle": "🛠️ Tecnologías",
+    "expTitle": "🚀 Experiencia",
+    "expParagraph1": "Participo en el mantenimiento de plataformas de distintos proyectos, desarrollo de <strong>bugfixes</strong> y diseño e implementación de <strong>features</strong>, donde tengo la oportunidad de formar parte de diversos proyectos junto a mi equipo de trabajo.",
+    "expParagraph2": "En algunos casos, asisto a reuniones que incluyen interacción directa con clientes y otros equipos, en las cuales también colaboro en la definición de la estructura backend.",
+    "expParagraph3": "Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador.",
+    "goalTitle": "🎯 Objetivo",
+    "goalParagraph1": "Estar en constante crecimiento y desarrollo, tanto personal como laboral.",
+    "goalParagraph2": "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo."
+  },
+  "workExperience": {
+    "title": "Experiencia Laboral"
+  },
+  "jobCard": {
+    "resume": "Reanudar",
+    "pause": "Pausar",
+    "currentJob": "Trabajo actual",
+    "professionalPath": "💼 Trayectoria profesional",
+    "viewDetail": "Ver detalle",
+    "currentDateKeyword": "actualidad"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "Esta sección no existe o está en construcción. Pronto habrá novedades.",
+    "back": "Volver al inicio"
+  },
+  "comingSoon": {
+    "title": "Sección en construcción",
+    "description": "Próximamente habrá contenido nuevo por acá."
+  },
+  "curriculum": {
+    "download": "Descargar",
+    "view": "Ver en otra pestaña",
+    "button": "Curriculum"
+  }
+}

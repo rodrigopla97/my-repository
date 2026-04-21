@@ -1,14 +1,16 @@
 import { usePortfolio } from "../../../containers/states/portfolioProvider";
+import { TRANSLATIONS } from "../../../containers/constants/constants";
 import workerAvatar from '../../../images/avatar-work.png';
 import JobExperienceCardInterface from "./jobExperienceCardInterface";
 
 export default function WorkExpierenceInterface() {
   const { getPortfolioState } = usePortfolio();
-  const {textColor, isDarkMode} = getPortfolioState;
+  const { textColor, isDarkMode, language } = getPortfolioState;
+  const { workExperience } = TRANSLATIONS[language];
   return (
     <>
       <div className={`pt-20 pb-[5vh] px-8 lg:px-20 ${textColor} lg:h-screen`}>
-        <h2 className="text-xl font-bold text-center">Experiencia Laboral</h2>
+        <h2 className="text-xl font-bold text-center">{workExperience.title}</h2>
         <div className="flex flex-col md:flex-row mb-6 h-full place-content-center place-items-center">
           <img
             src={workerAvatar}

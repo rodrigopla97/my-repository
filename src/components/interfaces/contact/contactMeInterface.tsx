@@ -2,13 +2,14 @@ import { usePortfolio } from "../../../containers/states/portfolioProvider";
 import { useState, useRef } from "react";
 import useRoutes from "../../../containers/hooks/useRoutes";
 import ReCAPTCHA from "react-google-recaptcha";
-import { PROFILE } from "../../../containers/constants/constants";
+import { PROFILE, TRANSLATIONS } from "../../../containers/constants/constants";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string;
 
 export default function ContactMeInterface() {
   const { getPortfolioState } = usePortfolio();
-  const { borderColor, textColor, isDarkMode } = getPortfolioState;
+  const { borderColor, textColor, isDarkMode, language } = getPortfolioState;
+  const { contact } = TRANSLATIONS[language];
   const { openExternal } = useRoutes();
   const [formSuccess, setFormSuccess] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -29,7 +30,7 @@ export default function ContactMeInterface() {
       if (!value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         setErrors(prev => ({ ...prev, email: "" }));
       } else {
-        setErrors(prev => ({ ...prev, email: "El correo no es válido." }));
+        setErrors(prev => ({ ...prev, email: contact.errorEmailInvalid }));
       }
     } else {
       setErrors(prev => ({ ...prev, [name]: "" }));
@@ -40,11 +41,11 @@ export default function ContactMeInterface() {
     e.preventDefault();
 
     const newErrors = { name: "", email: "", message: "", captcha: "" };
-    if (!formData.name.trim()) newErrors.name = "El nombre es requerido.";
-    if (!formData.email.trim()) newErrors.email = "El correo es requerido.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "El correo no es válido.";
-    if (!formData.message.trim()) newErrors.message = "El mensaje es requerido.";
-    if (!captchaToken) newErrors.captcha = "Completá la verificación.";
+    if (!formData.name.trim()) newErrors.name = contact.errorName;
+    if (!formData.email.trim()) newErrors.email = contact.errorEmailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = contact.errorEmailInvalid;
+    if (!formData.message.trim()) newErrors.message = contact.errorMessage;
+    if (!captchaToken) newErrors.captcha = contact.errorCaptcha;
 
     if (Object.values(newErrors).some(Boolean)) {
       setErrors(newErrors);
@@ -85,7 +86,7 @@ export default function ContactMeInterface() {
 
       {formSuccess && (
         <div className={`fixed top-[10vh] right-6 px-4 py-2 rounded text-sm text-white z-50 ${isDarkMode ? "bg-cvButtonSecondary" : "bg-cvButtonPrimary"}`}>
-          ¡Mensaje enviado!
+          {contact.successToast}
         </div>
       )}
 
@@ -93,12 +94,10 @@ export default function ContactMeInterface() {
 
         <div className="flex flex-col gap-2">
           <span className={`text-base uppercase tracking-widest flex items-center gap-1.5 ${textColor}`}>
-            📬 Contacto
+            {contact.title}
           </span>
-          <h2 className="text-4xl font-bold">Contactate conmigo.</h2>
-          <p className="text-sm">
-            Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
-          </p>
+          <h2 className="text-4xl font-bold">{contact.heading}</h2>
+          <p className="text-sm">{contact.description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -108,7 +107,7 @@ export default function ContactMeInterface() {
             <i
               className="material-symbols-outlined text-base cursor-pointer flex-shrink-0"
               onClick={handleCopyEmail}
-              title={copySuccess ? "¡Copiado!" : "Copiar email"}
+              title={copySuccess ? contact.copySuccess : contact.copyEmail}
             >
               {copySuccess ? "check" : "content_copy"}
             </i>
@@ -127,21 +126,21 @@ export default function ContactMeInterface() {
           <div className="flex flex-col gap-1">
             <div className="relative">
               <input type="text" name="name" placeholder=" " value={formData.name} onChange={handleChange} className={`${inputClass} ${errors.name ? "border-red-600" : ""}`} />
-              <label className={labelFloat}>Nombre</label>
+              <label className={labelFloat}>{contact.labelName}</label>
             </div>
             <span className={`${errorClass} text-xs h-4`}>{errors.name}</span>
           </div>
           <div className="flex flex-col gap-1">
             <div className="relative">
               <input type="text" name="email" placeholder=" " value={formData.email} onChange={handleChange} className={`${inputClass} ${errors.email ? "border-red-600" : ""}`} />
-              <label className={labelFloat}>Correo</label>
+              <label className={labelFloat}>{contact.labelEmail}</label>
             </div>
             <span className={`${errorClass} text-xs h-4`}>{errors.email}</span>
           </div>
           <div className="flex flex-col gap-1">
             <div className="relative">
               <textarea name="message" placeholder=" " rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none ${errors.message ? "border-red-600" : ""}`} />
-              <label className={labelFloat}>Mensaje</label>
+              <label className={labelFloat}>{contact.labelMessage}</label>
             </div>
             <span className={`${errorClass} text-xs h-4`}>{errors.message}</span>
           </div>
@@ -161,7 +160,7 @@ export default function ContactMeInterface() {
               <span className={`${errorClass} text-xs h-4`}>{errors.captcha}</span>
             </div>
             <button type="submit" className={`group self-end flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 my-auto ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary border-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}>
-              <span className="group-hover:underline underline-offset-2">Enviar</span>
+              <span className="group-hover:underline underline-offset-2">{contact.submit}</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </button>
           </div>

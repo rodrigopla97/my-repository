@@ -17,8 +17,11 @@ export interface ActionsTabdataItem {
   icon: string;
 }
 
+export type Language = 'es' | 'en';
+
 export type PortfolioStateType = {
   isDarkMode: boolean;
+  language: Language;
   textColor: string;
   bgColor: string;
   borderColor: string;
