@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { usePortfolio } from '../../containers/states/portfolioProvider';
 import useRoutes from '../../containers/hooks/useRoutes';
 
@@ -5,13 +6,23 @@ export default function NotFoundInterface() {
   const { getPortfolioState } = usePortfolio();
   const { textColor, isDarkMode } = getPortfolioState;
   const { navigate } = useRoutes();
+  const [seconds, setSeconds] = useState(30);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      navigate('/');
+      return;
+    }
+    const timer = setTimeout(() => setSeconds((s) => s - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [seconds]);
 
   return (
     <div className={`flex flex-col items-center justify-center w-screen h-screen gap-6 ${textColor}`}>
-      <span className="text-6xl">🚧</span>
-      <h1 className="text-3xl font-bold">Página no encontrada</h1>
+      <span className="text-6xl">⚠️</span>
+      <h1 className="text-3xl font-bold">Algo salió mal</h1>
       <p className="text-center opacity-70 max-w-sm">
-        Esta sección no existe o está en construcción. Pronto habrá novedades.
+        Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en {seconds} segundos.
       </p>
       <button
         onClick={() => navigate('/')}
