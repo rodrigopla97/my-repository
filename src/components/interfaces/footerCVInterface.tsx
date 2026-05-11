@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import CurriculumInterface from './curriculumInterface';
 import { usePortfolio } from '../../containers/states/portfolioProvider';
+import { useCurriculum } from '../../containers/hooks/useCurriculum';
 
 export default function FooterCVInterface() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
-  const { isDarkMode, isMenuOpen, isCurriculumOpen } = getPortfolioState;
-  const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
+  const { getPortfolioState } = usePortfolio();
+  const { isDarkMode, isMenuOpen } = getPortfolioState;
+  const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
 
   const modalRef = useRef<HTMLDivElement>(null);
 

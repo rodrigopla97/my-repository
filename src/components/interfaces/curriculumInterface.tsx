@@ -1,10 +1,11 @@
 import { usePortfolio } from '../../containers/states/portfolioProvider';
+import { useCurriculum } from '../../containers/hooks/useCurriculum';
 import { CurriculumInterfacePropsType } from '../../containers/entities/entities';
 
 export default function CurriculumInterface({ download }: CurriculumInterfacePropsType) {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolio();
   const { isDarkMode } = getPortfolioState;
-  const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
+  const { setCurriculumOpen } = useCurriculum();
 
   const buttonText = download ? "Descargar" : "Ver en otra pestaña";
   const icon = download ? "download" : "open_in_new";

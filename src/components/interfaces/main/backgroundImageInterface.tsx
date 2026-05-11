@@ -2,32 +2,32 @@ import { useEffect, useState } from 'react';
 import bgImageDark from '../../../images/bg-desk-black.png';
 import bgImagelight from '../../../images/bg-desk-gray.png';
 import { usePortfolio } from '../../../containers/states/portfolioProvider';
+import { useCurriculum } from '../../../containers/hooks/useCurriculum';
 
 export default function BackgroundImageInterface() {
   const [isMobile, setIsMobile] = useState(false);
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolio();
   const { isDarkMode } = getPortfolioState;
-  const setCurriculumOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isCurriculumOpen: isOpen }));
+  const { setCurriculumOpen } = useCurriculum();
   const [backgroundView, setBackgroundView] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
   const [scroll, setScroll] = useState(window.scrollY);
   const [hidden, setHidden] = useState(false);
 
+  function handleResize() {
+    setWidth(window.innerWidth);
+    setIsMobile(width < 1024);
+  }
+
+  function handleScroll() {
+    setScroll(window.scrollY);
+    setBackgroundView(scroll === 0);
+  }
+
   useEffect(() => {
     setCurriculumOpen(false)
-    function handleResize() {
-      setWidth(window.innerWidth);
-      setIsMobile(width < 1024);
-    }
-
-    function handleScroll() {
-      setScroll(window.scrollY);
-      setBackgroundView(scroll === 0);
-    }
-
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-
     handleResize();
     handleScroll();
 
