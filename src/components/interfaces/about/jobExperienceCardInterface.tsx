@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePortfolio } from '../../../containers/states/portfolioProvider';
+import TooltipInterface from '../tooltipInterface';
 
 export default function JobExperienceCardInterface() {
   const { getPortfolioState } = usePortfolio();
@@ -148,36 +149,41 @@ export default function JobExperienceCardInterface() {
     const experience = jobExperiencesContext[index];
     const role = experience.roles[selectedRoleIndex] ?? experience.roles[0];
     return (
-      <div key={animKey} className={`h-[32vh] flex flex-col md:rounded-lg md:border ${accentBorderFaint} md:p-5 animate-fadeIn gap-3 relative`}>
-        <button
-          onClick={() => setIsPaused(p => !p)}
-          className={`absolute top-3 right-3 hidden md:flex items-center justify-center transition-opacity duration-200 opacity-30 hover:opacity-80 ${accentColor}`}
-          title={isPaused ? "Reanudar" : "Pausar"}
-        >
-          <i className="material-symbols-outlined">{isPaused ? "play_arrow" : "pause"}</i>
-        </button>
+      <div key={animKey} className={`h-[32vh] flex flex-col md:rounded-lg md:border ${accentBorderFaint} md:p-5 animate-fadeIn gap-3`}>
 
-        {experience.roles.length > 1 && (
-          <div className="flex gap-2 flex-wrap flex-shrink-0">
-            {experience.roles.map((r, roleIdx) => (
-              <button
-                key={roleIdx}
-                onClick={() => handleSelectRole(roleIdx)}
-                className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border ${roleIdx === selectedRoleIndex
-                  ? `${accentColor} ${accentBorder}`
-                  : `opacity-40 border-transparent ${textColor} hover:opacity-70`
-                  }`}
-              >
-                {r.date}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className="flex items-center justify-between flex-shrink-0">
+          {experience.roles.length > 1 ? (
+            <div className="flex gap-2 flex-wrap">
+              {experience.roles.map((r, roleIdx) => (
+                <button
+                  key={roleIdx}
+                  onClick={() => handleSelectRole(roleIdx)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border ${roleIdx === selectedRoleIndex
+                    ? `${accentColor} ${accentBorder}`
+                    : `opacity-40 border-transparent ${textColor} hover:opacity-70`
+                    }`}
+                >
+                  {r.date}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <TooltipInterface text="Único período">
+              <span className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide border cursor-pointer ${accentColor} ${accentBorder}`}>{role.date}</span>
+            </TooltipInterface>
+          )}
+          <button
+            onClick={() => setIsPaused(p => !p)}
+            className={`hidden md:flex items-center justify-center transition-opacity duration-200 opacity-30 hover:opacity-80 ${accentColor}`}
+            title={isPaused ? "Reanudar" : "Pausar"}
+          >
+            <i className="material-symbols-outlined">{isPaused ? "play_arrow" : "pause"}</i>
+          </button>
+        </div>
 
         <div className="flex flex-col md:flex-row flex-1 overflow-hidden gap-2 md:gap-6">
 
           <div className="flex flex-col gap-1 flex-shrink-0 md:justify-center md:w-2/5">
-            <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{role.date}</span>
             <h4 className={`hidden md:block text-base font-semibold ${textColor}`}>{experience.company}</h4>
             <span className={`text-xs uppercase tracking-widest font-semibold ${textColor}`}>{role.title}</span>
           </div>
@@ -301,8 +307,10 @@ export default function JobExperienceCardInterface() {
                   >
                     <span className={`text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${isOpen ? accentColor : textColor}`}>
                       {experience.company}
-                      {experience.roles.some(r => r.date.toLowerCase().includes('actualidad')) && (
-                        <span title="Trabajo actual">🟢</span>
+                      {experience.roles.some(r => r.currentWork) && (
+                        <TooltipInterface text="Trabajo actual">
+                          <span className="block w-2 h-2 rounded-full bg-green-500 animate-pulse cursor-default" />
+                        </TooltipInterface>
                       )}
                     </span>
                     <i className={`material-symbols-outlined text-sm transition-transform duration-200 opacity-40 md:hidden ml-auto ${isOpen ? "rotate-180" : ""} ${accentColor}`}>
