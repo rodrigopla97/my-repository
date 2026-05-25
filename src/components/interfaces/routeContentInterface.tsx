@@ -5,6 +5,14 @@ import HomePage from "../../routes/main/mainPage";
 import AboutPage from "../../routes/about/aboutPage";
 import ContactPage from "../../routes/contact/contactPage";
 import ErrorPage from "../../routes/error/errorPage";
+import ComingSoonInterface from "./main/comingSoonInterface";
+import { TAB_DATA_ITEMS } from "../../containers/constants/constants";
+
+function FallbackRoute() {
+  const { pathname } = useLocation();
+  const isKnownTab = TAB_DATA_ITEMS.some(tab => tab.path === pathname);
+  return isKnownTab ? <ComingSoonInterface /> : <Navigate to="/error" replace />;
+}
 
 export default function RouteContent() {
   const { pathname } = useLocation();
@@ -30,7 +38,7 @@ export default function RouteContent() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/error" element={<ErrorPage />} />
-          <Route path="*" element={<Navigate to="/error" replace />} />
+          <Route path="*" element={<FallbackRoute />} />
         </Routes>
       )}
     </>

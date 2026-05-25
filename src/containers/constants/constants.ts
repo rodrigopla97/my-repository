@@ -1,4 +1,4 @@
-import { ActionsTabdataItem, JobExperience } from '../entities/entities';
+import { ActionsTabdataItem, JobExperience, AboutContentType } from '../entities/entities';
 
 export const JOB_EXPERIENCES: JobExperience[] = [
   {
@@ -7,6 +7,7 @@ export const JOB_EXPERIENCES: JobExperience[] = [
       {
         title: "Desarrollador Frontend",
         date: "2022-Actualidad",
+        currentWork: true,
         tasks: [
           "Mantenimiento de plataformas, participación en distintos proyectos. (Angular - React - TypeScript)",
           "Desarrollo de bugfix",
@@ -79,6 +80,50 @@ export const JOB_EXPERIENCES: JobExperience[] = [
   },
 ];
 
+export const ABOUT_CONTENT: AboutContentType = {
+  sections: [
+    {
+      title: "bio",
+      items: [
+        "Vivo en la **Ciudad Autónoma de Buenos Aires**, soy desarrollador **frontend**, recibido como **Técnico en Computación** y actualmente estudiante de **Tecnicatura universitaria en Programación** (UTN).",
+        "Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 me desempeño como **Desarrollador Frontend** en **Leafnoise**.",
+      ],
+    },
+    {
+      title: "🚀 Experiencia",
+      items: [
+        "Participo en el mantenimiento de plataformas de distintos proyectos, desarrollo de **bugfixes** y diseño e implementación de **features**, donde tengo la oportunidad de formar parte de diversos proyectos junto a mi equipo de trabajo.",
+        "En algunos casos, asisto a reuniones que incluyen interacción directa con clientes y otros equipos, en las cuales también colaboro en la definición de la estructura backend.",
+        "Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador.",
+      ],
+    },
+    {
+      title: "🎯 Objetivo",
+      items: [
+        "Estar en constante crecimiento y desarrollo, tanto personal como laboral.",
+        "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo.",
+      ],
+    },
+    {
+      title: "🛠️ Tecnologías",
+      items: [],
+      tags: {
+        items: [
+          { key: "html", label: "HTML" },
+          { key: "css", label: "CSS" },
+          { key: "javascript", label: "JavaScript" },
+          { key: "angular", label: "Angular" },
+          { key: "react", label: "React" },
+          { key: "typescript", label: "Typescript" },
+          { key: "tailwind", label: "Tailwind" },
+          { key: "git", label: "GIT" },
+          { key: "mongodb", label: "MongoDB" },
+        ],
+      },
+    },
+  ],
+};
+
 export const PROFILE = {
   name: "Rodrigo Placeres",
   role: "Desarrollador Frontend",
@@ -92,6 +137,7 @@ export const TAB_DATA_ITEMS: ActionsTabdataItem[] = [
   { path: '/', name: 'Inicio', icon: 'home' },
   { path: '/about', name: 'Sobre mí', icon: 'description' },
   { path: '/contact', name: 'Contacto', icon: 'contact_phone' },
+  { path: '/prueba', name: 'prueba', icon: 'contact_phone' },
 ];
 
 export const INITIAL_STATE = {
@@ -106,5 +152,9 @@ export const INITIAL_STATE = {
     experienceSelectedContex: 0,
     tabdataItems: TAB_DATA_ITEMS,
     jobExperiencesContext: JOB_EXPERIENCES,
+    aboutSections: {
+      loading: true,
+      data: null,
+    }
   },
 };

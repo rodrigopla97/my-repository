@@ -1,9 +1,11 @@
 import { ReactNode, Dispatch, SetStateAction } from "react";
+import type { TechnologyKey } from '../../icons/iconMap';
 
 export interface JobRole {
   title: string;
   date: string;
   tasks: string[];
+  currentWork?: boolean;
 }
 
 export interface JobExperience {
@@ -17,6 +19,11 @@ export interface ActionsTabdataItem {
   icon: string;
 }
 
+export type AboutSectionsContextType = {
+  loading: boolean;
+  data: AboutContentType | null;
+};
+
 export type PortfolioStateType = {
   isDarkMode: boolean;
   textColor: string;
@@ -28,6 +35,7 @@ export type PortfolioStateType = {
   experienceSelectedContex: number;
   tabdataItems: ActionsTabdataItem[];
   jobExperiencesContext: JobExperience[];
+  aboutSections: AboutSectionsContextType;
 };
 
 export type PortfolioContextType = {
@@ -48,3 +56,38 @@ export interface ModalJobProps {
 export interface CurriculumInterfacePropsType {
   download?: boolean;
 }
+
+export type ProfileType = {
+  name: string;
+  role: string;
+  email: string;
+  formEndpoint?: string;
+  github?: { url?: string; label?: string };
+  linkedin?: { url?: string; label?: string };
+};
+
+export type TechnologyItem = {
+  key: TechnologyKey;
+  label: string;
+};
+
+export type TechnologiesSectionType = {
+  items: TechnologyItem[];
+  animated?: boolean;
+};
+
+export type TechnologiesContextType = {
+  loading: boolean;
+  data: TechnologiesSectionType | null;
+};
+
+export type AboutContentType = {
+  sections: SectionType[];
+};
+
+export type SectionType = {
+  title: string;
+  items: string[];
+  tags?: TechnologiesSectionType;
+  hideTitle?: boolean;
+};
