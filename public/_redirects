@@ -1,3 +1,5 @@
+https://rplaceres.netlify.app/* https://rodrigoplaceres.com.ar/:splat 301!
+
 /portfolio/* https://rp-multi-api.up.railway.app/portfolio/:splat 200
 
 /* /index.html 200
