@@ -13,6 +13,14 @@ export interface JobExperience {
   roles: JobRole[];
 }
 
+export interface CertificationItem {
+  institution: string;
+  title: string;
+  year: string;
+  inProgress?: boolean;
+  imageUrl?: string;
+}
+
 export interface ActionsTabdataItem {
   path: string;
   name: string;
@@ -33,6 +41,7 @@ export type PortfolioStateType = {
   isCurriculumOpen: boolean;
   indexCarrousel: number;
   experienceSelectedContex: number;
+  tabsLoading: boolean;
   tabdataItems: ActionsTabdataItem[];
   jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;

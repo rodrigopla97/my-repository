@@ -4,18 +4,24 @@ import LoadingInterface from "./loadingInterface";
 import HomePage from "../../routes/main/mainPage";
 import AboutPage from "../../routes/about/aboutPage";
 import ContactPage from "../../routes/contact/contactPage";
+import ProjectsPage from "../../routes/projects/projectsPage";
 import ErrorPage from "../../routes/error/errorPage";
 import ComingSoonInterface from "./main/comingSoonInterface";
+import { usePortfolio } from "../../containers/states/portfolioProvider";
 import { TAB_DATA_ITEMS } from "../../containers/constants/constants";
 
 function FallbackRoute() {
   const { pathname } = useLocation();
-  const isKnownTab = TAB_DATA_ITEMS.some(tab => tab.path === pathname);
+  const { getPortfolioState } = usePortfolio();
+  const allTabs = [...getPortfolioState.tabdataItems, ...TAB_DATA_ITEMS];
+  const isKnownTab = allTabs.some(tab => tab.path === pathname);
   return isKnownTab ? <ComingSoonInterface /> : <Navigate to="/error" replace />;
 }
 
 export default function RouteContent() {
   const { pathname } = useLocation();
+  const { getPortfolioState } = usePortfolio();
+  const { tabsLoading } = getPortfolioState;
   const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
@@ -30,13 +36,14 @@ export default function RouteContent() {
 
   return (
     <>
-      {isLoading ? (
+      {(isLoading || tabsLoading) ? (
         <LoadingInterface />
       ) : (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<FallbackRoute />} />
         </Routes>

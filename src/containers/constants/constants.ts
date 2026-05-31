@@ -1,4 +1,10 @@
-import { ActionsTabdataItem, JobExperience, AboutContentType } from '../entities/entities';
+import { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem } from '../entities/entities';
+
+export const CERTIFICATIONS: CertificationItem[] = [
+  { institution: "UTN", title: "Tecnicatura Universitaria en Programación", year: "2023", inProgress: true },
+  { institution: "EducaciónIT", title: "Desarrollador Fullstack Node.js", year: "2022" },
+  { institution: "CoderHouse", title: "Desarrollo Web", year: "2021" },
+];
 
 export const JOB_EXPERIENCES: JobExperience[] = [
   {
@@ -150,6 +156,7 @@ export const INITIAL_STATE = {
     isCurriculumOpen: false,
     indexCarrousel: 0,
     experienceSelectedContex: 0,
+    tabsLoading: true,
     tabdataItems: TAB_DATA_ITEMS,
     jobExperiencesContext: JOB_EXPERIENCES,
     aboutSections: {
