@@ -1,12 +1,12 @@
 import React from 'react';
 import HomeInterface from '../../components/interfaces/main/homeInterface';
-import ComingSoonInterface from '../../components/interfaces/main/comingSoonInterface';
+import HomeSummaryInterface from '../../components/interfaces/main/homeSummaryInterface';
 
 export default function MainPage() {
   return (
     <React.Fragment>
       <HomeInterface />
-      <ComingSoonInterface />
+      <HomeSummaryInterface />
     </React.Fragment>
   );
 }
