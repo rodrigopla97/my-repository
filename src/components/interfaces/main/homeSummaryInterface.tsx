@@ -1,97 +1,283 @@
-import { useState } from 'react';
-import type { CertificationItem } from '../../../containers/entities/entities';
+import { useState, useEffect, useRef } from 'react';
 import { usePortfolio } from '../../../containers/states/portfolioProvider';
 import useRoutes from '../../../containers/hooks/useRoutes';
 import FooterAllIcons from '../footerAllIconsInterface';
-import { ABOUT_CONTENT, CERTIFICATIONS } from '../../../containers/constants/constants';
+import { ABOUT_CONTENT, CERTIFICATIONS, PROJECT_SITES } from '../../../containers/constants/constants';
+import { useModal } from '../../../containers/hooks/useModal';
+import { useIframePreview } from '../../../containers/hooks/useIframePreview';
+import IframePreviewInterface from '../iframePreviewInterface';
+import TooltipInterface from '../tooltipInterface';
+import type { CertificationItem } from '../../../containers/entities/entities';
 
-const SITES = [
-  {
-    label: 'Proyecto Final Coder',
-    description: 'Descripción genérica del proyecto. Próximamente más detalles.',
-    url: 'https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/',
-  },
-  {
-    label: 'Pixel Pancheria',
-    description: 'Descripción genérica del proyecto. Próximamente más detalles.',
-    url: 'https://pixelpancheria.netlify.app/',
-  },
-];
-
+const SITES = PROJECT_SITES;
 const techSection = ABOUT_CONTENT.sections.find(s => s.tags);
 
 export default function HomeSummaryInterface() {
   const { getPortfolioState } = usePortfolio();
   const { textColor, isDarkMode } = getPortfolioState;
   const { navigate, openExternal } = useRoutes();
+  const { modal } = useModal();
+  const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
   const [imgLoading, setImgLoading] = useState<Record<string, boolean>>(
     Object.fromEntries(SITES.map(s => [s.url, true]))
   );
-  const [selectedCert, setSelectedCert] = useState<CertificationItem | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [previewLoading, setPreviewLoading] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 768);
+  const [startIdx, setStartIdx] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [withTransition, setWithTransition] = useState(false);
+  const [slideTarget, setSlideTarget] = useState<'left' | 'right' | 'base'>('base');
+  const isAnimating = useRef(false);
+  const isDragging = useRef(false);
+  const hasDragged = useRef(false);
+  const dragStartX = useRef(0);
+  const dragAccumRef = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pointerIdRef = useRef<number>(0);
+
+  useEffect(() => {
+    const handler = () => setIsDesktop(window.innerWidth >= 768);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
+
+  const visible = isDesktop ? 3 : 1;
+  const totalSlots = visible + 2;
+  const innerSites = Array.from({ length: totalSlots }, (_, i) =>
+    SITES[(startIdx - 1 + i + SITES.length) % SITES.length]
+  );
+  const basePercent = -(100 / totalSlots);
+  const targetPercent =
+    slideTarget === 'left' ? basePercent * 2 :
+      slideTarget === 'right' ? 0 :
+        basePercent;
 
   const accentColor = !isDarkMode ? 'text-cvButtonPrimary' : 'text-cvButtonSecondary';
+  const accentBg = !isDarkMode ? 'bg-cvButtonPrimary' : 'bg-cvButtonSecondary';
+  const accentBgFaint = !isDarkMode ? 'bg-cvButtonPrimary/30' : 'bg-cvButtonSecondary/30';
   const accentBorder = !isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary';
   const accentBorderFaint = !isDarkMode ? 'border-cvButtonPrimary/30' : 'border-cvButtonSecondary/30';
+
+  const canScroll = SITES.length > visible;
+
+  function advance(direction: 'left' | 'right') {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+    setDragX(0);
+    setWithTransition(true);
+    setSlideTarget(direction);
+    setTimeout(() => {
+      setWithTransition(false);
+      setSlideTarget('base');
+      setStartIdx(prev =>
+        direction === 'left'
+          ? (prev + 1) % SITES.length
+          : (prev - 1 + SITES.length) % SITES.length
+      );
+      isAnimating.current = false;
+    }, 400);
+  }
+
+  function onPointerDown(e: React.PointerEvent) {
+    if (!canScroll || isAnimating.current) return;
+    dragStartX.current = e.clientX;
+    dragAccumRef.current = 0;
+    isDragging.current = true;
+    hasDragged.current = false;
+    pointerIdRef.current = e.pointerId;
+    setWithTransition(false);
+    setDragX(0);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!isDragging.current || e.buttons === 0) return;
+    const slotWidth = (containerRef.current?.offsetWidth ?? 300) / visible;
+    const delta = e.clientX - dragStartX.current;
+    if (!hasDragged.current && Math.abs(delta) > 8) {
+      hasDragged.current = true;
+      e.currentTarget.setPointerCapture(pointerIdRef.current);
+    }
+    dragAccumRef.current += delta;
+    dragStartX.current = e.clientX;
+    if (dragAccumRef.current <= -slotWidth) {
+      dragAccumRef.current += slotWidth;
+      setStartIdx(prev => (prev + 1) % SITES.length);
+    } else if (dragAccumRef.current >= slotWidth) {
+      dragAccumRef.current -= slotWidth;
+      setStartIdx(prev => (prev - 1 + SITES.length) % SITES.length);
+    }
+    setDragX(dragAccumRef.current);
+  }
+
+  function onPointerUp(_e: React.PointerEvent) {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const accum = dragAccumRef.current;
+    const slotWidth = (containerRef.current?.offsetWidth ?? 300) / visible;
+    dragAccumRef.current = 0;
+    if (Math.abs(accum) >= 50) {
+      const dir = accum < 0 ? 'left' : 'right';
+      setWithTransition(true);
+      setDragX(dir === 'left' ? -slotWidth : slotWidth);
+      setTimeout(() => {
+        setWithTransition(false);
+        setDragX(0);
+        setStartIdx(prev => dir === 'left'
+          ? (prev + 1) % SITES.length
+          : (prev - 1 + SITES.length) % SITES.length
+        );
+      }, 350);
+    } else {
+      setWithTransition(true);
+      setDragX(0);
+      setTimeout(() => setWithTransition(false), 300);
+    }
+  }
+
+  function openCertModal(cert: CertificationItem) {
+    modal.open(
+      cert.title,
+      cert.imageUrl
+        ? <img src={cert.imageUrl} alt={cert.title} className="w-full h-auto" />
+        : <div className="flex flex-col items-center justify-center gap-3 py-20">
+            <i className={`material-symbols-outlined text-5xl opacity-20 ${accentColor}`}>image_search</i>
+            <span className={`text-sm opacity-40 italic ${textColor}`}>Imagen del certificado próximamente</span>
+          </div>
+    );
+  }
+
+  function renderCard(site: typeof SITES[0]) {
+    return (
+      <div className={`group/card relative rounded-xl border overflow-hidden h-44 ${accentBorderFaint}`}>
+        {imgLoading[site.url] && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${!isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary'}`} />
+          </div>
+        )}
+        <img
+          src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(site.url)}?w=600&h=400`}
+          alt={site.label}
+          className="w-full h-full object-cover object-top"
+          style={{ opacity: imgLoading[site.url] ? 0 : 1, transition: 'opacity 0.3s ease' }}
+          draggable={false}
+          onLoad={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
+          onError={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
+        />
+        <span className="absolute bottom-3 left-0 text-sm font-semibold text-white px-3 py-1 rounded-r-full bg-black/60 backdrop-blur-sm pointer-events-none">{site.label}</span>
+
+        <div
+          className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4"
+        >
+          <TooltipInterface text="Ver preview" position="bottom">
+            <button
+              onPointerDown={e => e.stopPropagation()}
+              onClick={() => openPreview(site.url)}
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+            >
+              <i className="material-symbols-outlined text-xl">preview</i>
+            </button>
+          </TooltipInterface>
+          <TooltipInterface text="Info" position="bottom">
+            <button
+              onPointerDown={e => e.stopPropagation()}
+              onClick={() => modal.open(site.label, (
+                <p className={`px-6 py-8 text-sm leading-relaxed ${textColor}`}>{site.description}</p>
+              ))}
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+            >
+              <i className="material-symbols-outlined text-xl">info</i>
+            </button>
+          </TooltipInterface>
+          <TooltipInterface text="Visitar" position="bottom">
+            <button
+              onPointerDown={e => e.stopPropagation()}
+              onClick={() => openExternal(site.url)}
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+            >
+              <i className="material-symbols-outlined text-xl">open_in_new</i>
+            </button>
+          </TooltipInterface>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`flex flex-col gap-12 w-screen md:w-[75vw] px-10 md:mx-auto py-[8vh] ${textColor}`}>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <span className="text-base uppercase tracking-widest">🌐 Proyectos</span>
           <button
             onClick={() => navigate('/projects')}
-            className={`text-xs uppercase tracking-widest flex items-center gap-1 ${accentColor} transition-opacity hover:opacity-70`}
+            className={`hidden md:flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
           >
             Ver todos
             <i className="material-symbols-outlined text-sm">arrow_forward</i>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {SITES.map(site => (
-            <div
-              key={site.label}
-              className={`group flex flex-col gap-3 p-4 rounded-xl border ${accentBorderFaint}`}
-            >
-              <div className="w-full h-36 rounded-lg overflow-hidden relative">
-                {imgLoading[site.url] && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${!isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary'}`} />
-                  </div>
-                )}
-                <img
-                  src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(site.url)}?w=600&h=400`}
-                  alt={site.label}
-                  className="w-full h-full object-cover object-top"
-                  style={{ opacity: imgLoading[site.url] ? 0 : 1, transition: 'opacity 0.3s ease' }}
-                  onLoad={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
-                  <button
-                    onClick={() => { setPreviewUrl(site.url); setPreviewLoading(true); }}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 ${!isDarkMode ? 'bg-cvButtonPrimary' : 'bg-cvButtonSecondary'}`}
-                  >
-                    <i className="material-symbols-outlined text-sm">preview</i>
-                    Ver preview
-                  </button>
+        {!canScroll ? (
+          <div className={`grid gap-4 justify-center ${SITES.length === 1 ? 'grid-cols-1 max-w-xs mx-auto w-full' : 'grid-cols-1 md:grid-cols-2 md:max-w-2xl md:mx-auto w-full'}`}>
+            {SITES.map(site => (
+              <div key={site.url}>{renderCard(site)}</div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <div className="relative flex items-center gap-2">
+              <button
+                onClick={() => advance('right')}
+                className={`flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full border transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
+              >
+                <i className="material-symbols-outlined text-sm">chevron_left</i>
+              </button>
+
+              <div
+                ref={containerRef}
+                className="flex-1 overflow-hidden cursor-grab active:cursor-grabbing select-none"
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                style={{ touchAction: 'pan-y' }}
+              >
+                <div
+                  className="flex"
+                  style={{
+                    width: `${(totalSlots / visible) * 100}%`,
+                    transform: `translateX(calc(${targetPercent}% + ${dragX}px))`,
+                    transition: withTransition ? 'transform 0.4s ease' : 'none',
+                  }}
+                >
+                  {innerSites.map((site, i) => (
+                    <div key={`${site.url}-${i}`} style={{ width: `${100 / totalSlots}%` }} className="px-1">
+                      {renderCard(site)}
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-sm">{site.label}</span>
-                <button
-                  onClick={() => openExternal(site.url)}
-                  className={`flex items-center gap-1 text-xs border px-2.5 py-1 rounded-full transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
-                >
-                  <i className="material-symbols-outlined text-sm">open_in_new</i>
-                  Visitar
-                </button>
-              </div>
+
+              <button
+                onClick={() => advance('left')}
+                className={`flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full border transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
+              >
+                <i className="material-symbols-outlined text-sm">chevron_right</i>
+              </button>
             </div>
-          ))}
-        </div>
+
+            <div className="flex justify-center gap-2 md:hidden">
+              {SITES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (isAnimating.current || i === startIdx) return;
+                    advance(i > startIdx ? 'left' : 'right');
+                  }}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === startIdx ? accentBg : accentBgFaint}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {techSection?.tags && (
@@ -107,8 +293,8 @@ export default function HomeSummaryInterface() {
           {CERTIFICATIONS.map((cert, i) => (
             <div
               key={i}
-              onClick={() => cert.imageUrl && setSelectedCert(cert)}
-              className={`flex items-center justify-between px-4 py-3 rounded-xl border transition-opacity ${accentBorderFaint} ${cert.imageUrl ? 'cursor-pointer hover:opacity-70' : ''}`}
+              onClick={() => openCertModal(cert)}
+              className={`flex items-center justify-between px-4 py-3 rounded-xl border transition-opacity cursor-pointer hover:opacity-70 ${accentBorderFaint}`}
             >
               <div className="flex flex-col gap-0.5">
                 <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{cert.institution}</span>
@@ -118,9 +304,7 @@ export default function HomeSummaryInterface() {
                 {cert.inProgress && (
                   <span className={`text-xs px-2 py-0.5 rounded border ${accentColor} ${accentBorder} opacity-70`}>En curso</span>
                 )}
-                {cert.imageUrl && (
-                  <i className={`material-symbols-outlined text-base opacity-40 ${accentColor}`}>image_search</i>
-                )}
+                <i className={`material-symbols-outlined text-base opacity-40 ${accentColor}`}>{cert.imageUrl ? 'image_search' : 'image'}</i>
                 <span className="text-xs opacity-50">{cert.year}</span>
               </div>
             </div>
@@ -128,87 +312,13 @@ export default function HomeSummaryInterface() {
         </div>
       </div>
 
-      {previewUrl && (() => {
-        const site = SITES.find(s => s.url === previewUrl);
-        return (
-          <div
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm md:p-8"
-            onClick={() => { setPreviewUrl(null); setPreviewLoading(false); }}
-          >
-            <div
-              className={`relative w-full max-w-6xl flex flex-col overflow-hidden md:rounded-xl border ${accentBorderFaint} shadow-2xl h-[100dvh] md:h-[85vh]`}
-              onClick={e => e.stopPropagation()}
-            >
-              <div className={`flex items-center gap-3 px-4 py-3 flex-shrink-0 ${isDarkMode ? 'bg-neutral-900' : 'bg-neutral-100'}`}>
-                <div className={`flex-1 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs truncate ${isDarkMode ? 'bg-neutral-800 text-neutral-400' : 'bg-white text-neutral-500'}`}>
-                  <i className="material-symbols-outlined text-sm flex-shrink-0">lock</i>
-                  <span className="truncate">{previewUrl}</span>
-                </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  {site && <span className={`text-xs font-medium hidden md:block ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{site.label}</span>}
-                  <button
-                    onClick={() => openExternal(previewUrl)}
-                    className={`flex items-center gap-1 text-xs border px-2.5 py-1 rounded-full transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
-                  >
-                    <i className="material-symbols-outlined text-sm">open_in_new</i>
-                    Abrir
-                  </button>
-                  <button
-                    onClick={() => { setPreviewUrl(null); setPreviewLoading(false); }}
-                    className={`flex items-center justify-center w-7 h-7 rounded-full transition-opacity hover:opacity-70 ${!isDarkMode ? 'bg-cvButtonPrimary' : 'bg-cvButtonSecondary'} text-white`}
-                  >
-                    <i className="material-symbols-outlined text-sm">close</i>
-                  </button>
-                </div>
-              </div>
-
-              <div className="relative flex-1 overflow-hidden">
-                {previewLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center z-10">
-                    <div className={`w-8 h-8 border-2 border-t-transparent rounded-full animate-spin ${!isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary'}`} />
-                  </div>
-                )}
-                <iframe
-                  key={previewUrl}
-                  src={previewUrl}
-                  title="web preview"
-                  onLoad={() => setPreviewLoading(false)}
-                  className="w-full h-full"
-                  style={{ border: 'none', opacity: previewLoading ? 0 : 1, transition: 'opacity 0.3s ease' }}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      })()}
-
-      {selectedCert?.imageUrl && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-6"
-          onClick={() => setSelectedCert(null)}
-        >
-          <div
-            className={`relative max-w-2xl w-full rounded-xl overflow-hidden border ${!isDarkMode ? 'border-cvButtonPrimary/40' : 'border-cvButtonSecondary/40'}`}
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedCert(null)}
-              className={`absolute top-3 right-3 z-10 flex items-center justify-center w-8 h-8 rounded-full text-white transition-opacity hover:opacity-80 ${!isDarkMode ? 'bg-cvButtonPrimary' : 'bg-cvButtonSecondary'}`}
-            >
-              <i className="material-symbols-outlined text-sm">close</i>
-            </button>
-            <img
-              src={selectedCert.imageUrl}
-              alt={selectedCert.title}
-              className="w-full h-auto"
-            />
-            <div className={`px-5 py-4 flex flex-col gap-0.5 ${!isDarkMode ? 'bg-white' : 'bg-neutral-900'}`}>
-              <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{selectedCert.institution}</span>
-              <span className={`text-sm font-medium ${textColor}`}>{selectedCert.title} — {selectedCert.year}</span>
-            </div>
-          </div>
-        </div>
-      )}
+      <IframePreviewInterface
+        previewUrl={previewUrl}
+        previewLoading={previewLoading}
+        setPreviewLoading={setPreviewLoading}
+        closePreview={closePreview}
+        label={SITES.find(s => s.url === previewUrl)?.label}
+      />
 
     </div>
   );

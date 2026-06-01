@@ -48,8 +48,7 @@ export default function BackgroundImageInterface() {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${hidden ? 'hidden' : 'block'
-        }`}
+      className={`fixed top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${hidden ? 'hidden' : 'block'} ${!backgroundView ? 'pointer-events-none' : ''}`}
       style={{
         opacity: backgroundView ? 1 : 0,
         backgroundImage: `url(${isDarkMode ? bgImageDark : bgImagelight})`,
