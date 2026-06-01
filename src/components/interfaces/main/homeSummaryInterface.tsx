@@ -18,6 +18,7 @@ export default function HomeSummaryInterface() {
   const { navigate, openExternal } = useRoutes();
   const { modal } = useModal();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
+  const [infoUrl, setInfoUrl] = useState<string | null>(null);
   const [imgLoading, setImgLoading] = useState<Record<string, boolean>>(
     Object.fromEntries(SITES.map(s => [s.url, true]))
   );
@@ -139,9 +140,9 @@ export default function HomeSummaryInterface() {
       cert.imageUrl
         ? <img src={cert.imageUrl} alt={cert.title} className="w-full h-auto" />
         : <div className="flex flex-col items-center justify-center gap-3 py-20">
-            <i className={`material-symbols-outlined text-5xl opacity-20 ${accentColor}`}>image_search</i>
-            <span className={`text-sm opacity-40 italic ${textColor}`}>Imagen del certificado próximamente</span>
-          </div>
+          <i className={`material-symbols-outlined text-5xl opacity-20 ${accentColor}`}>image_search</i>
+          <span className={`text-sm opacity-40 italic ${textColor}`}>Imagen del certificado próximamente</span>
+        </div>
     );
   }
 
@@ -164,39 +165,55 @@ export default function HomeSummaryInterface() {
         />
         <span className="absolute bottom-3 left-0 text-sm font-semibold text-white px-3 py-1 rounded-r-full bg-black/60 backdrop-blur-sm pointer-events-none">{site.label}</span>
 
-        <div
-          className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4"
-        >
-          <TooltipInterface text="Ver preview" position="bottom">
-            <button
-              onPointerDown={e => e.stopPropagation()}
-              onClick={() => openPreview(site.url)}
-              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-            >
-              <i className="material-symbols-outlined text-xl">preview</i>
-            </button>
-          </TooltipInterface>
-          <TooltipInterface text="Info" position="bottom">
-            <button
-              onPointerDown={e => e.stopPropagation()}
-              onClick={() => modal.open(site.label, (
-                <p className={`px-6 py-8 text-sm leading-relaxed ${textColor}`}>{site.description}</p>
-              ))}
-              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-            >
-              <i className="material-symbols-outlined text-xl">info</i>
-            </button>
-          </TooltipInterface>
-          <TooltipInterface text="Visitar" position="bottom">
-            <button
-              onPointerDown={e => e.stopPropagation()}
-              onClick={() => openExternal(site.url)}
-              className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-            >
-              <i className="material-symbols-outlined text-xl">open_in_new</i>
-            </button>
-          </TooltipInterface>
-        </div>
+        {infoUrl === site.url ? (
+          <div
+            className="absolute inset-0 flex flex-col backdrop-blur-sm bg-black/80 animate-fadeIn"
+            onPointerDown={e => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-2 px-3 pt-3 pb-2 flex-shrink-0">
+              <button
+                onClick={() => setInfoUrl(null)}
+                className="flex items-center justify-center text-white/70 hover:text-white transition-colors"
+              >
+                <i className="material-symbols-outlined text-base">arrow_back</i>
+              </button>
+              <span className="text-white text-xs font-semibold uppercase tracking-wide truncate">{site.label}</span>
+            </div>
+            <p className="text-white text-sm leading-relaxed px-3 pb-3 overflow-y-auto">{site.description}</p>
+          </div>
+        ) : (
+          <div
+            className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4"
+          >
+            <TooltipInterface text="Previsualizar" position="bottom">
+              <button
+                onPointerDown={e => e.stopPropagation()}
+                onClick={() => openPreview(site.url)}
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+              >
+                <i className="material-symbols-outlined text-xl">preview</i>
+              </button>
+            </TooltipInterface>
+            <TooltipInterface text="Info" position="bottom">
+              <button
+                onPointerDown={e => e.stopPropagation()}
+                onClick={() => setInfoUrl(site.url)}
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+              >
+                <i className="material-symbols-outlined text-xl">info</i>
+              </button>
+            </TooltipInterface>
+            <TooltipInterface text="Visitar" position="bottom">
+              <button
+                onPointerDown={e => e.stopPropagation()}
+                onClick={() => openExternal(site.url)}
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+              >
+                <i className="material-symbols-outlined text-xl">open_in_new</i>
+              </button>
+            </TooltipInterface>
+          </div>
+        )}
       </div>
     );
   }
