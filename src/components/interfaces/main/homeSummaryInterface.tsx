@@ -6,7 +6,6 @@ import { ABOUT_CONTENT, CERTIFICATIONS, PROJECT_SITES } from '../../../container
 import { useModal } from '../../../containers/hooks/useModal';
 import { useIframePreview } from '../../../containers/hooks/useIframePreview';
 import IframePreviewInterface from '../iframePreviewInterface';
-import TooltipInterface from '../tooltipInterface';
 import type { CertificationItem } from '../../../containers/entities/entities';
 
 const SITES = PROJECT_SITES;
@@ -19,6 +18,7 @@ export default function HomeSummaryInterface() {
   const { modal } = useModal();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
   const [infoUrl, setInfoUrl] = useState<string | null>(null);
+  const [menuKey, setMenuKey] = useState<string | null>(null);
   const [imgLoading, setImgLoading] = useState<Record<string, boolean>>(
     Object.fromEntries(SITES.map(s => [s.url, true]))
   );
@@ -40,6 +40,13 @@ export default function HomeSummaryInterface() {
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
   }, []);
+
+  useEffect(() => {
+    if (!menuKey) return;
+    const close = () => setMenuKey(null);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [menuKey]);
 
   const visible = isDesktop ? 3 : 1;
   const totalSlots = visible + 2;
@@ -146,7 +153,7 @@ export default function HomeSummaryInterface() {
     );
   }
 
-  function renderCard(site: typeof SITES[0]) {
+  function renderCard(site: typeof SITES[0], cardKey: string) {
     return (
       <div className={`group/card relative rounded-xl border overflow-hidden h-44 ${accentBorderFaint}`}>
         {imgLoading[site.url] && (
@@ -182,37 +189,41 @@ export default function HomeSummaryInterface() {
             <p className="text-white text-sm leading-relaxed px-3 pb-3 overflow-y-auto">{site.description}</p>
           </div>
         ) : (
-          <div
-            className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4"
+          <>
+          <button
+            className="absolute top-2 right-2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-colors"
+            onPointerDown={e => e.stopPropagation()}
+            onClick={e => { e.stopPropagation(); setMenuKey(prev => prev === cardKey ? null : cardKey); }}
           >
-            <TooltipInterface text="Previsualizar" position="bottom">
-              <button
+            <i className="material-symbols-outlined text-base">more_vert</i>
+          </button>
+          {menuKey === cardKey && (
+            <div
+              className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
+            >
+              <div
+                className="flex flex-col w-40 rounded-xl overflow-hidden bg-black/80 backdrop-blur-sm border border-white/10 animate-fadeIn pointer-events-auto"
                 onPointerDown={e => e.stopPropagation()}
-                onClick={() => openPreview(site.url)}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
+                onClick={e => e.stopPropagation()}
               >
-                <i className="material-symbols-outlined text-xl">preview</i>
-              </button>
-            </TooltipInterface>
-            <TooltipInterface text="Info" position="bottom">
-              <button
-                onPointerDown={e => e.stopPropagation()}
-                onClick={() => setInfoUrl(site.url)}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-              >
-                <i className="material-symbols-outlined text-xl">info</i>
-              </button>
-            </TooltipInterface>
-            <TooltipInterface text="Visitar" position="bottom">
-              <button
-                onPointerDown={e => e.stopPropagation()}
-                onClick={() => openExternal(site.url)}
-                className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-              >
-                <i className="material-symbols-outlined text-xl">open_in_new</i>
-              </button>
-            </TooltipInterface>
-          </div>
+                {[
+                  { icon: 'preview', label: 'Previsualizar', action: () => { openPreview(site.url); setMenuKey(null); } },
+                  { icon: 'info', label: 'Info', action: () => { setInfoUrl(site.url); setMenuKey(null); } },
+                  { icon: 'open_in_new', label: 'Visitar', action: () => { openExternal(site.url); setMenuKey(null); } },
+                ].map(item => (
+                  <button
+                    key={item.icon}
+                    onClick={item.action}
+                    className={`flex items-center gap-3 px-4 py-3 text-sm cursor-pointer transition-colors text-white/70 hover:text-white ${!isDarkMode ? 'hover:bg-cvButtonPrimary/20' : 'hover:bg-cvButtonSecondary/20'}`}
+                  >
+                    <i className="material-symbols-outlined text-base flex-shrink-0">{item.icon}</i>
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          </>
         )}
       </div>
     );
@@ -235,8 +246,8 @@ export default function HomeSummaryInterface() {
 
         {!canScroll ? (
           <div className={`grid gap-4 justify-center ${SITES.length === 1 ? 'grid-cols-1 max-w-xs mx-auto w-full' : 'grid-cols-1 md:grid-cols-2 md:max-w-2xl md:mx-auto w-full'}`}>
-            {SITES.map(site => (
-              <div key={site.url}>{renderCard(site)}</div>
+            {SITES.map((site, i) => (
+              <div key={`${site.url}-${i}`}>{renderCard(site, `${i}`)}</div>
             ))}
           </div>
         ) : (
@@ -244,7 +255,7 @@ export default function HomeSummaryInterface() {
             <div className="relative flex items-center gap-2">
               <button
                 onClick={() => advance('right')}
-                className={`flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full border transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
+                className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
                 <i className="material-symbols-outlined text-sm">chevron_left</i>
               </button>
@@ -267,7 +278,7 @@ export default function HomeSummaryInterface() {
                 >
                   {innerSites.map((site, i) => (
                     <div key={`${site.url}-${i}`} style={{ width: `${100 / totalSlots}%` }} className="px-1">
-                      {renderCard(site)}
+                      {renderCard(site, `slot-${i}`)}
                     </div>
                   ))}
                 </div>
@@ -275,23 +286,32 @@ export default function HomeSummaryInterface() {
 
               <button
                 onClick={() => advance('left')}
-                className={`flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full border transition-opacity hover:opacity-70 ${accentColor} ${accentBorder}`}
+                className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
                 <i className="material-symbols-outlined text-sm">chevron_right</i>
               </button>
             </div>
 
-            <div className="flex justify-center gap-2 md:hidden">
-              {SITES.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (isAnimating.current || i === startIdx) return;
-                    advance(i > startIdx ? 'left' : 'right');
-                  }}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === startIdx ? accentBg : accentBgFaint}`}
-                />
-              ))}
+            <div className="flex flex-col items-center gap-3 md:hidden">
+              <div className="flex justify-center gap-2">
+                {SITES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      if (isAnimating.current || i === startIdx) return;
+                      advance(i > startIdx ? 'left' : 'right');
+                    }}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === startIdx ? accentBg : accentBgFaint}`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => navigate('/projects')}
+                className={`flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
+              >
+                Ver todos
+                <i className="material-symbols-outlined text-sm">arrow_forward</i>
+              </button>
             </div>
           </>
         )}

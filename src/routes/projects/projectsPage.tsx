@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useRoutes from "../../containers/hooks/useRoutes";
 import { usePortfolio } from "../../containers/states/portfolioProvider";
 import { useIframePreview } from "../../containers/hooks/useIframePreview";
 import IframePreviewInterface from "../../components/interfaces/iframePreviewInterface";
-import TooltipInterface from "../../components/interfaces/tooltipInterface";
 import { PROJECT_SITES } from "../../containers/constants/constants";
 
 const SITES = PROJECT_SITES;
@@ -18,6 +17,15 @@ export default function ProjectsPage() {
   );
 
   const [infoUrl, setInfoUrl] = useState<string | null>(null);
+  const [menuKey, setMenuKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!menuKey) return;
+    const close = () => setMenuKey(null);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [menuKey]);
+
   const isInNav = tabdataItems.some(t => t.path === '/projects');
   const accentText = isDarkMode ? 'text-cvButtonSecondary' : 'text-cvButtonPrimary';
   const accentBorder = isDarkMode ? 'border-cvButtonSecondary' : 'border-cvButtonPrimary';
@@ -37,8 +45,8 @@ export default function ProjectsPage() {
       <span className="text-base uppercase tracking-widest self-start">🌐 Mis webs</span>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {SITES.map(site => (
-          <div key={site.url} className={`group/card relative rounded-xl border overflow-hidden h-44 ${accentBorderFaint}`}>
+        {SITES.map((site, siteIdx) => (
+          <div key={`${site.url}-${siteIdx}`} className={`group/card relative rounded-xl border overflow-hidden h-44 ${accentBorderFaint}`}>
             {imgLoading[site.url] && (
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${isDarkMode ? 'border-cvButtonSecondary' : 'border-cvButtonPrimary'}`} />
@@ -69,32 +77,37 @@ export default function ProjectsPage() {
                 <p className="text-white text-sm leading-relaxed px-3 pb-3 overflow-y-auto">{site.description}</p>
               </div>
             ) : (
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4">
-                <TooltipInterface text="Previsualizar" position="bottom">
-                  <button
-                    onClick={() => openPreview(site.url)}
-                    className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-                  >
-                    <i className="material-symbols-outlined text-xl">preview</i>
-                  </button>
-                </TooltipInterface>
-                <TooltipInterface text="Info" position="bottom">
-                  <button
-                    onClick={() => setInfoUrl(site.url)}
-                    className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-                  >
-                    <i className="material-symbols-outlined text-xl">info</i>
-                  </button>
-                </TooltipInterface>
-                <TooltipInterface text="Visitar" position="bottom">
-                  <button
-                    onClick={() => openExternal(site.url)}
-                    className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/30 text-white transition-all hover:scale-110 hover:bg-white/20"
-                  >
-                    <i className="material-symbols-outlined text-xl">open_in_new</i>
-                  </button>
-                </TooltipInterface>
-              </div>
+              <>
+                <button
+                  className="absolute top-2 right-2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-colors"
+                  onClick={e => { e.stopPropagation(); setMenuKey(prev => prev === `${siteIdx}` ? null : `${siteIdx}`); }}
+                >
+                  <i className="material-symbols-outlined text-base">more_vert</i>
+                </button>
+                {menuKey === `${siteIdx}` && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                    <div
+                      className="flex flex-col w-40 rounded-xl overflow-hidden bg-black/80 backdrop-blur-sm border border-white/10 animate-fadeIn pointer-events-auto"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      {[
+                        { icon: 'preview', label: 'Previsualizar', action: () => { openPreview(site.url); setMenuKey(null); } },
+                        { icon: 'info', label: 'Info', action: () => { setInfoUrl(site.url); setMenuKey(null); } },
+                        { icon: 'open_in_new', label: 'Visitar', action: () => { openExternal(site.url); setMenuKey(null); } },
+                      ].map(item => (
+                        <button
+                          key={item.icon}
+                          onClick={item.action}
+                          className={`flex items-center gap-3 px-4 py-3 text-sm cursor-pointer transition-colors text-white/70 hover:text-white ${isDarkMode ? 'hover:bg-cvButtonSecondary/20' : 'hover:bg-cvButtonPrimary/20'}`}
+                        >
+                          <i className="material-symbols-outlined text-base flex-shrink-0">{item.icon}</i>
+                          {item.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         ))}
