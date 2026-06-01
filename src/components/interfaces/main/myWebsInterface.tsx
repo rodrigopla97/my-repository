@@ -89,7 +89,7 @@ export default function MyWebsInterface() {
                   className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-80 ${accentBg}`}
                 >
                   <i className="material-symbols-outlined text-sm">preview</i>
-                  Ver preview
+                  Previsualizar
                 </button>
               </div>
             </div>

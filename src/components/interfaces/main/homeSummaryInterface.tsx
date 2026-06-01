@@ -319,7 +319,10 @@ export default function HomeSummaryInterface() {
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 {cert.inProgress && (
-                  <span className={`text-xs px-2 py-0.5 rounded border ${accentColor} ${accentBorder} opacity-70`}>En curso</span>
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <span className="block w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
+                    <span className={`text-xs font-bold ${textColor}`}>En curso</span>
+                  </div>
                 )}
                 <i className={`material-symbols-outlined text-base opacity-40 ${accentColor}`}>{cert.imageUrl ? 'image_search' : 'image'}</i>
                 <span className="text-xs opacity-50">{cert.year}</span>
