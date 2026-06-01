@@ -1,4 +1,10 @@
 import { ReactNode, Dispatch, SetStateAction } from "react";
+
+export type ModalDataType = {
+  open: boolean;
+  title?: string;
+  content?: ReactNode | null;
+};
 import type { TechnologyKey } from '../../icons/iconMap';
 
 export interface JobRole {
@@ -11,6 +17,12 @@ export interface JobRole {
 export interface JobExperience {
   company: string;
   roles: JobRole[];
+}
+
+export interface ProjectSiteItem {
+  label: string;
+  description: string;
+  url: string;
 }
 
 export interface CertificationItem {
@@ -45,6 +57,7 @@ export type PortfolioStateType = {
   tabdataItems: ActionsTabdataItem[];
   jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;
+  modal: ModalDataType;
 };
 
 export type PortfolioContextType = {

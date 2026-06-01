@@ -1,4 +1,17 @@
-import { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem } from '../entities/entities';
+import { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem, ProjectSiteItem } from '../entities/entities';
+
+export const PROJECT_SITES: ProjectSiteItem[] = [
+  {
+    label: 'Proyecto Final Coder',
+    description: 'Página realizada para el curso de Coder House. Con detalles a mejorar para seguir mostrando lo que voy aprendiendo.',
+    url: 'https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/',
+  },
+  {
+    label: 'Pixel Pancheria',
+    description: 'Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.',
+    url: 'https://pixelpancheria.netlify.app/',
+  }
+];
 
 export const CERTIFICATIONS: CertificationItem[] = [
   { institution: "UTN", title: "Tecnicatura Universitaria en Programación", year: "2023", inProgress: true },
@@ -162,6 +175,7 @@ export const INITIAL_STATE = {
     aboutSections: {
       loading: true,
       data: null,
-    }
+    },
+    modal: { open: false },
   },
 };
