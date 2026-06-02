@@ -19,6 +19,8 @@
 
 #root {
   border-left: 0.2rem solid var(--scrollbar-track-color);
+  overflow-x: hidden;
+  max-width: 100%;
 }
 @keyframes typing {
   from { width: 0; }
