@@ -1,9 +1,23 @@
 import { ReactNode, Dispatch, SetStateAction } from "react";
 
+export type NotificationType = 'success' | 'info' | 'error';
+
+export type NotificationDataType = {
+  open: boolean;
+  message: string;
+  type: NotificationType;
+};
+
+export type ModalFooterActionsType = {
+  extraButtons?: ReactNode;
+  closeText?: string;
+};
+
 export type ModalDataType = {
   open: boolean;
   title?: string;
   content?: ReactNode | null;
+  footerActions?: ModalFooterActionsType | null;
 };
 import type { TechnologyKey } from '../../icons/iconMap';
 
@@ -58,6 +72,8 @@ export type PortfolioStateType = {
   jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;
   modal: ModalDataType;
+  notification: NotificationDataType;
+  contactFormValid: boolean;
 };
 
 export type PortfolioContextType = {

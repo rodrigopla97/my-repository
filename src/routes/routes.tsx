@@ -5,6 +5,7 @@ import RouteContent from '../components/interfaces/routeContentInterface';
 import FooterCVInterface from '../components/interfaces/footerCVInterface';
 import FooterInterface from '../components/interfaces/footerInterface';
 import ModalInterface from '../components/interfaces/modalInterface';
+import NotificationInterface from '../components/interfaces/notificationInterface';
 
 export default function RoutesProvider() {
   return (
@@ -15,6 +16,7 @@ export default function RoutesProvider() {
         <FooterInterface />
         <FooterCVInterface />
         <ModalInterface />
+        <NotificationInterface />
       </BrowserRouter>
     </PortfolioProvider>
   );

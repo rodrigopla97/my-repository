@@ -152,12 +152,12 @@ export const PROFILE = {
   formEndpoint: "https://formsubmit.co/ajax/rodrigoplaceres19@gmail.com",
 };
 
-export const TAB_DATA_ITEMS: ActionsTabdataItem[] = [
+export const BASE_TABS: ActionsTabdataItem[] = [
   { path: '/', name: 'Inicio', icon: 'home' },
   { path: '/about', name: 'Sobre mí', icon: 'description' },
-  { path: '/contact', name: 'Contacto', icon: 'contact_phone' },
-  { path: '/prueba', name: 'prueba', icon: 'contact_phone' },
 ];
+
+export const TAB_DATA_ITEMS = BASE_TABS;
 
 export const INITIAL_STATE = {
   PORTFOLIO: {
@@ -170,12 +170,14 @@ export const INITIAL_STATE = {
     indexCarrousel: 0,
     experienceSelectedContex: 0,
     tabsLoading: true,
-    tabdataItems: TAB_DATA_ITEMS,
+    tabdataItems: BASE_TABS,
     jobExperiencesContext: JOB_EXPERIENCES,
     aboutSections: {
       loading: true,
       data: null,
     },
     modal: { open: false },
+    notification: { open: false, message: '', type: 'info' as const },
+    contactFormValid: false,
   },
 };

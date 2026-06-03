@@ -6,7 +6,7 @@ export default function ModalInterface() {
   const { modalState, modal } = useModal();
   const { getPortfolioState } = usePortfolio();
   const { isDarkMode, textColor, bgColor } = getPortfolioState;
-  const { open, title, content } = modalState;
+  const { open, title, content, footerActions } = modalState;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -40,6 +40,18 @@ export default function ModalInterface() {
         <div className="flex-1 overflow-y-auto">
           {content}
         </div>
+
+        {footerActions && (
+          <div className={`flex items-center justify-end gap-3 px-5 py-4 border-t ${isDarkMode ? 'border-white/10' : 'border-black/10'}`}>
+            <button
+              onClick={modal.close}
+              className={`px-4 py-2 text-xs uppercase tracking-widest border rounded-full transition-opacity hover:opacity-70 ${textColor} ${isDarkMode ? 'border-white/20' : 'border-black/20'}`}
+            >
+              {footerActions.closeText ?? 'Cerrar'}
+            </button>
+            {footerActions.extraButtons}
+          </div>
+        )}
       </div>
     </div>
   );

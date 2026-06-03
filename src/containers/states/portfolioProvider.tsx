@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { PortfolioContext } from './portfolioContext';
 import { PortfolioContextType, PortfolioStateType, ProviderProps } from '../entities/entities';
-import { INITIAL_STATE, TAB_DATA_ITEMS } from '../constants/constants';
+import { INITIAL_STATE, BASE_TABS } from '../constants/constants';
 import { getTabs } from '../../services/tabsService';
 
 export default function PortfolioProvider({ children }: ProviderProps) {
@@ -17,10 +17,14 @@ export default function PortfolioProvider({ children }: ProviderProps) {
   async function getTabsData() {
     try {
       const res = await getTabs();
-      const sorted = [...res.data].sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
-      setPortfolioState(state => ({ ...state, tabsLoading: false, tabdataItems: sorted }));
+      const apiTabs = [...res.data].sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
+      const merged = [
+        ...BASE_TABS,
+        ...apiTabs.filter(t => !BASE_TABS.some(b => b.path === t.path)),
+      ];
+      setPortfolioState(state => ({ ...state, tabsLoading: false, tabdataItems: merged }));
     } catch {
-      setPortfolioState(state => ({ ...state, tabsLoading: false, tabdataItems: TAB_DATA_ITEMS }));
+      setPortfolioState(state => ({ ...state, tabsLoading: false, tabdataItems: BASE_TABS }));
     }
   }
 
