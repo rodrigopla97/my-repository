@@ -18,7 +18,7 @@ export default function TooltipInterface({ text, children, position = 'right' }:
   return (
     <div className="relative group/tooltip inline-flex">
       {children}
-      <span className={`absolute z-50 ${positionClass} px-2 py-1 text-xs rounded whitespace-nowrap pointer-events-none opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 bg-neutral-800 text-neutral-200 border border-neutral-700`}>
+      <span className={`hidden md:block absolute z-50 ${positionClass} px-2 py-1 text-xs rounded whitespace-nowrap pointer-events-none opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 bg-neutral-800 text-neutral-200 border border-neutral-700`}>
         {text}
       </span>
     </div>

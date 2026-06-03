@@ -18,8 +18,7 @@ function ContactSubmitButton() {
       disabled={!contactFormValid}
       className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${contactFormValid ? 'hover:scale-105 active:scale-95' : 'opacity-30 cursor-not-allowed'} ${isDarkMode ? 'text-cvButtonSecondary border-cvButtonSecondary' : 'text-cvButtonPrimary border-cvButtonPrimary'}`}
     >
-      <span className={contactFormValid ? 'group-hover:underline underline-offset-2' : ''}>Enviar</span>
-      <span className={`transition-transform duration-200 ${contactFormValid ? 'group-hover:translate-x-1' : ''}`}>→</span>
+      Enviar
     </button>
   );
 }
@@ -51,9 +50,9 @@ export default function FooterInterface() {
   }
 
   return (
-    <div className={`flex flex-col w-screen h-screen md:h-auto md:border-t ${textColor} justify-center font-semibold overflow-visible py-[10vh] md:py-[5vh] px-[5vh] md:px-8 bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
+    <div className={`flex flex-col w-screen h-screen md:h-auto md:border-t ${textColor} md:justify-center font-semibold overflow-visible py-[10vh] md:py-[5vh] px-[5vh] md:px-8 bg-opacity-20 gap-10 ${isDarkMode ? "bg-black md:border-black" : "bg-white md:border-white"}`}>
 
-      <div className="flex flex-col md:flex-row justify-center md:justify-normal gap-10">
+      <div className="flex flex-col md:flex-row justify-center md:justify-normal gap-5 md:gap-10">
         <div className='flex md:flex-col w-full md:w-1/4 items-center justify-between'>
           <div>
             <h2 className='font-bold text-xl'>{PROFILE.name}</h2>
@@ -72,7 +71,7 @@ export default function FooterInterface() {
                 return (
                   <span
                     key={index}
-                    className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition ${isActive
+                    className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none ${isActive
                       ? `${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
                       : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
                       }`}
@@ -95,19 +94,22 @@ export default function FooterInterface() {
           <div className='flex flex-col md:flex-row gap-8 normal-case font-normal'>
             <div className='flex flex-col gap-1 md:w-1/2 justify-between'>
               <TooltipInterface text={copySuccess ? '¡Copiado!' : 'Copiar al portapapeles'} position="bottom">
-                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={handleCopyEmail}>
+                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={handleCopyEmail}>
                   <i className={`material-symbols-outlined text-sm flex-shrink-0 ${accentColor}`}>mail</i>
                   {PROFILE.email}
+                  <i className={`material-symbols-outlined text-sm flex-shrink-0 transition-colors ${copySuccess ? 'text-green-500' : 'opacity-40'}`}>
+                    {copySuccess ? 'check' : 'content_copy'}
+                  </i>
                 </span>
               </TooltipInterface>
               <TooltipInterface text="Ir a GitHub" position="bottom">
-                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.github.url)}>
+                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.github.url)}>
                   <i className={`material-symbols-outlined text-sm flex-shrink-0 ${accentColor}`}>code</i>
                   {PROFILE.github.label}
                 </span>
               </TooltipInterface>
               <TooltipInterface text="Ir a LinkedIn" position="bottom">
-                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.linkedin.url)}>
+                <span className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`} onClick={() => openExternal(PROFILE.linkedin.url)}>
                   <i className={`material-symbols-outlined text-sm flex-shrink-0 ${accentColor}`}>work</i>
                   {PROFILE.linkedin.label}
                 </span>

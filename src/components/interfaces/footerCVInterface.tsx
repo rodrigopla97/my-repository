@@ -9,6 +9,16 @@ export default function FooterCVInterface() {
   const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
 
   const modalRef = useRef<HTMLDivElement>(null);
+  const [nearBottom, setNearBottom] = React.useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 80;
+      setNearBottom(atBottom);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     setCurriculumOpen(false);
@@ -39,7 +49,7 @@ export default function FooterCVInterface() {
   return (
     <React.Fragment>
       {!isMenuOpen && (
-        <div className="fixed bottom-8 right-8 z-50">
+        <div className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${nearBottom ? 'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto' : 'opacity-100'}`}>
           <div className="relative" ref={modalRef}>
             <button
               onClick={() => setCurriculumOpen(!isCurriculumOpen)}

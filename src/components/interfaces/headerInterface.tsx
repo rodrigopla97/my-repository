@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 export default function HeaderInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolio();
   const { isDarkMode, bgColor, textColor } = getPortfolioState;
-
   return (
     <div className={`max-h-[10vh] flex justify-between items-center pr-4 md:pl-4 fixed w-full ${textColor} z-20 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />

@@ -140,6 +140,13 @@ body {
   background-position: center;
   position: relative;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 @media (max-width: 1024px) {
