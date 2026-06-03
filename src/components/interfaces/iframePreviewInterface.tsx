@@ -1,5 +1,6 @@
 import { usePortfolio } from '../../containers/states/portfolioProvider';
 import useRoutes from '../../containers/hooks/useRoutes';
+import SpinnerInterface from './spinnerInterface';
 
 interface IframePreviewProps {
   previewUrl: string | null;
@@ -21,7 +22,7 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
   if (!previewUrl) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col">
+    <div className="fixed inset-0 z-40 flex flex-col">
       <div
         className={`relative w-full flex flex-col overflow-hidden flex-1`}
         onClick={e => e.stopPropagation()}
@@ -51,8 +52,9 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
 
         <div className="relative flex-1 overflow-hidden">
           {previewLoading && (
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <div className={`w-8 h-8 border-2 border-t-transparent rounded-full animate-spin ${!isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary'}`} />
+            <div className={`absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 ${isDarkMode ? 'bg-neutral-950' : 'bg-neutral-100'}`}>
+              <SpinnerInterface size={48} borderWidth={4} />
+              <span className={`text-xs uppercase tracking-widest opacity-50 ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>Cargando...</span>
             </div>
           )}
           <iframe

@@ -82,7 +82,7 @@ export default function ContactMeInterface() {
           <span className="text-red-600 text-xs h-4 block">{errors.email}</span>
         </div>
         <div className="relative">
-          <textarea name="message" placeholder=" " rows={3} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none`} />
+          <textarea name="message" placeholder=" " rows={6} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none`} />
           <label className={labelFloat}>Mensaje <span className="text-red-500">*</span></label>
         </div>
         <div className="flex justify-center">

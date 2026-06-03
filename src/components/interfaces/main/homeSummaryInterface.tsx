@@ -6,6 +6,7 @@ import { ABOUT_CONTENT, CERTIFICATIONS, PROJECT_SITES } from '../../../container
 import { useModal } from '../../../containers/hooks/useModal';
 import { useIframePreview } from '../../../containers/hooks/useIframePreview';
 import IframePreviewInterface from '../iframePreviewInterface';
+import ProjectCardInterface from './projectCardInterface';
 import type { CertificationItem } from '../../../containers/entities/entities';
 
 const SITES = PROJECT_SITES;
@@ -14,7 +15,7 @@ const techSection = ABOUT_CONTENT.sections.find(s => s.tags);
 export default function HomeSummaryInterface() {
   const { getPortfolioState } = usePortfolio();
   const { textColor, isDarkMode } = getPortfolioState;
-  const { navigate, openExternal } = useRoutes();
+  const { navigate } = useRoutes();
   const { modal } = useModal();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
   const [infoUrl, setInfoUrl] = useState<string | null>(null);
@@ -155,77 +156,18 @@ export default function HomeSummaryInterface() {
 
   function renderCard(site: typeof SITES[0], cardKey: string) {
     return (
-      <div className={`group/card relative rounded-xl border overflow-hidden h-44 ${accentBorderFaint}`}>
-        {imgLoading[site.url] && (
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${!isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary'}`} />
-          </div>
-        )}
-        <img
-          src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(site.url)}?w=600&h=400`}
-          alt={site.label}
-          className="w-full h-full object-cover object-top"
-          style={{ opacity: imgLoading[site.url] ? 0 : 1, transition: 'opacity 0.3s ease' }}
-          draggable={false}
-          onLoad={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
-          onError={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
-        />
-        <span className="absolute bottom-3 left-0 text-sm font-semibold text-white px-3 py-1 rounded-r-full bg-black/60 backdrop-blur-sm pointer-events-none">{site.label}</span>
-
-        {infoUrl === site.url ? (
-          <div
-            className="absolute inset-0 flex flex-col backdrop-blur-sm bg-black/80 animate-fadeIn"
-            onPointerDown={e => e.stopPropagation()}
-          >
-            <div className="flex items-center gap-2 px-3 pt-3 pb-2 flex-shrink-0">
-              <button
-                onClick={() => setInfoUrl(null)}
-                className="flex items-center justify-center text-white/70 hover:text-white transition-colors"
-              >
-                <i className="material-symbols-outlined text-base">arrow_back</i>
-              </button>
-              <span className="text-white text-xs font-semibold uppercase tracking-wide truncate">{site.label}</span>
-            </div>
-            <p className="text-white text-sm leading-relaxed px-3 pb-3 overflow-y-auto">{site.description}</p>
-          </div>
-        ) : (
-          <>
-          <button
-            className="absolute top-2 right-2 z-20 flex items-center justify-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 transition-colors"
-            onPointerDown={e => e.stopPropagation()}
-            onClick={e => { e.stopPropagation(); setMenuKey(prev => prev === cardKey ? null : cardKey); }}
-          >
-            <i className="material-symbols-outlined text-base">more_vert</i>
-          </button>
-          {menuKey === cardKey && (
-            <div
-              className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
-            >
-              <div
-                className="flex flex-col w-40 rounded-xl overflow-hidden bg-black/80 backdrop-blur-sm border border-white/10 animate-fadeIn pointer-events-auto"
-                onPointerDown={e => e.stopPropagation()}
-                onClick={e => e.stopPropagation()}
-              >
-                {[
-                  { icon: 'preview', label: 'Previsualizar', action: () => { openPreview(site.url); setMenuKey(null); } },
-                  { icon: 'info', label: 'Info', action: () => { setInfoUrl(site.url); setMenuKey(null); } },
-                  { icon: 'open_in_new', label: 'Visitar', action: () => { openExternal(site.url); setMenuKey(null); } },
-                ].map(item => (
-                  <button
-                    key={item.icon}
-                    onClick={item.action}
-                    className={`flex items-center gap-3 px-4 py-3 text-sm cursor-pointer transition-colors text-white/70 hover:text-white ${!isDarkMode ? 'hover:bg-cvButtonPrimary/20' : 'hover:bg-cvButtonSecondary/20'}`}
-                  >
-                    <i className="material-symbols-outlined text-base flex-shrink-0">{item.icon}</i>
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          </>
-        )}
-      </div>
+      <ProjectCardInterface
+        site={site}
+        cardKey={cardKey}
+        imgLoading={imgLoading[site.url]}
+        onImgLoad={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
+        onImgError={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
+        infoUrl={infoUrl}
+        setInfoUrl={setInfoUrl}
+        menuKey={menuKey}
+        setMenuKey={setMenuKey}
+        onPreview={openPreview}
+      />
     );
   }
 
@@ -240,7 +182,7 @@ export default function HomeSummaryInterface() {
             className={`hidden md:flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
           >
             Ver todos
-            <i className="material-symbols-outlined text-sm">arrow_forward</i>
+            <i className="material-symbols-outlined text-xl">chevron_right</i>
           </button>
         </div>
 
@@ -257,7 +199,7 @@ export default function HomeSummaryInterface() {
                 onClick={() => advance('right')}
                 className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
-                <i className="material-symbols-outlined text-sm">chevron_left</i>
+                <i className="material-symbols-outlined text-xl">chevron_left</i>
               </button>
 
               <div
@@ -288,7 +230,7 @@ export default function HomeSummaryInterface() {
                 onClick={() => advance('left')}
                 className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
-                <i className="material-symbols-outlined text-sm">chevron_right</i>
+                <i className="material-symbols-outlined text-xl">chevron_right</i>
               </button>
             </div>
 
@@ -310,7 +252,7 @@ export default function HomeSummaryInterface() {
                 className={`flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
               >
                 Ver todos
-                <i className="material-symbols-outlined text-sm">arrow_forward</i>
+                <i className="material-symbols-outlined text-xl">chevron_right</i>
               </button>
             </div>
           </>
@@ -335,15 +277,17 @@ export default function HomeSummaryInterface() {
             >
               <div className="flex flex-col gap-0.5">
                 <span className={`text-xs uppercase tracking-widest ${accentColor}`}>{cert.institution}</span>
-                <span className="text-sm font-medium">{cert.title}</span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm font-medium">{cert.title}</span>
+                  {cert.inProgress && (
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      <span className="block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
+                      <span className="text-xs opacity-50">En curso</span>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
-                {cert.inProgress && (
-                  <div className="flex items-center gap-1.5 flex-shrink-0">
-                    <span className="block w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
-                    <span className={`text-xs font-bold ${textColor}`}>En curso</span>
-                  </div>
-                )}
                 <i className={`material-symbols-outlined text-base opacity-40 ${accentColor}`}>{cert.imageUrl ? 'image_search' : 'image'}</i>
                 <span className="text-xs opacity-50">{cert.year}</span>
               </div>

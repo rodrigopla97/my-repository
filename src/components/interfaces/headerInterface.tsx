@@ -10,7 +10,7 @@ export default function HeaderInterface() {
   const { isDarkMode, bgColor, textColor } = getPortfolioState;
   const { pathname } = useLocation();
   return (
-    <div className={`max-h-[10vh] flex justify-between items-center pr-4 md:pl-4 fixed w-full ${textColor} z-20 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
+    <div className={`max-h-[10vh] flex justify-between items-center pr-4 md:pl-4 fixed w-full ${textColor} z-30 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />
       <div className="flex items-center justify-center w-20 h-[10vh]">
         <Link to="/" onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}>

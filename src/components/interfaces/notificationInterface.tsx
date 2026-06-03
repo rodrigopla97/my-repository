@@ -59,7 +59,7 @@ export default function NotificationInterface() {
   if (!open) return null;
 
   return (
-    <div className="fixed top-[3vh] right-8 z-[300] animate-fadeIn">
+    <div className="fixed top-[3vh] right-8 z-50 animate-fadeIn">
       <div className={`flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 bg-neutral-900 shadow-xl min-w-64 max-w-xs ${borderStyles[type]}`}>
         <NotifIcon type={type} />
         <p className="text-sm flex-1 text-neutral-200">{message}</p>
