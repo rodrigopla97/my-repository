@@ -58,7 +58,7 @@ export default function FooterInterface() {
             <h2 className='font-bold text-xl'>{PROFILE.name}</h2>
             <span className='font-light'>{PROFILE.role}</span>
           </div>
-          <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh] cursor-pointer' onClick={() => navigate("/")} />
+          <img src={isDarkMode ? darkLogo : lightLogo} alt="bye" className='max-h-[16vh] cursor-pointer' onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); else navigate('/'); }} />
         </div>
 
         <div className='flex flex-col md:w-1/4 items-center uppercase self-stretch'>
@@ -75,7 +75,7 @@ export default function FooterInterface() {
                       ? `${!isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary"}`
                       : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
                       }`}
-                    onClick={() => navigate(tab.path)}
+                    onClick={() => { if (pathname === tab.path) window.scrollTo({ top: 0, behavior: 'smooth' }); else navigate(tab.path); }}
                   >
                     <i className={`material-symbols-outlined text-sm ${accentColor}`}>{tab.icon}</i>
                     {tab.name}

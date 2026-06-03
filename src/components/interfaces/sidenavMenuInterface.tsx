@@ -15,7 +15,8 @@ export function SidenavMenuInterface() {
 
   function handleNavigate(path: string) {
     setMenuOpen(false);
-    if (pathname !== path) navigate(path);
+    if (pathname === path) window.scrollTo({ top: 0, behavior: 'smooth' });
+    else navigate(path);
   }
 
   return (
