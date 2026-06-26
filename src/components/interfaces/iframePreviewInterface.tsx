@@ -22,7 +22,7 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
   if (!previewUrl) return null;
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col">
+    <div className="fixed inset-0 z-[60] flex flex-col">
       <div
         className={`relative w-full flex flex-col overflow-hidden flex-1`}
         onClick={e => e.stopPropagation()}
