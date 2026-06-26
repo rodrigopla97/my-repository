@@ -1,4 +1,4 @@
-import { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem, ProjectSiteItem } from '../entities/entities';
+import { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem, ProjectSiteItem, TechnologyItem } from '../entities/entities';
 
 export const PROJECT_SITES: ProjectSiteItem[] = [
   {
@@ -128,25 +128,20 @@ export const ABOUT_CONTENT: AboutContentType = {
         "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo.",
       ],
     },
-    {
-      title: "🛠️ Tecnologías",
-      items: [],
-      tags: {
-        items: [
-          { key: "html", label: "HTML" },
-          { key: "css", label: "CSS" },
-          { key: "javascript", label: "JavaScript" },
-          { key: "angular", label: "Angular" },
-          { key: "react", label: "React" },
-          { key: "typescript", label: "Typescript" },
-          { key: "tailwind", label: "Tailwind" },
-          { key: "git", label: "GIT" },
-          { key: "mongodb", label: "MongoDB" },
-        ],
-      },
-    },
   ],
 };
+
+export const TECH_TAGS: TechnologyItem[] = [
+  { key: "html", label: "HTML" },
+  { key: "css", label: "CSS" },
+  { key: "javascript", label: "JavaScript" },
+  { key: "angular", label: "Angular" },
+  { key: "react", label: "React" },
+  { key: "typescript", label: "Typescript" },
+  { key: "tailwind", label: "Tailwind" },
+  { key: "git", label: "GIT" },
+  { key: "mongodb", label: "MongoDB" },
+];
 
 export const PROFILE = {
   name: "Rodrigo Placeres",

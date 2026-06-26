@@ -14,25 +14,11 @@ export default function AboutPage() {
         setPortfolioState(state => ({ ...state, aboutSections: { ...state.aboutSections, loading: true } }));
         try {
             const res = await getAboutContent();
-            const hasTechnologies = res.data.sections.some(s => s.tags);
-            setPortfolioState(state => ({
-                ...state,
-                aboutSections: {
-                    loading: false,
-                    data: {
-                        ...res.data,
-                        sections: hasTechnologies
-                            ? res.data.sections
-                            : [...res.data.sections, ...ABOUT_CONTENT.sections.filter(s => s.tags)],
-                    },
-                },
-            }));
+            setPortfolioState(state => ({ ...state, aboutSections: { loading: false, data: res.data } }));
         } catch (err) {
             console.error(err);
-            setPortfolioState(state => ({
-                ...state,
-                aboutSections: { loading: false, data: ABOUT_CONTENT },
-            }));
+            const fallback = { ...ABOUT_CONTENT, sections: ABOUT_CONTENT.sections.filter(s => !s.tags) };
+            setPortfolioState(state => ({ ...state, aboutSections: { loading: false, data: fallback } }));
         }
     }
 
