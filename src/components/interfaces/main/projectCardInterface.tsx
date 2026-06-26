@@ -29,7 +29,7 @@ export default function ProjectCardInterface({
 
   return (
     <div
-      className={`group/card relative rounded-xl border overflow-hidden h-44 cursor-pointer ${accentBorderFaint}`}
+      className={`group/card relative rounded-xl border overflow-hidden h-44 md:h-56 cursor-pointer ${accentBorderFaint}`}
       onPointerDown={onPointerDownCapture}
       onClick={e => { if (!isInfoOpen && !isMenuOpen) { e.stopPropagation(); setInfoUrl(null); setMenuKey(cardKey); } }}
     >

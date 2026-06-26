@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { usePortfolio } from '../../../containers/states/portfolioProvider';
 import useRoutes from '../../../containers/hooks/useRoutes';
 import FooterAllIcons from '../footerAllIconsInterface';
-import { ABOUT_CONTENT, CERTIFICATIONS, PROJECT_SITES } from '../../../containers/constants/constants';
+import { CERTIFICATIONS, PROJECT_SITES, TECH_TAGS } from '../../../containers/constants/constants';
 import { useModal } from '../../../containers/hooks/useModal';
 import { useIframePreview } from '../../../containers/hooks/useIframePreview';
 import IframePreviewInterface from '../iframePreviewInterface';
@@ -10,7 +10,6 @@ import ProjectCardInterface from './projectCardInterface';
 import type { CertificationItem } from '../../../containers/entities/entities';
 
 const SITES = PROJECT_SITES;
-const techSection = ABOUT_CONTENT.sections.find(s => s.tags);
 
 export default function HomeSummaryInterface() {
   const { getPortfolioState } = usePortfolio();
@@ -24,6 +23,7 @@ export default function HomeSummaryInterface() {
     Object.fromEntries(SITES.map(s => [s.url, true]))
   );
   const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 768);
+  const [isIconsPaused, setIsIconsPaused] = useState(false);
   const [startIdx, setStartIdx] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [withTransition, setWithTransition] = useState(false);
@@ -210,7 +210,7 @@ export default function HomeSummaryInterface() {
             <div className="relative flex items-center gap-2">
               <button
                 onClick={() => advance('right')}
-                className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
+                className={`flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
                 <i className="material-symbols-outlined text-xl">chevron_left</i>
               </button>
@@ -241,13 +241,13 @@ export default function HomeSummaryInterface() {
 
               <button
                 onClick={() => advance('left')}
-                className={`hidden md:flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
+                className={`flex flex-shrink-0 items-center justify-center w-9 h-9 rounded-full border backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:opacity-90 opacity-50 ${accentColor} ${accentBorder} ${!isDarkMode ? 'bg-cvButtonPrimary/10' : 'bg-cvButtonSecondary/10'}`}
               >
                 <i className="material-symbols-outlined text-xl">chevron_right</i>
               </button>
             </div>
 
-            <div className="flex flex-col items-center gap-3 md:hidden">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex justify-center gap-2">
                 {SITES.map((_, i) => (
                   <button
@@ -262,7 +262,7 @@ export default function HomeSummaryInterface() {
               </div>
               <button
                 onClick={() => navigate('/projects')}
-                className={`flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
+                className={`flex md:hidden items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
               >
                 Ver todos
                 <i className="material-symbols-outlined text-xl">chevron_right</i>
@@ -272,12 +272,21 @@ export default function HomeSummaryInterface() {
         )}
       </div>
 
-      {techSection?.tags && (
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2">
           <span className="text-base uppercase tracking-widest">🛠️ Tecnologías</span>
-          <FooterAllIcons isPaused={false} items={techSection.tags.items} />
+          {TECH_TAGS.length > (isDesktop ? 5 : 3) && (
+            <button
+              onClick={() => setIsIconsPaused(p => !p)}
+              className={`transition-opacity duration-200 opacity-30 hover:opacity-80 ${textColor}`}
+              title={isIconsPaused ? "Reanudar" : "Pausar"}
+            >
+              <i className="material-symbols-outlined text-base">{isIconsPaused ? "play_arrow" : "pause"}</i>
+            </button>
+          )}
         </div>
-      )}
+        <FooterAllIcons isPaused={isIconsPaused} items={TECH_TAGS} />
+      </div>
 
       <div className="flex flex-col gap-4">
         <span className="text-base uppercase tracking-widest">🎓 Certificaciones</span>
