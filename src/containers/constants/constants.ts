@@ -10,6 +10,11 @@ export const PROJECT_SITES: ProjectSiteItem[] = [
     label: 'Pixel Pancheria',
     description: 'Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.',
     url: 'https://pixelpancheria.netlify.app/',
+  },
+  {
+    label: 'Circo Caeli',
+    description: 'Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.',
+    url: 'https://circocaeli.ar/',
   }
 ];
 

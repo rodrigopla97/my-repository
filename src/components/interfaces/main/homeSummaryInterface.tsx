@@ -43,6 +43,16 @@ export default function HomeSummaryInterface() {
   }, []);
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    function handleTouchEnd(e: TouchEvent) {
+      if (hasDragged.current) e.preventDefault();
+    }
+    el.addEventListener('touchend', handleTouchEnd, { passive: false });
+    return () => el.removeEventListener('touchend', handleTouchEnd);
+  }, []);
+
+  useEffect(() => {
     if (!menuKey) return;
     const close = () => setMenuKey(null);
     document.addEventListener('click', close);
@@ -104,6 +114,8 @@ export default function HomeSummaryInterface() {
     if (!hasDragged.current && Math.abs(delta) > 8) {
       hasDragged.current = true;
       e.currentTarget.setPointerCapture(pointerIdRef.current);
+      setMenuKey(null);
+      setInfoUrl(null);
     }
     dragAccumRef.current += delta;
     dragStartX.current = e.clientX;
@@ -117,9 +129,10 @@ export default function HomeSummaryInterface() {
     setDragX(dragAccumRef.current);
   }
 
-  function onPointerUp(_e: React.PointerEvent) {
+  function onPointerUp(e: React.PointerEvent) {
     if (!isDragging.current) return;
     isDragging.current = false;
+    if (hasDragged.current) e.preventDefault();
     const accum = dragAccumRef.current;
     const slotWidth = (containerRef.current?.offsetWidth ?? 300) / visible;
     dragAccumRef.current = 0;
@@ -187,7 +200,7 @@ export default function HomeSummaryInterface() {
         </div>
 
         {!canScroll ? (
-          <div className={`grid gap-4 justify-center ${SITES.length === 1 ? 'grid-cols-1 max-w-xs mx-auto w-full' : 'grid-cols-1 md:grid-cols-2 md:max-w-2xl md:mx-auto w-full'}`}>
+          <div className={`grid gap-4 justify-center ${SITES.length === 1 ? 'grid-cols-1 max-w-xs mx-auto w-full' : SITES.length === 3 ? 'grid-cols-1 md:grid-cols-3 w-full' : 'grid-cols-1 md:grid-cols-2 md:max-w-2xl md:mx-auto w-full'}`}>
             {SITES.map((site, i) => (
               <div key={`${site.url}-${i}`}>{renderCard(site, `${i}`)}</div>
             ))}
