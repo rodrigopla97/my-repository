@@ -4,13 +4,14 @@ import lightLogo from '../../images/black-logo.png';
 import darkLogo from '../../images/gray-logo.png';
 import { usePortfolio } from '../../containers/states/portfolioProvider';
 import { Link, useLocation } from 'react-router-dom';
+import TooltipInterface from './tooltipInterface';
 
 export default function HeaderInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolio();
   const { isDarkMode, bgColor, textColor } = getPortfolioState;
   const { pathname } = useLocation();
   return (
-    <div className={`max-h-[10vh] flex justify-between items-center pr-4 md:pl-4 fixed w-full ${textColor} z-30 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
+    <div className={`max-h-[10vh] flex justify-between items-center pr-6 md:pl-4 fixed w-full ${textColor} z-30 ${bgColor} md:backdrop-blur-md md:bg-opacity-60`}>
       <SidenavMenuInterface />
       <div className="flex items-center justify-center w-20 h-[10vh]">
         <Link to="/" onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
@@ -18,7 +19,17 @@ export default function HeaderInterface() {
         </Link>
       </div>
       <HeaderMenuInterface />
-      <div className="flex items-center justify-center w-20 h-[10vh]">
+      <div className="flex items-center justify-center gap-2 h-[10vh]">
+        {pathname === '/about' && (
+          <TooltipInterface text="Sincronizar contenido" position="bottom">
+            <button
+              onClick={() => setPortfolioState(state => ({ ...state, aboutSections: { loading: false, data: null } }))}
+              className={`flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 ${isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary"}`}
+            >
+              <i className="material-symbols-outlined text-lg">sync</i>
+            </button>
+          </TooltipInterface>
+        )}
         <button
           onClick={() => setPortfolioState(state => ({ ...state, isDarkMode: !state.isDarkMode }))}
           className={`relative flex items-center justify-between rounded-full p-1 border transition-all duration-300 hover:scale-105 active:scale-95 w-14 h-7 ${isDarkMode ? "border-cvButtonSecondary/40 bg-cvButtonSecondary/10" : "border-cvButtonPrimary/30 bg-cvButtonPrimary/10"}`}

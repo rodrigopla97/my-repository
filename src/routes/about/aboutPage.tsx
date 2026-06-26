@@ -36,12 +36,7 @@ export default function AboutPage() {
         }
     }
 
-    function onInitAboutPage() {
-        fetchAbout();
-    }
-
-    useEffect(onInitAboutPage, []);
-
+    useEffect(() => { if (!aboutSections.data) fetchAbout(); }, [aboutSections.data]);
 
     return (
         <>{aboutSections.loading ?
