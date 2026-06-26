@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { usePortfolio } from '../../containers/states/portfolioProvider';
 import { useCurriculum } from '../../containers/hooks/useCurriculum';
+import { useIframePreview } from '../../containers/hooks/useIframePreview';
+import IframePreviewInterface from './iframePreviewInterface';
 
 export default function FooterCVInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolio();
   const { isDarkMode, isMenuOpen } = getPortfolioState;
   const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
+  const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
   const { pathname } = useLocation();
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [nearBottom, setNearBottom] = React.useState(false);
@@ -86,15 +89,13 @@ export default function FooterCVInterface() {
               </button>
 
               <div className={`overflow-hidden transition-all duration-300 ${isCVOpen ? 'max-h-40' : 'max-h-0'}`}>
-                <a
-                  href="/CV - Rodrigo Placeres.pdf"
-                  target="_blank"
-                  onClick={close}
-                  className={`flex items-center gap-3 pl-12 pr-5 py-3 text-sm font-medium transition-all duration-150 ${accentColor} ${accentHover}`}
+                <button
+                  onClick={() => { close(); openPreview('/CV - Rodrigo Placeres.pdf'); }}
+                  className={`flex items-center gap-3 pl-12 pr-5 py-3 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
                 >
-                  <i className="material-symbols-outlined text-base leading-none">open_in_new</i>
-                  <span>Ver en otra pestaña</span>
-                </a>
+                  <i className="material-symbols-outlined text-base leading-none">visibility</i>
+                  <span>Previsualizar</span>
+                </button>
                 <a
                   href="/CV - Rodrigo Placeres.pdf"
                   download=""
@@ -125,6 +126,13 @@ export default function FooterCVInterface() {
           </div>
         </>
       )}
+      <IframePreviewInterface
+        previewUrl={previewUrl}
+        previewLoading={previewLoading}
+        setPreviewLoading={setPreviewLoading}
+        closePreview={closePreview}
+        label="Curriculum"
+      />
     </React.Fragment>
   );
 }
