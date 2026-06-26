@@ -1,17 +1,25 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useModal } from "../../containers/hooks/useModal";
 import { usePortfolio } from "../../containers/states/portfolioProvider";
 
 export default function ModalInterface() {
   const { modalState, modal } = useModal();
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolio();
   const { isDarkMode, textColor, bgColor } = getPortfolioState;
   const { open, title, content, footerActions } = modalState;
+  const location = useLocation();
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  useEffect(() => {
+    if (!new URLSearchParams(location.search).has("modal") && open) {
+      setPortfolioState(s => ({ ...s, modal: { ...s.modal, open: false } }));
+    }
+  }, [location.search]);
 
   if (!open) return null;
 
