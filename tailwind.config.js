@@ -9,6 +9,7 @@ module.exports = {
         cvButtonPrimary: "#5E1B00",
         cvButtonSecondary: "#D48F74",
         grayPrimary: "#BABABA",
+        darkGray: "#303030",
       },
       fontFamily: {
         sans: ['Exo', 'sans-serif'],
