@@ -1,6 +1,6 @@
 import "./index.css";
 import ReactDOM from "react-dom/client";
-import RoutesProvider from "./routes/routes";
+import PortfolioApp from '@app/modules/portfolio/interfaces/portfolioApp';
 
 document.addEventListener('dragstart', e => {
   if (e.target instanceof HTMLImageElement) e.preventDefault();
@@ -10,5 +10,5 @@ document.addEventListener('contextmenu', e => {
 }, { passive: false });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <RoutesProvider />
+  <PortfolioApp />
 );

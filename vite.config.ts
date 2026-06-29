@@ -1,12 +1,19 @@
 import { defineConfig } from 'vitest/config'
 import { loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-// https://vitejs.dev/config/
+import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return {
     base: '/',
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
+    resolve: {
+      alias: {
+        '@app': path.resolve(__dirname, './src'),
+      },
+    },
     server: {
       proxy: {
         '/portfolio': {
