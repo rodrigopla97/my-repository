@@ -75,6 +75,7 @@ export type PortfolioStateType = {
   modal: ModalDataType;
   notification: NotificationDataType;
   contactFormValid: boolean;
+  contactFormSubmitting: boolean;
 };
 
 export type PortfolioContextType = {

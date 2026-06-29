@@ -16,16 +16,18 @@ export default function PortfolioProvider({ children }: ProviderProps) {
 
   useEffect(() => {
     async function getTabsData() {
+      let tabdataItems = BASE_TABS;
       try {
         const res = await getTabs();
         const apiTabs = [...res.data].sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
-        const merged = [
+        tabdataItems = [
           ...BASE_TABS,
           ...apiTabs.filter((t) => !BASE_TABS.some((b) => b.path === t.path))
         ];
-        setPortfolioState((state) => ({ ...state, tabsLoading: false, tabdataItems: merged }));
       } catch {
-        setPortfolioState((state) => ({ ...state, tabsLoading: false, tabdataItems: BASE_TABS }));
+        // tabdataItems remains BASE_TABS
+      } finally {
+        setPortfolioState((state) => ({ ...state, tabsLoading: false, tabdataItems }));
       }
     }
     getTabsData();

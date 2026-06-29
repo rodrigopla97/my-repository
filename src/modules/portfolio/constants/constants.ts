@@ -196,6 +196,7 @@ export const INITIAL_STATE = {
     },
     modal: { open: false },
     notification: { open: false, message: "", type: "info" as const },
-    contactFormValid: false
+    contactFormValid: false,
+    contactFormSubmitting: false
   }
 };

@@ -52,16 +52,19 @@ export default function ContactMeInterface() {
     formBody.append("email", formData.email);
     formBody.append("message", formData.message);
 
+    setPortfolioState((s) => ({ ...s, contactFormSubmitting: true }));
     try {
       await fetch(PROFILE.formEndpoint, { method: "POST", body: formBody });
       modal.close();
-      notification.success("Â¡Mensaje enviado! Te responderÃ© a la brevedad.");
+      notification.success("¡Mensaje enviado! Te responderé a la brevedad.");
       setFormData({ name: "", email: "", message: "" });
       setCaptchaToken(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error("Error al enviar el formulario", error);
-      notification.error("Hubo un error al enviar el mensaje. IntentÃ¡ de nuevo.");
+      notification.error("Hubo un error al enviar el mensaje. Intentá de nuevo.");
+    } finally {
+      setPortfolioState((s) => ({ ...s, contactFormSubmitting: false }));
     }
   }
 

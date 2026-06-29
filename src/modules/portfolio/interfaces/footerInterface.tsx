@@ -10,13 +10,14 @@ import { useState } from "react";
 
 function ContactSubmitButton() {
   const { getPortfolioState } = usePortfolioProvider();
-  const { contactFormValid, isDarkMode } = getPortfolioState;
+  const { contactFormValid, contactFormSubmitting, isDarkMode } = getPortfolioState;
+  const isDisabled = !contactFormValid || contactFormSubmitting;
   return (
     <button
       form="contact-form"
       type="submit"
-      disabled={!contactFormValid}
-      className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${contactFormValid ? "hover:scale-105 active:scale-95" : "opacity-30 cursor-not-allowed"} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary" : "text-cvButtonPrimary border-cvButtonPrimary"}`}
+      disabled={isDisabled}
+      className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${isDisabled ? "opacity-30 cursor-not-allowed" : "hover:scale-105 active:scale-95"} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary" : "text-cvButtonPrimary border-cvButtonPrimary"}`}
     >
       Enviar
     </button>
