@@ -23,14 +23,14 @@ export default defineConfig(({ mode }) => {
       },
     },
     test: {
-        globals: true,
+        globals: false,
         environment: 'jsdom',
-        setupFiles: './src/setupTests.ts',
+        setupFiles: './src/modules/main/tests/setup.ts',
         css: true,
         reporters: ['verbose'],
         coverage: {
             reporter: ['text', 'json', 'html'],
-            include: ['src/**/*'],
+            include: ['src/**/*.ts', 'src/**/*.tsx'],
             exclude: [],
         }
     },

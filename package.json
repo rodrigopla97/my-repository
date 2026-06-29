@@ -28,12 +28,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
+    "start": "npm run format && npm run lint && vite",
+    "build": "npm run format && npm run lint && tsc && vite build",
     "serve": "vite preview",
     "dev": "vite",
-    "lint": "biome lint --write ./src",
-    "format": "biome format --write ./src"
+    "lint": "biome lint --write src/",
+    "format": "biome format --write src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "browserslist": {
     "production": [
