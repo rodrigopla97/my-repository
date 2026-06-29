@@ -1,5 +1,5 @@
 ﻿import useRouter from "@app/modules/main/hooks/useRouter";
-import SpinnerInterface from "@app/modules/main/interfaces/spinnerInterface";
+import SpinnerInterface from "@app/modules/portfolio/interfaces/spinnerInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 interface IframePreviewProps {
@@ -71,7 +71,7 @@ export default function IframePreviewInterface({
             <div
               className={`absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 ${isDarkMode ? "bg-neutral-950" : "bg-neutral-100"}`}
             >
-              <SpinnerInterface size={48} borderWidth={4} />
+              <SpinnerInterface className="w-12 h-12 border-4" />
               <span
                 className={`text-xs uppercase tracking-widest opacity-50 ${isDarkMode ? "text-neutral-300" : "text-neutral-600"}`}
               >

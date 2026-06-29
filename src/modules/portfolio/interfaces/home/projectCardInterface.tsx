@@ -1,5 +1,5 @@
 import useRouter from "@app/modules/main/hooks/useRouter";
-import SpinnerInterface from "@app/modules/main/interfaces/spinnerInterface";
+import SpinnerInterface from "@app/modules/portfolio/interfaces/spinnerInterface";
 import type { ProjectSiteItem } from "@app/modules/portfolio/entities/entities";
 import { useAccentColors } from "@app/modules/portfolio/hooks/useAccentColors";
 
@@ -50,7 +50,7 @@ export default function ProjectCardInterface({
     >
       {imgLoading && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
-          <SpinnerInterface size={20} />
+          <SpinnerInterface className="w-5 h-5" />
         </div>
       )}
       <img
