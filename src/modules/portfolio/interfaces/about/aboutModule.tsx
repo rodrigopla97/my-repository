@@ -2,7 +2,7 @@ import LoadingInterface from "@app/modules/main/interfaces/loadingInterface";
 import { ABOUT_CONTENT } from "@app/modules/portfolio/constants/constants";
 import ExperienceInterface from "@app/modules/portfolio/interfaces/about/expierenceInterface";
 import JobExperienceCardInterface from "@app/modules/portfolio/interfaces/about/jobExperienceCardInterface";
-import { getAboutContent } from "@app/modules/portfolio/services/aboutService";
+import { getAboutContent } from "@app/modules/portfolio/services/services";
 import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect } from "react";
 

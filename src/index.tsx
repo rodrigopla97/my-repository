@@ -1,5 +1,5 @@
 import "./index.css";
-import PortfolioApp from "@app/modules/portfolio/interfaces/portfolioApp";
+import PortfolioModuleProvider from "@app/modules/portfolio/interfaces/portfolioModuleProvider";
 import ReactDOM from "react-dom/client";
 
 document.addEventListener("dragstart", (e) => {
@@ -13,4 +13,4 @@ document.addEventListener(
   { passive: false }
 );
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<PortfolioApp />);
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<PortfolioModuleProvider />);

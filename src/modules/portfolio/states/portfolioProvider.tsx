@@ -4,7 +4,7 @@ import type {
   PortfolioStateType,
   ProviderProps
 } from "@app/modules/portfolio/entities/entities";
-import { getTabs } from "@app/modules/portfolio/services/tabsService";
+import { getTabs } from "@app/modules/portfolio/services/services";
 import { PortfolioContext } from "@app/modules/portfolio/states/portfolioContext";
 import { useContext, useEffect, useState } from "react";
 
