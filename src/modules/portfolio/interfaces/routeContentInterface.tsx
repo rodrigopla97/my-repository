@@ -1,24 +1,24 @@
-import ComingSoonInterface from "@app/modules/main/interfaces/comingSoonInterface";
+﻿import ComingSoonInterface from "@app/modules/main/interfaces/comingSoonInterface";
 import LoadingInterface from "@app/modules/main/interfaces/loadingInterface";
 import { BASE_TABS } from "@app/modules/portfolio/constants/constants";
 import AboutPage from "@app/modules/portfolio/interfaces/about/aboutModule";
 import ErrorPage from "@app/modules/portfolio/interfaces/error/errorModule";
 import HomePage from "@app/modules/portfolio/interfaces/home/homeModule";
 import ProjectsPage from "@app/modules/portfolio/interfaces/projects/projectsModule";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useLayoutEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 function FallbackRoute() {
   const { pathname } = useLocation();
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const allTabs = [...getPortfolioState.tabdataItems, ...BASE_TABS];
   const isKnownTab = allTabs.some((tab) => tab.path === pathname);
   return isKnownTab ? <ComingSoonInterface /> : <Navigate to="/error" replace />;
 }
 
 export default function RouteContent() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { tabsLoading } = getPortfolioState;
   const [isLoading, setIsLoading] = useState(true);
 

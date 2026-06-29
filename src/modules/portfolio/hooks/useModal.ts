@@ -1,5 +1,5 @@
-import type { ModalFooterActionsType } from "@app/modules/portfolio/entities/entities";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import type { ModalFooterActionsType } from "@app/modules/portfolio/entities/entities";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import type { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ type OpenModalOptions = {
 };
 
 export function useModal() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const navigate = useNavigate();
   const location = useLocation();
 

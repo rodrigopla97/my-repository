@@ -1,11 +1,11 @@
-import bgImageDark from "@app/images/bg-desk-black.png";
+﻿import bgImageDark from "@app/images/bg-desk-black.png";
 import bgImagelight from "@app/images/bg-desk-gray.png";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 
 export default function BackgroundImageInterface() {
   const [isMobile, setIsMobile] = useState(false);
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { isDarkMode } = getPortfolioState;
   const [backgroundView, setBackgroundView] = useState(true);
   const [hidden, setHidden] = useState(false);

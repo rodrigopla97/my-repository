@@ -1,15 +1,15 @@
-import lightLogo from "@app/images/black-logo.png";
+﻿import lightLogo from "@app/images/black-logo.png";
 import darkLogo from "@app/images/gray-logo.png";
 import useRouter from "@app/modules/main/hooks/useRouter";
 import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
 import { PROFILE } from "@app/modules/portfolio/constants/constants";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import ContactMeInterface from "@app/modules/portfolio/interfaces/contact/contactMeInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useState } from "react";
 
 function ContactSubmitButton() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { contactFormValid, isDarkMode } = getPortfolioState;
   return (
     <button
@@ -24,7 +24,7 @@ function ContactSubmitButton() {
 }
 
 export default function FooterInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { navigate, pathname, openExternal } = useRouter();
   const { modal } = useModal();
@@ -73,7 +73,7 @@ export default function FooterInterface() {
 
         <div className="flex flex-col md:w-1/4 items-center uppercase self-stretch">
           <div className="flex flex-col gap-4 w-full items-start h-full">
-            <span className="uppercase">Navegación</span>
+            <span className="uppercase">NavegaciÃ³n</span>
 
             <div className="flex flex-col gap-3 normal-case font-normal">
               {tabdataItems.map((tab, index) => {
@@ -112,7 +112,7 @@ export default function FooterInterface() {
           <div className="flex flex-col md:flex-row gap-8 normal-case font-normal">
             <div className="flex flex-col gap-1 md:w-1/2 justify-between">
               <TooltipInterface
-                text={copySuccess ? "¡Copiado!" : "Copiar al portapapeles"}
+                text={copySuccess ? "Â¡Copiado!" : "Copiar al portapapeles"}
                 position="bottom"
               >
                 <span
@@ -155,7 +155,7 @@ export default function FooterInterface() {
             </div>
             <div className="flex flex-col gap-4 md:w-1/2 justify-center">
               <p className="text-sm opacity-70">
-                Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
+                Si tenÃ©s un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
               </p>
               <button
                 type="button"
@@ -171,7 +171,7 @@ export default function FooterInterface() {
       </div>
 
       <div className="w-full text-center text-xs font-light">
-        © {new Date().getFullYear()} {PROFILE.name}
+        Â© {new Date().getFullYear()} {PROFILE.name}
       </div>
     </div>
   );

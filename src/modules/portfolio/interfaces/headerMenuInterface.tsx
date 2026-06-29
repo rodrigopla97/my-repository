@@ -1,8 +1,8 @@
-import useRouter from "@app/modules/main/hooks/useRouter";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import useRouter from "@app/modules/main/hooks/useRouter";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function HeaderMenuInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { pathname, navigate } = useRouter();
 

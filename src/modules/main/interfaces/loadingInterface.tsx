@@ -1,7 +1,7 @@
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function LoadingInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode, bgColor } = getPortfolioState;
 
   return (

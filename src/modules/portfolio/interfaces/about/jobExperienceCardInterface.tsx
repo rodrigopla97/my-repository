@@ -1,9 +1,9 @@
-import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export default function JobExperienceCardInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode, textColor, jobExperiencesContext } = getPortfolioState;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [selectedRoleIndex, setSelectedRoleIndex] = useState<number>(0);
@@ -183,7 +183,7 @@ export default function JobExperienceCardInterface() {
               ))}
             </div>
           ) : (
-            <TooltipInterface text="Único período">
+            <TooltipInterface text="Ãšnico perÃ­odo">
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide border cursor-pointer ${accentColor} ${accentBorder}`}
               >
@@ -307,7 +307,7 @@ export default function JobExperienceCardInterface() {
       <span
         className={`text-base uppercase tracking-widest self-start flex items-center gap-1.5 ${textColor}`}
       >
-        💼 Trayectoria profesional
+        ðŸ’¼ Trayectoria profesional
       </span>
 
       <div className="flex flex-col md:flex-row w-full gap-6">

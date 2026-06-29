@@ -1,12 +1,12 @@
-import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
+﻿import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import { useCurriculum } from "@app/modules/portfolio/hooks/useCurriculum";
 import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function FooterCVInterface() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { isDarkMode, isMenuOpen } = getPortfolioState;
   const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =

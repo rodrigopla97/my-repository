@@ -1,13 +1,13 @@
-import type { CurriculumInterfacePropsType } from "@app/modules/portfolio/entities/entities";
+﻿import type { CurriculumInterfacePropsType } from "@app/modules/portfolio/entities/entities";
 import { useCurriculum } from "@app/modules/portfolio/hooks/useCurriculum";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function CurriculumInterface({ download }: CurriculumInterfacePropsType) {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode } = getPortfolioState;
   const { setCurriculumOpen } = useCurriculum();
 
-  const buttonText = download ? "Descargar" : "Ver en otra pestaña";
+  const buttonText = download ? "Descargar" : "Ver en otra pestaÃ±a";
   const icon = download ? "download" : "open_in_new";
 
   return (

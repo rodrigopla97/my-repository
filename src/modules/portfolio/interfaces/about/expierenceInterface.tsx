@@ -1,9 +1,9 @@
-import { parseBold } from "@app/modules/portfolio/helpers/parseBold";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import { parseBold } from "@app/modules/portfolio/helpers/parseBold";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import React from "react";
 
 export default function ExperienceInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { textColor, aboutSections } = getPortfolioState;
 
   return (

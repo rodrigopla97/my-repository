@@ -1,4 +1,4 @@
-import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
+﻿import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import useRouter from "@app/modules/main/hooks/useRouter";
 import {
   CERTIFICATIONS,
@@ -10,13 +10,13 @@ import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import FooterAllIcons from "@app/modules/portfolio/interfaces/footerAllIconsInterface";
 import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
 import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useRef, useState } from "react";
 
 const SITES = PROJECT_SITES;
 
 export default function HomeSummaryInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode } = getPortfolioState;
   const { navigate } = useRouter();
   const { modal } = useModal();
@@ -169,7 +169,7 @@ export default function HomeSummaryInterface() {
             image_search
           </i>
           <span className={`text-sm opacity-40 italic ${textColor}`}>
-            Imagen del certificado próximamente
+            Imagen del certificado prÃ³ximamente
           </span>
         </div>
       )
@@ -199,7 +199,7 @@ export default function HomeSummaryInterface() {
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-base uppercase tracking-widest">🌐 Proyectos</span>
+          <span className="text-base uppercase tracking-widest">ðŸŒ Proyectos</span>
           <button
             type="button"
             onClick={() => navigate("/projects")}
@@ -295,7 +295,7 @@ export default function HomeSummaryInterface() {
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-base uppercase tracking-widest">🛠️ Tecnologías</span>
+          <span className="text-base uppercase tracking-widest">ðŸ› ï¸ TecnologÃ­as</span>
           {TECH_TAGS.length > (isDesktop ? 5 : 3) && (
             <button
               type="button"
@@ -313,7 +313,7 @@ export default function HomeSummaryInterface() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-base uppercase tracking-widest">🎓 Certificaciones</span>
+        <span className="text-base uppercase tracking-widest">ðŸŽ“ Certificaciones</span>
         <div className="flex flex-col gap-3">
           {CERTIFICATIONS.map((cert, i) => (
             <div

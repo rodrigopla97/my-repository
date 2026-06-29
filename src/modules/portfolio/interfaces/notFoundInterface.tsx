@@ -1,9 +1,9 @@
-import useRouter from "@app/modules/main/hooks/useRouter";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import useRouter from "@app/modules/main/hooks/useRouter";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 
 export default function NotFoundInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode } = getPortfolioState;
   const { navigate } = useRouter();
   const [seconds, setSeconds] = useState(30);
@@ -21,10 +21,10 @@ export default function NotFoundInterface() {
     <div
       className={`flex flex-col items-center justify-center w-screen h-screen gap-6 ${textColor}`}
     >
-      <span className="text-6xl">⚠️</span>
-      <h1 className="text-3xl font-bold">Algo salió mal</h1>
+      <span className="text-6xl">âš ï¸</span>
+      <h1 className="text-3xl font-bold">Algo saliÃ³ mal</h1>
       <p className="text-center opacity-70 max-w-sm">
-        Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en {seconds}{" "}
+        OcurriÃ³ un error o la pÃ¡gina que buscÃ¡s no existe. SerÃ¡s redirigido al inicio en {seconds}{" "}
         segundos.
       </p>
       <button

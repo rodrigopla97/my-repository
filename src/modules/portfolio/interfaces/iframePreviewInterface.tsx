@@ -1,6 +1,6 @@
-import useRouter from "@app/modules/main/hooks/useRouter";
+﻿import useRouter from "@app/modules/main/hooks/useRouter";
 import SpinnerInterface from "@app/modules/main/interfaces/spinnerInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 interface IframePreviewProps {
   previewUrl: string | null;
@@ -17,7 +17,7 @@ export default function IframePreviewInterface({
   closePreview,
   label
 }: IframePreviewProps) {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode, bgColor } = getPortfolioState;
   const { openExternal } = useRouter();
 

@@ -1,4 +1,4 @@
-import { BASE_TABS, INITIAL_STATE } from "@app/modules/portfolio/constants/constants";
+﻿import { BASE_TABS, INITIAL_STATE } from "@app/modules/portfolio/constants/constants";
 import type {
   PortfolioContextType,
   PortfolioStateType,
@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from "react";
 
 export default function PortfolioProvider({ children }: ProviderProps) {
   const [getPortfolioState, setPortfolioState] = useState<PortfolioStateType>(() => ({
-    ...INITIAL_STATE.PORTFOLIO,
+    ...INITIAL_STATE.PORTFOLIO_PAGE,
     isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") ?? "true")
   }));
 
@@ -51,6 +51,6 @@ export default function PortfolioProvider({ children }: ProviderProps) {
   );
 }
 
-export function usePortfolio() {
+export function usePortfolioProvider() {
   return useContext(PortfolioContext) as PortfolioContextType;
 }

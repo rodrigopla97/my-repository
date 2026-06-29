@@ -178,7 +178,7 @@ export const BASE_TABS: ActionsTabdataItem[] = [
 export const TAB_DATA_ITEMS = BASE_TABS;
 
 export const INITIAL_STATE = {
-  PORTFOLIO: {
+  PORTFOLIO_PAGE: {
     isDarkMode: true,
     textColor: "text-grayPrimary",
     bgColor: "bg-black",

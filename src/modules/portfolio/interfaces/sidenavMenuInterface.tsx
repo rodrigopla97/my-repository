@@ -1,9 +1,9 @@
-import useRouter from "@app/modules/main/hooks/useRouter";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import useRouter from "@app/modules/main/hooks/useRouter";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect } from "react";
 
 export function SidenavMenuInterface() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { bgColor, textColor, isDarkMode, isMenuOpen, tabdataItems } = getPortfolioState;
   const setMenuOpen = (isOpen: boolean) =>
     setPortfolioState((prevState) => ({ ...prevState, isMenuOpen: isOpen }));

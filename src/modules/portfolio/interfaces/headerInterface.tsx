@@ -1,12 +1,12 @@
-import lightLogo from "@app/images/black-logo.png";
+﻿import lightLogo from "@app/images/black-logo.png";
 import darkLogo from "@app/images/gray-logo.png";
 import HeaderMenuInterface from "@app/modules/portfolio/interfaces/headerMenuInterface";
 import { SidenavMenuInterface } from "@app/modules/portfolio/interfaces/sidenavMenuInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { Link, useLocation } from "react-router-dom";
 
 export default function HeaderInterface() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { isDarkMode, bgColor, textColor } = getPortfolioState;
   const { pathname } = useLocation();
   return (

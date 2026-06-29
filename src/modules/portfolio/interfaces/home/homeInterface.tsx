@@ -1,13 +1,13 @@
-import desk from "@app/images/avatar-float.png";
+﻿import desk from "@app/images/avatar-float.png";
 import bgAvatarDesk from "@app/images/bg-avatar.png";
 import BackgroundImageInterface from "@app/modules/portfolio/interfaces/home/backgroundImageInterface";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 
 const texts = ["Rodrigo Placeres", "Desarrollador Front-End"];
 
 export default function HomeInterface() {
-  const { getPortfolioState } = usePortfolio();
+  const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode, textColor } = getPortfolioState;
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);

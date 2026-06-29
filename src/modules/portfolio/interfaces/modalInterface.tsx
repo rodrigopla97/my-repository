@@ -1,11 +1,11 @@
-import { useModal } from "@app/modules/portfolio/hooks/useModal";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import { useModal } from "@app/modules/portfolio/hooks/useModal";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function ModalInterface() {
   const { modalState, modal } = useModal();
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { isDarkMode, textColor, bgColor } = getPortfolioState;
   const { open, title, content, footerActions } = modalState;
   const location = useLocation();

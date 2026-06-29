@@ -1,14 +1,14 @@
-import { PROFILE } from "@app/modules/portfolio/constants/constants";
+﻿import { PROFILE } from "@app/modules/portfolio/constants/constants";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import { useNotification } from "@app/modules/portfolio/hooks/useNotification";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string;
 
 export default function ContactMeInterface() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { modal } = useModal();
   const { notification } = useNotification();
   const { borderColor, textColor, isDarkMode } = getPortfolioState;
@@ -38,7 +38,7 @@ export default function ContactMeInterface() {
       setErrors((prev) => ({
         ...prev,
         email:
-          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es válido." : ""
+          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es vÃ¡lido." : ""
       }));
     }
   }
@@ -55,13 +55,13 @@ export default function ContactMeInterface() {
     try {
       await fetch(PROFILE.formEndpoint, { method: "POST", body: formBody });
       modal.close();
-      notification.success("¡Mensaje enviado! Te responderé a la brevedad.");
+      notification.success("Â¡Mensaje enviado! Te responderÃ© a la brevedad.");
       setFormData({ name: "", email: "", message: "" });
       setCaptchaToken(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error("Error al enviar el formulario", error);
-      notification.error("Hubo un error al enviar el mensaje. Intentá de nuevo.");
+      notification.error("Hubo un error al enviar el mensaje. IntentÃ¡ de nuevo.");
     }
   }
 

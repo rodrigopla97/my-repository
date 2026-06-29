@@ -1,7 +1,7 @@
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export function useCurriculum() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { isCurriculumOpen } = getPortfolioState;
 
   function setCurriculumOpen(isOpen: boolean) {

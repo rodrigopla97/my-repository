@@ -1,8 +1,8 @@
-import type { NotificationType } from "@app/modules/portfolio/entities/entities";
-import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+﻿import type { NotificationType } from "@app/modules/portfolio/entities/entities";
+import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export function useNotification() {
-  const { getPortfolioState, setPortfolioState } = usePortfolio();
+  const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
 
   function show(message: string, type: NotificationType) {
     setPortfolioState((s) => ({ ...s, notification: { open: true, message, type } }));
