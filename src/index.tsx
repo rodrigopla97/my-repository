@@ -1,6 +1,7 @@
 import "./index.css";
 import PortfolioModuleProvider from "@app/modules/portfolio/portfolioModuleProvider";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 document.addEventListener("dragstart", (e) => {
   if (e.target instanceof HTMLImageElement) e.preventDefault();
@@ -14,5 +15,7 @@ document.addEventListener(
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <PortfolioModuleProvider />
+  <BrowserRouter>
+    <PortfolioModuleProvider />
+  </BrowserRouter>
 );

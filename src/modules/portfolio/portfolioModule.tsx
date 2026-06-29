@@ -4,17 +4,16 @@ import HeaderInterface from "@app/modules/portfolio/interfaces/headerInterface";
 import ModalInterface from "@app/modules/portfolio/interfaces/modalInterface";
 import NotificationInterface from "@app/modules/portfolio/interfaces/notificationInterface";
 import RouteContent from "@app/modules/portfolio/interfaces/routeContentInterface";
-import { BrowserRouter } from "react-router-dom";
 
 export default function PortfolioModule() {
   return (
-    <BrowserRouter>
+    <>
       <HeaderInterface />
       <RouteContent />
       <FooterInterface />
       <FooterCVInterface />
       <ModalInterface />
       <NotificationInterface />
-    </BrowserRouter>
+    </>
   );
 }
