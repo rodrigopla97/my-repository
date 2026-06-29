@@ -1,4 +1,4 @@
-﻿import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
+import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import useRouter from "@app/modules/main/hooks/useRouter";
 import { PROJECT_SITES } from "@app/modules/portfolio/constants/constants";
 import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const SITES = PROJECT_SITES;
 
-export default function ProjectsPage() {
+export default function ProjectsInterface() {
   const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { navigate } = useRouter();
