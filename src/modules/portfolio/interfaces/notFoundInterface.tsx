@@ -24,8 +24,8 @@ export default function NotFoundInterface() {
       <span className="text-6xl">⚠️</span>
       <h1 className="text-3xl font-bold">Algo salió mal</h1>
       <p className="text-center opacity-70 max-w-sm">
-        Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en{" "}
-        {seconds} segundos.
+        Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en {seconds}{" "}
+        segundos.
       </p>
       <button
         type="button"
