@@ -31,11 +31,14 @@ export default function FooterInterface() {
   const [copySuccess, setCopySuccess] = useState(false);
   const accentColor = !isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary";
 
-  function handleCopyEmail() {
-    navigator.clipboard.writeText(PROFILE.email).then(() => {
+  async function handleCopyEmail() {
+    try {
+      await navigator.clipboard.writeText(PROFILE.email);
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
-    });
+    } catch {
+      // clipboard unavailable
+    }
   }
 
   function openContactModal() {
