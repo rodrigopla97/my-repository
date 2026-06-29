@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export function useIframePreview() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -7,8 +7,10 @@ export function useIframePreview() {
   const pushedState = useRef(false);
 
   useEffect(() => {
-    document.body.style.overflow = previewUrl ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflow = previewUrl ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [previewUrl]);
 
   useEffect(() => {
@@ -18,8 +20,8 @@ export function useIframePreview() {
       setPreviewUrl(null);
       setPreviewLoading(false);
     }
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
   }, [previewUrl]);
 
   function openPreview(url: string) {
@@ -27,8 +29,8 @@ export function useIframePreview() {
     setPreviewLoading(true);
     setTappedUrl(null);
     const previewPageUrl = new URL(window.location.href);
-    previewPageUrl.searchParams.set('preview', 'open');
-    window.history.pushState({ iframePreview: true }, '', previewPageUrl.toString());
+    previewPageUrl.searchParams.set("preview", "open");
+    window.history.pushState({ iframePreview: true }, "", previewPageUrl.toString());
     pushedState.current = true;
   }
 
@@ -43,8 +45,16 @@ export function useIframePreview() {
   }
 
   function toggleTap(url: string) {
-    setTappedUrl(prev => prev === url ? null : url);
+    setTappedUrl((prev) => (prev === url ? null : url));
   }
 
-  return { previewUrl, previewLoading, setPreviewLoading, tappedUrl, openPreview, closePreview, toggleTap };
+  return {
+    previewUrl,
+    previewLoading,
+    setPreviewLoading,
+    tappedUrl,
+    openPreview,
+    closePreview,
+    toggleTap
+  };
 }

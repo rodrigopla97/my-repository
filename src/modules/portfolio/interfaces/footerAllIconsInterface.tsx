@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { ICON_MAP } from '@app/modules/portfolio/icons/iconMap';
-import type { TechnologyItem } from '@app/modules/portfolio/entities/entities';
+import type { TechnologyItem } from "@app/modules/portfolio/entities/entities";
+import { ICON_MAP } from "@app/modules/portfolio/icons/iconMap";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface FooterAllIconsProps {
   isPaused: boolean;
@@ -8,16 +8,16 @@ interface FooterAllIconsProps {
 }
 
 export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps) {
-  const icons = items.map(item => ({
+  const icons = items.map((item) => ({
     component: ICON_MAP[item.key],
-    label: item.label,
+    label: item.label
   }));
 
-  const [visible, setVisible] = useState(() => window.innerWidth < 768 ? 3 : 5);
+  const [visible, setVisible] = useState(() => (window.innerWidth < 768 ? 3 : 5));
   const [startIdx, setStartIdx] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [withTransition, setWithTransition] = useState(false);
-  const [slideTarget, setSlideTarget] = useState<'left' | 'right' | 'base'>('base');
+  const [slideTarget, setSlideTarget] = useState<"left" | "right" | "base">("base");
 
   const isAnimating = useRef(false);
   const isDragging = useRef(false);
@@ -29,43 +29,45 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
 
   useEffect(() => {
     const handler = () => setVisible(window.innerWidth < 768 ? 3 : 5);
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
   }, []);
 
   const canScroll = icons.length > visible;
   const totalSlots = visible + 2;
-  const innerIcons = Array.from({ length: totalSlots }, (_, i) =>
-    icons[(startIdx - 1 + i + icons.length) % icons.length]
+  const innerIcons = Array.from(
+    { length: totalSlots },
+    (_, i) => icons[(startIdx - 1 + i + icons.length) % icons.length]
   );
 
   const basePercent = -(100 / totalSlots);
   const targetPercent =
-    slideTarget === 'left' ? basePercent * 2 :
-      slideTarget === 'right' ? 0 :
-        basePercent;
+    slideTarget === "left" ? basePercent * 2 : slideTarget === "right" ? 0 : basePercent;
 
-  const advance = useCallback(function(direction: 'left' | 'right') {
-    if (isAnimating.current) return;
-    isAnimating.current = true;
-    setDragX(0);
-    setWithTransition(true);
-    setSlideTarget(direction);
-    setTimeout(() => {
-      setWithTransition(false);
-      setSlideTarget('base');
-      setStartIdx(prev =>
-        direction === 'left'
-          ? (prev + 1) % icons.length
-          : (prev - 1 + icons.length) % icons.length
-      );
-      isAnimating.current = false;
-    }, 400);
-  }, [icons.length]);
+  const advance = useCallback(
+    function (direction: "left" | "right") {
+      if (isAnimating.current) return;
+      isAnimating.current = true;
+      setDragX(0);
+      setWithTransition(true);
+      setSlideTarget(direction);
+      setTimeout(() => {
+        setWithTransition(false);
+        setSlideTarget("base");
+        setStartIdx((prev) =>
+          direction === "left"
+            ? (prev + 1) % icons.length
+            : (prev - 1 + icons.length) % icons.length
+        );
+        isAnimating.current = false;
+      }, 400);
+    },
+    [icons.length]
+  );
 
   function startAutoAdvance() {
     clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => advance('left'), 2000);
+    intervalRef.current = setInterval(() => advance("left"), 2000);
   }
 
   function pauseAndScheduleResume() {
@@ -79,7 +81,7 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
       clearInterval(intervalRef.current);
     } else {
       clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => advance('left'), 2000);
+      intervalRef.current = setInterval(() => advance("left"), 2000);
     }
     return () => clearInterval(intervalRef.current);
   }, [isPaused, canScroll, advance]);
@@ -102,10 +104,10 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
 
     if (dragAccumRef.current <= -slotWidth) {
       dragAccumRef.current += slotWidth;
-      setStartIdx(prev => (prev + 1) % icons.length);
+      setStartIdx((prev) => (prev + 1) % icons.length);
     } else if (dragAccumRef.current >= slotWidth) {
       dragAccumRef.current -= slotWidth;
-      setStartIdx(prev => (prev - 1 + icons.length) % icons.length);
+      setStartIdx((prev) => (prev - 1 + icons.length) % icons.length);
     }
 
     setDragX(dragAccumRef.current);
@@ -119,15 +121,14 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
     dragAccumRef.current = 0;
 
     if (Math.abs(accum) >= 50) {
-      const dir = accum < 0 ? 'left' : 'right';
+      const dir = accum < 0 ? "left" : "right";
       setWithTransition(true);
-      setDragX(dir === 'left' ? -slotWidth : slotWidth);
+      setDragX(dir === "left" ? -slotWidth : slotWidth);
       setTimeout(() => {
         setWithTransition(false);
         setDragX(0);
-        setStartIdx(prev => dir === 'left'
-          ? (prev + 1) % icons.length
-          : (prev - 1 + icons.length) % icons.length
+        setStartIdx((prev) =>
+          dir === "left" ? (prev + 1) % icons.length : (prev - 1 + icons.length) % icons.length
         );
       }, 350);
     } else {
@@ -138,16 +139,17 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
     pauseAndScheduleResume();
   }
 
-  if (!canScroll) return (
-    <div className="w-full flex justify-around">
-      {icons.map((icon, i) => (
-        <div key={i} className="flex flex-col items-center">
-          <div className="w-16 h-16 flex items-center justify-center">{icon.component}</div>
-          <p className="mt-2 text-sm font-semibold">{icon.label}</p>
-        </div>
-      ))}
-    </div>
-  );
+  if (!canScroll)
+    return (
+      <div className="w-full flex justify-around">
+        {icons.map((icon, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center">{icon.component}</div>
+            <p className="mt-2 text-sm font-semibold">{icon.label}</p>
+          </div>
+        ))}
+      </div>
+    );
 
   return (
     <div ref={containerRef} className="w-full select-none overflow-hidden">
@@ -156,8 +158,8 @@ export default function FooterAllIcons({ isPaused, items }: FooterAllIconsProps)
         style={{
           width: `${(totalSlots / visible) * 100}%`,
           transform: `translateX(calc(${targetPercent}% + ${dragX}px))`,
-          transition: withTransition ? 'transform 0.4s ease' : 'none',
-          touchAction: 'pan-y',
+          transition: withTransition ? "transform 0.4s ease" : "none",
+          touchAction: "pan-y"
         }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}

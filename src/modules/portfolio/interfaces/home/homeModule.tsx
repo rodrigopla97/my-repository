@@ -1,6 +1,6 @@
-import React from 'react';
-import HomeInterface from '@app/modules/portfolio/interfaces/home/homeInterface';
-import HomeSummaryInterface from '@app/modules/portfolio/interfaces/home/homeSummaryInterface';
+import HomeInterface from "@app/modules/portfolio/interfaces/home/homeInterface";
+import HomeSummaryInterface from "@app/modules/portfolio/interfaces/home/homeSummaryInterface";
+import React from "react";
 
 export default function HomeModule() {
   return (

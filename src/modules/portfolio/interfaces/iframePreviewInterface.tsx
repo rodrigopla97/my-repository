@@ -1,6 +1,6 @@
-import { usePortfolio } from '@app/modules/portfolio/states/portfolioProvider';
-import useRouter from '@app/modules/main/hooks/useRouter';
-import SpinnerInterface from '@app/modules/main/interfaces/spinnerInterface';
+import useRouter from "@app/modules/main/hooks/useRouter";
+import SpinnerInterface from "@app/modules/main/interfaces/spinnerInterface";
+import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
 
 interface IframePreviewProps {
   previewUrl: string | null;
@@ -10,14 +10,20 @@ interface IframePreviewProps {
   label?: string;
 }
 
-export default function IframePreviewInterface({ previewUrl, previewLoading, setPreviewLoading, closePreview, label }: IframePreviewProps) {
+export default function IframePreviewInterface({
+  previewUrl,
+  previewLoading,
+  setPreviewLoading,
+  closePreview,
+  label
+}: IframePreviewProps) {
   const { getPortfolioState } = usePortfolio();
   const { isDarkMode, bgColor } = getPortfolioState;
   const { openExternal } = useRouter();
 
-  const accentText = !isDarkMode ? 'text-cvButtonPrimary' : 'text-cvButtonSecondary';
-  const accentBorder = !isDarkMode ? 'border-cvButtonPrimary' : 'border-cvButtonSecondary';
-  const accentBg = !isDarkMode ? 'bg-cvButtonPrimary' : 'bg-cvButtonSecondary';
+  const accentText = !isDarkMode ? "text-cvButtonPrimary" : "text-cvButtonSecondary";
+  const accentBorder = !isDarkMode ? "border-cvButtonPrimary" : "border-cvButtonSecondary";
+  const accentBg = !isDarkMode ? "bg-cvButtonPrimary" : "bg-cvButtonSecondary";
 
   if (!previewUrl) return null;
 
@@ -25,15 +31,23 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
     <div className="fixed inset-0 z-[60] flex flex-col">
       <div
         className={`relative w-full flex flex-col overflow-hidden flex-1`}
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className={`flex items-center gap-3 px-4 py-3 flex-shrink-0 ${bgColor}`}>
-          <div className={`flex-1 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs truncate ${isDarkMode ? 'bg-white/10 text-neutral-400' : 'bg-black/10 text-neutral-600'}`}>
+          <div
+            className={`flex-1 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs truncate ${isDarkMode ? "bg-white/10 text-neutral-400" : "bg-black/10 text-neutral-600"}`}
+          >
             <i className="material-symbols-outlined text-sm flex-shrink-0">lock</i>
             <span className="truncate">{previewUrl}</span>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            {label && <span className={`text-xs font-medium hidden md:block ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>{label}</span>}
+            {label && (
+              <span
+                className={`text-xs font-medium hidden md:block ${isDarkMode ? "text-neutral-400" : "text-neutral-500"}`}
+              >
+                {label}
+              </span>
+            )}
             <button
               type="button"
               onClick={() => openExternal(previewUrl)}
@@ -54,9 +68,15 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
 
         <div className="relative flex-1 overflow-hidden">
           {previewLoading && (
-            <div className={`absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 ${isDarkMode ? 'bg-neutral-950' : 'bg-neutral-100'}`}>
+            <div
+              className={`absolute inset-0 flex flex-col items-center justify-center gap-4 z-10 ${isDarkMode ? "bg-neutral-950" : "bg-neutral-100"}`}
+            >
               <SpinnerInterface size={48} borderWidth={4} />
-              <span className={`text-xs uppercase tracking-widest opacity-50 ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>Cargando...</span>
+              <span
+                className={`text-xs uppercase tracking-widest opacity-50 ${isDarkMode ? "text-neutral-300" : "text-neutral-600"}`}
+              >
+                Cargando...
+              </span>
             </div>
           )}
           <iframe
@@ -65,7 +85,11 @@ export default function IframePreviewInterface({ previewUrl, previewLoading, set
             title="web preview"
             onLoad={() => setPreviewLoading(false)}
             className="w-full h-full"
-            style={{ border: 'none', opacity: previewLoading ? 0 : 1, transition: 'opacity 0.3s ease' }}
+            style={{
+              border: "none",
+              opacity: previewLoading ? 0 : 1,
+              transition: "opacity 0.3s ease"
+            }}
           />
         </div>
       </div>

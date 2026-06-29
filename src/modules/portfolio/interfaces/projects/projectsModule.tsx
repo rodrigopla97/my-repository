@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import useRouter from '@app/modules/main/hooks/useRouter';
-import { usePortfolio } from '@app/modules/portfolio/states/portfolioProvider';
-import { useIframePreview } from '@app/modules/main/hooks/useIframePreview';
-import IframePreviewInterface from '@app/modules/portfolio/interfaces/iframePreviewInterface';
-import ProjectCardInterface from '@app/modules/portfolio/interfaces/home/projectCardInterface';
-import { PROJECT_SITES } from '@app/modules/portfolio/constants/constants';
+import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
+import useRouter from "@app/modules/main/hooks/useRouter";
+import { PROJECT_SITES } from "@app/modules/portfolio/constants/constants";
+import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
+import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
+import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { useEffect, useState } from "react";
 
 const SITES = PROJECT_SITES;
 
@@ -12,9 +12,10 @@ export default function ProjectsPage() {
   const { getPortfolioState } = usePortfolio();
   const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
   const { navigate } = useRouter();
-  const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } = useIframePreview();
+  const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =
+    useIframePreview();
   const [imgLoading, setImgLoading] = useState<Record<string, boolean>>(
-    Object.fromEntries(SITES.map(s => [s.url, true]))
+    Object.fromEntries(SITES.map((s) => [s.url, true]))
   );
 
   const [infoUrl, setInfoUrl] = useState<string | null>(null);
@@ -23,20 +24,22 @@ export default function ProjectsPage() {
   useEffect(() => {
     if (!menuKey) return;
     const close = () => setMenuKey(null);
-    document.addEventListener('click', close);
-    return () => document.removeEventListener('click', close);
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
   }, [menuKey]);
 
-  const isInNav = tabdataItems.some(t => t.path === '/projects');
-  const accentText = isDarkMode ? 'text-cvButtonSecondary' : 'text-cvButtonPrimary';
-  const accentBorder = isDarkMode ? 'border-cvButtonSecondary' : 'border-cvButtonPrimary';
+  const isInNav = tabdataItems.some((t) => t.path === "/projects");
+  const accentText = isDarkMode ? "text-cvButtonSecondary" : "text-cvButtonPrimary";
+  const accentBorder = isDarkMode ? "border-cvButtonSecondary" : "border-cvButtonPrimary";
 
   return (
-    <div className={`flex flex-col gap-8 w-screen md:w-3/4 px-10 md:mx-auto py-[10vh] min-h-screen ${textColor}`}>
+    <div
+      className={`flex flex-col gap-8 w-screen md:w-3/4 px-10 md:mx-auto py-[10vh] min-h-screen ${textColor}`}
+    >
       {!isInNav && (
         <button
           type="button"
-          onClick={() => window.history.length > 1 ? navigate(-1) : navigate('/')}
+          onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))}
           className={`self-start flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentText}`}
         >
           <i className="material-symbols-outlined text-xl">chevron_left</i>
@@ -52,8 +55,8 @@ export default function ProjectsPage() {
             site={site}
             cardKey={`${siteIdx}`}
             imgLoading={imgLoading[site.url]}
-            onImgLoad={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
-            onImgError={() => setImgLoading(prev => ({ ...prev, [site.url]: false }))}
+            onImgLoad={() => setImgLoading((prev) => ({ ...prev, [site.url]: false }))}
+            onImgError={() => setImgLoading((prev) => ({ ...prev, [site.url]: false }))}
             infoUrl={infoUrl}
             setInfoUrl={setInfoUrl}
             menuKey={menuKey}
@@ -66,9 +69,10 @@ export default function ProjectsPage() {
           className={`flex flex-col items-center justify-center gap-2 p-6 rounded-xl border border-dashed opacity-30 min-h-44 ${accentBorder}`}
         >
           <span className="text-3xl">🚧</span>
-          <span className={`text-xs uppercase tracking-widest text-center ${accentText}`}>Próximamente</span>
+          <span className={`text-xs uppercase tracking-widest text-center ${accentText}`}>
+            Próximamente
+          </span>
         </div>
-
       </div>
 
       <IframePreviewInterface
@@ -76,7 +80,7 @@ export default function ProjectsPage() {
         previewLoading={previewLoading}
         setPreviewLoading={setPreviewLoading}
         closePreview={closePreview}
-        label={SITES.find(s => s.url === previewUrl)?.label}
+        label={SITES.find((s) => s.url === previewUrl)?.label}
       />
     </div>
   );

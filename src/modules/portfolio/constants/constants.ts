@@ -1,27 +1,42 @@
-import type { ActionsTabdataItem, JobExperience, AboutContentType, CertificationItem, ProjectSiteItem, TechnologyItem } from '@app/modules/portfolio/entities/entities';
+import type {
+  AboutContentType,
+  ActionsTabdataItem,
+  CertificationItem,
+  JobExperience,
+  ProjectSiteItem,
+  TechnologyItem
+} from "@app/modules/portfolio/entities/entities";
 
 export const PROJECT_SITES: ProjectSiteItem[] = [
   {
-    label: 'Proyecto Final Coder',
-    description: 'Página realizada para el curso de Coder House. Con detalles a mejorar para seguir mostrando lo que voy aprendiendo.',
-    url: 'https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/',
+    label: "Proyecto Final Coder",
+    description:
+      "Página realizada para el curso de Coder House. Con detalles a mejorar para seguir mostrando lo que voy aprendiendo.",
+    url: "https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/"
   },
   {
-    label: 'Pixel Pancheria',
-    description: 'Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.',
-    url: 'https://pixelpancheria.netlify.app/',
+    label: "Pixel Pancheria",
+    description:
+      "Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.",
+    url: "https://pixelpancheria.netlify.app/"
   },
   {
-    label: 'Circo Caeli',
-    description: 'Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.',
-    url: 'https://circocaeli.ar/',
+    label: "Circo Caeli",
+    description:
+      "Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.",
+    url: "https://circocaeli.ar/"
   }
 ];
 
 export const CERTIFICATIONS: CertificationItem[] = [
-  { institution: "UTN", title: "Tecnicatura Universitaria en Programación", year: "2023", inProgress: true },
+  {
+    institution: "UTN",
+    title: "Tecnicatura Universitaria en Programación",
+    year: "2023",
+    inProgress: true
+  },
   { institution: "EducaciónIT", title: "Desarrollador Fullstack Node.js", year: "2022" },
-  { institution: "CoderHouse", title: "Desarrollo Web", year: "2021" },
+  { institution: "CoderHouse", title: "Desarrollo Web", year: "2021" }
 ];
 
 export const JOB_EXPERIENCES: JobExperience[] = [
@@ -38,8 +53,8 @@ export const JOB_EXPERIENCES: JobExperience[] = [
           "Diseño e implementación de features.",
           "Participación en la creación de la estructura de las APIs, junto con el backend",
           "Maquetación e implementación de diseño",
-          "Análisis y Resolución de requerimientos en sprint (Azure - Jira)",
-        ],
+          "Análisis y Resolución de requerimientos en sprint (Azure - Jira)"
+        ]
       },
       {
         title: "Implementador",
@@ -48,10 +63,10 @@ export const JOB_EXPERIENCES: JobExperience[] = [
           "1 año en Implementación .NET y Administración de Base de datos:",
           "Mantenimiento de la plataforma (correcciones de bugs) C# .NET",
           "Mantenimiento de Base de Datos en SQL",
-          "Análisis y Resolución de problemas informados por el cliente",
-        ],
-      },
-    ],
+          "Análisis y Resolución de problemas informados por el cliente"
+        ]
+      }
+    ]
   },
   {
     company: "Mother Solution",
@@ -67,10 +82,10 @@ export const JOB_EXPERIENCES: JobExperience[] = [
           "Cambio de partes y componentes smd",
           "Instalación de software",
           "Recepción y entrega de mercadería",
-          "Atención de consultas",
-        ],
-      },
-    ],
+          "Atención de consultas"
+        ]
+      }
+    ]
   },
   {
     company: "Estudio Guitelman",
@@ -82,10 +97,10 @@ export const JOB_EXPERIENCES: JobExperience[] = [
           "Reparación y mantenimiento de PC",
           "Resolución de fallos",
           "Diagnóstico y cambio de partes.",
-          "Instalación y configuración de software",
-        ],
-      },
-    ],
+          "Instalación y configuración de software"
+        ]
+      }
+    ]
   },
   {
     company: "C.L'ectricidad - Ferro - Multiled",
@@ -97,11 +112,11 @@ export const JOB_EXPERIENCES: JobExperience[] = [
           "Instalación y conexionado de pantallas LED (videowall)",
           "Configuración de videos en software (LedStudio)",
           "Tendido de cableado (UTP)",
-          "Prueba de luces en estadio",
-        ],
-      },
-    ],
-  },
+          "Prueba de luces en estadio"
+        ]
+      }
+    ]
+  }
 ];
 
 export const ABOUT_CONTENT: AboutContentType = {
@@ -110,25 +125,25 @@ export const ABOUT_CONTENT: AboutContentType = {
       title: "bio",
       items: [
         "Vivo en la **Ciudad Autónoma de Buenos Aires**, soy desarrollador **frontend**, recibido como **Técnico en Computación** y actualmente estudiante de **Tecnicatura universitaria en Programación** (UTN).",
-        "Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 me desempeño como **Desarrollador Frontend** en **Leafnoise**.",
-      ],
+        "Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 me desempeño como **Desarrollador Frontend** en **Leafnoise**."
+      ]
     },
     {
       title: "🚀 Experiencia",
       items: [
         "Participo en el mantenimiento de plataformas de distintos proyectos, desarrollo de **bugfixes** y diseño e implementación de **features**, donde tengo la oportunidad de formar parte de diversos proyectos junto a mi equipo de trabajo.",
         "En algunos casos, asisto a reuniones que incluyen interacción directa con clientes y otros equipos, en las cuales también colaboro en la definición de la estructura backend.",
-        "Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador.",
-      ],
+        "Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador."
+      ]
     },
     {
       title: "🎯 Objetivo",
       items: [
         "Estar en constante crecimiento y desarrollo, tanto personal como laboral.",
-        "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo.",
-      ],
-    },
-  ],
+        "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo."
+      ]
+    }
+  ]
 };
 
 export const TECH_TAGS: TechnologyItem[] = [
@@ -140,7 +155,7 @@ export const TECH_TAGS: TechnologyItem[] = [
   { key: "typescript", label: "Typescript" },
   { key: "tailwind", label: "Tailwind" },
   { key: "git", label: "GIT" },
-  { key: "mongodb", label: "MongoDB" },
+  { key: "mongodb", label: "MongoDB" }
 ];
 
 export const PROFILE = {
@@ -148,13 +163,16 @@ export const PROFILE = {
   role: "Desarrollador Frontend",
   email: "rodrigoplaceres19@gmail.com",
   github: { url: "https://github.com/rodrigopla97", label: "github.com/rodrigopla97" },
-  linkedin: { url: "https://www.linkedin.com/in/rodrigo-placeres/", label: "linkedin.com/in/rodrigo-placeres" },
-  formEndpoint: "https://formsubmit.co/ajax/rodrigoplaceres19@gmail.com",
+  linkedin: {
+    url: "https://www.linkedin.com/in/rodrigo-placeres/",
+    label: "linkedin.com/in/rodrigo-placeres"
+  },
+  formEndpoint: "https://formsubmit.co/ajax/rodrigoplaceres19@gmail.com"
 };
 
 export const BASE_TABS: ActionsTabdataItem[] = [
-  { path: '/', name: 'Inicio', icon: 'home' },
-  { path: '/about', name: 'Sobre mí', icon: 'description' },
+  { path: "/", name: "Inicio", icon: "home" },
+  { path: "/about", name: "Sobre mí", icon: "description" }
 ];
 
 export const TAB_DATA_ITEMS = BASE_TABS;
@@ -174,10 +192,10 @@ export const INITIAL_STATE = {
     jobExperiencesContext: JOB_EXPERIENCES,
     aboutSections: {
       loading: true,
-      data: null,
+      data: null
     },
     modal: { open: false },
-    notification: { open: false, message: '', type: 'info' as const },
-    contactFormValid: false,
-  },
+    notification: { open: false, message: "", type: "info" as const },
+    contactFormValid: false
+  }
 };

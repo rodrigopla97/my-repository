@@ -1,21 +1,24 @@
+import useRouter from "@app/modules/main/hooks/useRouter";
+import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect } from "react";
-import { usePortfolio } from '@app/modules/portfolio/states/portfolioProvider';
-import useRouter from '@app/modules/main/hooks/useRouter';
 
 export function SidenavMenuInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolio();
   const { bgColor, textColor, isDarkMode, isMenuOpen, tabdataItems } = getPortfolioState;
-  const setMenuOpen = (isOpen: boolean) => setPortfolioState(prevState => ({ ...prevState, isMenuOpen: isOpen }));
+  const setMenuOpen = (isOpen: boolean) =>
+    setPortfolioState((prevState) => ({ ...prevState, isMenuOpen: isOpen }));
   const { navigate, pathname } = useRouter();
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMenuOpen]);
 
   function handleNavigate(path: string) {
     setMenuOpen(false);
-    if (pathname === path) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (pathname === path) window.scrollTo({ top: 0, behavior: "smooth" });
     else navigate(path);
   }
 
@@ -38,7 +41,11 @@ export function SidenavMenuInterface() {
         className={`fixed top-0 bottom-0 left-0 w-full z-50 ${bgColor} shadow-lg flex flex-col transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="ml-[0.2rem] mt-[0.2rem] w-20 h-[10vh] flex items-center justify-center">
-          <button type="button" className={`${textColor} focus:outline-none`} onClick={() => setMenuOpen(false)}>
+          <button
+            type="button"
+            className={`${textColor} focus:outline-none`}
+            onClick={() => setMenuOpen(false)}
+          >
             <span className="material-icons">close</span>
           </button>
         </div>
@@ -49,10 +56,13 @@ export function SidenavMenuInterface() {
               const isActive = pathname === tab.path;
               return (
                 <li key={index} onClick={() => handleNavigate(tab.path)}>
-                  <span className={`cursor-pointer inline-block px-6 py-2 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-200 ${isActive
-                    ? `${!isDarkMode ? "text-cvButtonPrimary bg-cvButtonPrimary/15 ring-1 ring-cvButtonPrimary/30" : "text-cvButtonSecondary bg-cvButtonSecondary/15 ring-1 ring-cvButtonSecondary/30"}`
-                    : `${textColor} ${!isDarkMode ? "hover:text-cvButtonPrimary hover:bg-cvButtonPrimary/10" : "hover:text-cvButtonSecondary hover:bg-cvButtonSecondary/10"}`
-                  }`}>
+                  <span
+                    className={`cursor-pointer inline-block px-6 py-2 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-200 ${
+                      isActive
+                        ? `${!isDarkMode ? "text-cvButtonPrimary bg-cvButtonPrimary/15 ring-1 ring-cvButtonPrimary/30" : "text-cvButtonSecondary bg-cvButtonSecondary/15 ring-1 ring-cvButtonSecondary/30"}`
+                        : `${textColor} ${!isDarkMode ? "hover:text-cvButtonPrimary hover:bg-cvButtonPrimary/10" : "hover:text-cvButtonSecondary hover:bg-cvButtonSecondary/10"}`
+                    }`}
+                  >
                     {tab.name}
                   </span>
                 </li>
@@ -60,7 +70,6 @@ export function SidenavMenuInterface() {
             })}
           </ul>
         </div>
-
       </div>
     </div>
   );

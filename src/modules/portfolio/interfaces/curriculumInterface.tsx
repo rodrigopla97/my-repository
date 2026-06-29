@@ -1,6 +1,6 @@
-import { usePortfolio } from '@app/modules/portfolio/states/portfolioProvider';
-import { useCurriculum } from '@app/modules/portfolio/hooks/useCurriculum';
-import type { CurriculumInterfacePropsType } from '@app/modules/portfolio/entities/entities';
+import type { CurriculumInterfacePropsType } from "@app/modules/portfolio/entities/entities";
+import { useCurriculum } from "@app/modules/portfolio/hooks/useCurriculum";
+import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function CurriculumInterface({ download }: CurriculumInterfacePropsType) {
   const { getPortfolioState } = usePortfolio();
@@ -16,7 +16,8 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
       target="_blank"
       download={download ? "" : undefined}
       onClick={() => setCurriculumOpen(false)}
-      className={`group flex items-center gap-3 px-5 py-3 text-sm font-medium tracking-wide transition-all duration-150 ${isDarkMode ? "text-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`} rel="noopener"
+      className={`group flex items-center gap-3 px-5 py-3 text-sm font-medium tracking-wide transition-all duration-150 ${isDarkMode ? "text-cvButtonSecondary hover:bg-cvButtonPrimary/30" : "text-cvButtonPrimary hover:bg-cvButtonSecondary/30"}`}
+      rel="noopener"
     >
       <i className="material-symbols-outlined text-base leading-none">{icon}</i>
       <span className="group-hover:underline underline-offset-2">{buttonText}</span>

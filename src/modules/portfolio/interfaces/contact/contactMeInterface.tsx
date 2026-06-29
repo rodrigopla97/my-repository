@@ -1,9 +1,9 @@
-import { usePortfolio } from '@app/modules/portfolio/states/portfolioProvider';
-import { useModal } from '@app/modules/portfolio/hooks/useModal';
-import { useNotification } from '@app/modules/portfolio/hooks/useNotification';
-import { useState, useRef, useEffect } from "react";
+import { PROFILE } from "@app/modules/portfolio/constants/constants";
+import { useModal } from "@app/modules/portfolio/hooks/useModal";
+import { useNotification } from "@app/modules/portfolio/hooks/useNotification";
+import { usePortfolio } from "@app/modules/portfolio/states/portfolioProvider";
+import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { PROFILE } from '@app/modules/portfolio/constants/constants';
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string;
 
@@ -18,24 +18,27 @@ export default function ContactMeInterface() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const isFormValid =
-    formData.name.trim() !== '' &&
-    formData.email.trim() !== '' &&
+    formData.name.trim() !== "" &&
+    formData.email.trim() !== "" &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
-    formData.message.trim() !== '' &&
+    formData.message.trim() !== "" &&
     captchaToken !== null;
 
   useEffect(() => {
-    setPortfolioState(s => ({ ...s, contactFormValid: isFormValid }));
-    return () => { setPortfolioState(s => ({ ...s, contactFormValid: false })); };
+    setPortfolioState((s) => ({ ...s, contactFormValid: isFormValid }));
+    return () => {
+      setPortfolioState((s) => ({ ...s, contactFormValid: false }));
+    };
   }, [isFormValid, setPortfolioState]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (name === "email") {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        email: value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es válido." : "",
+        email:
+          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es válido." : ""
       }));
     }
   }
@@ -52,13 +55,13 @@ export default function ContactMeInterface() {
     try {
       await fetch(PROFILE.formEndpoint, { method: "POST", body: formBody });
       modal.close();
-      notification.success('¡Mensaje enviado! Te responderé a la brevedad.');
+      notification.success("¡Mensaje enviado! Te responderé a la brevedad.");
       setFormData({ name: "", email: "", message: "" });
       setCaptchaToken(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error("Error al enviar el formulario", error);
-      notification.error('Hubo un error al enviar el mensaje. Intentá de nuevo.');
+      notification.error("Hubo un error al enviar el mensaje. Intentá de nuevo.");
     }
   }
 
@@ -68,22 +71,48 @@ export default function ContactMeInterface() {
 
   return (
     <div className={`flex flex-col w-full px-6 py-6 relative ${textColor}`}>
-
-<form id="contact-form" className="flex flex-col gap-7" onSubmit={handleSubmit}>
+      <form id="contact-form" className="flex flex-col gap-7" onSubmit={handleSubmit}>
         <div className="relative">
-          <input type="text" name="name" placeholder=" " value={formData.name} onChange={handleChange} className={inputClass} />
-          <label className={labelFloat}>Nombre <span className="text-red-500">*</span></label>
+          <input
+            type="text"
+            name="name"
+            placeholder=" "
+            value={formData.name}
+            onChange={handleChange}
+            className={inputClass}
+          />
+          <label className={labelFloat}>
+            Nombre <span className="text-red-500">*</span>
+          </label>
         </div>
         <div className="flex flex-col gap-1">
           <div className="relative">
-            <input type="text" name="email" placeholder=" " value={formData.email} onChange={handleChange} className={`${inputClass} ${errors.email ? "border-red-600" : ""}`} />
-            <label className={labelFloat}>Correo <span className="text-red-500">*</span></label>
+            <input
+              type="text"
+              name="email"
+              placeholder=" "
+              value={formData.email}
+              onChange={handleChange}
+              className={`${inputClass} ${errors.email ? "border-red-600" : ""}`}
+            />
+            <label className={labelFloat}>
+              Correo <span className="text-red-500">*</span>
+            </label>
           </div>
           <span className="text-red-600 text-xs h-4 block">{errors.email}</span>
         </div>
         <div className="relative">
-          <textarea name="message" placeholder=" " rows={6} value={formData.message} onChange={handleChange} className={`${inputClass} resize-none`} />
-          <label className={labelFloat}>Mensaje <span className="text-red-500">*</span></label>
+          <textarea
+            name="message"
+            placeholder=" "
+            rows={6}
+            value={formData.message}
+            onChange={handleChange}
+            className={`${inputClass} resize-none`}
+          />
+          <label className={labelFloat}>
+            Mensaje <span className="text-red-500">*</span>
+          </label>
         </div>
         <div className="flex justify-center">
           <ReCAPTCHA

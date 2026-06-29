@@ -1,20 +1,63 @@
-@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-
-/* @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap'); */
+@import url("https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp") layer(google-fonts);
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200") layer(google-fonts);
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-bluePrimary: #0B486B;
+  --color-cvButtonPrimary: #5E1B00;
+  --color-cvButtonSecondary: #D48F74;
+  --color-grayPrimary: #BABABA;
+  --color-darkGray: #303030;
+
+  --font-sans: 'Exo', sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif;
+
+  --animate-fadeIn: fadeIn .2s ease;
+  --animate-tilt: tilt 3s infinite ease-in-out;
+  --animate-float: float 3s infinite ease-in-out;
+  --animate-rotate360: rotate360 1s linear infinite;
+  --animate-slideInFromRight: slideInFromRight .5s ease;
+  --animate-slideInFromLeft: slideInFromLeft .5s ease;
+
+  --drop-shadow-red: 10px 10px 10px #622529;
+  --drop-shadow-white: 10px 10px 10px #ffffff;
+  --drop-shadow-darkGray: 10px 10px 10px #1F2937;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes tilt {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes rotate360 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes slideInFromRight {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInFromLeft {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
 
 ::-webkit-scrollbar {
   width: 0.2rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color:  var(--scrollbar-color);
-  border: 1px solid  var(--scrollbar-color);
+  background-color: var(--scrollbar-color);
+  border: 1px solid var(--scrollbar-color);
 }
 
 #root {
@@ -22,6 +65,7 @@
   overflow-x: hidden;
   max-width: 100%;
 }
+
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; }
@@ -61,7 +105,7 @@ input:-webkit-autofill:focus {
 body.dark-mode input:-webkit-autofill,
 body.dark-mode input:-webkit-autofill:hover,
 body.dark-mode input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--grayPrimary) !important;
+  -webkit-text-fill-color: var(--color-grayPrimary) !important;
 }
 
 body.light-mode input:-webkit-autofill,
@@ -94,7 +138,7 @@ body.light-mode input:-webkit-autofill:focus {
   overflow-y: scroll;
 }
 
-.card-container::-webkit-scrollbar{
+.card-container::-webkit-scrollbar {
   width: 0;
 }
 
@@ -106,9 +150,6 @@ body.light-mode input:-webkit-autofill:focus {
   height: 2.5rem;
 }
 
-button i {
-  font-size: 3rem;
-}
 
 .role-container {
   padding: 1rem 2rem;
@@ -117,22 +158,22 @@ button i {
 
 @media only screen and (max-width: 890px) {
   .card-container {
-      width: 75vw;
+    width: 75vw;
   }
 }
 
 body.light-mode {
-  background-color: var(--grayPrimary);
+  background-color: var(--color-grayPrimary);
   background-image: url('./images/bg-desk-gray-secondary.png');
-  --scrollbar-track-color: var(--grayPrimary);
-  --scrollbar-color: var(--cvButtonPrimary);
+  --scrollbar-track-color: var(--color-grayPrimary);
+  --scrollbar-color: var(--color-cvButtonPrimary);
 }
 
 body.dark-mode {
   background-color: black;
   background-image: url('./images/bg-desk-black-secondary.png');
   --scrollbar-track-color: black;
-  --scrollbar-color: var(--cvButtonSecondary);
+  --scrollbar-color: var(--color-cvButtonSecondary);
 }
 
 body {
@@ -161,7 +202,7 @@ img {
 }
 
 @keyframes marquee {
-  0%   { transform: translateX(0); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 

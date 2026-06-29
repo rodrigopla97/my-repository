@@ -1,6 +1,6 @@
-import type { ReactNode, Dispatch, SetStateAction } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
 
-export type NotificationType = 'success' | 'info' | 'error';
+export type NotificationType = "success" | "info" | "error";
 
 export type NotificationDataType = {
   open: boolean;
@@ -19,7 +19,8 @@ export type ModalDataType = {
   content?: ReactNode | null;
   footerActions?: ModalFooterActionsType | null;
 };
-import type { TechnologyKey } from '@app/modules/portfolio/icons/iconMap';
+
+import type { TechnologyKey } from "@app/modules/portfolio/icons/iconMap";
 
 export interface JobRole {
   title: string;
@@ -88,7 +89,7 @@ export interface ProviderProps {
 export interface ModalJobProps {
   children?: React.ReactNode;
   onClose: () => void;
-  selectedExperience: JobExperience
+  selectedExperience: JobExperience;
 }
 
 export interface CurriculumInterfacePropsType {
