@@ -1,5 +1,5 @@
-﻿import ComingSoonInterface from "@app/modules/main/interfaces/comingSoonInterface";
-import LoadingInterface from "@app/modules/main/interfaces/loadingInterface";
+﻿import ComingSoonInterface from "@app/modules/portfolio/interfaces/comingSoonInterface";
+import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
 import { BASE_TABS } from "@app/modules/portfolio/constants/constants";
 import AboutPage from "@app/modules/portfolio/interfaces/about/aboutModule";
 import ErrorPage from "@app/modules/portfolio/interfaces/error/errorModule";

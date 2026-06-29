@@ -1,4 +1,4 @@
-﻿import LoadingInterface from "@app/modules/main/interfaces/loadingInterface";
+﻿import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
 import { ABOUT_CONTENT } from "@app/modules/portfolio/constants/constants";
 import ExperienceInterface from "@app/modules/portfolio/interfaces/about/expierenceInterface";
 import JobExperienceCardInterface from "@app/modules/portfolio/interfaces/about/jobExperienceCardInterface";
