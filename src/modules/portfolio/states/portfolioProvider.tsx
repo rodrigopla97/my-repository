@@ -1,14 +1,14 @@
-﻿import { BASE_TABS, INITIAL_STATE } from "@app/modules/portfolio/constants/constants";
+﻿import type { ChildrenType } from "@app/modules/main/entities/entities";
+import { BASE_TABS, INITIAL_STATE } from "@app/modules/portfolio/constants/constants";
 import type {
   PortfolioContextType,
-  PortfolioStateType,
-  ProviderProps
+  PortfolioStateType
 } from "@app/modules/portfolio/entities/entities";
 import { getTabs } from "@app/modules/portfolio/services/services";
 import { PortfolioContext } from "@app/modules/portfolio/states/portfolioContext";
 import { useContext, useEffect, useState } from "react";
 
-export default function PortfolioProvider({ children }: ProviderProps) {
+export default function PortfolioProvider({ children }: ChildrenType) {
   const [getPortfolioState, setPortfolioState] = useState<PortfolioStateType>(() => ({
     ...INITIAL_STATE.PORTFOLIO_PAGE,
     isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") ?? "true")

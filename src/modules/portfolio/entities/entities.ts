@@ -83,10 +83,6 @@ export type PortfolioContextType = {
   setPortfolioState: Dispatch<SetStateAction<PortfolioStateType>>;
 };
 
-export interface ProviderProps {
-  children: ReactNode;
-}
-
 export interface ModalJobProps {
   children?: React.ReactNode;
   onClose: () => void;
