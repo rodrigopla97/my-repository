@@ -7,7 +7,7 @@ export default function CurriculumInterface({ download }: CurriculumInterfacePro
   const { isDarkMode } = getPortfolioState;
   const { setCurriculumOpen } = useCurriculum();
 
-  const buttonText = download ? "Descargar" : "Ver en otra pestaÃ±a";
+  const buttonText = download ? "Descargar" : "Ver en otra pestaña";
   const icon = download ? "download" : "open_in_new";
 
   return (

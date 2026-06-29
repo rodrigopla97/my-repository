@@ -39,7 +39,7 @@ export default function ContactMeInterface() {
         ...prev,
         email:
           value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            ? "El correo no es vÃ¡lido."
+            ? "El correo no es válido."
             : ""
       }));
     }

@@ -74,7 +74,7 @@ export default function FooterInterface() {
 
         <div className="flex flex-col md:w-1/4 items-center uppercase self-stretch">
           <div className="flex flex-col gap-4 w-full items-start h-full">
-            <span className="uppercase">NavegaciÃ³n</span>
+            <span className="uppercase">Navegación</span>
 
             <div className="flex flex-col gap-3 normal-case font-normal">
               {tabdataItems.map((tab, index) => {
@@ -113,7 +113,7 @@ export default function FooterInterface() {
           <div className="flex flex-col md:flex-row gap-8 normal-case font-normal">
             <div className="flex flex-col gap-1 md:w-1/2 justify-between">
               <TooltipInterface
-                text={copySuccess ? "Â¡Copiado!" : "Copiar al portapapeles"}
+                text={copySuccess ? "¡Copiado!" : "Copiar al portapapeles"}
                 position="bottom"
               >
                 <span
@@ -156,7 +156,7 @@ export default function FooterInterface() {
             </div>
             <div className="flex flex-col gap-4 md:w-1/2 justify-center">
               <p className="text-sm opacity-70">
-                Si tenÃ©s un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
+                Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
               </p>
               <button
                 type="button"
@@ -172,7 +172,7 @@ export default function FooterInterface() {
       </div>
 
       <div className="w-full text-center text-xs font-light">
-        Â© {new Date().getFullYear()} {PROFILE.name}
+        © {new Date().getFullYear()} {PROFILE.name}
       </div>
     </div>
   );

@@ -22,9 +22,9 @@ export default function NotFoundInterface() {
       className={`flex flex-col items-center justify-center w-screen h-screen gap-6 ${textColor}`}
     >
       <span className="text-6xl">âš ï¸</span>
-      <h1 className="text-3xl font-bold">Algo saliÃ³ mal</h1>
+      <h1 className="text-3xl font-bold">Algo salió mal</h1>
       <p className="text-center opacity-70 max-w-sm">
-        OcurriÃ³ un error o la pÃ¡gina que buscÃ¡s no existe. SerÃ¡s redirigido al inicio en{" "}
+        Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en{" "}
         {seconds} segundos.
       </p>
       <button

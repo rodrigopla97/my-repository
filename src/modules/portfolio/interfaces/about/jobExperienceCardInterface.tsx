@@ -183,7 +183,7 @@ export default function JobExperienceCardInterface() {
               ))}
             </div>
           ) : (
-            <TooltipInterface text="Ãšnico perÃ­odo">
+            <TooltipInterface text="Único período">
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide border cursor-pointer ${accentColor} ${accentBorder}`}
               >
@@ -307,7 +307,7 @@ export default function JobExperienceCardInterface() {
       <span
         className={`text-base uppercase tracking-widest self-start flex items-center gap-1.5 ${textColor}`}
       >
-        ðŸ’¼ Trayectoria profesional
+        💼 Trayectoria profesional
       </span>
 
       <div className="flex flex-col md:flex-row w-full gap-6">

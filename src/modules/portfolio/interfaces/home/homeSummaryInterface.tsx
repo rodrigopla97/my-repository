@@ -169,7 +169,7 @@ export default function HomeSummaryInterface() {
             image_search
           </i>
           <span className={`text-sm opacity-40 italic ${textColor}`}>
-            Imagen del certificado prÃ³ximamente
+            Imagen del certificado próximamente
           </span>
         </div>
       )
@@ -199,7 +199,7 @@ export default function HomeSummaryInterface() {
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-base uppercase tracking-widest">ðŸŒ Proyectos</span>
+          <span className="text-base uppercase tracking-widest">🌐 Proyectos</span>
           <button
             type="button"
             onClick={() => navigate("/projects")}
@@ -295,7 +295,7 @@ export default function HomeSummaryInterface() {
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-base uppercase tracking-widest">ðŸ› ï¸ TecnologÃ­as</span>
+          <span className="text-base uppercase tracking-widest">🛠️ Tecnologías</span>
           {TECH_TAGS.length > (isDesktop ? 5 : 3) && (
             <button
               type="button"
@@ -313,7 +313,7 @@ export default function HomeSummaryInterface() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-base uppercase tracking-widest">ðŸŽ“ Certificaciones</span>
+        <span className="text-base uppercase tracking-widest">🎓 Certificaciones</span>
         <div className="flex flex-col gap-3">
           {CERTIFICATIONS.map((cert, i) => (
             <div

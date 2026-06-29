@@ -46,7 +46,7 @@ export default function ProjectsPage() {
           Volver
         </button>
       )}
-      <span className="text-base uppercase tracking-widest self-start">ðŸŒ Mis webs</span>
+      <span className="text-base uppercase tracking-widest self-start">🌐 Mis webs</span>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {SITES.map((site, siteIdx) => (
@@ -68,9 +68,9 @@ export default function ProjectsPage() {
         <div
           className={`flex flex-col items-center justify-center gap-2 p-6 rounded-xl border border-dashed opacity-30 min-h-44 ${accentBorder}`}
         >
-          <span className="text-3xl">ðŸš§</span>
+          <span className="text-3xl">🚧</span>
           <span className={`text-xs uppercase tracking-widest text-center ${accentText}`}>
-            PrÃ³ximamente
+            Próximamente
           </span>
         </div>
       </div>
