@@ -21,7 +21,7 @@ export default function NotFoundInterface() {
     <div
       className={`flex flex-col items-center justify-center w-screen h-screen gap-6 ${textColor}`}
     >
-      <span className="text-6xl">âš ï¸</span>
+      <span className="text-6xl">⚠️</span>
       <h1 className="text-3xl font-bold">Algo salió mal</h1>
       <p className="text-center opacity-70 max-w-sm">
         Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en{" "}
