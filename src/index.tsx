@@ -1,5 +1,5 @@
 import "./index.css";
-import PortfolioModuleProvider from "@app/modules/portfolio/interfaces/portfolioModuleProvider";
+import PortfolioModuleProvider from "@app/modules/portfolio/portfolioModuleProvider";
 import ReactDOM from "react-dom/client";
 
 document.addEventListener("dragstart", (e) => {

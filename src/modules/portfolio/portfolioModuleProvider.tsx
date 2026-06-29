@@ -1,4 +1,4 @@
-import PortfolioModule from "@app/modules/portfolio/interfaces/portfolioModule";
+import PortfolioModule from "@app/modules/portfolio/portfolioModule";
 import PortfolioProvider from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function PortfolioModuleProvider() {
