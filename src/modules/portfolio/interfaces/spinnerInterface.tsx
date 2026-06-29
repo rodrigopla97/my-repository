@@ -10,7 +10,5 @@ export default function SpinnerInterface({ className = "" }: SpinnerProps) {
     ? "border-white/20 border-t-cvButtonSecondary"
     : "border-black/10 border-t-cvButtonPrimary";
 
-  return (
-    <div className={`rounded-full animate-spin border-2 w-6 h-6 ${spinClass} ${className}`} />
-  );
+  return <div className={`rounded-full animate-spin border-2 w-6 h-6 ${spinClass} ${className}`} />;
 }

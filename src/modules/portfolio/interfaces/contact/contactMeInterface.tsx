@@ -38,7 +38,9 @@ export default function ContactMeInterface() {
       setErrors((prev) => ({
         ...prev,
         email:
-          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es vÃ¡lido." : ""
+          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            ? "El correo no es vÃ¡lido."
+            : ""
       }));
     }
   }

@@ -1,7 +1,7 @@
 import useRouter from "@app/modules/main/hooks/useRouter";
-import SpinnerInterface from "@app/modules/portfolio/interfaces/spinnerInterface";
 import type { ProjectSiteItem } from "@app/modules/portfolio/entities/entities";
 import { useAccentColors } from "@app/modules/portfolio/hooks/useAccentColors";
+import SpinnerInterface from "@app/modules/portfolio/interfaces/spinnerInterface";
 
 interface ProjectCardProps {
   site: ProjectSiteItem;

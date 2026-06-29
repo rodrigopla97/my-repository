@@ -13,4 +13,6 @@ document.addEventListener(
   { passive: false }
 );
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<PortfolioModuleProvider />);
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <PortfolioModuleProvider />
+);

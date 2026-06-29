@@ -10,7 +10,9 @@ export default function ComingSoonInterface() {
     >
       <span className="text-5xl">ðŸ› ï¸</span>
       <h2 className="text-2xl md:text-3xl font-bold text-center">SecciÃ³n en construcciÃ³n</h2>
-      <p className="text-center max-w-md opacity-70">PrÃ³ximamente habrÃ¡ contenido nuevo por acÃ¡.</p>
+      <p className="text-center max-w-md opacity-70">
+        PrÃ³ximamente habrÃ¡ contenido nuevo por acÃ¡.
+      </p>
     </div>
   );
 }

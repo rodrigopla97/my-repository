@@ -1,9 +1,9 @@
-﻿import ComingSoonInterface from "@app/modules/portfolio/interfaces/comingSoonInterface";
-import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
-import { BASE_TABS } from "@app/modules/portfolio/constants/constants";
+﻿import { BASE_TABS } from "@app/modules/portfolio/constants/constants";
 import AboutPage from "@app/modules/portfolio/interfaces/about/aboutModule";
+import ComingSoonInterface from "@app/modules/portfolio/interfaces/comingSoonInterface";
 import ErrorPage from "@app/modules/portfolio/interfaces/error/errorModule";
 import HomePage from "@app/modules/portfolio/interfaces/home/homeModule";
+import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
 import ProjectsPage from "@app/modules/portfolio/interfaces/projects/projectsModule";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useLayoutEffect, useState } from "react";

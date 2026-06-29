@@ -1,4 +1,7 @@
-import type { AboutContentType, ActionsTabdataItem } from "@app/modules/portfolio/entities/entities";
+import type {
+  AboutContentType,
+  ActionsTabdataItem
+} from "@app/modules/portfolio/entities/entities";
 import type { AxiosResponse } from "axios";
 import axios from "axios";
 
