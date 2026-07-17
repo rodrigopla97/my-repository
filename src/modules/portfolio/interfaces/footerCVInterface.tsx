@@ -79,6 +79,7 @@ export default function FooterCVInterface() {
                     ...s,
                     language: s.language === "es" ? "en" : "es"
                   }));
+                  close();
                 }}
                 className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
               >

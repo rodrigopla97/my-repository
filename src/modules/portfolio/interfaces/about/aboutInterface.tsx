@@ -15,7 +15,7 @@ export default function AboutInterface() {
     async function fetchAbout() {
       setPortfolioState((state) => ({
         ...state,
-        aboutSections: { ...state.aboutSections, loading: true }
+        aboutSections: { loading: true, data: null }
       }));
       let data: AboutContentType | null = null;
       try {
@@ -27,6 +27,16 @@ export default function AboutInterface() {
           ...ABOUT_CONTENT,
           sections: ABOUT_CONTENT.sections.filter((s) => !s.tags)
         };
+        if (language === "en") {
+          setPortfolioState((state) => ({
+            ...state,
+            language: "es",
+            notification: { open: true, message: "El contenido en inglés no está disponible", type: "error" }
+          }));
+          setTimeout(() => {
+            setPortfolioState((state) => ({ ...state, notification: { ...state.notification, open: false } }));
+          }, 4000);
+        }
       } finally {
         setPortfolioState((state) => ({ ...state, aboutSections: { loading: false, data } }));
       }
