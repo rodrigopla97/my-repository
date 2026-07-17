@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function HeaderInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { isDarkMode, bgColor, textColor, language } = getPortfolioState;
+  const { isDarkMode, bgColor, textColor } = getPortfolioState;
   const { pathname } = useLocation();
   return (
     <div

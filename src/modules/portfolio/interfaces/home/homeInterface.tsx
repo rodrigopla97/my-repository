@@ -15,9 +15,11 @@ export default function HomeInterface() {
   const [typingSpeed, setTypingSpeed] = useState(50);
 
   useEffect(() => {
-    setCurrentText("");
-    setIsDeleting(false);
-    setLoopNum(0);
+    if (translations.typewriterTexts.length > 0) {
+      setCurrentText("");
+      setIsDeleting(false);
+      setLoopNum(0);
+    }
   }, [translations.typewriterTexts]);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function HomeInterface() {
 
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, loopNum, typingSpeed]);
+  }, [currentText, isDeleting, loopNum, typingSpeed, translations.typewriterTexts]);
 
   return (
     <div className={`flex flex-col justify-center h-screen w-screen ${textColor}`}>
