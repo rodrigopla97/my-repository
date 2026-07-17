@@ -1,11 +1,8 @@
 ﻿import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import useRouter from "@app/modules/main/hooks/useRouter";
-import {
-  CERTIFICATIONS,
-  PROJECT_SITES,
-  TECH_TAGS
-} from "@app/modules/portfolio/constants/constants";
+import { TECH_TAGS } from "@app/modules/portfolio/constants/constants";
 import type { CertificationItem } from "@app/modules/portfolio/entities/entities";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import FooterAllIcons from "@app/modules/portfolio/interfaces/footerAllIconsInterface";
 import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
@@ -13,11 +10,11 @@ import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePrev
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useRef, useState } from "react";
 
-const SITES = PROJECT_SITES;
-
 export default function HomeSummaryInterface() {
   const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode } = getPortfolioState;
+  const translations = useTranslations();
+  const SITES = translations.projectSites;
   const { navigate } = useRouter();
   const { modal } = useModal();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =
@@ -169,7 +166,7 @@ export default function HomeSummaryInterface() {
             image_search
           </i>
           <span className={`text-sm opacity-40 italic ${textColor}`}>
-            Imagen del certificado próximamente
+            {translations.certImageSoon}
           </span>
         </div>
       )
@@ -199,13 +196,13 @@ export default function HomeSummaryInterface() {
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-base uppercase tracking-widest">🌐 Proyectos</span>
+          <span className="text-base uppercase tracking-widest">{translations.sectionProjects}</span>
           <button
             type="button"
             onClick={() => navigate("/projects")}
             className={`hidden md:flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
           >
-            Ver todos
+            {translations.seeAll}
             <i className="material-symbols-outlined text-xl">chevron_right</i>
           </button>
         </div>
@@ -285,7 +282,7 @@ export default function HomeSummaryInterface() {
                 onClick={() => navigate("/projects")}
                 className={`flex md:hidden items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentColor}`}
               >
-                Ver todos
+                {translations.seeAll}
                 <i className="material-symbols-outlined text-xl">chevron_right</i>
               </button>
             </div>
@@ -295,13 +292,13 @@ export default function HomeSummaryInterface() {
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-base uppercase tracking-widest">🛠️ Tecnologías</span>
+          <span className="text-base uppercase tracking-widest">{translations.sectionTechnologies}</span>
           {TECH_TAGS.length > (isDesktop ? 5 : 3) && (
             <button
               type="button"
               onClick={() => setIsIconsPaused((p) => !p)}
               className={`transition-opacity duration-200 opacity-30 hover:opacity-80 ${textColor}`}
-              title={isIconsPaused ? "Reanudar" : "Pausar"}
+              title={isIconsPaused ? translations.resume : translations.pause}
             >
               <i className="material-symbols-outlined text-base">
                 {isIconsPaused ? "play_arrow" : "pause"}
@@ -313,9 +310,9 @@ export default function HomeSummaryInterface() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-base uppercase tracking-widest">🎓 Certificaciones</span>
+        <span className="text-base uppercase tracking-widest">{translations.sectionCertifications}</span>
         <div className="flex flex-col gap-3">
-          {CERTIFICATIONS.map((cert, i) => (
+          {translations.certifications.map((cert, i) => (
             <div
               key={i}
               onClick={() => openCertModal(cert)}
@@ -330,7 +327,7 @@ export default function HomeSummaryInterface() {
                   {cert.inProgress && (
                     <div className="flex items-center gap-1 flex-shrink-0">
                       <span className="block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
-                      <span className="text-xs opacity-50">En curso</span>
+                      <span className="text-xs opacity-50">{translations.inProgress}</span>
                     </div>
                   )}
                 </div>

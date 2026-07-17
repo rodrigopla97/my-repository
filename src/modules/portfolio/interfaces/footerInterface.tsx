@@ -1,8 +1,9 @@
-﻿import lightLogo from "@app/images/black-logo.png";
+import lightLogo from "@app/images/black-logo.png";
 import darkLogo from "@app/images/gray-logo.png";
 import useRouter from "@app/modules/main/hooks/useRouter";
 import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
 import { PROFILE } from "@app/modules/portfolio/constants/constants";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import ContactMeInterface from "@app/modules/portfolio/interfaces/contact/contactMeInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
@@ -11,6 +12,7 @@ import { useState } from "react";
 function ContactSubmitButton() {
   const { getPortfolioState } = usePortfolioProvider();
   const { contactFormValid, contactFormSubmitting, isDarkMode } = getPortfolioState;
+  const translations = useTranslations();
   const isDisabled = !contactFormValid || contactFormSubmitting;
   return (
     <button
@@ -19,14 +21,15 @@ function ContactSubmitButton() {
       disabled={isDisabled}
       className={`group flex items-center gap-2 border rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${isDisabled ? "opacity-30 cursor-not-allowed" : "hover:scale-105 active:scale-95"} ${isDarkMode ? "text-cvButtonSecondary border-cvButtonSecondary" : "text-cvButtonPrimary border-cvButtonPrimary"}`}
     >
-      Enviar
+      {translations.contactSend}
     </button>
   );
 }
 
 export default function FooterInterface() {
   const { getPortfolioState } = usePortfolioProvider();
-  const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
+  const { textColor, isDarkMode, tabdataItems, language } = getPortfolioState;
+  const translations = useTranslations();
   const { navigate, pathname, openExternal } = useRouter();
   const { modal } = useModal();
   const [copySuccess, setCopySuccess] = useState(false);
@@ -43,9 +46,9 @@ export default function FooterInterface() {
   }
 
   function openContactModal() {
-    modal.open("Enviar un mensaje", <ContactMeInterface />, {
+    modal.open(translations.contactSendModal, <ContactMeInterface />, {
       footerActions: {
-        closeText: "Cancelar",
+        closeText: translations.contactCancel,
         extraButtons: <ContactSubmitButton />
       }
     });
@@ -59,7 +62,7 @@ export default function FooterInterface() {
         <div className="flex md:flex-col w-full md:w-1/4 items-center justify-between">
           <div>
             <h2 className="font-bold text-xl">{PROFILE.name}</h2>
-            <span className="font-light">{PROFILE.role}</span>
+            <span className="font-light">{translations.role}</span>
           </div>
           <img
             src={isDarkMode ? darkLogo : lightLogo}
@@ -74,11 +77,11 @@ export default function FooterInterface() {
 
         <div className="flex flex-col md:w-1/4 items-center uppercase self-stretch">
           <div className="flex flex-col gap-4 w-full items-start h-full">
-            <span className="uppercase">Navegación</span>
-
+            <span className="uppercase">{translations.navLabel}</span>
             <div className="flex flex-col gap-3 normal-case font-normal">
               {tabdataItems.map((tab, index) => {
                 const isActive = pathname === tab.path;
+                const tabName = translations.tabNames[tab.path] ?? (language === "es" ? (tab.nameEs || tab.name) : (tab.nameEn || tab.name));
                 return (
                   <span
                     key={index}
@@ -93,7 +96,7 @@ export default function FooterInterface() {
                     }}
                   >
                     <i className={`material-symbols-outlined text-sm ${accentColor}`}>{tab.icon}</i>
-                    {tab.name}
+                    {tabName}
                     <span className="w-2 flex items-center justify-center">
                       {isActive && (
                         <span
@@ -109,11 +112,11 @@ export default function FooterInterface() {
         </div>
 
         <div className="flex flex-col md:w-1/2 gap-4 uppercase">
-          <span>Contacto</span>
+          <span>{translations.contactLabel}</span>
           <div className="flex flex-col md:flex-row gap-8 normal-case font-normal">
             <div className="flex flex-col gap-1 md:w-1/2 justify-between">
               <TooltipInterface
-                text={copySuccess ? "¡Copiado!" : "Copiar al portapapeles"}
+                text={copySuccess ? translations.copiedTooltip : translations.copyTooltip}
                 position="bottom"
               >
                 <span
@@ -131,7 +134,7 @@ export default function FooterInterface() {
                   </i>
                 </span>
               </TooltipInterface>
-              <TooltipInterface text="Ir a GitHub" position="bottom">
+              <TooltipInterface text={translations.goGithub} position="bottom">
                 <span
                   className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`}
                   onClick={() => openExternal(PROFILE.github.url)}
@@ -142,7 +145,7 @@ export default function FooterInterface() {
                   {PROFILE.github.label}
                 </span>
               </TooltipInterface>
-              <TooltipInterface text="Ir a LinkedIn" position="bottom">
+              <TooltipInterface text={translations.goLinkedin} position="bottom">
                 <span
                   className={`flex items-center gap-2 cursor-pointer py-1 text-sm transition select-none opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`}
                   onClick={() => openExternal(PROFILE.linkedin.url)}
@@ -155,16 +158,14 @@ export default function FooterInterface() {
               </TooltipInterface>
             </div>
             <div className="flex flex-col gap-4 md:w-1/2 justify-center">
-              <p className="text-sm opacity-70">
-                Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.
-              </p>
+              <p className="text-sm opacity-70">{translations.contactCta}</p>
               <button
                 type="button"
                 onClick={openContactModal}
                 className={`self-start flex items-center gap-2 text-sm normal-case font-normal transition-all hover:opacity-70 ${accentColor}`}
               >
                 <i className="material-symbols-outlined text-sm">send</i>
-                Enviar mensaje
+                {translations.contactSendModal}
               </button>
             </div>
           </div>

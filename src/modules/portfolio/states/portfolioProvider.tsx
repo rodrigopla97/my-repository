@@ -11,7 +11,8 @@ import { useContext, useEffect, useState } from "react";
 export default function PortfolioProvider({ children }: ChildrenType) {
   const [getPortfolioState, setPortfolioState] = useState<PortfolioStateType>(() => ({
     ...INITIAL_STATE.PORTFOLIO_PAGE,
-    isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") ?? "true")
+    isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") ?? "true"),
+    language: (localStorage.getItem("language") as "es" | "en") ?? "es"
   }));
 
   useEffect(() => {
@@ -45,6 +46,10 @@ export default function PortfolioProvider({ children }: ChildrenType) {
       bgColor: isDarkMode ? "bg-black" : "bg-grayPrimary"
     }));
   }, [getPortfolioState.isDarkMode, getPortfolioState]);
+
+  useEffect(() => {
+    localStorage.setItem("language", getPortfolioState.language);
+  }, [getPortfolioState.language]);
 
   return (
     <PortfolioContext.Provider value={{ getPortfolioState, setPortfolioState }}>

@@ -51,6 +51,8 @@ export interface CertificationItem {
 export interface ActionsTabdataItem {
   path: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   icon: string;
 }
 
@@ -61,6 +63,7 @@ export type AboutSectionsContextType = {
 
 export type PortfolioStateType = {
   isDarkMode: boolean;
+  language: "es" | "en";
   textColor: string;
   bgColor: string;
   borderColor: string;

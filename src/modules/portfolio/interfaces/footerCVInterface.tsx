@@ -1,5 +1,6 @@
 ﻿import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import { useCurriculum } from "@app/modules/portfolio/hooks/useCurriculum";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import React, { useEffect, useState } from "react";
@@ -7,7 +8,8 @@ import { useLocation } from "react-router-dom";
 
 export default function FooterCVInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { isDarkMode, isMenuOpen } = getPortfolioState;
+  const { isDarkMode, isMenuOpen, language, tabsLoading } = getPortfolioState;
+  const translations = useTranslations();
   const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =
     useIframePreview();
@@ -70,6 +72,21 @@ export default function FooterCVInterface() {
             </div>
 
             <div className="flex flex-col py-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setPortfolioState((s) => ({
+                    ...s,
+                    language: s.language === "es" ? "en" : "es"
+                  }));
+                }}
+                className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
+              >
+                <i className="material-symbols-outlined text-base leading-none">translate</i>
+                <span>{language === "es" ? "English" : "Español"}</span>
+              </button>
+              <div className={`mx-4 border-t ${divider}`} />
+
               {isAbout && (
                 <>
                   <button
@@ -118,7 +135,7 @@ export default function FooterCVInterface() {
                   className={`flex items-center gap-3 pl-12 pr-5 py-3 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
                 >
                   <i className="material-symbols-outlined text-base leading-none">visibility</i>
-                  <span>Previsualizar</span>
+                  <span>{translations.preview}</span>
                 </button>
                 <a
                   href="/CV - Rodrigo Placeres.pdf"
@@ -127,7 +144,7 @@ export default function FooterCVInterface() {
                   className={`flex items-center gap-3 pl-12 pr-5 py-3 text-sm font-medium transition-all duration-150 ${accentColor} ${accentHover}`}
                 >
                   <i className="material-symbols-outlined text-base leading-none">download</i>
-                  <span>Descargar</span>
+                  <span>{translations.download}</span>
                 </a>
               </div>
             </div>
@@ -135,7 +152,7 @@ export default function FooterCVInterface() {
 
           {/* FAB */}
           <div
-            className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${nearBottom && !isCurriculumOpen ? "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto" : "opacity-100"}`}
+            className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${tabsLoading ? "opacity-0 pointer-events-none" : nearBottom && !isCurriculumOpen ? "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto" : "opacity-100"}`}
           >
             {!isCurriculumOpen && (
               <span

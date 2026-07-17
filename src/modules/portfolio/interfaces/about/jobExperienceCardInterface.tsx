@@ -1,10 +1,13 @@
 ﻿import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export default function JobExperienceCardInterface() {
   const { getPortfolioState } = usePortfolioProvider();
-  const { isDarkMode, textColor, jobExperiencesContext } = getPortfolioState;
+  const { isDarkMode, textColor } = getPortfolioState;
+  const translations = useTranslations();
+  const jobExperiencesContext = translations.jobExperiences;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [selectedRoleIndex, setSelectedRoleIndex] = useState<number>(0);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
@@ -183,7 +186,7 @@ export default function JobExperienceCardInterface() {
               ))}
             </div>
           ) : (
-            <TooltipInterface text="Único período">
+            <TooltipInterface text={translations.singlePeriod}>
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide border cursor-pointer ${accentColor} ${accentBorder}`}
               >
@@ -195,7 +198,7 @@ export default function JobExperienceCardInterface() {
             type="button"
             onClick={() => setIsPaused((p) => !p)}
             className={`hidden md:flex items-center justify-center transition-opacity duration-200 opacity-30 hover:opacity-80 ${accentColor}`}
-            title={isPaused ? "Reanudar" : "Pausar"}
+            title={isPaused ? translations.resume : translations.pause}
           >
             <i className="material-symbols-outlined">{isPaused ? "play_arrow" : "pause"}</i>
           </button>
@@ -295,7 +298,7 @@ export default function JobExperienceCardInterface() {
           onClick={() => handleToggle(carouselIndex)}
           className={`text-xs uppercase tracking-widest ${accentColor} flex items-center gap-1`}
         >
-          Ver detalle
+          {translations.seeDetail}
           <i className="material-symbols-outlined text-sm">arrow_forward</i>
         </button>
       </div>
@@ -307,7 +310,7 @@ export default function JobExperienceCardInterface() {
       <span
         className={`text-base uppercase tracking-widest self-start flex items-center gap-1.5 ${textColor}`}
       >
-        💼 Trayectoria profesional
+        {translations.sectionExperience}
       </span>
 
       <div className="flex flex-col md:flex-row w-full gap-6">
@@ -342,7 +345,7 @@ export default function JobExperienceCardInterface() {
                     >
                       {experience.company}
                       {experience.roles.some((r) => r.currentWork) && (
-                        <TooltipInterface text="Trabajo actual">
+                        <TooltipInterface text={translations.currentJob}>
                           <span className="block w-2 h-2 rounded-full bg-green-500 animate-pulse cursor-default" />
                         </TooltipInterface>
                       )}

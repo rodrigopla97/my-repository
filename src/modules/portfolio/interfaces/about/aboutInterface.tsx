@@ -9,10 +9,9 @@ import { useEffect } from "react";
 
 export default function AboutInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { aboutSections } = getPortfolioState;
+  const { aboutSections, language } = getPortfolioState;
 
   useEffect(() => {
-    if (aboutSections.data) return;
     async function fetchAbout() {
       setPortfolioState((state) => ({
         ...state,
@@ -20,7 +19,7 @@ export default function AboutInterface() {
       }));
       let data: AboutContentType | null = null;
       try {
-        const res = await getAboutContent();
+        const res = await getAboutContent(language);
         data = res.data;
       } catch (err) {
         console.error(err);
@@ -33,7 +32,7 @@ export default function AboutInterface() {
       }
     }
     fetchAbout();
-  }, [aboutSections.data, setPortfolioState]);
+  }, [language, setPortfolioState]);
 
   return (
     <>

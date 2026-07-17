@@ -1,23 +1,29 @@
-﻿import desk from "@app/images/avatar-float.png";
+import desk from "@app/images/avatar-float.png";
 import bgAvatarDesk from "@app/images/bg-avatar.png";
 import BackgroundImageInterface from "@app/modules/portfolio/interfaces/home/backgroundImageInterface";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
-
-const texts = ["Rodrigo Placeres", "Desarrollador Front-End"];
 
 export default function HomeInterface() {
   const { getPortfolioState } = usePortfolioProvider();
   const { isDarkMode, textColor } = getPortfolioState;
+  const translations = useTranslations();
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(50);
 
   useEffect(() => {
+    setCurrentText("");
+    setIsDeleting(false);
+    setLoopNum(0);
+  }, [translations.typewriterTexts]);
+
+  useEffect(() => {
     function handleType() {
-      const i = loopNum % texts.length;
-      const fullText = texts[i];
+      const i = loopNum % translations.typewriterTexts.length;
+      const fullText = translations.typewriterTexts[i];
 
       setCurrentText(
         isDeleting
@@ -36,7 +42,6 @@ export default function HomeInterface() {
     }
 
     const timer = setTimeout(handleType, typingSpeed);
-
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, loopNum, typingSpeed]);
 
@@ -47,10 +52,10 @@ export default function HomeInterface() {
         <div
           className={`${textColor} max-md:text-lg md:text-2xl lg:text-5xl space-y-4 font-bold md:w-1/2 pl-[5vh] content-center md:pb-[10vh] z-10 items-center my-auto md:my-0`}
         >
-          <h1 className="text-left font-orbitron">Hola! Soy</h1>
+          <h1 className="text-left font-orbitron">{translations.greeting}</h1>
           <div className="typewriter">
             <h2 className={`font-orbitron ${isDeleting ? "deleting" : "typing"}`}>
-              <span>{currentText || "\u00A0"}</span>
+              <span>{currentText || " "}</span>
             </h2>
           </div>
         </div>

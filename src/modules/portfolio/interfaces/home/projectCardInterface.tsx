@@ -1,6 +1,7 @@
 import useRouter from "@app/modules/main/hooks/useRouter";
 import type { ProjectSiteItem } from "@app/modules/portfolio/entities/entities";
 import { useAccentColors } from "@app/modules/portfolio/hooks/useAccentColors";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import SpinnerInterface from "@app/modules/portfolio/interfaces/spinnerInterface";
 
 interface ProjectCardProps {
@@ -32,6 +33,7 @@ export default function ProjectCardInterface({
 }: ProjectCardProps) {
   const { accentBorderFaint, isDarkMode } = useAccentColors();
   const { openExternal } = useRouter();
+  const translations = useTranslations();
 
   const isMenuOpen = menuKey === cardKey;
   const isInfoOpen = infoUrl === site.url;
@@ -128,7 +130,7 @@ export default function ProjectCardInterface({
                 {[
                   {
                     icon: "visibility",
-                    label: "Previsualizar",
+                    label: translations.preview,
                     action: () => {
                       onPreview(site.url);
                       setMenuKey(null);
@@ -136,7 +138,7 @@ export default function ProjectCardInterface({
                   },
                   {
                     icon: "info",
-                    label: "Info",
+                    label: translations.info,
                     action: () => {
                       setInfoUrl(site.url);
                       setMenuKey(null);
@@ -144,7 +146,7 @@ export default function ProjectCardInterface({
                   },
                   {
                     icon: "open_in_new",
-                    label: "Visitar",
+                    label: translations.visit,
                     action: () => {
                       openExternal(site.url);
                       setMenuKey(null);

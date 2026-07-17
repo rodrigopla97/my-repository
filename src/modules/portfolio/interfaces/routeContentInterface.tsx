@@ -13,7 +13,8 @@ function FallbackRoute() {
   const { pathname } = useLocation();
   const { getPortfolioState } = usePortfolioProvider();
   const allTabs = [...getPortfolioState.tabdataItems, ...BASE_TABS];
-  const isKnownTab = allTabs.some((tab) => tab.path === pathname);
+  const normalize = (p: string) => (p.startsWith("/") ? p : `/${p}`);
+  const isKnownTab = allTabs.some((tab) => normalize(tab.path) === pathname);
   return isKnownTab ? <ComingSoonInterface /> : <Navigate to="/error" replace />;
 }
 

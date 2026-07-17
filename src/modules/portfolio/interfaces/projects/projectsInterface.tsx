@@ -1,16 +1,16 @@
 import { useIframePreview } from "@app/modules/main/hooks/useIframePreview";
 import useRouter from "@app/modules/main/hooks/useRouter";
-import { PROJECT_SITES } from "@app/modules/portfolio/constants/constants";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
 import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 
-const SITES = PROJECT_SITES;
-
 export default function ProjectsInterface() {
   const { getPortfolioState } = usePortfolioProvider();
   const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
+  const translations = useTranslations();
+  const SITES = translations.projectSites;
   const { navigate } = useRouter();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =
     useIframePreview();
@@ -43,10 +43,10 @@ export default function ProjectsInterface() {
           className={`self-start flex items-center gap-1 text-xs uppercase tracking-widest transition-opacity hover:opacity-70 ${accentText}`}
         >
           <i className="material-symbols-outlined text-xl">chevron_left</i>
-          Volver
+          {translations.back}
         </button>
       )}
-      <span className="text-base uppercase tracking-widest self-start">🌐 Mis webs</span>
+      <span className="text-base uppercase tracking-widest self-start">{translations.sectionMyWebs}</span>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {SITES.map((site, siteIdx) => (
@@ -70,7 +70,7 @@ export default function ProjectsInterface() {
         >
           <span className="text-3xl">🚧</span>
           <span className={`text-xs uppercase tracking-widest text-center ${accentText}`}>
-            Próximamente
+            {translations.soonLabel}
           </span>
         </div>
       </div>

@@ -1,10 +1,12 @@
 ﻿import useRouter from "@app/modules/main/hooks/useRouter";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect } from "react";
 
 export function SidenavMenuInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { bgColor, textColor, isDarkMode, isMenuOpen, tabdataItems } = getPortfolioState;
+  const { bgColor, textColor, isDarkMode, isMenuOpen, tabdataItems, language } = getPortfolioState;
+  const translations = useTranslations();
   const setMenuOpen = (isOpen: boolean) =>
     setPortfolioState((prevState) => ({ ...prevState, isMenuOpen: isOpen }));
   const { navigate, pathname } = useRouter();
@@ -63,7 +65,7 @@ export function SidenavMenuInterface() {
                         : `${textColor} ${!isDarkMode ? "hover:text-cvButtonPrimary hover:bg-cvButtonPrimary/10" : "hover:text-cvButtonSecondary hover:bg-cvButtonSecondary/10"}`
                     }`}
                   >
-                    {tab.name}
+                    {translations.tabNames[tab.path] ?? (language === "es" ? (tab.nameEs || tab.name) : (tab.nameEn || tab.name))}
                   </span>
                 </li>
               );

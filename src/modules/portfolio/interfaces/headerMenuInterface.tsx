@@ -1,9 +1,11 @@
 ﻿import useRouter from "@app/modules/main/hooks/useRouter";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 
 export default function HeaderMenuInterface() {
   const { getPortfolioState } = usePortfolioProvider();
-  const { textColor, isDarkMode, tabdataItems } = getPortfolioState;
+  const { textColor, isDarkMode, tabdataItems, language } = getPortfolioState;
+  const translations = useTranslations();
   const { pathname, navigate } = useRouter();
 
   function handleNavigate(path: string) {
@@ -24,7 +26,7 @@ export default function HeaderMenuInterface() {
                 : `${textColor} ${!isDarkMode ? "hover:text-cvButtonPrimary hover:bg-cvButtonPrimary/10" : "hover:text-cvButtonSecondary hover:bg-cvButtonSecondary/10"}`
             }`}
           >
-            {tab.name}
+            {translations.tabNames[tab.path] ?? (language === "es" ? (tab.nameEs || tab.name) : (tab.nameEn || tab.name))}
           </span>
         ))}
       </div>

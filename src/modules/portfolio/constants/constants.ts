@@ -25,6 +25,12 @@ export const PROJECT_SITES: ProjectSiteItem[] = [
     description:
       "Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.",
     url: "https://circocaeli.ar/"
+  },
+  {
+    label: "Leafnoise",
+    description:
+      "Participación en su desarrollo y actualización. Integración dinámica de textos en inglés y español.",
+    url: "https://leafnoise.io/"
   }
 ];
 
@@ -180,6 +186,7 @@ export const TAB_DATA_ITEMS = BASE_TABS;
 export const INITIAL_STATE = {
   PORTFOLIO_PAGE: {
     isDarkMode: true,
+    language: "es" as const,
     textColor: "text-grayPrimary",
     bgColor: "bg-black",
     borderColor: "border-grayPrimary",
