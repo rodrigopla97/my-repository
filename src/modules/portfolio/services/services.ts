@@ -7,8 +7,8 @@ import axios from "axios";
 
 export type TabApiItem = ActionsTabdataItem & { id: string; order?: string };
 
-export async function getAboutContent(lang: "es" | "en"): Promise<AxiosResponse<AboutContentType>> {
-  return await axios.get<AboutContentType>(`/portfolio/about/content?lang=${lang}`);
+export async function getAboutContent(lang: "es" | "en", v?: number): Promise<AxiosResponse<AboutContentType>> {
+  return await axios.get<AboutContentType>(`/portfolio/about/content?lang=${lang}${v ? `&_v=${v}` : ""}`);
 }
 
 export async function getTabs(): Promise<AxiosResponse<TabApiItem[]>> {

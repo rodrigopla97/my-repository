@@ -75,6 +75,7 @@ export type PortfolioStateType = {
   tabdataItems: ActionsTabdataItem[];
   jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;
+  aboutSyncKey: number;
   modal: ModalDataType;
   notification: NotificationDataType;
   contactFormValid: boolean;

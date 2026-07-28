@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export default function AboutInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { aboutSections, language } = getPortfolioState;
+  const { aboutSections, language, aboutSyncKey } = getPortfolioState;
 
   useEffect(() => {
     async function fetchAbout() {
@@ -19,7 +19,7 @@ export default function AboutInterface() {
       }));
       let data: AboutContentType | null = null;
       try {
-        const res = await getAboutContent(language);
+        const res = await getAboutContent(language, aboutSyncKey);
         data = res.data;
       } catch (err) {
         console.error(err);
@@ -42,7 +42,7 @@ export default function AboutInterface() {
       }
     }
     fetchAbout();
-  }, [language, setPortfolioState]);
+  }, [language, setPortfolioState, aboutSyncKey]);
 
   return (
     <>

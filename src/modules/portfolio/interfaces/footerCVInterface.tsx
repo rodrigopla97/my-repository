@@ -96,7 +96,8 @@ export default function FooterCVInterface() {
                       close();
                       setPortfolioState((s) => ({
                         ...s,
-                        aboutSections: { loading: false, data: null }
+                        aboutSyncKey: s.aboutSyncKey + 1,
+                        aboutSections: { loading: true, data: null }
                       }));
                     }}
                     className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}

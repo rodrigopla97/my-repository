@@ -197,6 +197,7 @@ export const INITIAL_STATE = {
     tabsLoading: true,
     tabdataItems: BASE_TABS,
     jobExperiencesContext: JOB_EXPERIENCES,
+    aboutSyncKey: 0,
     aboutSections: {
       loading: true,
       data: null
