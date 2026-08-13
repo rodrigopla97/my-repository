@@ -194,12 +194,14 @@ export const INITIAL_STATE = {
     isCurriculumOpen: false,
     indexCarrousel: 0,
     experienceSelectedContex: 0,
-    tabsLoading: true,
+    tabsLoading: false,
+    tabsSyncKey: 0,
+    isSyncing: false,
     tabdataItems: BASE_TABS,
     jobExperiencesContext: JOB_EXPERIENCES,
     aboutSyncKey: 0,
     aboutSections: {
-      loading: true,
+      loading: false,
       data: null
     },
     modal: { open: false },

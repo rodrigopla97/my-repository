@@ -15,11 +15,15 @@ export default function PortfolioProvider({ children }: ChildrenType) {
     language: (localStorage.getItem("language") as "es" | "en") ?? "es"
   }));
 
+  const { tabsSyncKey, isSyncing, tabsLoading, aboutSections } = getPortfolioState;
+
   useEffect(() => {
+    if (tabsSyncKey === 0) return;
     async function getTabsData() {
+      setPortfolioState((s) => ({ ...s, tabsLoading: true }));
       let tabdataItems = BASE_TABS;
       try {
-        const res = await getTabs();
+        const res = await getTabs(tabsSyncKey);
         const apiTabs = [...res.data].sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
         tabdataItems = [
           ...BASE_TABS,
@@ -32,7 +36,14 @@ export default function PortfolioProvider({ children }: ChildrenType) {
       }
     }
     getTabsData();
-  }, []);
+  }, [tabsSyncKey]);
+
+  useEffect(() => {
+    if (!isSyncing) return;
+    if (!tabsLoading && !aboutSections.loading) {
+      setPortfolioState((s) => ({ ...s, isSyncing: false }));
+    }
+  }, [isSyncing, tabsLoading, aboutSections.loading]);
 
   useEffect(() => {
     const { isDarkMode } = getPortfolioState;

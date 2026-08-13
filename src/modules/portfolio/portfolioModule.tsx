@@ -4,6 +4,7 @@ import HeaderInterface from "@app/modules/portfolio/interfaces/headerInterface";
 import ModalInterface from "@app/modules/portfolio/interfaces/modalInterface";
 import NotificationInterface from "@app/modules/portfolio/interfaces/notificationInterface";
 import RouteContent from "@app/modules/portfolio/interfaces/routeContentInterface";
+import SyncOverlayInterface from "@app/modules/portfolio/interfaces/syncOverlayInterface";
 
 export default function PortfolioModule() {
   return (
@@ -12,6 +13,7 @@ export default function PortfolioModule() {
       <RouteContent />
       <FooterInterface />
       <FooterCVInterface />
+      <SyncOverlayInterface />
       <ModalInterface />
       <NotificationInterface />
     </>

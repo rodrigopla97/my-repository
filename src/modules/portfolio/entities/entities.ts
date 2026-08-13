@@ -72,6 +72,8 @@ export type PortfolioStateType = {
   indexCarrousel: number;
   experienceSelectedContex: number;
   tabsLoading: boolean;
+  tabsSyncKey: number;
+  isSyncing: boolean;
   tabdataItems: ActionsTabdataItem[];
   jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;

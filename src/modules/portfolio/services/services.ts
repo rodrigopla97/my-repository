@@ -7,10 +7,15 @@ import axios from "axios";
 
 export type TabApiItem = ActionsTabdataItem & { id: string; order?: string };
 
-export async function getAboutContent(lang: "es" | "en", v?: number): Promise<AxiosResponse<AboutContentType>> {
-  return await axios.get<AboutContentType>(`/portfolio/about/content?lang=${lang}${v ? `&_v=${v}` : ""}`);
+export async function getAboutContent(
+  lang: "es" | "en",
+  v?: number
+): Promise<AxiosResponse<AboutContentType>> {
+  return await axios.get<AboutContentType>(
+    `/portfolio/about/content?lang=${lang}${v ? `&_v=${v}` : ""}`
+  );
 }
 
-export async function getTabs(): Promise<AxiosResponse<TabApiItem[]>> {
-  return await axios.get<TabApiItem[]>("/portfolio/home/tabs");
+export async function getTabs(v?: number): Promise<AxiosResponse<TabApiItem[]>> {
+  return await axios.get<TabApiItem[]>(`/portfolio/home/tabs${v ? `?_v=${v}` : ""}`);
 }

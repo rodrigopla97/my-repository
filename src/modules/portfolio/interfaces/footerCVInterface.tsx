@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 export default function FooterCVInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
-  const { isDarkMode, isMenuOpen, language, tabsLoading } = getPortfolioState;
+  const { isDarkMode, isMenuOpen, language } = getPortfolioState;
   const translations = useTranslations();
   const { isCurriculumOpen, setCurriculumOpen } = useCurriculum();
   const { previewUrl, previewLoading, setPreviewLoading, openPreview, closePreview } =
@@ -28,7 +28,9 @@ export default function FooterCVInterface() {
 
   useEffect(() => {
     function handleScroll() {
-      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 80;
+      const scrollable = document.body.scrollHeight > window.innerHeight + 80;
+      const atBottom =
+        scrollable && window.innerHeight + window.scrollY >= document.body.scrollHeight - 80;
       setNearBottom(atBottom);
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -88,26 +90,29 @@ export default function FooterCVInterface() {
               </button>
               <div className={`mx-4 border-t ${divider}`} />
 
-              {isAbout && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      close();
-                      setPortfolioState((s) => ({
-                        ...s,
-                        aboutSyncKey: s.aboutSyncKey + 1,
-                        aboutSections: { loading: true, data: null }
-                      }));
-                    }}
-                    className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
-                  >
-                    <i className="material-symbols-outlined text-base leading-none">sync</i>
-                    <span>Sincronizar contenido</span>
-                  </button>
-                  <div className={`mx-4 border-t ${divider}`} />
-                </>
-              )}
+              <button
+                type="button"
+                onClick={() => {
+                  close();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  setPortfolioState((s) => ({
+                    ...s,
+                    isSyncing: true,
+                    tabsSyncKey: s.tabsSyncKey + 1,
+                    ...(isAbout
+                      ? {
+                          aboutSyncKey: s.aboutSyncKey + 1,
+                          aboutSections: { loading: true, data: null }
+                        }
+                      : {})
+                  }));
+                }}
+                className={`flex items-center gap-3 px-5 py-3.5 text-sm font-medium w-full transition-all duration-150 ${accentColor} ${accentHover}`}
+              >
+                <i className="material-symbols-outlined text-base leading-none">sync</i>
+                <span>Sincronizar contenido</span>
+              </button>
+              <div className={`mx-4 border-t ${divider}`} />
 
               <button
                 type="button"
@@ -154,7 +159,7 @@ export default function FooterCVInterface() {
 
           {/* FAB */}
           <div
-            className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${tabsLoading ? "opacity-0 pointer-events-none" : nearBottom && !isCurriculumOpen ? "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto" : "opacity-100"}`}
+            className={`fixed bottom-8 right-8 z-50 transition-opacity duration-300 ${nearBottom && !isCurriculumOpen ? "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto" : "opacity-100"}`}
           >
             {!isCurriculumOpen && (
               <span
