@@ -6,7 +6,7 @@ import HomePage from "@app/modules/portfolio/interfaces/home/homePageInterface";
 import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
 import ProjectsPage from "@app/modules/portfolio/interfaces/projects/projectsInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 function FallbackRoute() {
@@ -19,23 +19,23 @@ function FallbackRoute() {
 }
 
 export default function RouteContent() {
-  const { getPortfolioState } = usePortfolioProvider();
-  const { tabsLoading } = getPortfolioState;
   const [isLoading, setIsLoading] = useState(true);
 
-  useLayoutEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-
+  useEffect(() => {
+    let cancelled = false;
     window.scrollTo(0, 0);
-    return () => clearTimeout(timer);
+    const minDelay = new Promise<void>((resolve) => setTimeout(resolve, 300));
+    Promise.all([document.fonts.ready, minDelay]).then(() => {
+      if (!cancelled) setIsLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
     <>
-      {isLoading || tabsLoading ? (
+      {isLoading ? (
         <LoadingInterface />
       ) : (
         <Routes>
