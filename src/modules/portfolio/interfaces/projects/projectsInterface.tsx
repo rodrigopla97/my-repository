@@ -46,7 +46,9 @@ export default function ProjectsInterface() {
           {translations.back}
         </button>
       )}
-      <span className="text-base uppercase tracking-widest self-start">{translations.sectionMyWebs}</span>
+      <span className="text-base uppercase tracking-widest self-start">
+        {translations.sectionMyWebs}
+      </span>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {SITES.map((site, siteIdx) => (

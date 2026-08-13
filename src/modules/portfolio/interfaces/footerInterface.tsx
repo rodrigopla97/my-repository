@@ -3,8 +3,8 @@ import darkLogo from "@app/images/gray-logo.png";
 import useRouter from "@app/modules/main/hooks/useRouter";
 import TooltipInterface from "@app/modules/main/interfaces/tooltipInterface";
 import { PROFILE } from "@app/modules/portfolio/constants/constants";
-import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import ContactMeInterface from "@app/modules/portfolio/interfaces/contact/contactMeInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useState } from "react";
@@ -81,7 +81,9 @@ export default function FooterInterface() {
             <div className="flex flex-col gap-3 normal-case font-normal">
               {tabdataItems.map((tab, index) => {
                 const isActive = pathname === tab.path;
-                const tabName = translations.tabNames[tab.path] ?? (language === "es" ? (tab.nameEs || tab.name) : (tab.nameEn || tab.name));
+                const tabName =
+                  translations.tabNames[tab.path] ??
+                  (language === "es" ? tab.nameEs || tab.name : tab.nameEn || tab.name);
                 return (
                   <span
                     key={index}

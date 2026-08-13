@@ -1,4 +1,8 @@
-import type { CertificationItem, JobExperience, ProjectSiteItem } from "@app/modules/portfolio/entities/entities";
+import type {
+  CertificationItem,
+  JobExperience,
+  ProjectSiteItem
+} from "@app/modules/portfolio/entities/entities";
 
 type Translations = {
   // Hero
@@ -76,7 +80,8 @@ export const translations: Record<"es" | "en", Translations> = {
     soonLabel: "Próximamente",
     navLabel: "Navegación",
     contactLabel: "Contacto",
-    contactCta: "Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.",
+    contactCta:
+      "Si tenés un proyecto en mente, una propuesta o alguna duda, no dudes en escribirme.",
     contactSend: "Enviar",
     contactSendModal: "Enviar un mensaje",
     contactCancel: "Cancelar",
@@ -98,34 +103,43 @@ export const translations: Record<"es" | "en", Translations> = {
     visit: "Visitar",
     tabNames: {
       "/": "Inicio",
-      "/about": "Sobre mí",
+      "/about": "Sobre mí"
     },
     certifications: [
-      { institution: "UTN", title: "Tecnicatura Universitaria en Programación", year: "2023", inProgress: true },
+      {
+        institution: "UTN",
+        title: "Tecnicatura Universitaria en Programación",
+        year: "2023",
+        inProgress: true
+      },
       { institution: "EducaciónIT", title: "Desarrollador Fullstack Node.js", year: "2022" },
-      { institution: "CoderHouse", title: "Desarrollo Web", year: "2021" },
+      { institution: "CoderHouse", title: "Desarrollo Web", year: "2021" }
     ],
     projectSites: [
       {
         label: "Proyecto Final Coder",
-        description: "Página realizada para el curso de Coder House. Con detalles a mejorar para seguir mostrando lo que voy aprendiendo.",
-        url: "https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/",
+        description:
+          "Página realizada para el curso de Coder House. Con detalles a mejorar para seguir mostrando lo que voy aprendiendo.",
+        url: "https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/"
       },
       {
         label: "Pixel Pancheria",
-        description: "Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.",
-        url: "https://pixelpancheria.netlify.app/",
+        description:
+          "Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.",
+        url: "https://pixelpancheria.netlify.app/"
       },
       {
         label: "Circo Caeli",
-        description: "Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.",
-        url: "https://circocaeli.ar/",
+        description:
+          "Página productiva de una compañía de circo, desarrollada y desplegada para su presentación y difusión.",
+        url: "https://circocaeli.ar/"
       },
       {
         label: "Leafnoise",
-        description: "Participación en su desarrollo y actualización. Integración dinámica de textos en inglés y español.",
-        url: "https://leafnoise.io/",
-      },
+        description:
+          "Participación en su desarrollo y actualización. Integración dinámica de textos en inglés y español.",
+        url: "https://leafnoise.io/"
+      }
     ],
     jobExperiences: [
       {
@@ -141,8 +155,8 @@ export const translations: Record<"es" | "en", Translations> = {
               "Diseño e implementación de features.",
               "Participación en la creación de la estructura de las APIs, junto con el backend",
               "Maquetación e implementación de diseño",
-              "Análisis y Resolución de requerimientos en sprint (Azure - Jira)",
-            ],
+              "Análisis y Resolución de requerimientos en sprint (Azure - Jira)"
+            ]
           },
           {
             title: "Implementador",
@@ -151,10 +165,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "1 año en Implementación .NET y Administración de Base de datos:",
               "Mantenimiento de la plataforma (correcciones de bugs) C# .NET",
               "Mantenimiento de Base de Datos en SQL",
-              "Análisis y Resolución de problemas informados por el cliente",
-            ],
-          },
-        ],
+              "Análisis y Resolución de problemas informados por el cliente"
+            ]
+          }
+        ]
       },
       {
         company: "Mother Solution",
@@ -170,10 +184,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "Cambio de partes y componentes smd",
               "Instalación de software",
               "Recepción y entrega de mercadería",
-              "Atención de consultas",
-            ],
-          },
-        ],
+              "Atención de consultas"
+            ]
+          }
+        ]
       },
       {
         company: "Estudio Guitelman",
@@ -185,10 +199,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "Reparación y mantenimiento de PC",
               "Resolución de fallos",
               "Diagnóstico y cambio de partes.",
-              "Instalación y configuración de software",
-            ],
-          },
-        ],
+              "Instalación y configuración de software"
+            ]
+          }
+        ]
       },
       {
         company: "C.L'ectricidad - Ferro - Multiled",
@@ -200,12 +214,12 @@ export const translations: Record<"es" | "en", Translations> = {
               "Instalación y conexionado de pantallas LED (videowall)",
               "Configuración de videos en software (LedStudio)",
               "Tendido de cableado (UTP)",
-              "Prueba de luces en estadio",
-            ],
-          },
-        ],
-      },
-    ],
+              "Prueba de luces en estadio"
+            ]
+          }
+        ]
+      }
+    ]
   },
 
   en: {
@@ -229,7 +243,8 @@ export const translations: Record<"es" | "en", Translations> = {
     soonLabel: "Coming soon",
     navLabel: "Navigation",
     contactLabel: "Contact",
-    contactCta: "If you have a project in mind, a proposal or any questions, feel free to reach out.",
+    contactCta:
+      "If you have a project in mind, a proposal or any questions, feel free to reach out.",
     contactSend: "Send",
     contactSendModal: "Send a message",
     contactCancel: "Cancel",
@@ -251,34 +266,43 @@ export const translations: Record<"es" | "en", Translations> = {
     visit: "Visit",
     tabNames: {
       "/": "Home",
-      "/about": "About me",
+      "/about": "About me"
     },
     certifications: [
-      { institution: "UTN", title: "University Technician in Programming", year: "2023", inProgress: true },
+      {
+        institution: "UTN",
+        title: "University Technician in Programming",
+        year: "2023",
+        inProgress: true
+      },
       { institution: "EducaciónIT", title: "Fullstack Node.js Developer", year: "2022" },
-      { institution: "CoderHouse", title: "Web Development", year: "2021" },
+      { institution: "CoderHouse", title: "Web Development", year: "2021" }
     ],
     projectSites: [
       {
         label: "Proyecto Final Coder",
-        description: "Page created for the Coder House course. With details to improve as I continue learning.",
-        url: "https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/",
+        description:
+          "Page created for the Coder House course. With details to improve as I continue learning.",
+        url: "https://rodrigopla97.github.io/proyecto-final-coder-rodrigo-placeres/"
       },
       {
         label: "Pixel Pancheria",
-        description: "Productive page for a small business, where I collaborated in development and bug fixes for its deployment.",
-        url: "https://pixelpancheria.netlify.app/",
+        description:
+          "Productive page for a small business, where I collaborated in development and bug fixes for its deployment.",
+        url: "https://pixelpancheria.netlify.app/"
       },
       {
         label: "Circo Caeli",
-        description: "Productive page for a circus company, developed and deployed for its presentation and outreach.",
-        url: "https://circocaeli.ar/",
+        description:
+          "Productive page for a circus company, developed and deployed for its presentation and outreach.",
+        url: "https://circocaeli.ar/"
       },
       {
         label: "Leafnoise",
-        description: "Participated in its development and updates. Dynamic integration of texts in English and Spanish.",
-        url: "https://leafnoise.io/",
-      },
+        description:
+          "Participated in its development and updates. Dynamic integration of texts in English and Spanish.",
+        url: "https://leafnoise.io/"
+      }
     ],
     jobExperiences: [
       {
@@ -294,8 +318,8 @@ export const translations: Record<"es" | "en", Translations> = {
               "Design and implementation of features.",
               "Participation in API structure creation alongside the backend team",
               "Layout and design implementation",
-              "Sprint requirements analysis and resolution (Azure - Jira)",
-            ],
+              "Sprint requirements analysis and resolution (Azure - Jira)"
+            ]
           },
           {
             title: "Implementer",
@@ -304,10 +328,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "1 year in .NET Implementation and Database Administration:",
               "Platform maintenance (bug fixes) C# .NET",
               "SQL Database maintenance",
-              "Analysis and resolution of client-reported issues",
-            ],
-          },
-        ],
+              "Analysis and resolution of client-reported issues"
+            ]
+          }
+        ]
       },
       {
         company: "Mother Solution",
@@ -323,10 +347,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "SMD parts and component replacement",
               "Software installation",
               "Goods reception and delivery",
-              "Customer inquiry assistance",
-            ],
-          },
-        ],
+              "Customer inquiry assistance"
+            ]
+          }
+        ]
       },
       {
         company: "Estudio Guitelman",
@@ -338,10 +362,10 @@ export const translations: Record<"es" | "en", Translations> = {
               "PC repair and maintenance",
               "Fault resolution",
               "Diagnosis and parts replacement.",
-              "Software installation and configuration",
-            ],
-          },
-        ],
+              "Software installation and configuration"
+            ]
+          }
+        ]
       },
       {
         company: "C.L'ectricidad - Ferro - Multiled",
@@ -353,11 +377,11 @@ export const translations: Record<"es" | "en", Translations> = {
               "Installation and wiring of LED screens (videowall)",
               "Video configuration in software (LedStudio)",
               "Cable laying (UTP)",
-              "Stadium light testing",
-            ],
-          },
-        ],
-      },
-    ],
-  },
+              "Stadium light testing"
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };

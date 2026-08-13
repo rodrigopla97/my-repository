@@ -65,7 +65,8 @@ export function SidenavMenuInterface() {
                         : `${textColor} ${!isDarkMode ? "hover:text-cvButtonPrimary hover:bg-cvButtonPrimary/10" : "hover:text-cvButtonSecondary hover:bg-cvButtonSecondary/10"}`
                     }`}
                   >
-                    {translations.tabNames[tab.path] ?? (language === "es" ? (tab.nameEs || tab.name) : (tab.nameEn || tab.name))}
+                    {translations.tabNames[tab.path] ??
+                      (language === "es" ? tab.nameEs || tab.name : tab.nameEn || tab.name)}
                   </span>
                 </li>
               );

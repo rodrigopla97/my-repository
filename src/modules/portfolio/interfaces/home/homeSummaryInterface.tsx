@@ -2,8 +2,8 @@
 import useRouter from "@app/modules/main/hooks/useRouter";
 import { TECH_TAGS } from "@app/modules/portfolio/constants/constants";
 import type { CertificationItem } from "@app/modules/portfolio/entities/entities";
-import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import FooterAllIcons from "@app/modules/portfolio/interfaces/footerAllIconsInterface";
 import ProjectCardInterface from "@app/modules/portfolio/interfaces/home/projectCardInterface";
 import IframePreviewInterface from "@app/modules/portfolio/interfaces/iframePreviewInterface";
@@ -196,7 +196,9 @@ export default function HomeSummaryInterface() {
     >
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <span className="text-base uppercase tracking-widest">{translations.sectionProjects}</span>
+          <span className="text-base uppercase tracking-widest">
+            {translations.sectionProjects}
+          </span>
           <button
             type="button"
             onClick={() => navigate("/projects")}
@@ -292,7 +294,9 @@ export default function HomeSummaryInterface() {
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-base uppercase tracking-widest">{translations.sectionTechnologies}</span>
+          <span className="text-base uppercase tracking-widest">
+            {translations.sectionTechnologies}
+          </span>
           {TECH_TAGS.length > (isDesktop ? 5 : 3) && (
             <button
               type="button"
@@ -310,7 +314,9 @@ export default function HomeSummaryInterface() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <span className="text-base uppercase tracking-widest">{translations.sectionCertifications}</span>
+        <span className="text-base uppercase tracking-widest">
+          {translations.sectionCertifications}
+        </span>
         <div className="flex flex-col gap-3">
           {translations.certifications.map((cert, i) => (
             <div
