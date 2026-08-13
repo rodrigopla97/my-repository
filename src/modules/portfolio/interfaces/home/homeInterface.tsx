@@ -1,7 +1,7 @@
 import desk from "@app/images/avatar-float.png";
 import bgAvatarDesk from "@app/images/bg-avatar.png";
-import BackgroundImageInterface from "@app/modules/portfolio/interfaces/home/backgroundImageInterface";
 import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
+import BackgroundImageInterface from "@app/modules/portfolio/interfaces/home/backgroundImageInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,7 @@ export default function HomeInterface() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(50);
+  const [avatarLoaded, setAvatarLoaded] = useState(false);
 
   useEffect(() => {
     if (translations.typewriterTexts.length > 0) {
@@ -71,10 +72,14 @@ export default function HomeInterface() {
             backgroundPosition: "center"
           }}
         >
+          {!avatarLoaded && (
+            <div className="max-[820px]:h-[50vh] md:h-[70vh] aspect-square animate-pulse rounded-full bg-current opacity-5" />
+          )}
           <img
             src={desk}
             alt="Logo"
-            className={`max-[820px]:h-[50vh] mt-0 md:h-[70vh] w-auto animate-float ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"}`}
+            className={`max-[820px]:h-[50vh] mt-0 md:h-[70vh] w-auto animate-float ${isDarkMode ? "drop-shadow-red" : "drop-shadow-white"} ${avatarLoaded ? "block" : "hidden"}`}
+            onLoad={() => setAvatarLoaded(true)}
           />
         </div>
       </div>
