@@ -49,12 +49,39 @@ export interface CertificationItem {
   imageUrl?: string;
 }
 
+export type ModalContentBlock = {
+  type: "modal";
+  titleEs: string;
+  titleEn?: string;
+  textEs: string;
+  textEn?: string;
+};
+export type TextContentBlock = { type: "text"; textEs: string; textEn?: string };
+export type TitledTextContentBlock = {
+  type: "titledText";
+  titleEs: string;
+  titleEn?: string;
+  textEs: string;
+  textEn?: string;
+};
+export type ImageContentBlock = { type: "image"; src: string; alt: string };
+// sameRow: true agrupa este bloque en la misma fila que el bloque anterior (lado a lado)
+export type ContentBlock = (
+  | ModalContentBlock
+  | TextContentBlock
+  | TitledTextContentBlock
+  | ImageContentBlock
+) & { sameRow?: boolean };
+
 export interface ActionsTabdataItem {
   path: string;
   name: string;
   nameEs?: string;
   nameEn?: string;
   icon: string;
+  contentTitleEs?: string;
+  contentTitleEn?: string;
+  content?: ContentBlock[];
 }
 
 export type AboutSectionsContextType = {

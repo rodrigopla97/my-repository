@@ -195,7 +195,7 @@ export const INITIAL_STATE = {
     isCurriculumOpen: false,
     indexCarrousel: 0,
     experienceSelectedContex: 0,
-    tabsLoading: false,
+    tabsLoading: true,
     tabsSyncKey: 0,
     isSyncing: false,
     tabdataItems: BASE_TABS,

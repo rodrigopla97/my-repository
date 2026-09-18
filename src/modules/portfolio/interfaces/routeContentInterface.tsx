@@ -1,6 +1,7 @@
 ﻿import { BASE_TABS } from "@app/modules/portfolio/constants/constants";
 import AboutPage from "@app/modules/portfolio/interfaces/about/aboutInterface";
 import ComingSoonInterface from "@app/modules/portfolio/interfaces/comingSoonInterface";
+import ContentBlocksInterface from "@app/modules/portfolio/interfaces/contentBlocksInterface";
 import ErrorPage from "@app/modules/portfolio/interfaces/error/errorInterface";
 import HomePage from "@app/modules/portfolio/interfaces/home/homePageInterface";
 import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
@@ -12,10 +13,23 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 function FallbackRoute() {
   const { pathname } = useLocation();
   const { getPortfolioState } = usePortfolioProvider();
+  const { language, tabsLoading } = getPortfolioState;
   const allTabs = [...getPortfolioState.tabdataItems, ...BASE_TABS];
   const normalize = (p: string) => (p.startsWith("/") ? p : `/${p}`);
-  const isKnownTab = allTabs.some((tab) => normalize(tab.path) === pathname);
-  return isKnownTab ? <ComingSoonInterface /> : <Navigate to="/error" replace />;
+  const matchedTab = allTabs.find((tab) => normalize(tab.path) === pathname);
+  if (!matchedTab) {
+    if (tabsLoading) return <LoadingInterface />;
+    return <Navigate to="/error" replace />;
+  }
+  if (matchedTab.content?.length) {
+    const title =
+      (language === "es" ? matchedTab.contentTitleEs : matchedTab.contentTitleEn) ||
+      matchedTab.contentTitleEs ||
+      (language === "es" ? matchedTab.nameEs : matchedTab.nameEn) ||
+      matchedTab.name;
+    return <ContentBlocksInterface title={title} blocks={matchedTab.content} />;
+  }
+  return <ComingSoonInterface />;
 }
 
 export default function RouteContent() {

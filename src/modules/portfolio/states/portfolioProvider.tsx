@@ -18,7 +18,6 @@ export default function PortfolioProvider({ children }: ChildrenType) {
   const { tabsSyncKey, isSyncing, tabsLoading, aboutSections } = getPortfolioState;
 
   useEffect(() => {
-    if (tabsSyncKey === 0) return;
     async function getTabsData() {
       setPortfolioState((s) => ({ ...s, tabsLoading: true }));
       let tabdataItems = BASE_TABS;
