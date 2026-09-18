@@ -2,14 +2,11 @@ import type {
   AboutContentType,
   ActionsTabdataItem,
   CertificationItem,
-  EvolutionVersionItem,
   JobExperience,
   ProjectSiteItem,
   TechnologyItem
 } from "@app/modules/portfolio/entities/entities";
-import EVOLUTION_VERSIONS_DATA from "@app/modules/portfolio/constants/evolutionVersions.json";
-
-export const EVOLUTION_VERSIONS: EvolutionVersionItem[] = EVOLUTION_VERSIONS_DATA;
+import { SUBJECTS as BASE_ROADMAP_SUBJECTS } from "@app/modules/portfolio/interfaces/roadmap/roadmapData";
 
 export const PROJECT_SITES: ProjectSiteItem[] = [
   {
@@ -182,8 +179,7 @@ export const PROFILE = {
 
 export const BASE_TABS: ActionsTabdataItem[] = [
   { path: "/", name: "Inicio", icon: "home" },
-  { path: "/about", name: "Sobre mí", icon: "description" },
-  { path: "/evolution", name: "Evolución", nameEs: "Evolución", nameEn: "Evolution", icon: "history" }
+  { path: "/about", name: "Sobre mí", icon: "description" }
 ];
 
 export const TAB_DATA_ITEMS = BASE_TABS;
@@ -212,6 +208,7 @@ export const INITIAL_STATE = {
     modal: { open: false },
     notification: { open: false, message: "", type: "info" as const },
     contactFormValid: false,
-    contactFormSubmitting: false
+    contactFormSubmitting: false,
+    roadmapSubjects: BASE_ROADMAP_SUBJECTS
   }
 };

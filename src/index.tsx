@@ -15,7 +15,7 @@ document.addEventListener(
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter basename={import.meta.env.BASE_URL}>
+  <BrowserRouter>
     <PortfolioModuleProvider />
   </BrowserRouter>
 );

@@ -2,10 +2,10 @@
 import AboutPage from "@app/modules/portfolio/interfaces/about/aboutInterface";
 import ComingSoonInterface from "@app/modules/portfolio/interfaces/comingSoonInterface";
 import ErrorPage from "@app/modules/portfolio/interfaces/error/errorInterface";
-import EvolutionPage from "@app/modules/portfolio/interfaces/evolution/evolutionInterface";
 import HomePage from "@app/modules/portfolio/interfaces/home/homePageInterface";
 import LoadingInterface from "@app/modules/portfolio/interfaces/loadingInterface";
 import ProjectsPage from "@app/modules/portfolio/interfaces/projects/projectsInterface";
+import RoadmapPage from "@app/modules/portfolio/interfaces/roadmap/roadmapInterface";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
@@ -42,8 +42,8 @@ export default function RouteContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/evolution" element={<EvolutionPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<FallbackRoute />} />
         </Routes>

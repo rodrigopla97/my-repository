@@ -10,17 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Install dependencies
         run: npm install  # o el comando que uses
 
       - name: Build
         run: npm run build  # o tu comando específico
-
-      - name: Build archived versions
-        run: bash .github/scripts/build-archive-versions.sh
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
