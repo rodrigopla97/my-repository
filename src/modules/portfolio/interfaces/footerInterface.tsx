@@ -69,8 +69,8 @@ export default function FooterInterface() {
             alt="bye"
             className="max-h-[16vh] cursor-pointer"
             onClick={() => {
-              if (pathname === "/") window.scrollTo({ top: 0, behavior: "smooth" });
-              else navigate("/");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              if (pathname !== "/") navigate("/");
             }}
           />
         </div>
@@ -93,8 +93,8 @@ export default function FooterInterface() {
                         : `opacity-80 ${!isDarkMode ? "hover:text-cvButtonPrimary" : "hover:text-cvButtonSecondary"}`
                     }`}
                     onClick={() => {
-                      if (pathname === tab.path) window.scrollTo({ top: 0, behavior: "smooth" });
-                      else navigate(tab.path);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      if (pathname !== tab.path) navigate(tab.path);
                     }}
                   >
                     <i className={`material-symbols-outlined text-sm ${accentColor}`}>{tab.icon}</i>

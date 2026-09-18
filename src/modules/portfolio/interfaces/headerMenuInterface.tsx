@@ -9,8 +9,8 @@ export default function HeaderMenuInterface() {
   const { pathname, navigate } = useRouter();
 
   function handleNavigate(path: string) {
-    if (pathname === path) window.scrollTo({ top: 0, behavior: "smooth" });
-    else navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pathname !== path) navigate(path);
   }
 
   return (

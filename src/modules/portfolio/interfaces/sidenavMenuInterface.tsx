@@ -20,8 +20,8 @@ export function SidenavMenuInterface() {
 
   function handleNavigate(path: string) {
     setMenuOpen(false);
-    if (pathname === path) window.scrollTo({ top: 0, behavior: "smooth" });
-    else navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (pathname !== path) navigate(path);
   }
 
   return (
