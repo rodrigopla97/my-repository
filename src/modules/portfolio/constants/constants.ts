@@ -2,10 +2,14 @@ import type {
   AboutContentType,
   ActionsTabdataItem,
   CertificationItem,
+  EvolutionVersionItem,
   JobExperience,
   ProjectSiteItem,
   TechnologyItem
 } from "@app/modules/portfolio/entities/entities";
+import EVOLUTION_VERSIONS_DATA from "@app/modules/portfolio/constants/evolutionVersions.json";
+
+export const EVOLUTION_VERSIONS: EvolutionVersionItem[] = EVOLUTION_VERSIONS_DATA;
 
 export const PROJECT_SITES: ProjectSiteItem[] = [
   {
@@ -178,7 +182,8 @@ export const PROFILE = {
 
 export const BASE_TABS: ActionsTabdataItem[] = [
   { path: "/", name: "Inicio", icon: "home" },
-  { path: "/about", name: "Sobre mí", icon: "description" }
+  { path: "/about", name: "Sobre mí", icon: "description" },
+  { path: "/evolution", name: "Evolución", nameEs: "Evolución", nameEn: "Evolution", icon: "history" }
 ];
 
 export const TAB_DATA_ITEMS = BASE_TABS;

@@ -103,7 +103,8 @@ export const translations: Record<"es" | "en", Translations> = {
     visit: "Visitar",
     tabNames: {
       "/": "Inicio",
-      "/about": "Sobre mí"
+      "/about": "Sobre mí",
+      "/evolution": "Evolución"
     },
     certifications: [
       {
@@ -266,7 +267,8 @@ export const translations: Record<"es" | "en", Translations> = {
     visit: "Visit",
     tabNames: {
       "/": "Home",
-      "/about": "About me"
+      "/about": "About me",
+      "/evolution": "Evolution"
     },
     certifications: [
       {

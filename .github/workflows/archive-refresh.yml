@@ -1,0 +1,39 @@
+name: Refresh Version Archive
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/modules/portfolio/constants/evolutionVersions.json"
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild current production version
+        run: |
+          set -e
+          latest_tag=$(git tag -l 'v*' --sort=-v:refname | head -1)
+          echo "Rebuilding current production tag: ${latest_tag}"
+          git worktree add /tmp/wt-current "${latest_tag}"
+          (cd /tmp/wt-current && npm ci && npm run build)
+          mkdir -p dist
+          cp -r /tmp/wt-current/dist/. dist/
+          git worktree remove /tmp/wt-current --force
+
+      - name: Build archived versions
+        run: bash .github/scripts/build-archive-versions.sh
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: "./dist"
+          production: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

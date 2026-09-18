@@ -56,6 +56,14 @@ export interface ActionsTabdataItem {
   icon: string;
 }
 
+export type EvolutionVersionItem = {
+  tag: string;
+  major: number;
+  label: string;
+  date: string;
+  description: string;
+};
+
 export type AboutSectionsContextType = {
   loading: boolean;
   data: AboutContentType | null;
