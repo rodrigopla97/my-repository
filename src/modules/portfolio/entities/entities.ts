@@ -38,6 +38,7 @@ export interface ProjectSiteItem {
   label: string;
   description: string;
   url: string;
+  previewBlocked?: boolean;
 }
 
 export interface CertificationItem {

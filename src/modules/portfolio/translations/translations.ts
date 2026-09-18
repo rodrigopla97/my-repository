@@ -26,6 +26,9 @@ type Translations = {
   comingSoon: string;
   comingSoonDesc: string;
   soonLabel: string;
+  errorTitle: string;
+  errorDescription: (seconds: number) => string;
+  errorButton: string;
   // Footer / Contact
   navLabel: string;
   contactLabel: string;
@@ -50,6 +53,8 @@ type Translations = {
   download: string;
   info: string;
   visit: string;
+  previewBlockedTitle: string;
+  previewBlockedDesc: string;
   // Tab names by path
   tabNames: Record<string, string>;
   // Data
@@ -78,6 +83,10 @@ export const translations: Record<"es" | "en", Translations> = {
     comingSoon: "Sección en construcción",
     comingSoonDesc: "Próximamente habrá contenido nuevo por acá.",
     soonLabel: "Próximamente",
+    errorTitle: "Algo salió mal",
+    errorDescription: (seconds) =>
+      `Ocurrió un error o la página que buscás no existe. Serás redirigido al inicio en ${seconds} segundos.`,
+    errorButton: "Volver al inicio",
     navLabel: "Navegación",
     contactLabel: "Contacto",
     contactCta:
@@ -101,6 +110,9 @@ export const translations: Record<"es" | "en", Translations> = {
     download: "Descargar",
     info: "Info",
     visit: "Visitar",
+    previewBlockedTitle: "No se puede previsualizar este sitio",
+    previewBlockedDesc:
+      "Este sitio bloquea ser mostrado dentro de otras páginas. Abrilo en una pestaña nueva.",
     tabNames: {
       "/": "Inicio",
       "/about": "Sobre mí"
@@ -126,7 +138,8 @@ export const translations: Record<"es" | "en", Translations> = {
         label: "Pixel Pancheria",
         description:
           "Página productiva de un emprendimiento, en la que colaboré en el desarrollo y correcciones de errores para su despliegue.",
-        url: "https://pixelpancheria.netlify.app/"
+        url: "https://pixelpancheria.netlify.app/",
+        previewBlocked: true
       },
       {
         label: "Circo Caeli",
@@ -241,6 +254,10 @@ export const translations: Record<"es" | "en", Translations> = {
     comingSoon: "Section under construction",
     comingSoonDesc: "New content coming soon.",
     soonLabel: "Coming soon",
+    errorTitle: "Something went wrong",
+    errorDescription: (seconds) =>
+      `An error occurred or the page you're looking for doesn't exist. You'll be redirected home in ${seconds} seconds.`,
+    errorButton: "Back to home",
     navLabel: "Navigation",
     contactLabel: "Contact",
     contactCta:
@@ -264,6 +281,9 @@ export const translations: Record<"es" | "en", Translations> = {
     download: "Download",
     info: "Info",
     visit: "Visit",
+    previewBlockedTitle: "This site can't be previewed",
+    previewBlockedDesc:
+      "This site blocks being shown inside other pages. Open it in a new tab instead.",
     tabNames: {
       "/": "Home",
       "/about": "About me"
@@ -289,7 +309,8 @@ export const translations: Record<"es" | "en", Translations> = {
         label: "Pixel Pancheria",
         description:
           "Productive page for a small business, where I collaborated in development and bug fixes for its deployment.",
-        url: "https://pixelpancheria.netlify.app/"
+        url: "https://pixelpancheria.netlify.app/",
+        previewBlocked: true
       },
       {
         label: "Circo Caeli",
