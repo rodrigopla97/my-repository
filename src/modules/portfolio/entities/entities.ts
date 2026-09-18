@@ -48,24 +48,6 @@ export interface CertificationItem {
   imageUrl?: string;
 }
 
-export type PartialGrades = {
-  grade: number | null;
-  r1: number | null;
-  r2: number | null;
-};
-
-export type RoadmapSubject = {
-  id: number;
-  name: string;
-  year: 1 | 2;
-  quarter: 1 | 2;
-  firstPartial: PartialGrades;
-  secondPartial: PartialGrades;
-  isCurrent: boolean;
-  requiresAttended: string[];
-  requiresPassed: string[];
-};
-
 export interface ActionsTabdataItem {
   path: string;
   name: string;
@@ -100,7 +82,6 @@ export type PortfolioStateType = {
   notification: NotificationDataType;
   contactFormValid: boolean;
   contactFormSubmitting: boolean;
-  roadmapSubjects: RoadmapSubject[];
 };
 
 export type PortfolioContextType = {

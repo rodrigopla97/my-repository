@@ -6,7 +6,6 @@ import type {
   ProjectSiteItem,
   TechnologyItem
 } from "@app/modules/portfolio/entities/entities";
-import { SUBJECTS as BASE_ROADMAP_SUBJECTS } from "@app/modules/portfolio/interfaces/roadmap/roadmapData";
 
 export const PROJECT_SITES: ProjectSiteItem[] = [
   {
@@ -208,7 +207,6 @@ export const INITIAL_STATE = {
     modal: { open: false },
     notification: { open: false, message: "", type: "info" as const },
     contactFormValid: false,
-    contactFormSubmitting: false,
-    roadmapSubjects: BASE_ROADMAP_SUBJECTS
+    contactFormSubmitting: false
   }
 };
