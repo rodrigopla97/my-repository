@@ -103,7 +103,6 @@ export type PortfolioStateType = {
   tabsSyncKey: number;
   isSyncing: boolean;
   tabdataItems: ActionsTabdataItem[];
-  jobExperiencesContext: JobExperience[];
   aboutSections: AboutSectionsContextType;
   aboutSyncKey: number;
   modal: ModalDataType;

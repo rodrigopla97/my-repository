@@ -355,6 +355,7 @@ export default function HomeSummaryInterface() {
         setPreviewLoading={setPreviewLoading}
         closePreview={closePreview}
         label={SITES.find((s) => s.url === previewUrl)?.label}
+        blocked={SITES.find((s) => s.url === previewUrl)?.previewBlocked}
       />
     </div>
   );

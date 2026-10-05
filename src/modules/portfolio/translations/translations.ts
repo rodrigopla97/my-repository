@@ -1,4 +1,5 @@
 import type {
+  AboutContentType,
   CertificationItem,
   JobExperience,
   ProjectSiteItem
@@ -61,6 +62,7 @@ type Translations = {
   certifications: CertificationItem[];
   projectSites: ProjectSiteItem[];
   jobExperiences: JobExperience[];
+  aboutContent: AboutContentType;
 };
 
 export const translations: Record<"es" | "en", Translations> = {
@@ -116,6 +118,32 @@ export const translations: Record<"es" | "en", Translations> = {
     tabNames: {
       "/": "Inicio",
       "/about": "Sobre mí"
+    },
+    aboutContent: {
+      sections: [
+        {
+          title: "bio",
+          items: [
+            "Vivo en la **Ciudad Autónoma de Buenos Aires**, soy desarrollador **frontend**, recibido como **Técnico en Computación** y actualmente estudiante de **Tecnicatura universitaria en Programación** (UTN).",
+            "Me formé como Desarrollador Fullstack con Node.js en EducaciónIT, y desde 2022 me desempeño como **Desarrollador Frontend** en **Leafnoise**."
+          ]
+        },
+        {
+          title: "🚀 Experiencia",
+          items: [
+            "Participo en el mantenimiento de plataformas de distintos proyectos, desarrollo de **bugfixes** y diseño e implementación de **features**, donde tengo la oportunidad de formar parte de diversos proyectos junto a mi equipo de trabajo.",
+            "En algunos casos, asisto a reuniones que incluyen interacción directa con clientes y otros equipos, en las cuales también colaboro en la definición de la estructura backend.",
+            "Esto me permitió ser parte de la creación de proyectos desde cero que me motivó a crear este portfolio para compartir mi experiencia y seguir creciendo como desarrollador."
+          ]
+        },
+        {
+          title: "🎯 Objetivo",
+          items: [
+            "Estar en constante crecimiento y desarrollo, tanto personal como laboral.",
+            "Adquirir nuevas experiencias en las que pueda aportar mis conocimientos y seguir aprendiendo."
+          ]
+        }
+      ]
     },
     certifications: [
       {
@@ -287,6 +315,32 @@ export const translations: Record<"es" | "en", Translations> = {
     tabNames: {
       "/": "Home",
       "/about": "About me"
+    },
+    aboutContent: {
+      sections: [
+        {
+          title: "bio",
+          items: [
+            "I live in **Buenos Aires City**, I'm a **frontend** developer, graduated as a **Computer Technician**, and currently studying a **University Technical Degree in Programming** (UTN).",
+            "I trained as a Fullstack Developer with Node.js at EducaciónIT, and since 2022 I've worked as a **Frontend Developer** at **Leafnoise**."
+          ]
+        },
+        {
+          title: "🚀 Experience",
+          items: [
+            "I help maintain platforms across different projects, working on **bugfixes** and designing and implementing **features**, with the chance to be part of several projects alongside my team.",
+            "In some cases I join meetings with direct client and cross-team interaction, where I also help define the backend structure.",
+            "This let me take part in building projects from scratch, which motivated me to create this portfolio to share my experience and keep growing as a developer."
+          ]
+        },
+        {
+          title: "🎯 Goals",
+          items: [
+            "Keep growing constantly, both personally and professionally.",
+            "Gain new experience where I can contribute what I know and keep learning."
+          ]
+        }
+      ]
     },
     certifications: [
       {

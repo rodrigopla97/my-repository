@@ -1,6 +1,7 @@
 ﻿import { PROFILE } from "@app/modules/portfolio/constants/constants";
 import { useModal } from "@app/modules/portfolio/hooks/useModal";
 import { useNotification } from "@app/modules/portfolio/hooks/useNotification";
+import { useTranslations } from "@app/modules/portfolio/hooks/useTranslations";
 import { usePortfolioProvider } from "@app/modules/portfolio/states/portfolioProvider";
 import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -11,6 +12,7 @@ export default function ContactMeInterface() {
   const { getPortfolioState, setPortfolioState } = usePortfolioProvider();
   const { modal } = useModal();
   const { notification } = useNotification();
+  const translations = useTranslations();
   const { borderColor, textColor, isDarkMode } = getPortfolioState;
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({ email: "" });
@@ -38,7 +40,9 @@ export default function ContactMeInterface() {
       setErrors((prev) => ({
         ...prev,
         email:
-          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "El correo no es válido." : ""
+          value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            ? translations.contactEmailInvalid
+            : ""
       }));
     }
   }
@@ -56,13 +60,13 @@ export default function ContactMeInterface() {
     try {
       await fetch(PROFILE.formEndpoint, { method: "POST", body: formBody });
       modal.close();
-      notification.success("¡Mensaje enviado! Te responderé a la brevedad.");
+      notification.success(translations.contactSuccessMsg);
       setFormData({ name: "", email: "", message: "" });
       setCaptchaToken(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       console.error("Error al enviar el formulario", error);
-      notification.error("Hubo un error al enviar el mensaje. Intentá de nuevo.");
+      notification.error(translations.contactErrorMsg);
     } finally {
       setPortfolioState((s) => ({ ...s, contactFormSubmitting: false }));
     }
@@ -85,7 +89,7 @@ export default function ContactMeInterface() {
             className={inputClass}
           />
           <label className={labelFloat}>
-            Nombre <span className="text-red-500">*</span>
+            {translations.contactName} <span className="text-red-500">*</span>
           </label>
         </div>
         <div className="flex flex-col gap-1">
@@ -99,7 +103,7 @@ export default function ContactMeInterface() {
               className={`${inputClass} ${errors.email ? "border-red-600" : ""}`}
             />
             <label className={labelFloat}>
-              Correo <span className="text-red-500">*</span>
+              {translations.contactEmail} <span className="text-red-500">*</span>
             </label>
           </div>
           <span className="text-red-600 text-xs h-4 block">{errors.email}</span>
@@ -114,7 +118,7 @@ export default function ContactMeInterface() {
             className={`${inputClass} resize-none`}
           />
           <label className={labelFloat}>
-            Mensaje <span className="text-red-500">*</span>
+            {translations.contactMessage} <span className="text-red-500">*</span>
           </label>
         </div>
         <div className="flex justify-center">
